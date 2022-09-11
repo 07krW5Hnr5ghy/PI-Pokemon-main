@@ -33,6 +33,7 @@ module.exports = (sequelize) => {
       type:DataTypes.INTEGER,
     },custom:{
       type:DataTypes.BOOLEAN,
+      allowNull:false,
       unique:'compositeIndex',
     }
   });
