@@ -9,5 +9,4 @@ const pokemons = require('./pokemons');
 // Ejemplo: router.use('/auth', authRouter);
 router.use("/",pokemons);
 
-
 module.exports = router;

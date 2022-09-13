@@ -3,19 +3,22 @@ const axios = require("axios");
 
 // api calls 
 const getPokemonsApi = async (pokemons) => {
-    //649 pokemons with img
-    //https://pokeapi.co/api/v2/pokemon?offset=0&limit=649
-    // img src https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/649.svg
-    // https://pokeapi.co/api/v2/pokemon/1/
+    
+    let pokeDb = await Pokemon.count({
+        col:'name',
+    });
+
+    if(pokeDb > 0){
+        return;
+    }
     
     const pokemonList = [];
-    //console.log(pokemonList);
+    
     for(let i = 1;i <= pokemons;i++){
         let info = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}/`);
         pokemonList.push(info.data);
     }
 
-    //console.log(pokemonList[0].stats.find(item => item.stat.name === "hp").base_stat);
     let pokeData = pokemonList.map((pokemon) => {
         let hp,attack,defense,speed;
         for(let item of pokemon.stats){
@@ -37,24 +40,39 @@ const getPokemonsApi = async (pokemons) => {
         };
     });
 
-    return pokeData;
+    await Pokemon.bulkCreate(pokeData);
 
 };
+
+const getTypesApi = async () => {
+
+    let typeDb = await Type.count({
+        col:'name',
+    });
+
+    if(typeDb > 0){
+        return;
+    }
+
+    let types = await axios.get(`https://pokeapi.co/api/v2/type`);
+    //console.log(types.data.results.map(type => type.name));
+    let typesName = types.data.results.map(type => {
+        return {
+            name:type.name,
+        }
+    });
+
+    await Type.bulkCreate(typesName);
+}
 
 
 module.exports = {
     // obtain all pokemons
     getPokemons: async (req,res)=>{
         const {name} = req.query;
-        const checkDb = await Pokemon.count({
-            col:'name',
-        });
-    
-        if(checkDb == 0){
-            const data = await getPokemonsApi(100);
-            await Pokemon.bulkCreate(data);
-        }
-        
+
+        await getPokemonsApi(10);
+        await getTypesApi();       
 
         if(name){
             try{
@@ -78,5 +96,15 @@ module.exports = {
         }
         
         
+    },
+    getTypes: async (req,res) => {
+        await getTypesApi();
+
+        try{
+            const types = await Type.findAll();
+            res.json(types.length > 0 ? types : "Not types retrieved");
+        }catch(err){
+            res.json({error:err.message});
+        }
     }
 };
