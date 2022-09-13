@@ -2,14 +2,15 @@ const {Pokemon, Type, Op} = require("../db");
 const axios = require("axios");
 
 // api calls 
-const getPokemonsApi = async () => {
+const getPokemonsApi = async (pokemons) => {
     //649 pokemons with img
     //https://pokeapi.co/api/v2/pokemon?offset=0&limit=649
     // img src https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/649.svg
     // https://pokeapi.co/api/v2/pokemon/1/
+    
     const pokemonList = [];
     //console.log(pokemonList);
-    for(let i = 1;i <= 20;i++){
+    for(let i = 1;i <= pokemons;i++){
         let info = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}/`);
         pokemonList.push(info.data);
     }
@@ -55,8 +56,15 @@ module.exports = {
     // obtain all pokemons
     getPokemons: async (req,res)=>{
         const {name} = req.query;
-        const data = await getPokemonsApi();
-        await fillDb(data);
+        const checkDb = await Pokemon.count({
+            col:'name',
+        });
+    
+        if(checkDb == 0){
+            const data = await getPokemonsApi(20);
+            await fillDb(data);
+        }
+        
 
         if(name){
             try{
