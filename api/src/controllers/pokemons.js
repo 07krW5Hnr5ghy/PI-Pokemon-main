@@ -45,16 +45,23 @@ const fillDb = async (data) => {
     await Pokemon.bulkCreate(data);
 };
 
+// get database records
+const getDbRecords = async () => {
+    const records = await Pokemon.findAll();
+    return records;
+};
+
 module.exports = {
     // obtain all pokemons
     getPokemons: async (req,res)=>{
         try{
             const data = await getPokemonsApi();
             await fillDb(data);
-            res.json(data);
+            const dbRecords = await getDbRecords();
+            res.json(dbRecords.length > 0 ? dbRecords : "Not pokemons created");
         }catch(err){
-            console.log(err);
-            //res.json({error:err.message});
+            //console.log(err);
+            res.json({error:err.message});
         }
         
     }
