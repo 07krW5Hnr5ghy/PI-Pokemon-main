@@ -41,16 +41,6 @@ const getPokemonsApi = async (pokemons) => {
 
 };
 
-// populate database
-const fillDb = async (data) => {
-    await Pokemon.bulkCreate(data);
-};
-
-// get database records
-const getDbRecords = async () => {
-    const records = await Pokemon.findAll();
-    return records;
-};
 
 module.exports = {
     // obtain all pokemons
@@ -61,8 +51,8 @@ module.exports = {
         });
     
         if(checkDb == 0){
-            const data = await getPokemonsApi(20);
-            await fillDb(data);
+            const data = await getPokemonsApi(100);
+            await Pokemon.bulkCreate(data);
         }
         
 
@@ -73,7 +63,7 @@ module.exports = {
                         name:name,
                     }
                 });
-                res.json(filteredRecords?filteredRecords:"Pokemon not found");
+                res.json(filteredRecords.length > 0 ?filteredRecords:"Pokemon not found");
             }catch(err){
                 res.json({error:err.message});
             }
