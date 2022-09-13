@@ -54,15 +54,31 @@ const getDbRecords = async () => {
 module.exports = {
     // obtain all pokemons
     getPokemons: async (req,res)=>{
-        try{
-            const data = await getPokemonsApi();
-            await fillDb(data);
-            const dbRecords = await getDbRecords();
-            res.json(dbRecords.length > 0 ? dbRecords : "Not pokemons created");
-        }catch(err){
-            //console.log(err);
-            res.json({error:err.message});
+        const {name} = req.query;
+        const data = await getPokemonsApi();
+        await fillDb(data);
+
+        if(name){
+            try{
+                const filteredRecords = await Pokemon.findAll({
+                    where:{
+                        name:name,
+                    }
+                });
+                res.json(filteredRecords?filteredRecords:"Pokemon not found");
+            }catch(err){
+                res.json({error:err.message});
+            }
+        }else{
+            try{
+                const dbRecords = await Pokemon.findAll();
+                res.json(dbRecords.length > 0 ? dbRecords : "Not pokemons created");
+            }catch(err){
+                //console.log(err);
+                res.json({error:err.message});
+            }
         }
+        
         
     }
 };
