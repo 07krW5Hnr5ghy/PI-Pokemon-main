@@ -23,7 +23,7 @@ const getPokemonsApi = async (pokemons) => {
     let pokeData = pokemonList.map((pokemon) => {
         let hp,attack,defense,speed;
         let types = [];
-        console.log(pokemon.types);
+        
         for(let item of pokemon.types){
             types.push(item.type.name);
         }
@@ -35,7 +35,7 @@ const getPokemonsApi = async (pokemons) => {
         }
         return {
             name:pokemon.name,
-            pokeid:pokemon.id,
+            id:pokemon.id < 10 ? "0" + pokemon.id + "a":pokemon.id.toString() + "a",
             classes:types,
             hp:hp,
             attack:attack,
@@ -124,7 +124,7 @@ module.exports = {
         let {id} = req.params;
         try{
             const pokemon = await Pokemon.findOne({
-                where:{pokeid:id}
+                where:{id:id}
             });
             res.json(pokemon);
         }catch(err){
@@ -136,7 +136,7 @@ module.exports = {
         let {name,classes,hp,attack,defense,speed,height,weight,img} = req.body;
         try{
             await Pokemon.create({
-                name,pokeid:keyGenerator.next().value,classes,hp,attack,defense,speed,height,weight,img,
+                name,id:keyGenerator.next().value,classes,hp,attack,defense,speed,height,weight,img,
             });
             res.send("Pokemon created");
         }catch(err){
