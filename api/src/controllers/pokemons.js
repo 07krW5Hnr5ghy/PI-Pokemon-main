@@ -1,11 +1,12 @@
 const {Pokemon, Type, Op} = require("../db");
 const axios = require("axios");
+const {keyGenerator} = require('../utils/utils');
 
 // api calls 
 const getPokemonsApi = async (pokemons) => {
     
     let pokeDb = await Pokemon.count({
-        col:'name',
+        where:{custom:false}
     });
 
     if(pokeDb > 0){
@@ -21,6 +22,11 @@ const getPokemonsApi = async (pokemons) => {
 
     let pokeData = pokemonList.map((pokemon) => {
         let hp,attack,defense,speed;
+        let types = [];
+        console.log(pokemon.types);
+        for(let item of pokemon.types){
+            types.push(item.type.name);
+        }
         for(let item of pokemon.stats){
             if(item.stat.name === "hp") hp = item.base_stat;
             if(item.stat.name === "attack") attack = item.base_stat;
@@ -29,6 +35,8 @@ const getPokemonsApi = async (pokemons) => {
         }
         return {
             name:pokemon.name,
+            pokeid:pokemon.id,
+            classes:types,
             hp:hp,
             attack:attack,
             defense:defense,
@@ -64,6 +72,11 @@ const getTypesApi = async () => {
 
     await Type.bulkCreate(typesName);
 }
+
+const getPokemonId = async (id) => {
+
+}
+
 
 
 module.exports = {
@@ -106,5 +119,28 @@ module.exports = {
         }catch(err){
             res.json({error:err.message});
         }
-    }
+    },
+    getDetail: async (req,res) => {
+        let {id} = req.params;
+        try{
+            const pokemon = await Pokemon.findOne({
+                where:{pokeid:id}
+            });
+            res.json(pokemon);
+        }catch(err){
+            res.json({error:err.message});
+        }
+    },
+    createPokemon: async (req,res) => {
+        
+        let {name,classes,hp,attack,defense,speed,height,weight,img} = req.body;
+        try{
+            await Pokemon.create({
+                name,pokeid:keyGenerator.next().value,classes,hp,attack,defense,speed,height,weight,img,
+            });
+            res.send("Pokemon created");
+        }catch(err){
+            res.send(err);
+        }
+    },
 };
