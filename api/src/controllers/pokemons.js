@@ -134,9 +134,10 @@ module.exports = {
     createPokemon: async (req,res) => {
         
         let {name,classes,hp,attack,defense,speed,height,weight,img} = req.body;
+        let id = await keyGenerator.next();
         try{
             await Pokemon.create({
-                name,id:keyGenerator.next().value,classes,hp,attack,defense,speed,height,weight,img,
+                name,id:id.value,classes,hp,attack,defense,speed,height,weight,img,
             });
             res.send("Pokemon created");
         }catch(err){

@@ -1,5 +1,10 @@
-function* idGenerator(){
-    let seed = 1;
+const {Pokemon} = require('../db');
+async function* idGenerator(){
+    let lastId = await Pokemon.count({
+        where:{custom:true}
+    });
+    console.log(lastId);
+    let seed = lastId + 1;
     while(seed){
         if(seed > 0 && seed < 10){
             yield "0" + seed + "c";
