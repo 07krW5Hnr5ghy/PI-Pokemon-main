@@ -8,7 +8,7 @@ const {
 
 const sequelize = new Sequelize('pokemon',`${DB_USER}`,`${DB_PASSWORD}`,{
   host:`${DB_HOST}`,
-  logging:console.log,
+  logging:false,
   dialect:'postgres',
 });
 const basename = path.basename(__filename);
