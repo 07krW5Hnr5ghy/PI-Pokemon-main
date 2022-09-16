@@ -5,14 +5,6 @@ const {keyGenerator} = require('../utils/utils');
 // api calls 
 const getPokemonsApi = async (pokemons) => {
     
-    let pokeDb = await Pokemon.count({
-        where:{custom:false}
-    });
-
-    if(pokeDb > 0){
-        return;
-    }
-    
     const pokemonList = [];
     
     for(let i = 1;i <= pokemons;i++){
@@ -23,16 +15,18 @@ const getPokemonsApi = async (pokemons) => {
     let pokeData = pokemonList.map((pokemon) => {
         let hp,attack,defense,speed;
         let types = [];
-        
+            
         for(let item of pokemon.types){
             types.push(item.type.name);
         }
+
         for(let item of pokemon.stats){
             if(item.stat.name === "hp") hp = item.base_stat;
             if(item.stat.name === "attack") attack = item.base_stat;
             if(item.stat.name === "defense") defense = item.base_stat;
             if(item.stat.name === "speed") speed = item.base_stat;
         }
+
         return {
             name:pokemon.name,
             id:pokemon.id < 10 ? "0" + pokemon.id + "a":pokemon.id.toString() + "a",
@@ -49,7 +43,6 @@ const getPokemonsApi = async (pokemons) => {
     });
 
     await Pokemon.bulkCreate(pokeData);
-
 };
 
 const getTypesApi = async () => {
@@ -73,18 +66,19 @@ const getTypesApi = async () => {
     await Type.bulkCreate(typesName);
 }
 
-const getPokemonId = async (id) => {
-
-}
-
-
-
 module.exports = {
     // obtain all pokemons
     getPokemons: async (req,res)=>{
         const {name} = req.query;
 
-        await getPokemonsApi(10);
+        let pokeDb = await Pokemon.count({
+            where:{custom:false}
+        });
+    
+        if(pokeDb == 0){
+            await getPokemonsApi(10);            
+        }
+
         await getTypesApi();       
 
         if(name){
