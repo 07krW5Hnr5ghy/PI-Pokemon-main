@@ -12,11 +12,21 @@ const Details = () => {
         dispatch(getDetail(id));
     },[dispatch]);
 
-    let details = useSelector(state => state.reducerPokemon.pokemonDetail);
+    let detail = useSelector(state => state.reducerPokemon.pokemonDetail);
 
-    console.log(details);
+    console.log(detail);
+
     return(
-        <h1>Details</h1>
+        <div>
+            <h2>{detail.name}</h2>
+            <p>id:{detail.id}</p>
+            <img src={detail.img} alt={detail.name}/>
+            <p>health:{detail.hp}</p>
+            <p>attack:{detail.attack}</p>
+            <p>speed:{detail.speed}</p>
+            <p>height:{detail.height}</p>
+            <p>weight:{detail.weight}</p>
+        </div>
     );
 }
 
