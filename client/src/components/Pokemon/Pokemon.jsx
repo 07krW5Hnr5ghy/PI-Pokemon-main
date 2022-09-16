@@ -1,8 +1,13 @@
 import "./Pokemon.css";
 
-const Pokemon = () => {
+const Pokemon = (props) => {
+    let {name,img,classes} = props;
     return(
-        <h1>Pokemon</h1>
+        <div>
+            <h2>{name}</h2>
+            <img src={img} alt={name}/>
+            {classes.map(type => <p>{type}</p>)}
+        </div>
     );
 }
 
