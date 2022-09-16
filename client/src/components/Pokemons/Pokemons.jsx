@@ -3,19 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPokemons } from "../../redux/actions"; 
 import Page from "../Page/Page";
 import "./Pokemons.css";
-
+/* pokemons per page */
 let PageSize = 2;
 
 const Pokemons = () => {
     const dispatch = useDispatch();
+    /* state tracking number of page */
     const [currentPage,setCurrentPage] = useState(1);
-
+    /* select pokemons getted from db */
     let pokemons =  useSelector(state => state.reducerPokemon.pokemons);
-
+    /* request pokemons from db */
     useEffect(() => {
         dispatch(getPokemons());
     },[dispatch]);
-
+    /* set first and last page index
+    divide the number of pokemons per page
+     */
     const pokeData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
@@ -39,6 +42,7 @@ const Pokemons = () => {
                     );
                 })}
             </div>
+            {/* pagination component */}
             <Page 
             className="page-bar" 
             currentPage={currentPage}

@@ -10,7 +10,7 @@ const Page = (props) => {
         pageSize,
         className,
     } = props;
-    
+    /* custom hook */
     const pageRange = usePage({
         currentPage,
         totalCount,
@@ -18,21 +18,24 @@ const Page = (props) => {
         pageSize,
     });
 
-    /* If there are less than 2 times in pagination
-        range we shall not render the component */
+    /* If there are less than 2 pages in pagination
+        dont show the pagination bar */
     if(currentPage === 0 || pageRange.length < 2){
         return null;
     }
 
+    /* forward one page */
     const onNext = () => {
         onPageChange(currentPage + 1);
     };
 
+    /* back one page */
     const onPrevious = () => {
         onPageChange(currentPage - 1);
     }
 
     let lastPage = pageRange[pageRange.length - 1];
+    
     return(
         <ul>
             {/* left navigation arrow */}

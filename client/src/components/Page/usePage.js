@@ -8,17 +8,20 @@ const range = (start,end) => {
     and set the elements within it from
     start value to end value 
     */
-   return Array.from({length},(element,index)=>index + start);
+   return Array.from({length},(_,index)=>index + start);
 };
 
 export const usePage = ({
     totalCount,
     pageSize,
+    /* min amount of pages of each side
+    of current Page */
     siblingCount = 1,
     currentPage
 }) => {
     const paginationRange = useMemo(()=>{
-        // implement logic
+        /* set the total the of pages
+        total pokemons divided by pagesize */
         const totalPageCount = Math.ceil(totalCount/pageSize);
         // Pages count is determined as siblingCount + firstPage + lastPage + currentPage + 2*DOTS
         const totalPageNumbers = siblingCount + 5;
@@ -28,45 +31,55 @@ export const usePage = ({
         if(totalPageNumbers >= totalPageCount){
             return range(1,totalPageCount);
         }
-        /* Calculate left and right sibling index and 
-        make sure they are within range 1 and totalPageCount */
-        const leftSiblingIndex = Math.max(currentPage - siblingCount,1);
-        const rightSiblingIndex = Math.min(
+        /* Calculate left and right pages index of the current 
+        Page and make sure they are within range 1 and totalPageCount */
+        const leftPageIndex = Math.max(currentPage - siblingCount,1);
+        const rightPageIndex = Math.min(
             currentPage + siblingCount,
             totalPageCount
         );
 
-        /* we do not show dots just when there is just 
-        one page number to be inserted between the extremes
-        of sibling and the page limits i.e 1 and totalPageCount.
-        Hence we are using leftSiblingIndex > 2 and rightSiblingIndex
-        < totalPageCount - 2 */
-        const shouldShowLeftDots = leftSiblingIndex > 2;
-        const shouldShowRightDots = rightSiblingIndex < totalPageCount - 2;
-
+        /* Determine if show left dots and right dots */
+        /* if the left section of bar has more than 2 pages 
+        show the left dots */
+        const shouldShowLeftDots = leftPageIndex > 2;
+        /* if the right section of bar has more than 2 pages
+        show the right dots  */
+        const shouldShowRightDots = rightPageIndex < totalPageCount - 2;
+        /* firts and last pages index */
         const firstPageIndex = 1;
         const lastPageIndex = totalPageCount;
 
         /* Case 2: No left dots to show, but rights dots to be shown */
         if(!shouldShowLeftDots && shouldShowRightDots){
+            /* 2 * siblings value of curent page + first page + last page
+            of left section */
             let leftItemCount = 3 + 2 * siblingCount;
+            /* set range of items left section */
             let leftRange = range(1,leftItemCount);
+            /* return layout of pages bar */
             return [...leftRange,DOTS,totalPageCount];
         }
 
         /* Case 3: No right dots to show, but left dots to be shown */
         if(shouldShowLeftDots && !shouldShowRightDots){
+            /* 2 * siblings value of curent page + first page + last page
+            of right section */
             let rightItemCount = 3 + 2 * siblingCount;
+            /* set range of items right section */
             let rightRange = range(
                 totalPageCount - rightItemCount + 1,
                 totalPageCount
             );
+            /* return layout of pages bar */
             return [firstPageIndex,DOTS,...rightRange];
         }
 
         /* Case 4: Both left and right dots to be shown */
         if(shouldShowLeftDots && shouldShowRightDots){
-            let middleRange = range(leftSiblingIndex, rightSiblingIndex);
+            /* set middle range */
+            let middleRange = range(leftPageIndex, rightPageIndex);
+            /* return layout of pages bar */
             return [firstPageIndex,DOTS,...middleRange,DOTS,lastPageIndex];
         }
 
