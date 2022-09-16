@@ -15,18 +15,18 @@ const Pokemons = () => {
     let pokemons =  useSelector(state => state.reducerPokemon.pokemons);
     /* request pokemons from db */
     useEffect(() => {
-        dispatch(getPokemons());
+        dispatch(getPokemons()).then();
     },[dispatch]);
+
     /* set first and last page index
     divide the number of pokemons per page
      */
-    const pokeData = useMemo(() => {
-        const firstPageIndex = (currentPage - 1) * PageSize;
-        const lastPageIndex = firstPageIndex + PageSize;
-        return pokemons.slice(firstPageIndex,lastPageIndex);
-    },[currentPage]);
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    let pokeData = pokemons.slice(firstPageIndex,lastPageIndex);
 
     console.log(pokemons);
+    console.log(pokeData);
 
     // pages
     return(

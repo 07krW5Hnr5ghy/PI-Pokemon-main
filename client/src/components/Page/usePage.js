@@ -20,6 +20,7 @@ export const usePage = ({
     currentPage
 }) => {
     const paginationRange = useMemo(()=>{
+        console.log("use page");
         /* set the total the of pages
         total pokemons divided by pagesize */
         const totalPageCount = Math.ceil(totalCount/pageSize);
