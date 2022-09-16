@@ -10,7 +10,7 @@ const Page = (props) => {
         pageSize,
         className,
     } = props;
-    /* custom hook */
+    /* pages bar logic */
     const pageRange = usePage({
         currentPage,
         totalCount,

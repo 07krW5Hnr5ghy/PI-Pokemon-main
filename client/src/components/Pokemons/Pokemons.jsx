@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemons } from "../../redux/actions"; 
 import Page from "../Page/Page";
+import Loading from "../Loading/Loading";
 import "./Pokemons.css";
 /* pokemons per page */
 let PageSize = 2;
@@ -32,7 +33,7 @@ const Pokemons = () => {
         <>
             <h1>Pokemons</h1>
             <div>
-                {pokeData.map(item => {
+                {pokemons.length ? pokeData.map(item => {
                     return(
                         <div>
                             <p>{item.id}</p>
@@ -40,7 +41,7 @@ const Pokemons = () => {
                             <p>{item.classes}</p>
                         </div>
                     );
-                })}
+                }):<Loading/>}
             </div>
             {/* pagination component */}
             <Page 
