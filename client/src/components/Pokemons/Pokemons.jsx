@@ -16,7 +16,7 @@ const Pokemons = () => {
     let pokemons =  useSelector(state => state.reducerPokemon.pokemons);
     /* request pokemons from db */
     useEffect(() => {
-        dispatch(getPokemons()).then();
+        dispatch(getPokemons());
     },[dispatch]);
 
     /* set first and last page index
@@ -38,6 +38,8 @@ const Pokemons = () => {
                 name={item.name}
                 img={item.img}
                 classes={item.classes}
+                id={item.id}
+                key={item.id}
                 />):<Loading/>}
             </div>
             {/* pagination component */}
