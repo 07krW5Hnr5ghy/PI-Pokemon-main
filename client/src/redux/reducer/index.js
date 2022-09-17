@@ -1,11 +1,13 @@
 import {
     GET_POKEMONS,
     GET_DETAIL,
+    GET_TYPES,
 } from "../actions/index";
 
 const initialState = {
     pokemons: [],
     pokemonDetail: [],
+    types:[],
 };
 
 export const reducerPokemon = (state = initialState,action) => {
@@ -19,6 +21,11 @@ export const reducerPokemon = (state = initialState,action) => {
             return {
                 ...state,
                 pokemonDetail:action.payload,
+            };
+        case GET_TYPES:
+            return {
+                ...state,
+                types:action.payload,
             };
         default:
             return state;

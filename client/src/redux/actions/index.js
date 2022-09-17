@@ -2,6 +2,8 @@ import axios from "axios";
 export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_DETAIL = "GET_DETAIL";
 export const GET_NAME = "GET_NAME";
+export const GET_TYPES = "GET_TYPES";
+export const POST_CREATE = "POST_CREATE";
 
 export const getPokemons = (name) => {
     return async (dispatch) => {
@@ -28,6 +30,26 @@ export const getDetail = (id) => {
         return dispatch({
             type:GET_DETAIL,
             payload:request.data,
+        });
+    }
+}
+
+export const getTypes = () => {
+    return async(dispatch) => {
+        const request = await axios(`http://localhost:3001/types`);
+        return dispatch({
+            type:GET_TYPES,
+            payload:request.data,
+        });
+    }
+}
+
+export const postCreate = (pokemon) => {
+    return async(dispatch) => {
+        const request = await axios.post(`http://localhost:3001/pokemons`,pokemon);
+        return dispatch({
+            type:POST_CREATE,
+            payload: request.data,
         });
     }
 }

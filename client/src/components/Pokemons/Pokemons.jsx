@@ -37,18 +37,13 @@ const Pokemons = () => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
     let pokeData = pokemons.slice(firstPageIndex,lastPageIndex);
-    console.log("pokemons");
-    console.log(pokemons);
-    console.log(typeof pokemons);
-    console.log("pokedata");
-    console.log(pokeData);
-    console.log(typeof pokeData);
 
-    // pages
+    // render pokemons
     return(
         <>
             <h1>Pokemons</h1>
             <div>
+                {/* if not receive pokemons render pokemon not found message */}
                 {!pokemons.length && Array.isArray(pokemons) ? 
                 <Loading/> : pokeData && Array.isArray(pokeData) ? pokeData.map(item => <Pokemon 
                 name={item.name}
