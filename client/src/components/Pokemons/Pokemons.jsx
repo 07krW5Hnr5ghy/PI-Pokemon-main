@@ -18,7 +18,7 @@ const Pokemons = () => {
     
     /* request pokemons from db */
     const name = searchParams.get('name');
-    console.log(name);
+    //console.log(name);
     
     useEffect(() => {
         if(name){
@@ -37,31 +37,36 @@ const Pokemons = () => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
     let pokeData = pokemons.slice(firstPageIndex,lastPageIndex);
-
+    console.log("pokemons");
     console.log(pokemons);
+    console.log(typeof pokemons);
+    console.log("pokedata");
     console.log(pokeData);
+    console.log(typeof pokeData);
 
     // pages
     return(
         <>
             <h1>Pokemons</h1>
             <div>
-                {pokemons.length ? pokeData.map(item => <Pokemon 
+                {!pokemons.length && Array.isArray(pokemons) ? 
+                <Loading/> : pokeData && Array.isArray(pokeData) ? pokeData.map(item => <Pokemon 
                 name={item.name}
                 img={item.img}
                 classes={item.classes}
                 id={item.id}
                 key={item.id}
-                />):<Loading/>}
+                />):<h2>{pokemons}</h2>}
             </div>
             {/* pagination component */}
-            <Page 
+            {!name ? <Page 
             className="page-bar" 
             currentPage={currentPage}
             totalCount={pokemons.length}
             onPageChange={page => setCurrentPage(page)}
             pageSize={PageSize}
-            />
+            /> : <h3>footer</h3>}
+            
         </>
     );
 };
