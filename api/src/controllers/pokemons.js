@@ -76,7 +76,7 @@ module.exports = {
         });
     
         if(pokeDb == 0){
-            await getPokemonsApi(10);            
+            await getPokemonsApi(50);            
         }
 
         await getTypesApi();       

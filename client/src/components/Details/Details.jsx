@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getDetail } from '../../redux/actions';
+import Nav from "../Nav/Nav";
 
 const Details = () => {
     const {id} = useParams();
@@ -17,7 +18,8 @@ const Details = () => {
     console.log(detail);
 
     return(
-        <div>
+        <>
+            <Nav/>
             <h2>{detail.name}</h2>
             <p>id:{detail.id}</p>
             <img src={detail.img} alt={detail.name}/>
@@ -26,7 +28,7 @@ const Details = () => {
             <p>speed:{detail.speed}</p>
             <p>height:{detail.height}</p>
             <p>weight:{detail.weight}</p>
-        </div>
+        </>
     );
 }
 

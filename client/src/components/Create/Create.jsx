@@ -2,6 +2,7 @@ import './Create.css';
 import { getTypes,postCreate } from '../../redux/actions';
 import { useState,useEffect,useCallback,useMemo } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
+import Nav from "../Nav/Nav";
 
 const Create = () => {
     const dispatch = useDispatch();
@@ -50,7 +51,8 @@ const Create = () => {
     const options = types.map(type => <option key={type.id} value={type.name}>{type.name}</option>)
 
     return(
-        <div>
+        <>
+            <Nav/>
             <h1>Create</h1>
             <form onSubmit={handleSubmit}>
                 <fieldset>
@@ -78,7 +80,7 @@ const Create = () => {
                 <input type="submit" value="Submit"/>
                 </fieldset>
             </form>
-        </div>
+        </>
     );
 };
 

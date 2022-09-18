@@ -4,6 +4,7 @@ export const GET_DETAIL = "GET_DETAIL";
 export const GET_NAME = "GET_NAME";
 export const GET_TYPES = "GET_TYPES";
 export const POST_CREATE = "POST_CREATE";
+export const FILTER_TYPE = "FILTER_TYPE";
 
 export const getPokemons = (name) => {
     return async (dispatch) => {
@@ -52,4 +53,11 @@ export const postCreate = (pokemon) => {
             payload: request.data,
         });
     }
+}
+
+export const filterType = (type) => {
+    return {
+        type:FILTER_TYPE,
+        payload:type,
+    };
 }

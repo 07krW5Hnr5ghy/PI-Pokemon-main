@@ -39,7 +39,7 @@ const Page = (props) => {
     return(
         <ul>
             {/* left navigation arrow */}
-            <li onClick={onPrevious}>
+            <li key={"left"} onClick={onPrevious}>
                 <div className="arrow left">
                     {"<-"}
                 </div> 
@@ -47,7 +47,7 @@ const Page = (props) => {
             {pageRange.map(pageNumber => {
                 // if the pageItem is a DOT, render the DOTS unicode character
                 if(pageNumber === DOTS){
-                    return <li className="dots">&#8230;</li>
+                    return <li key={pageNumber} className="dots">&#8230;</li>
                 }
 
                 // Render our Page Pills
@@ -58,7 +58,7 @@ const Page = (props) => {
                 );
             })}
             {/* right navigation arrow */}
-            <li className="pageItem" onClick={onNext}>
+            <li className="pageItem" key={"right"} onClick={onNext}>
                 <div className="arrow right">
                     {"->"}
                 </div>
