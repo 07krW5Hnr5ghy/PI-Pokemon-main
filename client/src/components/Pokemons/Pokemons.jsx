@@ -6,7 +6,6 @@ import Page from "../Page/Page";
 import Loading from "../Loading/Loading";
 import Pokemon from "../Pokemon/Pokemon";
 import Nav from "../Nav/Nav";
-import Search from "../Search/Search";
 import "./Pokemons.css";
 import { useLocation, useParams } from "react-router-dom";
 /* pokemons per page */
@@ -90,13 +89,15 @@ const Pokemons = () => {
                 <button onClick={applyFilter}>filter</button>
                 <label>Please select a type --</label>
                 <select>
-                    <option key="all" value="all">all</option>
+                    <option value="">select types</option>
+                    <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
                     {types && Array.isArray(types) ? 
                     types.map(type => <option key={type.id} value={type.name}
                     onClick={event => handleOptions(event,"filter")}>{type.name}</option>):[]}
                 </select>
                 <label>Select to filter between filter and custom pokemons</label>
                 <select>
+                    <option value="">select origin</option>
                     <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
                     <option value="api+" onClick={event => handleOptions(event,"filter")}>api</option>
                     <option value="custom+" onClick={event => handleOptions(event,"filter")}>custom</option>
@@ -106,11 +107,13 @@ const Pokemons = () => {
                 <button onClick={order}>order</button>
                 <label>Select item</label>
                 <select>
+                    <option value="">select item</option>
                     <option value="name" onClick={event => handleOptions(event,"order")}>name</option>
                     <option value="attack" onClick={event => handleOptions(event,"order")}>attack</option>
                 </select>
                 <label>Select mode</label>
                 <select>
+                    <option value="">select mode</option>
                     <option value="asc" onClick={event => handleOptions(event,"mode")}>asc</option>
                     <option value="desc" onClick={event => handleOptions(event,"mode")}>desc</option>
                 </select>
