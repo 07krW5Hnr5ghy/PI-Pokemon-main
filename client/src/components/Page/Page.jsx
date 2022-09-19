@@ -50,7 +50,7 @@ const Page = (props) => {
                     return <li key={pageNumber} className="dots">&#8230;</li>
                 }
 
-                // Render our Page Pills
+                // render page numbers
                 return(
                     <li className="pageItem" key={pageNumber} onClick={() => onPageChange(pageNumber)}>
                         {pageNumber}
