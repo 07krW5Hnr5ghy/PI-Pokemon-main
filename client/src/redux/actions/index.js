@@ -4,7 +4,8 @@ export const GET_DETAIL = "GET_DETAIL";
 export const GET_NAME = "GET_NAME";
 export const GET_TYPES = "GET_TYPES";
 export const POST_CREATE = "POST_CREATE";
-export const FILTER_TYPE = "FILTER_TYPE";
+export const FILTER = "FILTER";
+export const ORDER_NAME = "ORDER_NAME";
 
 export const getPokemons = (name) => {
     return async (dispatch) => {
@@ -55,9 +56,16 @@ export const postCreate = (pokemon) => {
     }
 }
 
-export const filterType = (type) => {
+export const filter = (filter) => {
     return {
-        type:FILTER_TYPE,
-        payload:type,
+        type:FILTER,
+        payload:filter,
+    };
+}
+
+export const orderName = (order) => {
+    return {
+        type:ORDER_NAME,
+        payload:order,
     };
 }

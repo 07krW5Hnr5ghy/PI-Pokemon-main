@@ -3,7 +3,8 @@ import {
     GET_DETAIL,
     GET_TYPES,
     POST_CREATE,
-    FILTER_TYPE,
+    FILTER,
+    ORDER_NAME,
 } from "../actions/index";
 
 const initialState = {
@@ -35,22 +36,25 @@ export const reducerPokemon = (state = initialState,action) => {
             return {
                 ...state,
             };
-        case FILTER_TYPE:
+        case FILTER:
             const filteredPokemons = state.filteredPokemons;
             const results = action.payload === "all" ?
              filteredPokemons : filteredPokemons.filter((pokemon) => pokemon.classes.includes(action.payload));
-            /*if(results.lenght === 0){
-                results = "No pokemons found with the filter";
-            }else{
-                return {
-                    ...state,
-                    pokemons:results,
-                };
-            } */
             return {
                 ...state,
                 pokemons:!results.length ? "No pokemons found with the filter" : results,
             };
+        case ORDER_NAME:
+            const unorderedPokemons = state.pokemons;
+            action.payload === "asc" ? 
+            unorderedPokemons.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)) : 
+            unorderedPokemons.sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1));
+
+            return{
+                ...state,
+                pokemons:[...unorderedPokemons],
+            };
+
         default:
             return state;
     }
