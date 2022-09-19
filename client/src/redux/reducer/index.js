@@ -45,7 +45,7 @@ export const reducerPokemon = (state = initialState,action) => {
                 pokemons:!results.length ? "No pokemons found with the filter" : results,
             };
         case ORDER_NAME:
-            const unorderedPokemons = state.pokemons;
+            const unorderedPokemons = [...state.pokemons];
             action.payload === "asc" ? 
             unorderedPokemons.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)) : 
             unorderedPokemons.sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1));
