@@ -14,6 +14,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique:true,
+      validate:{
+        isAlpha:true,
+      },
     },
     classes:{
       type:DataTypes.ARRAY(DataTypes.STRING),
@@ -22,32 +25,53 @@ module.exports = (sequelize) => {
     hp:{
       type:DataTypes.INTEGER,
       allowNull:false,
+      validate:{
+        min:1,
+      },
     },
     attack:{
       type:DataTypes.INTEGER,
       allowNull:false,
+      validate:{
+        min:1,
+      },
     },
     defense:{
       type:DataTypes.INTEGER,
       allowNull:false,
+      validate:{
+        min:1,
+      },
     },
     speed:{
       type:DataTypes.INTEGER,
       allowNull:false,
+      validate:{
+        min:1,
+      },
     },
     height:{
       type:DataTypes.INTEGER,
       allowNull:false,
+      validate:{
+        min:1,
+      },
     },
     weight:{
       type:DataTypes.INTEGER,
       allowNull:false,
+      validate:{
+        min:1,
+      },
     },img:{
       type:DataTypes.TEXT,
       allowNull:false,
-    },custom:{
-      type:DataTypes.BOOLEAN,
-      defaultValue:true,
+      validate:{
+        is:/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|svg|png|webp)/,
+      },
+    },origin:{
+      type:DataTypes.ENUM("api+","custom+"),
+      defaultValue:"custom+",
     }
   });
 };

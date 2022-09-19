@@ -1,7 +1,7 @@
 const {Pokemon} = require('../db');
 async function* idGenerator(){
     let lastId = await Pokemon.count({
-        where:{custom:true}
+        where:{origin:"custom+"}
     });
     console.log(lastId);
     let seed = lastId + 1;

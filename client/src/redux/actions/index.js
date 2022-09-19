@@ -4,7 +4,8 @@ export const GET_DETAIL = "GET_DETAIL";
 export const GET_NAME = "GET_NAME";
 export const GET_TYPES = "GET_TYPES";
 export const POST_CREATE = "POST_CREATE";
-export const FILTER = "FILTER";
+export const FILTER_TYPES = "FILTER_TYPES";
+export const FILTER_CUSTOM = "FILTER_CUSTOM";
 export const ORDER_NAME = "ORDER_NAME";
 export const ORDER_ATTACK = "ORDER_ATTACK";
 
@@ -57,12 +58,20 @@ export const postCreate = (pokemon) => {
     }
 }
 
-export const filter = (filter) => {
+export const filterTypes = (filter) => {
     return {
-        type:FILTER,
+        type:FILTER_TYPES,
         payload:filter,
     };
 }
+
+export const filterCustom = (filter) => {
+    return {
+        type:FILTER_CUSTOM,
+        payload:filter,
+    };
+}
+
 
 export const orderName = (order) => {
     return {

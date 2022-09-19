@@ -1,16 +1,19 @@
 import './Create.css';
-import { getTypes,postCreate } from '../../redux/actions';
+import { getPokemons,getTypes,postCreate } from '../../redux/actions';
 import { useState,useEffect,useCallback,useMemo } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import Nav from "../Nav/Nav";
 
-const validate = (input) => {
+
+const validate = (input,pokemons) => {
     let errors = {};
 
     if(!input.name){
         errors.name = 'Name is required';
     }else if(!/^[A-Za-z]+$/.test(input.name) || input.name.length > 10){
         errors.name = 'Name is invalid enter alphabet characters only and 10 Characters as maximum';
+    }else if(pokemons.find(pokemon => pokemon.name === input.name)){
+        errors.name = 'Name already exists in the pokemons list';
     }else{
         errors.name = "no error";
     }
@@ -69,13 +72,16 @@ const Create = () => {
         img:'',
     })
 
+    useEffect(() => {
+        dispatch(getTypes());
+        dispatch(getPokemons());
+    },[]);
+
     const types = useSelector(state => state.reducerPokemon.types);
 
     console.log(types);
 
-    useEffect(() => {
-        dispatch(getTypes());
-    },[]);
+    const pokemons = useSelector(state => state.reducerPokemon.pokemons);
 
     const handleChange = (event) => {
         setInput({
@@ -86,7 +92,7 @@ const Create = () => {
             validate({
                 ...input,
                 [event.target.name]:event.target.value,
-            })
+            },pokemons)
         );
     }
 

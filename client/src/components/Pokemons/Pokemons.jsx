@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons,getTypes,filter,orderName,orderAttack } from "../../redux/actions";
+import { getPokemons,getTypes,filterTypes,filterCustom,orderName,orderAttack } from "../../redux/actions";
 import { useSearchParams } from "react-router-dom";
 import Page from "../Page/Page";
 import Loading from "../Loading/Loading";
@@ -59,7 +59,15 @@ const Pokemons = () => {
     //console.log(filters);
 
     const applyFilter = () => {
-        dispatch(filter(options.filter));
+        if(types.find(type => type === options.filter)){
+            console.log("types");
+            dispatch(filterTypes(options.filter));
+        }
+        
+        if(options.filter === "api+" || options.filter === "custom+"){
+            console.log("origin");
+            dispatch(filterCustom(options.filter));
+        }
     }
 
     const order = () => {
@@ -84,9 +92,9 @@ const Pokemons = () => {
                 </select>
                 <label>Select to filter between filter and custom pokemons</label>
                 <select>
-                    <option key="all" value="all">all</option>
-                    <option value={0} onClick={event => handleOptions(event,"filter")}>api</option>
-                    <option value={1} onClick={event => handleOptions(event,"filter")}>custom</option>
+                    <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
+                    <option value="api+" onClick={event => handleOptions(event,"filter")}>api</option>
+                    <option value="custom+" onClick={event => handleOptions(event,"filter")}>custom</option>
                 </select>
             </div>
             <div>

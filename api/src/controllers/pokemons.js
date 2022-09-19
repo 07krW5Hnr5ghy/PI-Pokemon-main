@@ -38,7 +38,7 @@ const getPokemonsApi = async (pokemons) => {
             height:pokemon.height,
             weight:pokemon.weight,
             img:pokemon.sprites.other.dream_world.front_default,
-            custom:false,
+            origin:"api+",
         };
     });
 
@@ -72,7 +72,7 @@ module.exports = {
         const {name} = req.query;
 
         let pokeDb = await Pokemon.count({
-            where:{custom:false}
+            where:{origin:"api+"}
         });
     
         if(pokeDb == 0){
