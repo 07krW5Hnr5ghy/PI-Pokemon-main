@@ -71,9 +71,7 @@ const Pokemons = () => {
     // render pokemons
     return(
         <>  
-           {pokemons.length && Array.isArray(pokemons)?
-            <>
-             <Nav/>
+            <Nav/>
             <h1>Pokemons</h1>
             <div>
                 <button onClick={applyFilter}>filter</button>
@@ -104,6 +102,8 @@ const Pokemons = () => {
                     <option value="desc" onClick={event => handleOptions(event,"mode")}>desc</option>
                 </select>
             </div>
+           {pokemons.length && Array.isArray(pokemons)?
+            <>
             <div>
                 {/* if not receive pokemons render pokemon not found message */}
                 {pageData && Array.isArray(pageData) ? pageData.map(item => <Pokemon 
