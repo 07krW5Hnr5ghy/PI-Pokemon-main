@@ -48,8 +48,7 @@ export const reducerPokemon = (state = initialState,action) => {
             };
         case FILTER_CUSTOM:
             const filteredCustoms = state.filteredPokemons;
-            const resultsCustoms = action.payload === "all" ?
-             filteredCustoms : filteredCustoms.filter((pokemon) => pokemon.origin === action.payload);
+            const resultsCustoms = filteredCustoms.filter((pokemon) => pokemon.origin === action.payload);
             return {
                 ...state,
                 pokemons:!resultsCustoms.length ? "No pokemons found with the filter" : resultsCustoms,

@@ -6,6 +6,7 @@ import Page from "../Page/Page";
 import Loading from "../Loading/Loading";
 import Pokemon from "../Pokemon/Pokemon";
 import Nav from "../Nav/Nav";
+import Search from "../Search/Search";
 import "./Pokemons.css";
 import { useLocation, useParams } from "react-router-dom";
 /* pokemons per page */
@@ -63,10 +64,14 @@ const Pokemons = () => {
             console.log("types");
             dispatch(filterTypes(options.filter));
         }
-        
+
         if(options.filter === "api+" || options.filter === "custom+"){
             console.log("origin");
             dispatch(filterCustom(options.filter));
+        }
+
+        if(options.filter === "all"){
+            dispatch(getPokemons());
         }
     }
 

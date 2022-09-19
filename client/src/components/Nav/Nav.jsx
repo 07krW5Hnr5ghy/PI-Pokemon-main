@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import Search from "../Search/Search";
 
 const Nav = () => {
     return(
@@ -7,6 +8,7 @@ const Nav = () => {
                 <li><Link to={'/pokemons'}>Home</Link></li>
                 <li><Link to={'/create'}>New</Link></li>
             </ul>
+            <Search/>
         </nav>
     );
 }
