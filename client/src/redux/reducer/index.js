@@ -5,6 +5,7 @@ import {
     POST_CREATE,
     FILTER,
     ORDER_NAME,
+    ORDER_ATTACK,
 } from "../actions/index";
 
 const initialState = {
@@ -45,16 +46,23 @@ export const reducerPokemon = (state = initialState,action) => {
                 pokemons:!results.length ? "No pokemons found with the filter" : results,
             };
         case ORDER_NAME:
-            const unorderedPokemons = [...state.pokemons];
+            const unorderedNames = [...state.pokemons];
             action.payload === "asc" ? 
-            unorderedPokemons.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)) : 
-            unorderedPokemons.sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1));
+            unorderedNames.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)) : 
+            unorderedNames.sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1));
 
             return{
                 ...state,
-                pokemons:[...unorderedPokemons],
+                pokemons:[...unorderedNames],
             };
-
+        case ORDER_ATTACK:
+            const unorderedAttack = [...state.pokemons];
+            action.payload === "asc" ?
+            unorderedAttack.sort((a,b) => a.attack-b.attack) : unorderedAttack.sort((a,b) => b.attack-a.attack);
+            return{
+                ...state,
+                pokemons:[...unorderedAttack],
+            };
         default:
             return state;
     }

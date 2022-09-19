@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons,getTypes,filter,orderName } from "../../redux/actions";
+import { getPokemons,getTypes,filter,orderName,orderAttack } from "../../redux/actions";
 import { useSearchParams } from "react-router-dom";
 import Page from "../Page/Page";
 import Loading from "../Loading/Loading";
@@ -63,9 +63,8 @@ const Pokemons = () => {
     }
 
     const order = () => {
-        if(options.order === "name"){
-            dispatch(orderName(options.mode))
-        }
+        if(options.order === "name")dispatch(orderName(options.mode))
+        if(options.order === "attack")dispatch(orderAttack(options.mode))
     };
     //console.log(pokemons);
     console.log(options);
