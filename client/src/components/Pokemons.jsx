@@ -57,7 +57,7 @@ const Pokemons = () => {
     //console.log(filters);
 
     const applyFilter = () => {
-        if(types.find(type => type === options.filter)){
+        if(types.find(type => type.name === options.filter)){
             console.log("types");
             dispatch(filterTypes(options.filter));
         }
