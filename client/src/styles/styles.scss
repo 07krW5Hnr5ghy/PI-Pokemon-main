@@ -1,5 +1,6 @@
 // ui settings
 @use './base/settings';
+@use './base/global';
 // components
 @use './components/Create';
 @use './components/Details';
@@ -12,4 +13,3 @@
 @use './components/Pokemons';
 @use './components/Search';
 // screens
-  

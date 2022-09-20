@@ -5,7 +5,7 @@ const Landing = () => {
     return(
         <>
             <div className="Landing_container">
-                <button><Link to={'/pokemons'}>Enter</Link></button>
+                <button className="Landing_button"><Link to={'/pokemons'}>Enter</Link></button>
             </div>
         </>
     );
