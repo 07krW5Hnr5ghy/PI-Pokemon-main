@@ -1,0 +1,14 @@
+body{
+    background-image: url("../../img/324268.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+div{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
