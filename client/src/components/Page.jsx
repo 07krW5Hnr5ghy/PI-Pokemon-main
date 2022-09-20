@@ -1,4 +1,3 @@
-import "./Page.css";
 let {usePage,DOTS} = require('./usePage');
 
 const Page = (props) => {

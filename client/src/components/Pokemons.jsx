@@ -1,15 +1,13 @@
 import { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons,getTypes,filterTypes,filterCustom,orderName,orderAttack } from "../../redux/actions";
+import { getPokemons,getTypes,filterTypes,filterCustom,orderName,orderAttack } from "../redux/actions";
 import { useSearchParams } from "react-router-dom";
-import Page from "../Page/Page";
-import Loading from "../Loading/Loading";
-import Pokemon from "../Pokemon/Pokemon";
-import Nav from "../Nav/Nav";
-import "./Pokemons.css";
-import { useLocation, useParams } from "react-router-dom";
+import Page from "./Page";
+import Loading from "./Loading";
+import Pokemon from "./Pokemon";
+import Nav from "./Nav";
 /* pokemons per page */
-let PageSize = 5;
+let PageSize = 12;
 
 const Pokemons = () => {
     const [searchParams] = useSearchParams();

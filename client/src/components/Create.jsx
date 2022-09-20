@@ -1,8 +1,7 @@
-import './Create.css';
-import { getPokemons,getTypes,postCreate } from '../../redux/actions';
-import { useState,useEffect,useCallback,useMemo } from 'react';
+import { getPokemons,getTypes,postCreate } from '../redux/actions';
+import { useState,useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import Nav from "../Nav/Nav";
+import Nav from "./Nav";
 
 
 const validate = (input,pokemons) => {

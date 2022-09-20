@@ -1,10 +1,10 @@
-import "./Landing.module.css";
+//import "./Landing.module.css";
 import {Link} from "react-router-dom";
 
 const Landing = () => {
     return(
         <>
-            <div>
+            <div className="Landing_container">
                 <button><Link to={'/pokemons'}>Enter</Link></button>
             </div>
         </>

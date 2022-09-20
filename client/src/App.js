@@ -1,10 +1,10 @@
 import {Route,Routes} from "react-router-dom";
-import Landing from "./components/Landing/Landing";
-import Pokemons from "./components/Pokemons/Pokemons";
-import Details from "./components/Details/Details";
-import NotFound from "./components/NotFound/NotFound";
-import Create from "./components/Create/Create";
-import './App.css';
+import Landing from "./components/Landing";
+import Pokemons from "./components/Pokemons";
+import Details from "./components/Details";
+import NotFound from "./components/NotFound";
+import Create from "./components/Create";
+//import './App.css';
 
 function App() {
   return (

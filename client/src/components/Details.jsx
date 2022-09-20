@@ -1,9 +1,8 @@
-import './Details.css';
 import {useParams} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getDetail } from '../../redux/actions';
-import Nav from "../Nav/Nav";
+import { getDetail } from '../redux/actions';
+import Nav from "./Nav";
 
 const Details = () => {
     const {id} = useParams();
