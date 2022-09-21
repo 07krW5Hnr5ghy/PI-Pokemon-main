@@ -1,0 +1,19 @@
+#Pokemons_container{
+    display: flex;
+    flex-direction: column;
+}
+
+.Pokemons_options{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+#Pokemons_cards{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}

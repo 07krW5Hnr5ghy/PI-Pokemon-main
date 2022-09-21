@@ -4,8 +4,8 @@ import {Link} from "react-router-dom";
 const Landing = () => {
     return(
         <>
-            <div className="Landing_container">
-                <button className="Landing_button"><Link to={'/pokemons'}>Enter</Link></button>
+            <div id="Landing_container">
+                <button id="Landing_button"><Link to={'/pokemons'}>Enter</Link></button>
             </div>
         </>
     );

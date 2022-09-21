@@ -1,6 +1,6 @@
 @use "../base";
 /*container of Landing page */
-.Landing_container{
+#Landing_container{
     background-image: url('../img/324268.png');
     background-size: cover;
     background-position: center;
@@ -12,7 +12,7 @@
     justify-content: center;
 }
 
-.Landing_button{
+#Landing_button{
     margin: 0 30vw;
     height: 10vh;
     border-radius: 25px;
@@ -27,7 +27,7 @@
 
 }
 
-.Landing_button:hover{
+#Landing_button:hover{
     outline: 0;
     background-color:#f60e1aa4;
     a{

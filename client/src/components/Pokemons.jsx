@@ -80,45 +80,42 @@ const Pokemons = () => {
     console.log(options);
     // render pokemons
     return(
-        <>  
+        <div id="Pokemons_container">  
             <Nav/>
-            <h1>Pokemons</h1>
             <div>
-                <button onClick={applyFilter}>filter</button>
-                <label>Please select a type --</label>
-                <select>
-                    <option value="">select types</option>
-                    <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
-                    {types && Array.isArray(types) ? 
-                    types.map(type => <option key={type.id} value={type.name}
-                    onClick={event => handleOptions(event,"filter")}>{type.name}</option>):[]}
-                </select>
-                <label>Select to filter between filter and custom pokemons</label>
-                <select>
-                    <option value="">select origin</option>
-                    <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
-                    <option value="api+" onClick={event => handleOptions(event,"filter")}>api</option>
-                    <option value="custom+" onClick={event => handleOptions(event,"filter")}>custom</option>
-                </select>
-            </div>
-            <div>
-                <button onClick={order}>order</button>
-                <label>Select item</label>
-                <select>
-                    <option value="">select item</option>
-                    <option value="name" onClick={event => handleOptions(event,"order")}>name</option>
-                    <option value="attack" onClick={event => handleOptions(event,"order")}>attack</option>
-                </select>
-                <label>Select mode</label>
-                <select>
-                    <option value="">select mode</option>
-                    <option value="asc" onClick={event => handleOptions(event,"mode")}>asc</option>
-                    <option value="desc" onClick={event => handleOptions(event,"mode")}>desc</option>
-                </select>
+                <fieldset className="Pokemons_options">
+                    <button onClick={applyFilter}>filter</button>
+                    <select defaultValue={'DEFAULT'}>
+                        <option value="DEFAULT" disabled>filter by type</option>
+                        <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
+                        {types && Array.isArray(types) ? 
+                        types.map(type => <option key={type.id} value={type.name}
+                        onClick={event => handleOptions(event,"filter")}>{type.name}</option>):[]}
+                    </select>
+                    <select defaultValue={'DEFAULT'}>
+                        <option value="DEFAULT" disabled>filter by origin</option>
+                        <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
+                        <option value="api+" onClick={event => handleOptions(event,"filter")}>api</option>
+                        <option value="custom+" onClick={event => handleOptions(event,"filter")}>custom</option>
+                    </select>
+                </fieldset>
+                <fieldset className="Pokemons_options">
+                    <button onClick={order}>order</button>
+                    <select defaultValue={'DEFAULT'}>
+                        <option value="DEFAULT" disabled>order by name or attack</option>
+                        <option value="name" onClick={event => handleOptions(event,"order")}>name</option>
+                        <option value="attack" onClick={event => handleOptions(event,"order")}>attack</option>
+                    </select>
+                    <select defaultValue={'DEFAULT'}>
+                        <option value="DEFAULT" disabled>order mode</option>
+                        <option value="asc" onClick={event => handleOptions(event,"mode")}>asc</option>
+                        <option value="desc" onClick={event => handleOptions(event,"mode")}>desc</option>
+                    </select>
+                </fieldset>
             </div>
            {pokemons.length && Array.isArray(pokemons)?
             <>
-            <div>
+            <div id="Pokemons_cards">
                 {/* if not receive pokemons render pokemon not found message */}
                 {pageData && Array.isArray(pageData) ? pageData.map(item => <Pokemon 
                 name={item.name}
@@ -138,7 +135,7 @@ const Pokemons = () => {
             /> : <h3>footer</h3>}
             </>: pokemons.length && typeof pokemons === "string" ? pokemons : <Loading/>
            }   
-        </>
+        </div>
     );
 };
 

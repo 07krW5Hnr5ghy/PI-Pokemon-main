@@ -1,0 +1,17 @@
+.Pokemon_card{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    max-height: fit-content;
+    a{
+        text-decoration: none;
+        font-size: 80%;
+    }
+    img{
+        max-width: 240px;
+        max-height: 250px;
+        object-fit: cover;
+    }
+}
