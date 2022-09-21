@@ -22,10 +22,8 @@ module.exports = (sequelize) => {
       type:DataTypes.ARRAY(DataTypes.STRING),
       allowNull:false,
       validate:{
+        notEmpty:true,
         isInsideLimit(value){
-          if(!value.length){
-            throw new Error('No empty values are allowed');
-          }
           if(value.length > 2){
             throw new Error('Maximum of two types is allowed');
           }

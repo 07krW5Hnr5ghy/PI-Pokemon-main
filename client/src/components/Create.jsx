@@ -76,7 +76,7 @@ const Create = () => {
     useEffect(() => {
         dispatch(getTypes());
         dispatch(getPokemons());
-    },[]);
+    },[dispatch]);
 
     const types = useSelector(state => state.reducerPokemon.types);
 
