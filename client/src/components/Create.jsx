@@ -19,8 +19,10 @@ const validate = (input,pokemons) => {
 
     if(!input.classes.length){
         errors.classes = 'Select at least one type to create pokemon';
+    }else if(input.classes.length > 2){
+        errors.classes = "Maximum two types allowed";
     }else{
-        errors.classes = "no error";
+        errors.name = "no error";
     }
 
     let stats = ["attack","hp","defense","speed","height","weight"];
