@@ -16,7 +16,7 @@ const Search = () => {
     }
 
     return(
-        <div>
+        <div id="Search_container">
             <input type="text" placeholder="name of pokemon" value={name} onChange={handleSearch}/>
             <button onClick={submitSearch}>Search</button>
         </div>

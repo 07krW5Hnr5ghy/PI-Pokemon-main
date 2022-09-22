@@ -97,6 +97,13 @@ const Create = () => {
         );
     }
 
+    const handleName = (event) => {
+        setInput({
+            ...input,
+            name:event.target.value.toLowerCase(),
+        })
+    }
+
     const handleTypes = (event) => {
         
         setInput({
@@ -122,7 +129,7 @@ const Create = () => {
             <form onSubmit={handleSubmit}>
                 <fieldset>
                 <label>Name:</label>
-                <input type="text" name="name" value={input.name} onChange={handleChange}/>
+                <input type="text" name="name" value={input.name} onChange={handleName}/>
                 {errors.name && (<p className='danger'>{errors.name}</p>)}
                 <label>Hp:</label>
                 <input type="number" name="hp" value={input.hp} onChange={handleChange}/>

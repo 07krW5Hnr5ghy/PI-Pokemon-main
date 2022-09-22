@@ -80,62 +80,64 @@ const Pokemons = () => {
     console.log(options);
     // render pokemons
     return(
-        <div id="Pokemons_container">  
+        <>
             <Nav/>
-            <div>
-                <fieldset className="Pokemons_options">
-                    <button onClick={applyFilter}>filter</button>
-                    <select defaultValue={'DEFAULT'}>
-                        <option value="DEFAULT" disabled>filter by type</option>
-                        <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
-                        {types && Array.isArray(types) ? 
-                        types.map(type => <option key={type.id} value={type.name}
-                        onClick={event => handleOptions(event,"filter")}>{type.name}</option>):[]}
-                    </select>
-                    <select defaultValue={'DEFAULT'}>
-                        <option value="DEFAULT" disabled>filter by origin</option>
-                        <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
-                        <option value="api+" onClick={event => handleOptions(event,"filter")}>api</option>
-                        <option value="custom+" onClick={event => handleOptions(event,"filter")}>custom</option>
-                    </select>
-                </fieldset>
-                <fieldset className="Pokemons_options">
-                    <button onClick={order}>order</button>
-                    <select defaultValue={'DEFAULT'}>
-                        <option value="DEFAULT" disabled>order by name or attack</option>
-                        <option value="name" onClick={event => handleOptions(event,"order")}>name</option>
-                        <option value="attack" onClick={event => handleOptions(event,"order")}>attack</option>
-                    </select>
-                    <select defaultValue={'DEFAULT'}>
-                        <option value="DEFAULT" disabled>order mode</option>
-                        <option value="asc" onClick={event => handleOptions(event,"mode")}>asc</option>
-                        <option value="desc" onClick={event => handleOptions(event,"mode")}>desc</option>
-                    </select>
-                </fieldset>
+            <div id="Pokemons_container">  
+                {pokemons.length && Array.isArray(pokemons) ? <div id="Pokemons_header">
+                    <div className="Pokemons_options">
+                        <button onClick={applyFilter}>filter</button>
+                        <select defaultValue={'DEFAULT'}>
+                            <option value="DEFAULT" disabled>select type</option>
+                            <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
+                            {types && Array.isArray(types) ? 
+                            types.map(type => <option key={type.id} value={type.name}
+                            onClick={event => handleOptions(event,"filter")}>{type.name}</option>):[]}
+                        </select>
+                        <select defaultValue={'DEFAULT'}>
+                            <option value="DEFAULT" disabled>select origin</option>
+                            <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
+                            <option value="api+" onClick={event => handleOptions(event,"filter")}>api</option>
+                            <option value="custom+" onClick={event => handleOptions(event,"filter")}>custom</option>
+                        </select>
+                    </div>
+                    <div className="Pokemons_options">
+                        <button onClick={order}>order</button>
+                        <select defaultValue={'DEFAULT'}>
+                            <option value="DEFAULT" disabled>select order</option>
+                            <option value="name" onClick={event => handleOptions(event,"order")}>name</option>
+                            <option value="attack" onClick={event => handleOptions(event,"order")}>attack</option>
+                        </select>
+                        <select defaultValue={'DEFAULT'}>
+                            <option value="DEFAULT" disabled>select mode</option>
+                            <option value="asc" onClick={event => handleOptions(event,"mode")}>asc</option>
+                            <option value="desc" onClick={event => handleOptions(event,"mode")}>desc</option>
+                        </select>
+                    </div>
+                </div> : []}
+            {pokemons.length && Array.isArray(pokemons)?
+                <div id="Pokemons_body">
+                    <div id="Pokemons_cards">
+                        {/* if not receive pokemons render pokemon not found message */}
+                        {pageData && Array.isArray(pageData) ? pageData.map(item => <Pokemon 
+                        name={item.name}
+                        img={item.img}
+                        classes={item.classes}
+                        id={item.id}
+                        key={item.id}
+                        />):<h2>{pokemons}</h2>}
+                    </div>
+                    {/* pagination component */}
+                    {!name ? <Page 
+                    className="page-bar" 
+                    currentPage={currentPage}
+                    totalCount={pokemons.length}
+                    onPageChange={page => setCurrentPage(page)}
+                    pageSize={PageSize}
+                    /> : <h3>footer</h3>}
+                </div>: pokemons.length && typeof pokemons === "string" ? pokemons : <Loading/>
+            }   
             </div>
-           {pokemons.length && Array.isArray(pokemons)?
-            <>
-            <div id="Pokemons_cards">
-                {/* if not receive pokemons render pokemon not found message */}
-                {pageData && Array.isArray(pageData) ? pageData.map(item => <Pokemon 
-                name={item.name}
-                img={item.img}
-                classes={item.classes}
-                id={item.id}
-                key={item.id}
-                />):<h2>{pokemons}</h2>}
-            </div>
-            {/* pagination component */}
-            {!name ? <Page 
-            className="page-bar" 
-            currentPage={currentPage}
-            totalCount={pokemons.length}
-            onPageChange={page => setCurrentPage(page)}
-            pageSize={PageSize}
-            /> : <h3>footer</h3>}
-            </>: pokemons.length && typeof pokemons === "string" ? pokemons : <Loading/>
-           }   
-        </div>
+        </>
     );
 };
 

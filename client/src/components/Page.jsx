@@ -36,13 +36,11 @@ const Page = (props) => {
     let lastPage = pageRange[pageRange.length - 1];
     
     return(
-        <ul>
+        <ul id="Page_container">
             {/* left navigation arrow */}
-            <li key={"left"} onClick={onPrevious}>
-                <div className="arrow left">
-                    {"<-"}
-                </div> 
-            </li>
+            <button key={"left"} onClick={onPrevious} disabled={currentPage === 1 ? "disabled" : ""}>
+                {" < "}
+            </button>
             {pageRange.map(pageNumber => {
                 // if the pageItem is a DOT, render the DOTS unicode character
                 if(pageNumber === DOTS){
@@ -57,11 +55,9 @@ const Page = (props) => {
                 );
             })}
             {/* right navigation arrow */}
-            <li className="pageItem" key={"right"} onClick={onNext}>
-                <div className="arrow right">
-                    {"->"}
-                </div>
-            </li>
+            <button key={"right"} onClick={onNext} disabled={currentPage === lastPage ? "disabled" : ""}>
+                {" > "}
+            </button>
         </ul>
     );
 };

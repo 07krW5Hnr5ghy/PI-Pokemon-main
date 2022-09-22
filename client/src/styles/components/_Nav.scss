@@ -1,0 +1,29 @@
+#Nav_navbar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    img{
+        max-height: 250px;
+        max-width: 300px;
+        margin: 1vh 1vw;
+    }
+
+    ul{
+        list-style: none;
+        padding:0;
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    @media only screen and (min-width:580px){
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+}
