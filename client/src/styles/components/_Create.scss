@@ -20,6 +20,10 @@
     border-radius: 20px;
     margin: 0 0.5vw 1vh 0;
     width: 95vw;
+    #Creation_select{
+        display: flex;
+        flex-direction: column;
+    }
     input,label,select{
         margin: 0.5vh 0;
     }
@@ -34,7 +38,7 @@
         display:block;
     }
 
-    @media only screen and (min-width:400px){
+    @media only screen and (min-width:305px){
         display: flex;
         flex-direction: center;
         flex-wrap: wrap;
@@ -46,10 +50,33 @@
         
     }
 
+    @media only screen and (min-width:500px){
+        display: flex;
+        flex-direction: center;
+        flex-wrap: wrap;
+        align-items:center;
+        width: 80vw;
+        input,select,span{
+            margin: 0.5vh 10vw;
+        }
+        #Creation_select{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin: 0.5vh 10vw;
+        }
+    }
+
     @media only screen and (min-width:800px){
         width: 55vw;
         input,select,span{
             margin: 0.5vh 10vw;
+        }
+        #Creation_select{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin: 0.5vh 5vw;
         }
     }
 }

@@ -163,7 +163,7 @@ const Create = () => {
                         <input type="number" name="weight" value={input.weight} onChange={handleChange}/>
                         {errors.weight && (<span className={errors.weight === "correct" ? "correct" : "error"}>{errors.weight}</span>)}
                     </label>
-                    <label>Types:
+                    <label id="Creation_select">Types:
                         <select name="classes" defaultValue={"DEFAULT"} value={input.classes} onChange={handleTypes} multiple>
                             <option value="DEFAULT" disabled>Please choose types --</option>
                             {options}
