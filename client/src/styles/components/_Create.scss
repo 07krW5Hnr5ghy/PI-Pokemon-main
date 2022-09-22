@@ -15,10 +15,12 @@
 #Create_fieldset{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border-radius: 20px;
     margin: 0 0.5vw 1vh 0;
     width: 95vw;
-    input,label{
+    input,label,select{
         margin: 0.5vh 0;
     }
     button{
@@ -26,17 +28,26 @@
     }
     span{
         font-size: 0.7em;
+        display: block;
+    }
+    label{
+        display:block;
     }
 
     @media only screen and (min-width:400px){
+        display: flex;
+        flex-direction: center;
+        flex-wrap: wrap;
+        align-items:center;
         width: 80vw;
         input,select,span{
             margin: 0.5vh 10vw;
         }
+        
     }
 
     @media only screen and (min-width:800px){
-        width: 60vw;
+        width: 55vw;
         input,select,span{
             margin: 0.5vh 10vw;
         }
