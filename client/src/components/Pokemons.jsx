@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemons,getTypes,filterTypes,filterCustom,orderName,orderAttack } from "../redux/actions";
 import { useSearchParams } from "react-router-dom";
@@ -34,7 +34,7 @@ const Pokemons = () => {
             dispatch(getPokemons());
         }
         dispatch(getTypes());
-    },[dispatch]);
+    },[dispatch,name]);
 
     
     let types = useSelector(state => state.reducerPokemon.types);

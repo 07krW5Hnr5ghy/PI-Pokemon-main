@@ -1,0 +1,26 @@
+#Create_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 0.8em;
+    width: 100vw;
+}
+
+#Create_fieldset{
+    display: flex;
+    flex-direction: column;
+    input{
+        margin: 0.5vh 0;
+    }
+    label{
+        margin: 0.5vh 0;
+    }
+    button{
+        margin: 0.5vh 0;
+    }
+    p{
+        font-size: 0.7em;
+    }
+}

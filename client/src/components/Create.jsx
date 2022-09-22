@@ -101,7 +101,13 @@ const Create = () => {
         setInput({
             ...input,
             name:event.target.value.toLowerCase(),
-        })
+        });
+        setErrors(
+            validate({
+                ...input,
+                [event.target.name]:event.target.value,
+            },pokemons)
+        );
     }
 
     const handleTypes = (event) => {
@@ -125,43 +131,45 @@ const Create = () => {
     return(
         <>
             <Nav/>
-            <h1>Create</h1>
-            <form onSubmit={handleSubmit}>
-                <fieldset>
-                <label>Name:</label>
-                <input type="text" name="name" value={input.name} onChange={handleName}/>
-                {errors.name && (<p className='danger'>{errors.name}</p>)}
-                <label>Hp:</label>
-                <input type="number" name="hp" value={input.hp} onChange={handleChange}/>
-                {errors.hp && (<p className='danger'>{errors.hp}</p>)}
-                <label>Attack:</label>
-                <input type="number" name="attack" value={input.attack} onChange={handleChange}/>
-                {errors.attack && (<p className='danger'>{errors.attack}</p>)}
-                <label>Defense:</label>
-                <input type="number" name="defense" value={input.defense} onChange={handleChange}/>
-                {errors.defense && (<p className='danger'>{errors.defense}</p>)}
-                <label>Speed:</label>
-                <input type="number" name="speed" value={input.speed} onChange={handleChange}/>
-                {errors.speed && (<p className='danger'>{errors.speed}</p>)}
-                <label>Height:</label>
-                <input type="number" name="height" value={input.height} onChange={handleChange}/>
-                {errors.height && (<p className='danger'>{errors.height}</p>)}
-                <label>Weight:</label>
-                <input type="number" name="weight" value={input.weight} onChange={handleChange}/>
-                {errors.weight && (<p className='danger'>{errors.weight}</p>)}
-                <label>Types:</label>
-                <select name="classes" value={input.classes} onChange={handleTypes} multiple>
-                    <option value="" disabled>Please choose types --</option>
-                    {options}
-                </select>
-                {errors.classes && (<p className='danger'>{errors.classes}</p>)}
-                <label>Image:</label>
-                <input type="text" name="img" value={input.img} onChange={handleChange}/>
-                {errors.img && (<p className='danger'>{errors.img}</p>)}
-                <input type="submit" value="Submit" disabled={Object.values(errors).every(item => 
-                item === "no error") ? "" : "disabled"}/>
-                </fieldset>
-            </form>
+            <div id="Create_container">   
+                <h2>Create new pokemon</h2>
+                <form onSubmit={handleSubmit}>
+                    <fieldset id='Create_fieldset'>
+                    <label>Name:</label>
+                    <input type="text" name="name" value={input.name} onChange={handleName}/>
+                    {errors.name && (<p className='danger'>{errors.name}</p>)}
+                    <label>Hp:</label>
+                    <input type="number" name="hp" value={input.hp} onChange={handleChange}/>
+                    {errors.hp && (<p className='danger'>{errors.hp}</p>)}
+                    <label>Attack:</label>
+                    <input type="number" name="attack" value={input.attack} onChange={handleChange}/>
+                    {errors.attack && (<p className='danger'>{errors.attack}</p>)}
+                    <label>Defense:</label>
+                    <input type="number" name="defense" value={input.defense} onChange={handleChange}/>
+                    {errors.defense && (<p className='danger'>{errors.defense}</p>)}
+                    <label>Speed:</label>
+                    <input type="number" name="speed" value={input.speed} onChange={handleChange}/>
+                    {errors.speed && (<p className='danger'>{errors.speed}</p>)}
+                    <label>Height:</label>
+                    <input type="number" name="height" value={input.height} onChange={handleChange}/>
+                    {errors.height && (<p className='danger'>{errors.height}</p>)}
+                    <label>Weight:</label>
+                    <input type="number" name="weight" value={input.weight} onChange={handleChange}/>
+                    {errors.weight && (<p className='danger'>{errors.weight}</p>)}
+                    <label>Types:</label>
+                    <select name="classes" defaultValue={"DEFAULT"} value={input.classes} onChange={handleTypes} multiple>
+                        <option value="DEFAULT" disabled>Please choose types --</option>
+                        {options}
+                    </select>
+                    {errors.classes && (<p className='danger'>{errors.classes}</p>)}
+                    <label>Image:</label>
+                    <input type="text" name="img" value={input.img} onChange={handleChange}/>
+                    {errors.img && (<p className='danger'>{errors.img}</p>)}
+                    <input type="submit" value="Submit" disabled={Object.values(errors).every(item => 
+                    item === "no error") ? "" : "disabled"}/>
+                    </fieldset>
+                </form>
+            </div>
         </>
     );
 };
