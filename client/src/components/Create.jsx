@@ -14,7 +14,7 @@ const validate = (input,pokemons) => {
     }else if(pokemons.find(pokemon => pokemon.name === input.name)){
         errors.name = 'Name already exists in the pokemons list';
     }else{
-        errors.name = "no error";
+        errors.name = "correct";
     }
 
     if(!input.classes.length){
@@ -22,7 +22,7 @@ const validate = (input,pokemons) => {
     }else if(input.classes.length > 2){
         errors.classes = "Maximum two types allowed";
     }else{
-        errors.name = "no error";
+        errors.name = "correct";
     }
 
     let stats = ["attack","hp","defense","speed","height","weight"];
@@ -31,7 +31,7 @@ const validate = (input,pokemons) => {
         if(!/^[0-9]+$/.test(input[stat]) || input[stat] <= 0){
             errors[stat] = `${stat} is invalid please input a number greather than zero in this field`;
         }else{
-            errors[stat] = "no error";
+            errors[stat] = "correct";
         }
     }
 
@@ -40,7 +40,7 @@ const validate = (input,pokemons) => {
     }else if(!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|svg|png|webp)/.test(input.img)){
         errors.img = 'input a valid image url of a file of the extensions jpg,svg,png or webp';
     }else{
-        errors.img = "no error";
+        errors.img = "correct";
     }
 
     return errors;
@@ -133,40 +133,40 @@ const Create = () => {
             <Nav/>
             <div id="Create_container">   
                 <h2>Create new pokemon</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} id="Create_form">
                     <fieldset id='Create_fieldset'>
                     <label>Name:</label>
                     <input type="text" name="name" value={input.name} onChange={handleName}/>
-                    {errors.name && (<p className='danger'>{errors.name}</p>)}
+                    {errors.name && (<span className={errors.name === "correct" ? "correct" : "error"}>{errors.name}</span>)}
                     <label>Hp:</label>
                     <input type="number" name="hp" value={input.hp} onChange={handleChange}/>
-                    {errors.hp && (<p className='danger'>{errors.hp}</p>)}
+                    {errors.hp && (<span className={errors.hp === "correct" ? "correct" : "error"}>{errors.hp}</span>)}
                     <label>Attack:</label>
                     <input type="number" name="attack" value={input.attack} onChange={handleChange}/>
-                    {errors.attack && (<p className='danger'>{errors.attack}</p>)}
+                    {errors.attack && (<span className={errors.attack === "correct" ? "correct" : "error"}>{errors.attack}</span>)}
                     <label>Defense:</label>
                     <input type="number" name="defense" value={input.defense} onChange={handleChange}/>
-                    {errors.defense && (<p className='danger'>{errors.defense}</p>)}
+                    {errors.defense && (<span className={errors.defense === "correct" ? "correct" : "error"}>{errors.defense}</span>)}
                     <label>Speed:</label>
                     <input type="number" name="speed" value={input.speed} onChange={handleChange}/>
-                    {errors.speed && (<p className='danger'>{errors.speed}</p>)}
+                    {errors.speed && (<span className={errors.speed === "correct" ? "correct" : "error"}>{errors.speed}</span>)}
                     <label>Height:</label>
                     <input type="number" name="height" value={input.height} onChange={handleChange}/>
-                    {errors.height && (<p className='danger'>{errors.height}</p>)}
+                    {errors.height && (<span className={errors.height === "correct" ? "correct" : "error"}>{errors.height}</span>)}
                     <label>Weight:</label>
                     <input type="number" name="weight" value={input.weight} onChange={handleChange}/>
-                    {errors.weight && (<p className='danger'>{errors.weight}</p>)}
+                    {errors.weight && (<span className={errors.weight === "correct" ? "correct" : "error"}>{errors.weight}</span>)}
                     <label>Types:</label>
                     <select name="classes" defaultValue={"DEFAULT"} value={input.classes} onChange={handleTypes} multiple>
                         <option value="DEFAULT" disabled>Please choose types --</option>
                         {options}
                     </select>
-                    {errors.classes && (<p className='danger'>{errors.classes}</p>)}
+                    {errors.classes && (<span className={errors.name === "correct" ? "correct" : "error"}>{errors.classes}</span>)}
                     <label>Image:</label>
                     <input type="text" name="img" value={input.img} onChange={handleChange}/>
-                    {errors.img && (<p className='danger'>{errors.img}</p>)}
+                    {errors.img && (<span className={errors.name === "correct" ? "correct" : "error"}>{errors.img}</span>)}
                     <input type="submit" value="Submit" disabled={Object.values(errors).every(item => 
-                    item === "no error") ? "" : "disabled"}/>
+                    item === "correct") ? "" : "disabled"}/>
                     </fieldset>
                 </form>
             </div>

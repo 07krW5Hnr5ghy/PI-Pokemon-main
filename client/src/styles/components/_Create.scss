@@ -8,19 +8,37 @@
     width: 100vw;
 }
 
+#Create_form{
+    margin: 0 2vw;
+}
+
 #Create_fieldset{
     display: flex;
     flex-direction: column;
-    input{
-        margin: 0.5vh 0;
-    }
-    label{
+    border-radius: 20px;
+    margin: 0 0.5vw 1vh 0;
+    width: 95vw;
+    input,label{
         margin: 0.5vh 0;
     }
     button{
-        margin: 0.5vh 0;
+        margin: 0.5vh 5vw;
     }
-    p{
+    span{
         font-size: 0.7em;
+    }
+
+    @media only screen and (min-width:400px){
+        width: 80vw;
+        input,select,span{
+            margin: 0.5vh 10vw;
+        }
+    }
+
+    @media only screen and (min-width:800px){
+        width: 60vw;
+        input,select,span{
+            margin: 0.5vh 10vw;
+        }
     }
 }
