@@ -5,7 +5,11 @@ const Landing = () => {
     return(
         <>
             <div id="Landing_container">
-                <Link to={'/pokemons'}><button id="Landing_button">Enter</button></Link>
+                <Link to={'/pokemons'} id="Landing_button">
+                    <button value="Enter">
+                        Enter
+                        </button> 
+                </Link>
             </div>
         </>
     );

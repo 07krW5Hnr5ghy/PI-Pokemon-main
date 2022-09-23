@@ -20,9 +20,16 @@
     border-radius: 20px;
     margin: 1vh 0.5vw 1vh 0;
     width: 95vw;
+    
     #Creation_select{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: unset;
+        width: 40vw;
+        option{
+            height: unset;
+        }
     }
     input,label,select{
         margin: 0.5vh 0;
@@ -40,7 +47,7 @@
 
     @media only screen and (min-width:305px){
         display: flex;
-        flex-direction: center;
+        flex-direction: row;
         flex-wrap: wrap;
         align-items:center;
         width: 80vw;
@@ -52,7 +59,7 @@
 
     @media only screen and (min-width:500px){
         display: flex;
-        flex-direction: center;
+        flex-direction: row;
         flex-wrap: wrap;
         align-items:center;
         width: 80vw;
@@ -60,9 +67,6 @@
             margin: 0.5vh 10vw;
         }
         #Creation_select{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
             margin: 0.5vh 10vw;
         }
     }
@@ -73,9 +77,6 @@
             margin: 0.5vh 10vw;
         }
         #Creation_select{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
             margin: 0.5vh 5vw;
         }
     }
