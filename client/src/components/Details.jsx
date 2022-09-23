@@ -10,23 +10,33 @@ const Details = () => {
 
     useEffect(()=>{
         dispatch(getDetail(id));
-    },[dispatch]);
+    },[dispatch,id]);
 
     let detail = useSelector(state => state.reducerPokemon.pokemonDetail);
 
     console.log(detail);
+    let displayName = detail.name.split("");
+    displayName[0] = detail.name[0].toUpperCase();
+    displayName = displayName.join("");
 
     return(
         <>
             <Nav/>
-            <h2>{detail.name}</h2>
-            <p>id:{detail.id}</p>
-            <img src={detail.img} alt={detail.name}/>
-            <p>health:{detail.hp}</p>
-            <p>attack:{detail.attack}</p>
-            <p>speed:{detail.speed}</p>
-            <p>height:{detail.height}</p>
-            <p>weight:{detail.weight}</p>
+            <div id="Details_container">
+                <h2>{`<${displayName}>`}</h2>
+                <span>{detail.id}</span>
+                <img src={detail.img} alt={detail.name}/>
+                <div id="Details_types">
+                    {detail.classes.map(type => <span key={type}>{` ${type} `}</span>)}
+                </div>
+                <div id="Details_stats">
+                    <span>health: {detail.hp}</span>
+                    <span>attack: {detail.attack}</span>
+                    <span>speed: {detail.speed}</span>
+                    <span>height: {detail.height}</span>
+                    <span>weight: {detail.weight}</span>
+                </div>
+            </div>
         </>
     );
 }
