@@ -1,6 +1,8 @@
+@use "../base/settings";
 #Pokemons_container{
     display: flex;
     flex-direction: column;
+    background-color: settings.$main;
 
     @media only screen and (min-width:1200px){
         flex-direction: row;
@@ -48,6 +50,7 @@
     flex-wrap:wrap;
     justify-content: center;
     align-items: center;
+    width:auto;
 
     a{
         text-decoration: none;

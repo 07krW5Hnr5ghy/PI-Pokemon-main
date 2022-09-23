@@ -1,9 +1,12 @@
+@use "../base/settings";
+
 #Nav_navbar{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    background-color: settings.$navbar;
 
     img{
         max-height: 250px;
