@@ -114,7 +114,14 @@ const Create = () => {
         
         setInput({
             ...input,
-            classes:input.classes.concat([event.target.value]),
+            classes:[...input.classes,event.target.value],
+        });
+    }
+
+    const handleDelete = (type) => {
+        setInput({
+            ...input,
+            classes:input.classes?.filter((kind) => kind !== type),
         });
     }
 
@@ -164,10 +171,13 @@ const Create = () => {
                         {errors.weight && (<span className={errors.weight === "is valid" ? "correct" : "error"}>{errors.weight}</span>)}
                     </label>
                     <label id="Creation_select">Types:
-                        <select name="classes" defaultValue={"DEFAULT"} value={input.classes} onChange={handleTypes} multiple>
+                        <select name="classes" defaultValue={"DEFAULT"} value={input.classes} onChange={handleTypes} disabled={input.classes.length >= 2}>
                             <option value="DEFAULT" disabled>Please choose types --</option>
                             {options}
                         </select>
+                        {input.classes?.map((type,index)=> (<div key={index}>
+                            <span onClick={() => handleDelete(type)}>{`${type} x`}</span>
+                        </div>))}
                         {errors.classes && (<span className={errors.classes === "is valid" ? "correct" : "error"}>{errors.classes}</span>)}
                     </label>
                     <label>Image:

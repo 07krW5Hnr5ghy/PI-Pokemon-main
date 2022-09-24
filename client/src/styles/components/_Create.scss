@@ -23,16 +23,16 @@
     margin: 1vh 0.5vw 1vh 0;
     width: 95vw;
     
-    #Creation_select{
+    /*#Creation_select{
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         height: unset;
-        width: 40vw;
+        width: 60vw;
         option{
             height: unset;
         }
-    }
+    }*/
     input,label,select{
         margin: 0.5vh 0;
     }
@@ -91,3 +91,4 @@
 .correct{
     color:settings.$correct;
 }
+
