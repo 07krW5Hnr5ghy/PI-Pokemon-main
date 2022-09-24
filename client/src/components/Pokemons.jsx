@@ -84,7 +84,7 @@ const Pokemons = () => {
             <div id="Pokemons_container">  
                 {pokemons.length && Array.isArray(pokemons) ? <div id="Pokemons_header">
                     <div className="Pokemons_options">
-                        <button onClick={applyFilter}>filter</button>
+                        <button onClick={applyFilter} className={"Pokemons_buttons"}>filter</button>
                         <select defaultValue={'DEFAULT'}>
                             <option value="DEFAULT" disabled>select type</option>
                             <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>

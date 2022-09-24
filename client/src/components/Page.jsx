@@ -37,7 +37,7 @@ const Page = (props) => {
     return(
         <ul id="Page_container">
             {/* left navigation arrow */}
-            <button key={"left"} onClick={onPrevious} disabled={currentPage === 1 ? "disabled" : ""}>
+            <button key={"left"} className={"arrow"} onClick={onPrevious} disabled={currentPage === 1 ? "disabled" : ""}>
                 {" < "}
             </button>
             {pageRange.map(pageNumber => {
@@ -54,7 +54,7 @@ const Page = (props) => {
                 );
             })}
             {/* right navigation arrow */}
-            <button key={"right"} onClick={onNext} disabled={currentPage === lastPage ? "disabled" : ""}>
+            <button key={"right"} className={"arrow"} onClick={onNext} disabled={currentPage === lastPage ? "disabled" : ""}>
                 {" > "}
             </button>
         </ul>

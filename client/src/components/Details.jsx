@@ -1,9 +1,8 @@
-import {useParams} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getDetail } from "../redux/actions/index";
 import Loading from "./Loading";
-import Nav from "./Nav";
 
 const Details = () => {
     const {id} = useParams();
@@ -18,10 +17,9 @@ const Details = () => {
 
     return(
         <>
-            <Nav/>
             {Object.keys(detail).length ? <div id="Details_container">
                 <h2>{`<${detail.name.charAt(0).toUpperCase() + detail.name.slice(1)}>`}</h2>
-                <span>{detail.id}</span>
+                <span id="Details_id">{detail.id}</span>
                 <img src={detail.img} alt={detail.name}/>
                 <div id="Details_types">
                     {detail.classes.map(type => <span key={type}>{` ${type} `}</span>)}
@@ -33,6 +31,9 @@ const Details = () => {
                     <span>height: {detail.height}</span>
                     <span>weight: {detail.weight}</span>
                 </div>
+                <Link to={"/pokemons"}>
+                    <button id="Details_button">Return</button>
+                </Link>
             </div> : <Loading/>}
         </>
     );
