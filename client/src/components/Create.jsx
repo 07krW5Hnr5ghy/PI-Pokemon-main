@@ -128,6 +128,28 @@ const Create = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(postCreate(input));
+        setInput({
+            name:'',
+            hp:0,
+            classes:[],
+            attack:0,
+            defense:0,
+            speed:0,
+            height:0,
+            weight:0,
+            img:"",
+        });
+        setErrors({
+            name:'',
+            hp:'',
+            classes:'',
+            attack:'',
+            defense:'',
+            speed:'',
+            height:'',
+            weight:'',
+            img:'',
+        });
     }
 
     console.log(input);
@@ -141,9 +163,9 @@ const Create = () => {
             <div id="Create_container">   
                 <h2>Create new pokemon</h2>
                 <form onSubmit={handleSubmit} id="Create_form">
-                    <fieldset id='Create_fieldset'>
+                    <div id='Create_fieldset'>
                     <label>Name:
-                        <input type="text" name="name" value={input.name} onChange={handleName}/>
+                        <input type="text" name="name" value={input.name} onChange={handleName} placeholder="type name of new pokemon"/>
                         {errors.name && (<span className={errors.name === "is valid" ? "correct" : "error"}>{errors.name}</span>)}
                     </label>
                     <label>Health:
@@ -170,13 +192,13 @@ const Create = () => {
                         <input type="number" name="weight" value={input.weight} onChange={handleChange}/>
                         {errors.weight && (<span className={errors.weight === "is valid" ? "correct" : "error"}>{errors.weight}</span>)}
                     </label>
-                    <label id="Creation_select">Types:
+                    <label id="Create_select">Types:
                         <select name="classes" defaultValue={"DEFAULT"} value={input.classes} onChange={handleTypes} disabled={input.classes.length >= 2}>
                             <option value="DEFAULT" disabled>Please choose types --</option>
                             {options}
                         </select>
                         {input.classes?.map((type,index)=> (<div key={index}>
-                            <span onClick={() => handleDelete(type)}>{`${type} x`}</span>
+                            <span className='Create_types' onClick={() => handleDelete(type)}>{`${type} x`}</span>
                         </div>))}
                         {errors.classes && (<span className={errors.classes === "is valid" ? "correct" : "error"}>{errors.classes}</span>)}
                     </label>
@@ -186,7 +208,7 @@ const Create = () => {
                     </label>
                     <input type="submit" value="Submit" disabled={Object.values(errors).every(item => 
                     item === "is valid") ? "" : "disabled"}/>
-                    </fieldset>
+                    </div>
                 </form>
             </div>
         </>

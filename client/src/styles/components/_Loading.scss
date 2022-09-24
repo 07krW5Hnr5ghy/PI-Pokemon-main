@@ -1,0 +1,31 @@
+@use "../base/settings";
+
+#Loading_container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    h3{
+        margin: 10vh 10vw;
+    }
+}
+
+#Loading_load{
+    height: 200vh;
+    width: 40vh;
+    border:10px solid settings.$loading;
+    border-top: 10px dashed settings.$loading;
+    border-right: 10px dashed #031c2c;
+    border-bottom: 10px dashed #031c2c;
+    border-left: 10px dashed #031c2c;
+    border-radius: 50%;
+    object-fit: fill;
+    animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}

@@ -9,7 +9,7 @@ const Pokemon = ({name,img,classes,id}) => {
         <div className="Pokemon_card">
             <h2>{`< ${displayName} >`}</h2>
             <img src={img} alt={displayName}/>
-            <div className="Pokemon_types">
+            <div id="Pokemon_types">
                 {classes.map(type => <span key={type}>{type}</span>)}
             </div>
             <Link to={`/pokemons/${id}`}>
