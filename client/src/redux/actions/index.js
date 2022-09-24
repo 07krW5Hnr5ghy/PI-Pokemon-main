@@ -29,6 +29,7 @@ export const getPokemons = (name) => {
 }
 
 export const getDetail = (id) => {
+    console.log("getDetail");
     return async(dispatch) => {
         const request = await axios(`http://localhost:3001/pokemons/${id}`);
         return dispatch({

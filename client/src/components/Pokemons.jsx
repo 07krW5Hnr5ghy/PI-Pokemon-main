@@ -25,7 +25,6 @@ const Pokemons = () => {
     
     /* request pokemons from db */
     const name = searchParams.get('name');
-    //console.log(name);
     
     useEffect(() => {
         if(name){
@@ -128,7 +127,6 @@ const Pokemons = () => {
                     </div>
                     {/* pagination component */}
                     {!name ? <Page 
-                    className="page-bar" 
                     currentPage={currentPage}
                     totalCount={pokemons.length}
                     onPageChange={page => setCurrentPage(page)}
