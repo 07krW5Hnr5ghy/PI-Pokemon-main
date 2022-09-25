@@ -123,7 +123,7 @@ const Pokemons = () => {
                         classes={item.classes}
                         id={item.id}
                         key={item.id}
-                        />):<h2>{pokemons}</h2>}
+                        />):<p>{pokemons}</p>}
                     </div>
                     {/* pagination component */}
                     {!name ? <Page 

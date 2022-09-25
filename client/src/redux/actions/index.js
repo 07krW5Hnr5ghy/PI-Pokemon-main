@@ -12,13 +12,13 @@ export const ORDER_ATTACK = "ORDER_ATTACK";
 export const getPokemons = (name) => {
     return async (dispatch) => {
         if(name){
-            const request = await axios(`http://localhost:3001/pokemons?name=${name}`);
+            const request = await axios(`/pokemons?name=${name}`);
             return dispatch({
                 type:GET_POKEMONS,
                 payload:request.data,
             });
         }else{
-            const request = await axios('http://localhost:3001/pokemons');
+            const request = await axios('/pokemons');
             return dispatch({
                 type:GET_POKEMONS,
                 payload:request.data,
@@ -30,7 +30,7 @@ export const getPokemons = (name) => {
 
 export const getDetail = (id) => {
     return async(dispatch) => {
-        const request = await axios(`http://localhost:3001/pokemons/${id}`);
+        const request = await axios(`/pokemons/${id}`);
         return dispatch({
             type:GET_DETAIL,
             payload:request.data,
@@ -40,7 +40,7 @@ export const getDetail = (id) => {
 
 export const getTypes = () => {
     return async(dispatch) => {
-        const request = await axios(`http://localhost:3001/types`);
+        const request = await axios(`/types`);
         return dispatch({
             type:GET_TYPES,
             payload:request.data,
@@ -50,7 +50,7 @@ export const getTypes = () => {
 
 export const postCreate = (pokemon) => {
     return async(dispatch) => {
-        const request = await axios.post(`http://localhost:3001/pokemons`,pokemon);
+        const request = await axios.post(`/pokemons`,pokemon);
         return dispatch({
             type:POST_CREATE,
             payload: request.data,
