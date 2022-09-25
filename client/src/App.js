@@ -4,7 +4,6 @@ import Pokemons from "./components/Pokemons";
 import Details from "./components/Details";
 import NotFound from "./components/NotFound";
 import Create from "./components/Create";
-//import './App.css';
 
 function App() {
   return (

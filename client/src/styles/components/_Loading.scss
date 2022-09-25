@@ -13,16 +13,25 @@
 }
 
 #Loading_load{
+    position: relative;
     height: 200vh;
     width: 40vh;
-    border:10px solid settings.$loading;
-    border-top: 10px dashed settings.$loading;
-    border-right: 10px dashed #031c2c;
-    border-bottom: 10px dashed #031c2c;
-    border-left: 10px dashed #031c2c;
+    background: linear-gradient(45deg,settings.$loading 10%,settings.$loading2 90%);
     border-radius: 50%;
     object-fit: fill;
-    animation: spin 5s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+#Loading_load::before{
+    position: absolute;
+    content: "";
+    background: #9bf0a7;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
 }
 
 @keyframes spin {
