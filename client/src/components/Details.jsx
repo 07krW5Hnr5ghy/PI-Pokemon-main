@@ -1,7 +1,7 @@
 import {useParams, Link} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getDetail } from "../redux/actions/index";
+import { getDetail, flushDetail } from "../redux/actions/index";
 import Loading from "./Loading";
 
 const Details = () => {
@@ -32,7 +32,7 @@ const Details = () => {
                     <span>weight: {detail.weight}</span>
                 </div>
                 <Link to={"/pokemons"}>
-                    <button id="Details_button">Return</button>
+                    <button id="Details_button" onClick={() => dispatch(flushDetail())}>Return</button>
                 </Link>
             </div> : <Loading/>}
         </>

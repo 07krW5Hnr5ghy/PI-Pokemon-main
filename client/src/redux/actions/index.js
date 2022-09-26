@@ -8,6 +8,7 @@ export const FILTER_TYPES = "FILTER_TYPES";
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const ORDER_NAME = "ORDER_NAME";
 export const ORDER_ATTACK = "ORDER_ATTACK";
+export const FLUSH_DETAIL = "FLUSH_DETAIL";
 
 export const getPokemons = (name) => {
     return async (dispatch) => {
@@ -84,5 +85,12 @@ export const orderAttack = (order) => {
     return {
         type:ORDER_ATTACK,
         payload:order,
+    };
+}
+
+export const flushDetail = () => {
+    return {
+        type:FLUSH_DETAIL,
+        payload:[],
     };
 }

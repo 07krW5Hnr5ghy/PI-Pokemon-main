@@ -7,6 +7,7 @@ import {
     ORDER_NAME,
     ORDER_ATTACK,
     FILTER_ORIGIN,
+    FLUSH_DETAIL,
 } from "../actions/index";
 
 const initialState = {
@@ -71,6 +72,11 @@ export const reducerPokemon = (state = initialState,action) => {
                 ...state,
                 pokemons:[...unorderedAttack],
             };
+        case FLUSH_DETAIL:
+            return{
+                ...state,
+                pokemonDetail:action.payload,
+            }
         default:
             return state;
     }
