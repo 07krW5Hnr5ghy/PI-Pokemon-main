@@ -59,7 +59,7 @@ const Create = () => {
         speed:0,
         height:0,
         weight:0,
-        img:"",
+        img:"https://i.pinimg.com/originals/e3/4f/ac/e34facd1e788d09f2bfcbc2f37f548ce.png",
     });
     const [errors,setErrors] = useState({
         name:'',
@@ -116,6 +116,7 @@ const Create = () => {
             ...input,
             classes:[...input.classes,event.target.value],
         });
+        
     }
 
     const handleDelete = (type) => {
@@ -137,7 +138,7 @@ const Create = () => {
             speed:0,
             height:0,
             weight:0,
-            img:"",
+            img:"https://i.pinimg.com/originals/e3/4f/ac/e34facd1e788d09f2bfcbc2f37f548ce.png",
         });
         setErrors({
             name:'',
@@ -150,6 +151,7 @@ const Create = () => {
             weight:'',
             img:'',
         });
+        alert("Pokemon created succesfully");
     }
 
     console.log(input);
@@ -167,6 +169,16 @@ const Create = () => {
                     <label>Name:
                         <input type="text" name="name" value={input.name} onChange={handleName} placeholder="type name of new pokemon"/>
                         {errors.name && (<span className={errors.name === "is valid" ? "correct" : "error"}>{errors.name}</span>)}
+                    </label>
+                    <label id="Create_select">Types:
+                        <select name="classes" defaultValue={"DEFAULT"} value={input.classes} onChange={handleTypes} disabled={input.classes.length >= 2}>
+                            <option value="DEFAULT" disabled>Please choose types --</option>
+                            {options}
+                        </select>
+                        {input.classes?.map((type,index)=> (<div key={index}>
+                            <span className='Create_types' onClick={() => handleDelete(type)}>{`${type} x`}</span>
+                        </div>))}
+                        {errors.classes && (<span className={errors.classes === "is valid" ? "correct" : "error"}>{errors.classes}</span>)}
                     </label>
                     <label>Health:
                         <input type="number" name="hp" value={input.hp} onChange={handleChange}/>
@@ -191,16 +203,6 @@ const Create = () => {
                     <label>Weight:
                         <input type="number" name="weight" value={input.weight} onChange={handleChange}/>
                         {errors.weight && (<span className={errors.weight === "is valid" ? "correct" : "error"}>{errors.weight}</span>)}
-                    </label>
-                    <label id="Create_select">Types:
-                        <select name="classes" defaultValue={"DEFAULT"} value={input.classes} onChange={handleTypes} disabled={input.classes.length >= 2}>
-                            <option value="DEFAULT" disabled>Please choose types --</option>
-                            {options}
-                        </select>
-                        {input.classes?.map((type,index)=> (<div key={index}>
-                            <span className='Create_types' onClick={() => handleDelete(type)}>{`${type} x`}</span>
-                        </div>))}
-                        {errors.classes && (<span className={errors.classes === "is valid" ? "correct" : "error"}>{errors.classes}</span>)}
                     </label>
                     <label>Image:
                         <input type="text" name="img" value={input.img} onChange={handleChange}/>
