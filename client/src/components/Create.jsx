@@ -2,51 +2,7 @@ import { getPokemons,getTypes,postCreate } from '../redux/actions';
 import { useState,useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import Nav from "./Nav";
-
-
-const validate = (input,pokemons) => {
-    let errors = {};
-
-    if(!input.name){
-        errors.name = 'Please write a name for the new pokemon';
-    }else if(!/^[A-Za-z]+$/.test(input.name) || input.name.length > 10){
-        errors.name = 'Name is invalid enter alphabet characters only and 10 Characters as maximum';
-    }else if(pokemons.find(pokemon => pokemon.name === input.name)){
-        errors.name = 'Name already exists in the pokemons list';
-    }else{
-        errors.name = "is valid";
-    }
-
-    if(!input.classes.length){
-        errors.classes = 'Select at least one type to create pokemon';
-    }else if(input.classes.length > 2){
-        errors.classes = "Maximum two types allowed";
-    }else{
-        errors.classes = "is valid";
-    }
-
-    let stats = ["attack","hp","defense","speed","height","weight"];
-
-    for(let stat of stats){
-        if(!/^[0-9]+$/.test(input[stat]) || input[stat] <= 0){
-            errors[stat] = `${stat} is invalid please input a number greather than zero in this field`;
-        }else{
-            errors[stat] = "is valid";
-        }
-    }
-
-    if(!input.img){
-        errors.img = 'url of image is required';
-    }else if(!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|svg|png|webp|jpeg)/.test(input.img)){
-        errors.img = 'input a valid image url of a file of the extensions jpg,svg,png,jpeg or webp';
-    }else{
-        errors.img = "is valid";
-    }
-
-    return errors;
-}
-
-
+import {validate} from "./utils";
 
 const Create = () => {
     const dispatch = useDispatch();
@@ -79,8 +35,6 @@ const Create = () => {
     },[dispatch]);
 
     const types = useSelector(state => state.reducerPokemon.types);
-
-    console.log(types);
 
     const pokemons = useSelector(state => state.reducerPokemon.pokemons);
 
@@ -153,9 +107,6 @@ const Create = () => {
         });
         alert("Pokemon created succesfully");
     }
-
-    console.log(input);
-    console.log(errors);
 
     const options = types.map(type => <option key={type.id} value={type.name}>{type.name}</option>)
 

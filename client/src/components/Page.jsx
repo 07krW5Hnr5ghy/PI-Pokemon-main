@@ -1,4 +1,4 @@
-let {usePage,DOTS} = require('./usePage');
+let {usePage,DOTS} = require('./utils');
 
 const Page = (props) => {
     const {

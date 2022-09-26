@@ -38,11 +38,12 @@ const Pokemons = () => {
     let types = useSelector(state => state.reducerPokemon.types);
     
     
-    /* set first and last page index
-    divide the number of pokemons per page
+    /* set first and last page index in the array
+    of pokemons displayed in current page
      */
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
+    /* extract pokemons that should be in the current page */
     let pageData = pokemons.slice(firstPageIndex,lastPageIndex);
 
     /* execute the filters and order options */
@@ -73,8 +74,7 @@ const Pokemons = () => {
         if(options.order === "name")dispatch(orderName(options.mode))
         if(options.order === "attack")dispatch(orderAttack(options.mode))
     };
-    //console.log(pokemons);
-    console.log(options);
+
     // render pokemons
     return(
         <>
