@@ -56,7 +56,7 @@ const getTypesApi = async () => {
     }
 
     let types = await axios.get(`https://pokeapi.co/api/v2/type`);
-    //console.log(types.data.results.map(type => type.name));
+    
     let typesName = types.data.results.map(type => {
         return {
             name:type.name,

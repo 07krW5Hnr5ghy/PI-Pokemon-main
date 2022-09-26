@@ -82,7 +82,7 @@ const Pokemons = () => {
         <>
             <Nav/>
             <div id="Pokemons_container">  
-                {pokemons.length && Array.isArray(pokemons) ? <div id="Pokemons_header">
+                {<div id="Pokemons_header">
                     <div className="Pokemons_options">
                         <button onClick={applyFilter} className={"Pokemons_buttons"}>filter</button>
                         <select defaultValue={'DEFAULT'}>
@@ -112,7 +112,7 @@ const Pokemons = () => {
                             <option value="desc" onClick={event => handleOptions(event,"mode")}>desc</option>
                         </select>
                     </div>
-                </div> : []}
+                </div>}
             {pokemons.length && Array.isArray(pokemons)?
                 <div id="Pokemons_body">
                     <div id="Pokemons_cards">
@@ -123,7 +123,7 @@ const Pokemons = () => {
                         classes={item.classes}
                         id={item.id}
                         key={item.id}
-                        />):<p>{pokemons}</p>}
+                        />):<p id="Pokemons_NoFound">{pokemons}</p>}
                     </div>
                     {/* pagination component */}
                     {!name ? <Page 
