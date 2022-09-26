@@ -5,7 +5,7 @@ export const GET_NAME = "GET_NAME";
 export const GET_TYPES = "GET_TYPES";
 export const POST_CREATE = "POST_CREATE";
 export const FILTER_TYPES = "FILTER_TYPES";
-export const FILTER_CUSTOM = "FILTER_CUSTOM";
+export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const ORDER_NAME = "ORDER_NAME";
 export const ORDER_ATTACK = "ORDER_ATTACK";
 
@@ -65,9 +65,9 @@ export const filterTypes = (filter) => {
     };
 }
 
-export const filterCustom = (filter) => {
+export const filterOrigin = (filter) => {
     return {
-        type:FILTER_CUSTOM,
+        type:FILTER_ORIGIN,
         payload:filter,
     };
 }

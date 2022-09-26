@@ -6,7 +6,7 @@ import {
     FILTER_TYPES,
     ORDER_NAME,
     ORDER_ATTACK,
-    FILTER_CUSTOM,
+    FILTER_ORIGIN,
 } from "../actions/index";
 
 const initialState = {
@@ -44,14 +44,14 @@ export const reducerPokemon = (state = initialState,action) => {
              filteredTypes : filteredTypes.filter((pokemon) => pokemon.classes.includes(action.payload));
             return {
                 ...state,
-                pokemons:!resultsTypes.length ? "No pokemons found with the filter" : resultsTypes,
+                pokemons:!resultsTypes.length ? "No pokemons found with types filter" : resultsTypes,
             };
-        case FILTER_CUSTOM:
+        case FILTER_ORIGIN:
             const filteredCustoms = state.filteredPokemons;
             const resultsCustoms = filteredCustoms.filter((pokemon) => pokemon.origin === action.payload);
             return {
                 ...state,
-                pokemons:!resultsCustoms.length ? "No pokemons found with the filter" : resultsCustoms,
+                pokemons:!resultsCustoms.length ? "No pokemons found with origin filter" : resultsCustoms,
             };
         case ORDER_NAME:
             const unorderedNames = [...state.pokemons];

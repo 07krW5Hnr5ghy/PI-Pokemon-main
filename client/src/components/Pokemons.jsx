@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons,getTypes,filterTypes,filterCustom,orderName,orderAttack } from "../redux/actions";
+import { getPokemons,getTypes,filterTypes,filterOrigin,orderName,orderAttack } from "../redux/actions";
 import { useSearchParams } from "react-router-dom";
 import Page from "./Page";
 import Loading from "./Loading";
@@ -25,7 +25,7 @@ const Pokemons = () => {
     
     /* request pokemons from db */
     const name = searchParams.get('name');
-    
+    /* fetch pokemons from backend */
     useEffect(() => {
         if(name){
             dispatch(getPokemons(name));
@@ -35,7 +35,6 @@ const Pokemons = () => {
         dispatch(getTypes());
     },[dispatch,name]);
 
-    
     let types = useSelector(state => state.reducerPokemon.types);
     
     
@@ -46,14 +45,13 @@ const Pokemons = () => {
     const lastPageIndex = firstPageIndex + PageSize;
     let pageData = pokemons.slice(firstPageIndex,lastPageIndex);
 
+    /* execute the filters and order options */
     const handleOptions = (event,option) => {
         setOptions({
             ...options,
             [option]:event.target.value,
         });
     }
-
-    //console.log(filters);
 
     const applyFilter = () => {
         if(types.find(type => type.name === options.filter)){
@@ -63,7 +61,7 @@ const Pokemons = () => {
 
         if(options.filter === "api+" || options.filter === "custom+"){
             console.log("origin");
-            dispatch(filterCustom(options.filter));
+            dispatch(filterOrigin(options.filter));
         }
 
         if(options.filter === "all"){
@@ -132,7 +130,7 @@ const Pokemons = () => {
                     onPageChange={page => setCurrentPage(page)}
                     pageSize={PageSize}
                     /> : <h3>footer</h3>}
-                </div>: pokemons.length && typeof pokemons === "string" ? pokemons : <Loading/>
+                </div>: pokemons.length && typeof pokemons === "string" ? <p id="Pokemons_NoFound">{pokemons}</p> : <Loading/>
             }   
             </div>
         </>
