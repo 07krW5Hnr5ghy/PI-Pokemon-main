@@ -84,32 +84,32 @@ const Pokemons = () => {
             <div id="Pokemons_container">  
                 {<div id="Pokemons_header">
                     <div className="Pokemons_options">
-                        <button onClick={applyFilter} className={"Pokemons_buttons"}>filter</button>
+                        <button onClick={applyFilter} onTouchStart={applyFilter} className={"Pokemons_buttons"}>filter</button>
                         <select defaultValue={'DEFAULT'}>
                             <option value="DEFAULT" disabled>select type</option>
-                            <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
+                            <option value="all" onClick={event => handleOptions(event,"filter")} onTouchStart={event => handleOptions(event,"filter")}>all</option>
                             {types && Array.isArray(types) ? 
                             types.map(type => <option key={type.id} value={type.name}
-                            onClick={event => handleOptions(event,"filter")}>{type.name}</option>):[]}
+                            onClick={event => handleOptions(event,"filter")} onTouchStart={event => handleOptions(event,"filter")}>{type.name}</option>):[]}
                         </select>
                         <select defaultValue={'DEFAULT'}>
                             <option value="DEFAULT" disabled>select origin</option>
-                            <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
-                            <option value="api+" onClick={event => handleOptions(event,"filter")}>api</option>
-                            <option value="custom+" onClick={event => handleOptions(event,"filter")}>custom</option>
+                            <option value="all" onClick={event => handleOptions(event,"filter")} onTouchStart={event => handleOptions(event,"filter")}>all</option>
+                            <option value="api+" onClick={event => handleOptions(event,"filter")} onTouchStart={event => handleOptions(event,"filter")}>api</option>
+                            <option value="custom+" onClick={event => handleOptions(event,"filter")} onTouchStart={event => handleOptions(event,"filter")}>custom</option>
                         </select>
                     </div>
                     <div className="Pokemons_options">
-                        <button onClick={order}>order</button>
+                        <button onClick={order} onTouchStart={order}>order</button>
                         <select defaultValue={'DEFAULT'}>
                             <option value="DEFAULT" disabled>select order</option>
-                            <option value="name" onClick={event => handleOptions(event,"order")}>name</option>
-                            <option value="attack" onClick={event => handleOptions(event,"order")}>attack</option>
+                            <option value="name" onClick={event => handleOptions(event,"order")} onTouchStart={event => handleOptions(event,"order")}>name</option>
+                            <option value="attack" onClick={event => handleOptions(event,"order")} onTouchStart={event => handleOptions(event,"order")}>attack</option>
                         </select>
                         <select defaultValue={'DEFAULT'}>
                             <option value="DEFAULT" disabled>select mode</option>
-                            <option value="asc" onClick={event => handleOptions(event,"mode")}>asc</option>
-                            <option value="desc" onClick={event => handleOptions(event,"mode")}>desc</option>
+                            <option value="asc" onClick={event => handleOptions(event,"mode")} onTouchStart={event => handleOptions(event,"order")}>asc</option>
+                            <option value="desc" onClick={event => handleOptions(event,"mode")} onTouchStart={event => handleOptions(event,"order")}>desc</option>
                         </select>
                     </div>
                 </div>}
