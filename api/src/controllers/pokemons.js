@@ -137,5 +137,31 @@ module.exports = {
         }catch(err){
             res.send(err);
         }
-    },
+    },deletePokemon: async (req,res) => {
+        let {id} = req.params;
+
+        try{
+            if(/^[0-9]*c$/.test(id)){
+
+                await Pokemon.destroy({
+                    where:{id:id}
+                });
+
+                res.send("Pokemon deleted");
+
+            }else if(/^[0-9]*a$/.test(id)){
+
+                res.send("Can't delete Pokemon from api");
+
+            }else{
+
+                res.send("Pokemon not found");
+
+            }  
+        }catch(err){
+
+            res.send(err);
+            
+        }
+    }
 };

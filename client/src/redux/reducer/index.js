@@ -8,6 +8,8 @@ import {
     ORDER_ATTACK,
     FILTER_ORIGIN,
     FLUSH_DETAIL,
+    DELETE_POKEMON,
+    FLUSH_POKEMONS,
 } from "../actions/index";
 
 const initialState = {
@@ -15,6 +17,7 @@ const initialState = {
     filteredPokemons:[],
     pokemonDetail: [],
     types:[],
+    id:"",
 };
 
 export const reducerPokemon = (state = initialState,action) => {
@@ -76,7 +79,17 @@ export const reducerPokemon = (state = initialState,action) => {
             return{
                 ...state,
                 pokemonDetail:action.payload,
-            }
+            };
+        case DELETE_POKEMON:
+            return{
+                ...state,
+                id:action.payload,
+            };
+        case FLUSH_POKEMONS:
+            return{
+                ...state,
+                pokemons:action.payload,
+            };
         default:
             return state;
     }

@@ -34,6 +34,13 @@
         margin: 0 0 1vh 0;
     }
 
+    button{
+        color:settings.$white;
+        background-color: settings.$idColor;
+        margin: 1vh 1vw;
+        padding:1vh 1vw;
+    }
+
     @media only screen and (min-width:580px){
         width: 49vw;
         height: 45vh;

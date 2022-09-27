@@ -9,6 +9,8 @@ export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const ORDER_NAME = "ORDER_NAME";
 export const ORDER_ATTACK = "ORDER_ATTACK";
 export const FLUSH_DETAIL = "FLUSH_DETAIL";
+export const DELETE_POKEMON = "DELETE_POKEMON";
+export const FLUSH_POKEMONS = "FLUSH_POKEMONS";
 
 export const getPokemons = (name) => {
     return async (dispatch) => {
@@ -50,7 +52,7 @@ export const getTypes = () => {
 }
 
 export const postCreate = (pokemon) => {
-    return async(dispatch) => {
+    return async (dispatch) => {
         const request = await axios.post(`/pokemons`,pokemon);
         return dispatch({
             type:POST_CREATE,
@@ -93,4 +95,21 @@ export const flushDetail = () => {
         type:FLUSH_DETAIL,
         payload:[],
     };
+}
+
+export const deletePokemon = (id) => {
+    return async (dispatch) => {
+        await axios.delete(`/pokemons/${id}`);
+        return {
+            type:DELETE_POKEMON,
+            payload:id,
+        };
+    }
+}
+
+export const flushPokemons = () => {
+    return {
+        type:FLUSH_POKEMONS,
+        payload:[],
+    }
 }
