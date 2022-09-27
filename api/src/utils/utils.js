@@ -3,7 +3,6 @@ async function* idGenerator(){
     let lastId = await Pokemon.count({
         where:{origin:"custom+"}
     });
-    console.log(lastId);
     let seed = lastId + 1;
     while(seed){
         if(seed > 0 && seed < 10){

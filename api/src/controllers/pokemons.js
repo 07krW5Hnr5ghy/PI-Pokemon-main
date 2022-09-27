@@ -67,7 +67,7 @@ const getTypesApi = async () => {
 }
 
 module.exports = {
-    // obtain all pokemons
+    // obtain api pokemons
     getPokemons: async (req,res)=>{
         const {name} = req.query;
 
@@ -97,7 +97,6 @@ module.exports = {
                 const dbRecords = await Pokemon.findAll();
                 res.json(dbRecords.length > 0 ? dbRecords : "Not pokemons created");
             }catch(err){
-                //console.log(err);
                 res.json({error:err.message});
             }
         }
@@ -162,6 +161,35 @@ module.exports = {
 
             res.send(err);
             
+        }
+    },modifyPokemon: async (req,res) => {
+        let {id} = req.params;
+        let {classes,hp,attack,defense,speed,height,weight,img} = req.body;
+        try{
+            if(/^[0-9]*c$/.test(id)){
+                await Pokemon.update(
+                    {
+                        classes:classes,
+                        hp:hp,
+                        attack:attack,
+                        defense:defense,
+                        speed:speed,
+                        height:height,
+                        weight:weight,
+                        img:img,
+                    },
+                    {
+                        where: {id:id},
+                    }
+                );
+                res.send("Pokemon updated");
+            }else if(/^[0-9]*a$/.test(id)){
+                res.send("Can't update Pokemon from api");
+            }else{
+                res.send("Pokemon not found");
+            }
+        }catch(err){
+            res.send(err);
         }
     }
 };
