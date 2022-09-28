@@ -5,13 +5,16 @@ const {keyGenerator} = require('../utils/utils');
 // api calls 
 const getPokemonsApi = async (pokemons) => {
     
+    // store data of api pokemons
     const pokemonList = [];
     
+    // make calls for each pokemon to get data from api
     for(let i = 1;i <= pokemons;i++){
         let info = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}/`);
         pokemonList.push(info.data);
     }
 
+    // map the pokemon data into objects with the nedeed info
     let pokeData = pokemonList.map((pokemon) => {
         let hp,attack,defense,speed;
         let types = [];
@@ -42,11 +45,13 @@ const getPokemonsApi = async (pokemons) => {
         };
     });
 
+    // insert pokemons in database
     await Pokemon.bulkCreate(pokeData);
 };
 
 const getTypesApi = async () => {
 
+    // check if the types are in the database
     let typeDb = await Type.count({
         col:'name',
     });
@@ -55,14 +60,17 @@ const getTypesApi = async () => {
         return;
     }
 
+    // make call to the api to get types
     let types = await axios.get(`https://pokeapi.co/api/v2/type`);
     
+    // map the data into objects with the type name
     let typesName = types.data.results.map(type => {
         return {
             name:type.name,
         }
     });
 
+    // insert types in database
     await Type.bulkCreate(typesName);
 }
 
