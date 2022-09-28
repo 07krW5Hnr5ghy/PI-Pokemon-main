@@ -3,7 +3,7 @@ import Landing from "./components/Landing";
 import Pokemons from "./components/Pokemons";
 import Details from "./components/Details";
 import NotFound from "./components/NotFound";
-import Create from "./components/Create";
+import Form from "./components/Form";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Landing/>}/>
         <Route path="/pokemons" element={<Pokemons/>}/>
         <Route path="/pokemons/:id" element={<Details/>}/>
-        <Route path="/create" element={<Create/>}/>
+        <Route path="/create" element={<Form/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
     </>

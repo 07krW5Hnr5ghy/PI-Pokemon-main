@@ -4,7 +4,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import Nav from "./Nav";
 import {validate} from "./utils";
 
-const Create = () => {
+const Form = () => {
     const dispatch = useDispatch();
     const [mode,setMode] = useState("create");
     const [input,setInput] = useState({
@@ -150,7 +150,8 @@ const Create = () => {
         
     }
 
-    const handleMode = () => {
+    const handleMode = (event) => {
+        event.preventDefault();
         if(mode === "create"){
             setMode("update");
             setInput({
@@ -178,6 +179,7 @@ const Create = () => {
         }
 
         if(mode === "update"){
+            setMode("create");
             setInput({
                 name:"",
                 hp:0,
@@ -205,65 +207,63 @@ const Create = () => {
     }
 
     const options = types.map(type => <option key={type.id} value={type.name}>{type.name}</option>)
-    console.log(input);
-    console.log(errors);
-
+    
     return(
         <>
             <Nav/>
             <div id="Create_container">   
                 <h2>Create new pokemon</h2>
-                <button onClick={handleMode}>set mode</button>
+                <button onClick={(e) => handleMode(e)}>set mode</button>
                 {<span>{mode}</span>}
                 <form onSubmit={(e) => handleSubmit(e,mode)} id="Create_form">
                     <div id='Create_fieldset'>
-                    {mode === "create" ? <label>Name:
+                        {mode === "create" ? <label>Name:
                         <input type="text" name="name" value={input.name} onChange={(e) => handleName(e,mode)} placeholder="type name of new pokemon"/>
-                        {errors.name && (<span className={errors.name === "is valid" ? "correct" : "error"}>{errors.name}</span>)}
-                    </label> : <label>Id:
+                            {errors.name && (<span className={errors.name === "is valid" ? "correct" : "error"}>{errors.name}</span>)}
+                        </label> : <label>Id:
                         <input type="text" name="id" value={input.id} onChange={(e) => handleId(e,mode)} placeholder="write id of created pokemon"/>
-                        {errors.id && (<span className={errors.id === "is valid" ? "correct" : "error"}>{errors.id}</span>)}
-                    </label>}
-                    <label id="Create_select">Types:
-                        <select name="classes" defaultValue={"DEFAULT"} value={input.classes} onChange={handleTypes} disabled={input.classes.length >= 2}>
-                            <option value="DEFAULT" disabled>Please choose types --</option>
-                            {options}
-                        </select>
-                        {input.classes?.map((type,index)=> (<div key={index}>
-                            <span className='Create_types' onClick={() => handleDelete(type)}>{`${type} x`}</span>
-                        </div>))}
-                        {errors.classes && (<span className={errors.classes === "is valid" ? "correct" : "error"}>{errors.classes}</span>)}
-                    </label>
-                    <label>Health:
-                        <input type="number" name="hp" value={input.hp} onChange={(e) => handleChange(e,mode)}/>
-                        {errors.hp && (<span className={errors.hp === "is valid" ? "correct" : "error"}>{errors.hp}</span>)}
-                    </label>
-                    <label>Attack:
-                        <input type="number" name="attack" value={input.attack} onChange={(e) => handleChange(e,mode)}/>
-                        {errors.attack && (<span className={errors.attack === "is valid" ? "correct" : "error"}>{errors.attack}</span>)}
-                    </label>
-                    <label>Defense:
-                        <input type="number" name="defense" value={input.defense} onChange={(e) => handleChange(e,mode)}/>
-                        {errors.defense && (<span className={errors.defense === "is valid" ? "correct" : "error"}>{errors.defense}</span>)}
-                    </label>
-                    <label>Speed:
-                        <input type="number" name="speed" value={input.speed} onChange={(e) => handleChange(e,mode)}/>
-                        {errors.speed && (<span className={errors.speed === "is valid" ? "correct" : "error"}>{errors.speed}</span>)}
-                    </label>
-                    <label>Height:
-                        <input type="number" name="height" value={input.height} onChange={(e) => handleChange(e,mode)}/>
-                        {errors.height && (<span className={errors.height === "is valid" ? "correct" : "error"}>{errors.height}</span>)}
-                    </label>
-                    <label>Weight:
-                        <input type="number" name="weight" value={input.weight} onChange={(e) => handleChange(e,mode)}/>
-                        {errors.weight && (<span className={errors.weight === "is valid" ? "correct" : "error"}>{errors.weight}</span>)}
-                    </label>
-                    <label>Image:
-                        <input type="text" name="img" value={input.img} onChange={(e) => handleChange(e,mode)}/>
-                        {errors.img && (<span className={errors.img === "is valid" ? "correct" : "error"}>{errors.img}</span>)}
-                    </label>
-                    <input type="submit" value="Submit" disabled={Object.values(errors).every(item => 
-                    item === "is valid") ? "" : "disabled"}/>
+                            {errors.id && (<span className={errors.id === "is valid" ? "correct" : "error"}>{errors.id}</span>)}
+                        </label>}
+                        <label id="Create_select">Types:
+                            <select name="classes" defaultValue={"DEFAULT"} value={input.classes} onChange={handleTypes} disabled={input.classes.length >= 2}>
+                                <option value="DEFAULT" disabled>Please choose types --</option>
+                                {options}
+                            </select>
+                            {input.classes?.map((type,index)=> (<div key={index}>
+                                <span className='Create_types' onClick={() => handleDelete(type)}>{`${type} x`}</span>
+                            </div>))}
+                            {errors.classes && (<span className={errors.classes === "is valid" ? "correct" : "error"}>{errors.classes}</span>)}
+                        </label>
+                        <label>Health:
+                            <input type="number" name="hp" value={input.hp} onChange={(e) => handleChange(e,mode)}/>
+                            {errors.hp && (<span className={errors.hp === "is valid" ? "correct" : "error"}>{errors.hp}</span>)}
+                        </label>
+                        <label>Attack:
+                            <input type="number" name="attack" value={input.attack} onChange={(e) => handleChange(e,mode)}/>
+                            {errors.attack && (<span className={errors.attack === "is valid" ? "correct" : "error"}>{errors.attack}</span>)}
+                        </label>
+                        <label>Defense:
+                            <input type="number" name="defense" value={input.defense} onChange={(e) => handleChange(e,mode)}/>
+                            {errors.defense && (<span className={errors.defense === "is valid" ? "correct" : "error"}>{errors.defense}</span>)}
+                        </label>
+                        <label>Speed:
+                            <input type="number" name="speed" value={input.speed} onChange={(e) => handleChange(e,mode)}/>
+                            {errors.speed && (<span className={errors.speed === "is valid" ? "correct" : "error"}>{errors.speed}</span>)}
+                        </label>
+                        <label>Height:
+                            <input type="number" name="height" value={input.height} onChange={(e) => handleChange(e,mode)}/>
+                            {errors.height && (<span className={errors.height === "is valid" ? "correct" : "error"}>{errors.height}</span>)}
+                        </label>
+                        <label>Weight:
+                            <input type="number" name="weight" value={input.weight} onChange={(e) => handleChange(e,mode)}/>
+                            {errors.weight && (<span className={errors.weight === "is valid" ? "correct" : "error"}>{errors.weight}</span>)}
+                        </label>
+                        <label>Image:
+                            <input type="text" name="img" value={input.img} onChange={(e) => handleChange(e,mode)}/>
+                            {errors.img && (<span className={errors.img === "is valid" ? "correct" : "error"}>{errors.img}</span>)}
+                        </label>
+                        <input type="submit" value="Submit" disabled={Object.values(errors).every(item => 
+                        item === "is valid") ? "" : "disabled"}/>
                     </div>
                 </form>
             </div>
@@ -271,4 +271,4 @@ const Create = () => {
     );
 };
 
-export default Create;
+export default Form;
