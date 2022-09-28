@@ -10,6 +10,7 @@ import {
     FLUSH_DETAIL,
     DELETE_POKEMON,
     FLUSH_POKEMONS,
+    UPDATE_POKEMON,
 } from "../actions/index";
 
 const initialState = {
@@ -89,6 +90,11 @@ export const reducerPokemon = (state = initialState,action) => {
             return{
                 ...state,
                 pokemons:action.payload,
+            };
+        case UPDATE_POKEMON:
+            console.log("UPDATE");
+            return{
+                ...state,
             };
         default:
             return state;

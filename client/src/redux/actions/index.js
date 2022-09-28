@@ -11,6 +11,7 @@ export const ORDER_ATTACK = "ORDER_ATTACK";
 export const FLUSH_DETAIL = "FLUSH_DETAIL";
 export const DELETE_POKEMON = "DELETE_POKEMON";
 export const FLUSH_POKEMONS = "FLUSH_POKEMONS";
+export const UPDATE_POKEMON = "UPDATE_POKEMON";
 
 export const getPokemons = (name) => {
     return async (dispatch) => {
@@ -111,5 +112,15 @@ export const flushPokemons = () => {
     return {
         type:FLUSH_POKEMONS,
         payload:[],
+    }
+}
+
+export const updatePokemon = (pokemon) => {
+    return async (dispatch) => {
+        const request = await axios.put(`/pokemons/`,pokemon);
+        return{
+            type:UPDATE_POKEMON,
+            payload:request.data,
+        }
     }
 }

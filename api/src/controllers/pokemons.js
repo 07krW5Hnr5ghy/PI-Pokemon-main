@@ -140,7 +140,7 @@ module.exports = {
         let {id} = req.params;
 
         try{
-            if(/^[0-9]*c$/.test(id)){
+            if(/^[0-9]{2}c$/.test(id)){
 
                 await Pokemon.destroy({
                     where:{id:id}
@@ -148,7 +148,7 @@ module.exports = {
 
                 res.send("Pokemon deleted");
 
-            }else if(/^[0-9]*a$/.test(id)){
+            }else if(/^[0-9]{2}a$/.test(id)){
 
                 res.send("Can't delete Pokemon from api");
 
@@ -162,11 +162,12 @@ module.exports = {
             res.send(err);
             
         }
-    },modifyPokemon: async (req,res) => {
-        let {id} = req.params;
-        let {classes,hp,attack,defense,speed,height,weight,img} = req.body;
+    },updatePokemon: async (req,res) => {
+        
+        let {classes,hp,attack,defense,speed,height,weight,img,id} = req.body;
+        
         try{
-            if(/^[0-9]*c$/.test(id)){
+            if(/^[0-9]{2}c$/.test(id)){
                 await Pokemon.update(
                     {
                         classes:classes,
@@ -183,7 +184,7 @@ module.exports = {
                     }
                 );
                 res.send("Pokemon updated");
-            }else if(/^[0-9]*a$/.test(id)){
+            }else if(/^[0-9]{2}a$/.test(id)){
                 res.send("Can't update Pokemon from api");
             }else{
                 res.send("Pokemon not found");

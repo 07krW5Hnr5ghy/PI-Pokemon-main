@@ -1,4 +1,4 @@
-import { getPokemons,getTypes,postCreate } from '../redux/actions';
+import { getPokemons,getTypes,postCreate,updatePokemon } from '../redux/actions';
 import { useState,useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import Nav from "./Nav";
@@ -6,8 +6,9 @@ import {validate} from "./utils";
 
 const Create = () => {
     const dispatch = useDispatch();
+    const [mode,setMode] = useState("create");
     const [input,setInput] = useState({
-        name:'',
+        name:"",
         hp:0,
         classes:[],
         attack:0,
@@ -17,8 +18,9 @@ const Create = () => {
         weight:0,
         img:"https://i.pinimg.com/originals/e3/4f/ac/e34facd1e788d09f2bfcbc2f37f548ce.png",
     });
+
     const [errors,setErrors] = useState({
-        name:'',
+        name:"",
         hp:'',
         classes:'',
         attack:'',
@@ -27,8 +29,8 @@ const Create = () => {
         height:'',
         weight:'',
         img:'',
-    })
-
+    });
+    
     useEffect(() => {
         dispatch(getTypes());
         dispatch(getPokemons());
@@ -38,7 +40,7 @@ const Create = () => {
 
     const pokemons = useSelector(state => state.reducerPokemon.pokemons);
 
-    const handleChange = (event) => {
+    const handleChange = (event,mode) => {
         setInput({
             ...input,
             [event.target.name]:event.target.value,
@@ -47,11 +49,11 @@ const Create = () => {
             validate({
                 ...input,
                 [event.target.name]:event.target.value,
-            },pokemons)
+            },pokemons,mode)
         );
     }
 
-    const handleName = (event) => {
+    const handleName = (event,mode) => {
         setInput({
             ...input,
             name:event.target.value.toLowerCase(),
@@ -60,8 +62,21 @@ const Create = () => {
             validate({
                 ...input,
                 [event.target.name]:event.target.value,
-            },pokemons)
+            },pokemons,mode)
         );
+    }
+
+    const handleId = (event,mode) => {
+        setInput({
+            ...input,
+            id:event.target.value,
+        });
+        setErrors(
+            validate({
+                ...input,
+                [event.target.name]:event.target.value,
+            },pokemons,mode)
+        )
     }
 
     const handleTypes = (event) => {
@@ -80,47 +95,135 @@ const Create = () => {
         });
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        dispatch(postCreate(input));
-        setInput({
-            name:'',
-            hp:0,
-            classes:[],
-            attack:0,
-            defense:0,
-            speed:0,
-            height:0,
-            weight:0,
-            img:"https://i.pinimg.com/originals/e3/4f/ac/e34facd1e788d09f2bfcbc2f37f548ce.png",
-        });
-        setErrors({
-            name:'',
-            hp:'',
-            classes:'',
-            attack:'',
-            defense:'',
-            speed:'',
-            height:'',
-            weight:'',
-            img:'',
-        });
-        alert("Pokemon created succesfully");
+    const handleSubmit = (event,mode) => {
+        if(mode === "create"){
+            dispatch(postCreate(input));
+            setInput({
+                name:'',
+                hp:0,
+                classes:[],
+                attack:0,
+                defense:0,
+                speed:0,
+                height:0,
+                weight:0,
+                img:"https://i.pinimg.com/originals/e3/4f/ac/e34facd1e788d09f2bfcbc2f37f548ce.png",
+            });
+            setErrors({
+                name:'',
+                hp:'',
+                classes:'',
+                attack:'',
+                defense:'',
+                speed:'',
+                height:'',
+                weight:'',
+                img:'',
+            });
+            alert("Pokemon created succesfully");
+        }else if(mode === "update"){
+            dispatch(updatePokemon(input));
+            setInput({
+                id:'',
+                hp:0,
+                classes:[],
+                attack:0,
+                defense:0,
+                speed:0,
+                height:0,
+                weight:0,
+                img:"",
+            });
+            setErrors({
+                id:'',
+                hp:'',
+                classes:'',
+                attack:'',
+                defense:'',
+                speed:'',
+                height:'',
+                weight:'',
+                img:'',
+            });
+            alert("Pokemon updated succesfully");
+        }
+        
+    }
+
+    const handleMode = () => {
+        if(mode === "create"){
+            setMode("update");
+            setInput({
+                id:"",
+                hp:0,
+                classes:[],
+                attack:0,
+                defense:0,
+                speed:0,
+                height:0,
+                weight:0,
+                img:"",
+            });
+            setErrors({
+                id:"",
+                hp:'',
+                classes:'',
+                attack:'',
+                defense:'',
+                speed:'',
+                height:'',
+                weight:'',
+                img:'',
+            });
+        }
+
+        if(mode === "update"){
+            setInput({
+                name:"",
+                hp:0,
+                classes:[],
+                attack:0,
+                defense:0,
+                speed:0,
+                height:0,
+                weight:0,
+                img:"https://i.pinimg.com/originals/e3/4f/ac/e34facd1e788d09f2bfcbc2f37f548ce.png",
+            });
+
+            setErrors({
+                name:"",
+                hp:'',
+                classes:'',
+                attack:'',
+                defense:'',
+                speed:'',
+                height:'',
+                weight:'',
+                img:'',
+            });
+        }
     }
 
     const options = types.map(type => <option key={type.id} value={type.name}>{type.name}</option>)
+    console.log(input);
+    console.log(errors);
 
     return(
         <>
             <Nav/>
             <div id="Create_container">   
                 <h2>Create new pokemon</h2>
-                <form onSubmit={handleSubmit} id="Create_form">
+                <button onClick={handleMode}>set mode</button>
+                {<span>{mode}</span>}
+                <form onSubmit={(e) => handleSubmit(e,mode)} id="Create_form">
                     <div id='Create_fieldset'>
-                    <label>Name:
-                        <input type="text" name="name" value={input.name} onChange={handleName} placeholder="type name of new pokemon"/>
+                    {mode === "create" ? <label>Name:
+                        <input type="text" name="name" value={input.name} onChange={(e) => handleName(e,mode)} placeholder="type name of new pokemon"/>
                         {errors.name && (<span className={errors.name === "is valid" ? "correct" : "error"}>{errors.name}</span>)}
-                    </label>
+                    </label> : <label>Id:
+                        <input type="text" name="id" value={input.id} onChange={(e) => handleId(e,mode)} placeholder="write id of created pokemon"/>
+                        {errors.id && (<span className={errors.id === "is valid" ? "correct" : "error"}>{errors.id}</span>)}
+                    </label>}
                     <label id="Create_select">Types:
                         <select name="classes" defaultValue={"DEFAULT"} value={input.classes} onChange={handleTypes} disabled={input.classes.length >= 2}>
                             <option value="DEFAULT" disabled>Please choose types --</option>
@@ -132,31 +235,31 @@ const Create = () => {
                         {errors.classes && (<span className={errors.classes === "is valid" ? "correct" : "error"}>{errors.classes}</span>)}
                     </label>
                     <label>Health:
-                        <input type="number" name="hp" value={input.hp} onChange={handleChange}/>
+                        <input type="number" name="hp" value={input.hp} onChange={(e) => handleChange(e,mode)}/>
                         {errors.hp && (<span className={errors.hp === "is valid" ? "correct" : "error"}>{errors.hp}</span>)}
                     </label>
                     <label>Attack:
-                        <input type="number" name="attack" value={input.attack} onChange={handleChange}/>
+                        <input type="number" name="attack" value={input.attack} onChange={(e) => handleChange(e,mode)}/>
                         {errors.attack && (<span className={errors.attack === "is valid" ? "correct" : "error"}>{errors.attack}</span>)}
                     </label>
                     <label>Defense:
-                        <input type="number" name="defense" value={input.defense} onChange={handleChange}/>
+                        <input type="number" name="defense" value={input.defense} onChange={(e) => handleChange(e,mode)}/>
                         {errors.defense && (<span className={errors.defense === "is valid" ? "correct" : "error"}>{errors.defense}</span>)}
                     </label>
                     <label>Speed:
-                        <input type="number" name="speed" value={input.speed} onChange={handleChange}/>
+                        <input type="number" name="speed" value={input.speed} onChange={(e) => handleChange(e,mode)}/>
                         {errors.speed && (<span className={errors.speed === "is valid" ? "correct" : "error"}>{errors.speed}</span>)}
                     </label>
                     <label>Height:
-                        <input type="number" name="height" value={input.height} onChange={handleChange}/>
+                        <input type="number" name="height" value={input.height} onChange={(e) => handleChange(e,mode)}/>
                         {errors.height && (<span className={errors.height === "is valid" ? "correct" : "error"}>{errors.height}</span>)}
                     </label>
                     <label>Weight:
-                        <input type="number" name="weight" value={input.weight} onChange={handleChange}/>
+                        <input type="number" name="weight" value={input.weight} onChange={(e) => handleChange(e,mode)}/>
                         {errors.weight && (<span className={errors.weight === "is valid" ? "correct" : "error"}>{errors.weight}</span>)}
                     </label>
                     <label>Image:
-                        <input type="text" name="img" value={input.img} onChange={handleChange}/>
+                        <input type="text" name="img" value={input.img} onChange={(e) => handleChange(e,mode)}/>
                         {errors.img && (<span className={errors.img === "is valid" ? "correct" : "error"}>{errors.img}</span>)}
                     </label>
                     <input type="submit" value="Submit" disabled={Object.values(errors).every(item => 

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 export const DOTS = "...";
-
+// set range
 const range = (start,end) => {
     let length = end - start + 1;
     /* Create an array of certain length 
@@ -11,6 +11,7 @@ const range = (start,end) => {
    return Array.from({length},(_,index)=>index + start);
 };
 
+// set pagination
 export const usePage = ({
     totalCount,
     pageSize,
@@ -88,17 +89,36 @@ export const usePage = ({
     return paginationRange;
 };
 
-export const validate = (input,pokemons) => {
+// validate create
+export const validate = (input,pokemons,mode) => {
     let errors = {};
 
-    if(!input.name){
-        errors.name = 'Please write a name for the new pokemon';
-    }else if(!/^[A-Za-z]+$/.test(input.name) || input.name.length > 10){
-        errors.name = 'Name is invalid enter alphabet characters only and 10 Characters as maximum';
-    }else if(pokemons.find(pokemon => pokemon.name === input.name)){
-        errors.name = 'Name already exists in the pokemons list';
-    }else{
-        errors.name = "is valid";
+    if(mode === "create"){
+        if(!input.name){
+            errors.name = 'Please write a name for the new pokemon';
+        }else if(!/^[A-Za-z]+$/.test(input.name) || input.name.length > 10){
+            errors.name = 'Name is invalid enter alphabet characters only and 10 Characters as maximum';
+        }else if(pokemons.find(pokemon => pokemon.name === input.name)){
+            errors.name = 'Name already exists in the pokemons list';
+        }else{
+            errors.name = "is valid";
+        }
+    }
+
+    if(mode === "update"){
+        if(!input.id){
+            errors.id = "Please write a id of a created pokemon";
+        }else if(/^[0-9]{2}a$/.test(input.id)){
+            errors.id = "Can't update a pokemon from the api";
+        }else if(/^[0-9]{2}c$/.test(input.id)){
+            if(pokemons.find(pokemon => pokemon.id === input.id)){
+                errors.id = "is valid";
+            }else{
+                errors.id = "Not existing id";
+            }
+        }else{
+            errors.id = "invalid id";
+        }
     }
 
     if(!input.classes.length){
