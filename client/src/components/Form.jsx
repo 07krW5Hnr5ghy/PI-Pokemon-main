@@ -236,10 +236,15 @@ const Form = () => {
         );
     }
 
+    const uploadImg = () => {
+        const formData = new FormData();
+    }
+
     const options = types.map(type => <option key={type.id} value={type.name}>{type.name}</option>)
 
     console.log(file);
     console.log(fileName);
+    console.log(input);
     
     return(
         <>
@@ -305,8 +310,11 @@ const Form = () => {
                             </label>*/}
                         <label>Image:
                             {img === "url" ? <input type="text" name="img" value={input.img} onChange={(e) => handleChange(e,mode)} /> : 
-                            <input type="file" name="img" onChange={(e) => saveFile(e,mode,img,file)}/>}
-                            {errors.img && (<span className={errors.img === "is valid" ? "correct" : "error"}>{errors.img}</span>)}
+                            <>
+                                <input type="file" name="img" onChange={(e) => saveFile(e,mode,img,file)}/>
+                                {errors.img && (<span className={errors.img === "is valid" ? "correct" : "error"}>{errors.img}</span>)}
+                                <button disabled={errors.img === "is valid" ? "" : "disabled"}>upload file</button>
+                            </>}
                         </label>
                         <input type="submit" value="Submit" disabled={Object.values(errors).every(item => 
                         item === "is valid") ? "" : "disabled"}/>
