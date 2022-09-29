@@ -90,7 +90,7 @@ export const usePage = ({
 };
 
 // validate create
-export const validate = (input,pokemons,mode) => {
+export const validate = (input,pokemons,mode,img,file) => {
     let errors = {};
 
     if(mode === "create"){
@@ -139,12 +139,27 @@ export const validate = (input,pokemons,mode) => {
         }
     }
 
-    if(!input.img){
-        errors.img = 'url of image is required';
-    }else if(!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|svg|png|webp|jpeg)/.test(input.img)){
-        errors.img = 'input a valid image url of a file of the extensions jpg,svg,png,jpeg or webp';
-    }else{
-        errors.img = "is valid";
+    if(img === "url"){
+        if(!input.img){
+            errors.img = 'url of image is required';
+        }else if(!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|svg|png|webp|jpeg)/.test(input.img)){
+            errors.img = 'input a valid image url of a file of the extensions jpg,svg,png,jpeg or webp';
+        }else{
+            errors.img = "is valid";
+        }
+    }
+
+    if(img === "file"){
+        console.log(/(jpg|svg|png|webp|jpeg)/.test(input.img.split('.').pop()));
+        if(!input.img){
+            errors.img = 'file of image is required';
+        }else if(!/^image/.test(file.type)){
+            errors.img = 'file is not a img';
+        }else if(!/(jpg|svg|png|webp|jpeg)/.test(input.img.split('.').pop())){
+            errors.img = 'input a valid file of the extensions jpg,svg,png,jpeg or webp';
+        }else{
+            errors.img = "is valid";
+        }
     }
 
     return errors;

@@ -200,5 +200,7 @@ module.exports = {
         }catch(err){
             res.send(err);
         }
+    },uploadImg: async (req,res) => {
+        
     }
 };

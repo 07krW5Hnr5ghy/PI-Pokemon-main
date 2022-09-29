@@ -52,6 +52,10 @@
         color: settings.$idColor;
     }
 
+    .Creation_noDisplay{
+        display:none;
+    }
+
     @media only screen and (min-width:305px){
         display: flex;
         flex-direction: row;

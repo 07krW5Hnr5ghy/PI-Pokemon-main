@@ -7,6 +7,9 @@ import {validate} from "./utils";
 const Form = () => {
     const dispatch = useDispatch();
     const [mode,setMode] = useState("create");
+    const [file,setFile] = useState();
+    const [fileName,setFileName] = useState("");
+    const [img,setImg] = useState("url");
     const [input,setInput] = useState({
         name:"",
         hp:0,
@@ -204,9 +207,39 @@ const Form = () => {
                 img:'',
             });
         }
+
+    }
+
+    const handleImg = (e) => {
+        e.preventDefault();
+        if(img === "url"){
+            setImg("file");
+        }
+
+        if(img === "file"){
+            setImg("url");
+        }
+    }
+
+    const saveFile = (event,mode,img,file) => {
+        setFile(event.target.files[0]);
+        setFileName(event.target.files[0].name);
+        setInput({
+            ...input,
+            img:fileName,
+        });
+        setErrors(
+            validate({
+                ...input,
+                [event.target.name]:event.target.value,
+            },pokemons,mode,img,file)
+        );
     }
 
     const options = types.map(type => <option key={type.id} value={type.name}>{type.name}</option>)
+
+    console.log(file);
+    console.log(fileName);
     
     return(
         <>
@@ -258,8 +291,21 @@ const Form = () => {
                             <input type="number" name="weight" value={input.weight} onChange={(e) => handleChange(e,mode)}/>
                             {errors.weight && (<span className={errors.weight === "is valid" ? "correct" : "error"}>{errors.weight}</span>)}
                         </label>
+                        <label>
+                            <button onClick={(e) => handleImg(e)}>mode</button>
+                            {<span>{img}</span>}
+                        </label>
+                        {/*<label className={img === "url" ? "" : ""}>Image:
+                            <input type="text" name={img === "url" ? "img" : ""} value={img === "url" ? input.img : ""} onChange={(e) => handleChange(e,mode)}/>
+                            {errors.img && (<span className={errors.img === "is valid" ? "correct" : "error"}>{errors.img}</span>)}
+                        </label>
+                        <label className={img === "file" ? "" : ""} >Upload file:
+                            <input type="file" name={img === "file" ? "img" : ""} value={img === "file" ? input.img : ""} onChange={(e) => handleChange(e,mode)}/>
+                            {errors.img && (<span className={errors.img === "is valid" ? "correct" : "error"}>{errors.img}</span>)}
+                            </label>*/}
                         <label>Image:
-                            <input type="text" name="img" value={input.img} onChange={(e) => handleChange(e,mode)}/>
+                            {img === "url" ? <input type="text" name="img" value={input.img} onChange={(e) => handleChange(e,mode)} /> : 
+                            <input type="file" name="img" onChange={(e) => saveFile(e,mode,img,file)}/>}
                             {errors.img && (<span className={errors.img === "is valid" ? "correct" : "error"}>{errors.img}</span>)}
                         </label>
                         <input type="submit" value="Submit" disabled={Object.values(errors).every(item => 
