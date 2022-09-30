@@ -12,6 +12,7 @@ export const FLUSH_DETAIL = "FLUSH_DETAIL";
 export const DELETE_POKEMON = "DELETE_POKEMON";
 export const FLUSH_POKEMONS = "FLUSH_POKEMONS";
 export const UPDATE_POKEMON = "UPDATE_POKEMON";
+export const UPLOAD_IMG = "UPLOAD_IMG";
 
 export const getPokemons = (name) => {
     return async (dispatch) => {
@@ -122,5 +123,11 @@ export const updatePokemon = (pokemon) => {
             type:UPDATE_POKEMON,
             payload:request.data,
         }
+    }
+}
+
+export const uploadImg = (data) => {
+    return async (dispatch) => {
+        const request = await axios.post('/upload',data);
     }
 }

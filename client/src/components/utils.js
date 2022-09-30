@@ -149,7 +149,7 @@ export const validate = (input,pokemons,mode,img,file) => {
         }
     }
 
-    if(img === "file"){
+    if(img === "file" && file){
         console.log(/(jpg|svg|png|webp|jpeg)/.test(input.img.split('.').pop()));
         if(!input.img){
             errors.img = 'file of image is required';

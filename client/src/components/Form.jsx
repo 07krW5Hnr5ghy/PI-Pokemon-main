@@ -1,4 +1,4 @@
-import { getPokemons,getTypes,postCreate,updatePokemon } from '../redux/actions';
+import { getPokemons,getTypes,postCreate,updatePokemon,uploadImg } from '../redux/actions';
 import { useState,useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import Nav from "./Nav";
@@ -239,6 +239,9 @@ const Form = () => {
 
     const uploadImg = () => {
         const formData = new FormData();
+        formData.append("file",file);
+        formData.append("fileName",fileName);
+        dispatch(uploadImg(formData));
     }
 
     const options = types.map(type => <option key={type.id} value={type.name}>{type.name}</option>)
@@ -314,7 +317,7 @@ const Form = () => {
                             <>
                                 <input type="file" name="img" onChange={(e) => saveFile(e,mode,img,file)}/>
                                 {errors.img && (<span className={errors.img === "is valid" ? "correct" : "error"}>{errors.img}</span>)}
-                                <button disabled={errors.img === "is valid" ? "" : "disabled"}>upload file</button>
+                                <button disabled={errors.img === "is valid" ? "" : "disabled"} onClick={uploadImg}>upload file</button>
                             </>}
                         </label>
                         <input type="submit" value="Submit" disabled={Object.values(errors).every(item => 
