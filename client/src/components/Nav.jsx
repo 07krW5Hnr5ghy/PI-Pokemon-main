@@ -8,7 +8,7 @@ const Nav = () => {
             <img src={logo} alt="Pokemon logo"/>
             <ul>
                 <li><Link to={'/pokemons'}>Home</Link></li>
-                <li><Link to={'/create'}>New</Link></li>
+                <li><Link to={'/create'}>New/Update</Link></li>
             </ul>
             <Search/>
         </nav>
