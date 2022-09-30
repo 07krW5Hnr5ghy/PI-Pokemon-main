@@ -7,6 +7,7 @@ const {
     createPokemon,
     deletePokemon,
     updatePokemon,
+    uploadImg,
 } = require('../controllers/pokemons');
 
 // load pokemons from api
@@ -21,5 +22,7 @@ router.post("/pokemons",createPokemon);
 router.delete("/pokemons/:id",deletePokemon);
 // update created pokemon from the database
 router.put("/pokemons",updatePokemon);
+// upload images
+router.post("/upload",uploadImg);
 
 module.exports = router;

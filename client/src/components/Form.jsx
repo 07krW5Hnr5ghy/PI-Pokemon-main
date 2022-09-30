@@ -221,9 +221,10 @@ const Form = () => {
         }
     }
 
-    const saveFile = (event,mode,img,file) => {
-        setFile(event.target.files[0]);
-        setFileName(event.target.files[0].name);
+    const saveFile = async (event,mode,img,file) => {
+        event.preventDefault();
+        await setFile(event.target.files[0]);
+        await setFileName(event.target.files[0].name);
         setInput({
             ...input,
             img:fileName,

@@ -3,6 +3,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
+const cors = require("cors");
+const fileupload = require("express-fileupload");
+require('events').EventEmitter.defaultMaxListeners = 20; 
 
 require('./db.js');
 
@@ -21,6 +24,9 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
+server.use(cors());
+server.use(fileupload());
+server.use(express.static("files"));
 
 server.use('/', routes);
 
