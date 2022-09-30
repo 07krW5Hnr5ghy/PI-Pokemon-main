@@ -29,7 +29,9 @@ const Pokemons = () => {
     useEffect(() => {
         if(name){
             dispatch(getPokemons(name));
-        }else{
+        }
+        
+        if(!pokemons.length){
             dispatch(getPokemons());
         }
         dispatch(getTypes());
