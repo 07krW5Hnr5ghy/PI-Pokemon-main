@@ -213,7 +213,7 @@ const Form = () => {
             <Nav/>
             <div id="Create_container">   
                 <h2>Create new pokemon</h2>
-                <button onClick={(e) => handleMode(e)}>set mode</button>
+                <button onClick={(e) => handleMode(e)} id="Form_mode">set mode</button>
                 {<span>{mode}</span>}
                 <form onSubmit={(e) => handleSubmit(e,mode)} id="Create_form">
                     <div id='Create_fieldset'>
