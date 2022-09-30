@@ -30,6 +30,7 @@ const Pokemons = () => {
         if(name){
             dispatch(getPokemons(name));
         }
+        
         if(!pokemons.length){
             dispatch(getPokemons());
         }
