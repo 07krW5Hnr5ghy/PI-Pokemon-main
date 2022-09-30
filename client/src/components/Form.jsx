@@ -237,7 +237,8 @@ const Form = () => {
         );
     }
 
-    const uploadImg = () => {
+    const uploadImg = (e) => {
+        e.preventDefault();
         const formData = new FormData();
         formData.append("file",file);
         formData.append("fileName",fileName);
@@ -317,7 +318,7 @@ const Form = () => {
                             <>
                                 <input type="file" name="img" onChange={(e) => saveFile(e,mode,img,file)}/>
                                 {errors.img && (<span className={errors.img === "is valid" ? "correct" : "error"}>{errors.img}</span>)}
-                                <button disabled={errors.img === "is valid" ? "" : "disabled"} onClick={uploadImg}>upload file</button>
+                                <button disabled={errors.img === "is valid" ? "" : "disabled"} onClick={(e) => uploadImg(e)}>upload file</button>
                             </>}
                         </label>
                         <input type="submit" value="Submit" disabled={Object.values(errors).every(item => 
