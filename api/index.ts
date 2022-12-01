@@ -28,19 +28,18 @@ db.sync({ force: false, alter:false }).then(() => {
     console.log(`listening at ${process.env.PORT}`); // eslint-disable-line no-console
   });
 });*/
-
-import express,{Express,Request,Response} from 'express';
+import http from 'http';
+import express,{Application} from 'express';
 import dotenv from 'dotenv';
+import router from './src/routes';
 
 dotenv.config();
 
-const app:Express = express();
-const port = process.env.PORT;
+const app:Application = express();
+const port = process.env.PORT || 3001;
+export const server = http.createServer(app);
 
-app.get('/',(req:Request, res:Response) => {
-  res.send('Express + TypeScript Server is running.');
-});
 
-app.listen(port, ()=>{
+app.listen(port, () => {
   console.log(`Server is running at https://localhost:${port}`);
 });
