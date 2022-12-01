@@ -24,9 +24,12 @@
     "nodemon": "^2.0.20",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.21.6"
+    "sequelize": "^6.21.6",
+    "typescript": "^4.9.3"
   },
   "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.11.10",
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
     "supertest": "^6.0.1",

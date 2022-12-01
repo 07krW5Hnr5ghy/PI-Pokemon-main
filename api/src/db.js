@@ -6,6 +6,8 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,DB_NAME
 } = process.env;
 
+console.log(DB_USER);
+
 let sequelize = process.env.NODE_ENV === "production" ? new Sequelize({
   database:DB_NAME,
   dialect:"postgres",
