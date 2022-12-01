@@ -1,5 +1,5 @@
-const {Router} = require("express");
-const router = Router();
+import  {Router} from 'express';
+const router : Router = Router();
 const {
     getPokemons,
     getTypes,
@@ -22,4 +22,4 @@ router.delete("/pokemons/:id",deletePokemon);
 // update created pokemon from the database
 router.put("/pokemons",updatePokemon);
 
-module.exports = router;
+export default router;
