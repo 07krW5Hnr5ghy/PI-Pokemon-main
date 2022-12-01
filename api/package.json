@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -L",
-    "test": "mocha -w ./tests/**/*.spec.js"
+    "start": "nodemon -L dist/index.js",
+    "test": "mocha -w ./tests/**/*.spec.js",
+    "build": "npx tsc",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
   },
   "author": "Henry",
   "license": "ISC",
@@ -31,6 +33,7 @@
     "@types/express": "^4.17.14",
     "@types/node": "^18.11.10",
     "chai": "^4.2.0",
+    "concurrently": "^7.6.0",
     "mocha": "^8.2.1",
     "supertest": "^6.0.1",
     "supertest-session": "^4.1.0"
