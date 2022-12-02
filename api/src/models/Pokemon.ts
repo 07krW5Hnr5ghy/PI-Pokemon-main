@@ -1,7 +1,6 @@
-const { DataTypes } = require('sequelize');
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
-module.exports = (sequelize) => {
+import { DataTypes,Sequelize } from 'sequelize';
+
+/*module.exports = (sequelize : Sequelize) => {
   // Pokemon model
   sequelize.define('pokemon', {
     id:{
@@ -23,7 +22,7 @@ module.exports = (sequelize) => {
       allowNull:false,
       validate:{
         notEmpty:true,
-        isInsideLimit(value){
+        isInsideLimit(value : string[] ){
           if(value.length > 2){
             throw new Error('Maximum of two types is allowed');
           }
@@ -82,4 +81,4 @@ module.exports = (sequelize) => {
       defaultValue:"custom+",
     }
   });
-};
+};*/

@@ -1,4 +1,4 @@
-const {Pokemon, Type, Op} = require("../db");
+import {Pokemon, Type, Op} from "../db";
 const axios = require("axios");
 const {keyGenerator} = require('../utils/utils');
 

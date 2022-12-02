@@ -6,7 +6,7 @@ const routes = require('./routes/index.js');
 
 require('./db.js');
 
-const server = express();
+const server : Express = express();
 
 //server.name = 'API';
 
@@ -25,11 +25,11 @@ server.use((req, res, next) => {
 server.use('/', routes);
 
 // Error catching endware.
-server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-  const status = err.status || 500;
+server.use((err:Error, req: Request, res:Response, next:NextFunction) => { 
+  // eslint-disable-line no-unused-vars
   const message = err.message || err;
   console.error(err);
-  res.status(status).send(message);
+  res.send(message);
 });
 
 module.exports = server;
