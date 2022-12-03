@@ -32,6 +32,7 @@ import http from 'http';
 import express,{Application} from 'express';
 import dotenv from 'dotenv';
 import router from './src/routes';
+import {sequelize} from './src/db';
 
 dotenv.config();
 
@@ -39,7 +40,12 @@ const app:Application = express();
 const port = process.env.PORT || 3001;
 export const server = http.createServer(app);
 
-
-app.listen(port, () => {
-  console.log(`Server is running at https://localhost:${port}`);
+sequelize.sync({ force: true }).then(() => {
+  server.listen(process.env.PORT, () => {
+    console.log(`listening at ${process.env.PORT}`); // eslint-disable-line no-console
+  });
 });
+
+/*app.listen(port, () => {
+  console.log(`Server is running at https://localhost:${port}`);
+});*/
