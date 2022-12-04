@@ -1,20 +1,20 @@
 import  {Router} from 'express';
 const router : Router = Router();
-const {
-    getPokemons,
-    getTypes,
-    getDetail,
+import  {
+    fetchPokemons,
+    fetchTypes,
+    fetchDetail,
     createPokemon,
     deletePokemon,
     updatePokemon,
-} = require('../controllers/pokemons');
+} from '../controllers/pokemons';
 
 // load pokemons from api
-router.get("/pokemons",getPokemons);
+router.get("/pokemons",fetchPokemons);
 // get detail data from pokemon by id
-router.get("/pokemons/:id",getDetail);
+router.get("/pokemons/:id",fetchDetail);
 // load types of pokemons from api
-router.get("/types",getTypes);
+router.get("/types",fetchTypes);
 // add pokemon to database
 router.post("/pokemons",createPokemon);
 // delete created pokemon from the database

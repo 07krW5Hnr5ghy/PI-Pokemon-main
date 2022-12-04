@@ -1,4 +1,5 @@
-const {Pokemon} = require('../db');
+//const {Pokemon} = require('../db');
+import Pokemon from '../models/Pokemon';
 async function* idGenerator(){
     let lastId = await Pokemon.count({
         where:{origin:"custom+"}
@@ -17,6 +18,4 @@ async function* idGenerator(){
     }
 }
 
-const keyGenerator = idGenerator();
-
-module.exports = { keyGenerator };
+export const keyGenerator = idGenerator();
