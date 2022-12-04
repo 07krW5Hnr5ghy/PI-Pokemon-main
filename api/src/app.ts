@@ -23,9 +23,6 @@ server.use((req, res, next) => {
 });
 
 server.use('/', routes);
-/*server.get('/',(req:Request,res:Response)=>{
-  res.send('hi');
-});*/
 
 // Error catching endware.
 server.use((err:Error, req: Request, res:Response, next:NextFunction) => { 
