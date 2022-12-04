@@ -1,7 +1,7 @@
 import express,{Express,Request,Response,NextFunction} from 'express';
 import Pokemon from '../models/Pokemon';
 import Type from '../models/Type';
-const {keyGenerator} = require('../utils/utils');
+import {keyGenerator} from '../utils/utils';
 import {getApiData, getApiTypes} from './apiGetters';
 import { getErrorMessage } from '../utils/errHandler';
 
