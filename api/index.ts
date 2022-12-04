@@ -31,14 +31,13 @@ db.sync({ force: false, alter:false }).then(() => {
 import http from 'http';
 import express,{Application} from 'express';
 import dotenv from 'dotenv';
+import server from './src/app';
 import router from './src/routes';
 import {sequelize} from './src/db';
 
 dotenv.config();
 
-const app:Application = express();
 const port = process.env.PORT || 3001;
-export const server = http.createServer(app);
 
 sequelize.sync({ force: true }).then(() => {
   server.listen(process.env.PORT, () => {

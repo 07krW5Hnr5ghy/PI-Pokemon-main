@@ -2,9 +2,9 @@ import express,{Express,Request,Response,NextFunction} from 'express';
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const routes = require('./routes/index.js');
+import routes from './routes/index';
 
-require('./db.js');
+require('./db');
 
 const server : Express = express();
 
@@ -23,6 +23,9 @@ server.use((req, res, next) => {
 });
 
 server.use('/', routes);
+/*server.get('/',(req:Request,res:Response)=>{
+  res.send('hi');
+});*/
 
 // Error catching endware.
 server.use((err:Error, req: Request, res:Response, next:NextFunction) => { 
@@ -32,4 +35,4 @@ server.use((err:Error, req: Request, res:Response, next:NextFunction) => {
   res.send(message);
 });
 
-module.exports = server;
+export default server;
