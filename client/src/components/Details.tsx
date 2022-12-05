@@ -1,7 +1,7 @@
-import {useParams, Link} from "react-router-dom";
+/*import {useParams, Link} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getDetail, flushDetail } from "../redux/actions/index";
+import { getDetail, flushDetail } from "../redux/pokemonActions";
 import Loading from "./Loading";
 
 const Details = () => {
@@ -39,4 +39,6 @@ const Details = () => {
     );
 }
 
-export default Details;
+export default Details;*/
+
+export const detail : string = "detail";

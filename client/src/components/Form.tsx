@@ -1,4 +1,4 @@
-import { getPokemons,getTypes,postCreate,updatePokemon } from '../redux/actions';
+/*import { getPokemons,getTypes,postCreate,updatePokemon } from '../redux/pokemonActions';
 import { useState,useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import Nav from "./Nav";
@@ -270,4 +270,5 @@ const Form = () => {
     );
 };
 
-export default Form;
+export default Form;*/
+export const form : string = "form";

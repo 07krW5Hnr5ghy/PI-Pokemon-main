@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useDispatch } from "react-redux";
-import { getPokemons } from "../redux/actions/index";
+import { getPokemons } from "../redux/pokemonActions";
 
 const Search = () => {
     const [name,setName] = useState("");

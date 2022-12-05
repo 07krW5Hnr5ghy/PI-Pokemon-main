@@ -1,7 +1,7 @@
-import {Link} from "react-router-dom";
+/*import {Link} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deletePokemon,getPokemons,flushPokemons } from "../redux/actions/index";
+import { deletePokemon,getPokemons,flushPokemons } from "../redux/pokemonActions";
 
 
 const Pokemon = ({name,img,classes,id}) => {
@@ -30,4 +30,5 @@ const Pokemon = ({name,img,classes,id}) => {
     );
 }
 
-export default Pokemon;
+export default Pokemon;*/
+export const pokemon : string = "pokemon";

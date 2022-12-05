@@ -1,5 +1,21 @@
 import axios from "axios";
-export const GET_POKEMONS = "GET_POKEMONS";
+import { fetchPokemons,fetchDetail } from "./pokemonSlice";
+import type {AppDispatch} from '../redux/store';
+
+export const getPokemons = (name : string) => {
+   return (dispatch:AppDispatch) => {
+    if(name){
+        axios(`/pokemons?name=${name}`)
+        .then(res => dispatch(fetchPokemons(res.data)))
+        .catch(e => console.log(e));
+    }else{
+        axios(`/pokemons`)
+        .then(res => dispatch(fetchPokemons(res.data)))
+        .catch(e => console.log(e));
+    }
+   }
+} 
+/*export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_DETAIL = "GET_DETAIL";
 export const GET_NAME = "GET_NAME";
 export const GET_TYPES = "GET_TYPES";
@@ -123,4 +139,4 @@ export const updatePokemon = (pokemon) => {
             payload:request.data,
         }
     }
-}
+}*/

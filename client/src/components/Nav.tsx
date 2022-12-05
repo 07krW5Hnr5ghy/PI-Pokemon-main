@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+/*import {Link} from "react-router-dom";
 import Search from "./Search";
 import logo from "../styles/img/pokemon.svg";
 
@@ -15,4 +15,5 @@ const Nav = () => {
     );
 }
 
-export default Nav;
+export default Nav;*/
+export const nav : string = "nav";
