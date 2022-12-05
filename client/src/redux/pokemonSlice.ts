@@ -1,3 +1,5 @@
+import {createSlice} from "@reduxjs/toolkit";
+import { Pokemon } from "../interfaces";
 import {
     GET_POKEMONS,
     GET_DETAIL,
@@ -11,17 +13,9 @@ import {
     DELETE_POKEMON,
     FLUSH_POKEMONS,
     UPDATE_POKEMON,
-} from "../actions/index";
+} from "./actions/index";
 
-const initialState = {
-    pokemons: [],
-    filteredPokemons:[],
-    pokemonDetail: [],
-    types:[],
-    id:"",
-};
-
-export const reducerPokemon = (state = initialState,action) => {
+/*export const reducerPokemon = (state = initialState,action) => {
     switch(action.type){
         case GET_POKEMONS:
             return {
@@ -99,4 +93,14 @@ export const reducerPokemon = (state = initialState,action) => {
         default:
             return state;
     }
+};*/
+
+export interface PokemonsState{
+    value:Pokemon[],
+    status:'idle' | 'loading' | 'failed',
+}
+
+const initialState : PokemonsState = {
+    value:[],
+    status:'idle',
 };

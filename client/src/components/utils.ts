@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 export const DOTS = "...";
 // set range
-const range = (start,end) => {
+const range = (start : number,end : number) => {
     let length = end - start + 1;
     /* Create an array of certain length 
     and set the elements within it from
@@ -19,6 +19,11 @@ export const usePage = ({
     of current Page */
     siblingCount = 1,
     currentPage
+} : {
+    totalCount:number;
+    pageSize:number;
+    siblingCount:number;
+    currentPage:number;
 }) => {
     const paginationRange = useMemo(()=>{
         /* set the total the of pages
@@ -90,7 +95,12 @@ export const usePage = ({
 };
 
 // validate create
-export const validate = (input,pokemons,mode) => {
+export const validate = (input : {
+    name: string;
+    id:string;
+    classes:string[];
+    img:string;
+},pokemons,mode) => {
     let errors = {};
 
     if(mode === "create"){

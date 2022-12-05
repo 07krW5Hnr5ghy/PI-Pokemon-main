@@ -49,15 +49,15 @@ const Pokemons = () => {
     let pageData = pokemons.slice(firstPageIndex,lastPageIndex);
 
     /* execute the filters and order options */
-    const handleOptions = (event,option) => {
+    const handleOptions = (event : React.MouseEvent<HTMLOptionElement,MouseEvent>,option : string) => {
         setOptions({
             ...options,
-            [option]:event.target.value,
+            [option]:(event.target as HTMLOptionElement).value,
         });
     }
 
     const applyFilter = () => {
-        if(types.find(type => type.name === options.filter)){
+        if(types.find((type : {name:string;}) => type.name === options.filter)){
             console.log("types");
             dispatch(filterTypes(options.filter));
         }
@@ -84,32 +84,32 @@ const Pokemons = () => {
             <div id="Pokemons_container">  
                 {<div id="Pokemons_header">
                     <div className="Pokemons_options">
-                        <button onClick={applyFilter} onTouchStart={applyFilter} className={"Pokemons_buttons"}>filter</button>
+                        <button onClick={applyFilter} className={"Pokemons_buttons"}>filter</button>
                         <select defaultValue={'DEFAULT'}>
                             <option value="DEFAULT" disabled>select type</option>
-                            <option value="all" onClick={event => handleOptions(event,"filter")} onTouchStart={event => handleOptions(event,"filter")}>all</option>
+                            <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
                             {types && Array.isArray(types) ? 
                             types.map(type => <option key={type.id} value={type.name}
-                            onClick={event => handleOptions(event,"filter")} onTouchStart={event => handleOptions(event,"filter")}>{type.name}</option>):[]}
+                            onClick={event => handleOptions(event,"filter")}>{type.name}</option>):[]}
                         </select>
                         <select defaultValue={'DEFAULT'}>
                             <option value="DEFAULT" disabled>select origin</option>
-                            <option value="all" onClick={event => handleOptions(event,"filter")} onTouchStart={event => handleOptions(event,"filter")}>all</option>
-                            <option value="api+" onClick={event => handleOptions(event,"filter")} onTouchStart={event => handleOptions(event,"filter")}>api</option>
-                            <option value="custom+" onClick={event => handleOptions(event,"filter")} onTouchStart={event => handleOptions(event,"filter")}>custom</option>
+                            <option value="all" onClick={event => handleOptions(event,"filter")}>all</option>
+                            <option value="api+" onClick={event => handleOptions(event,"filter")} >api</option>
+                            <option value="custom+" onClick={event => handleOptions(event,"filter")} >custom</option>
                         </select>
                     </div>
                     <div className="Pokemons_options">
-                        <button onClick={order} onTouchStart={order}>order</button>
+                        <button onClick={order} >order</button>
                         <select defaultValue={'DEFAULT'}>
                             <option value="DEFAULT" disabled>select order</option>
-                            <option value="name" onClick={event => handleOptions(event,"order")} onTouchStart={event => handleOptions(event,"order")}>name</option>
-                            <option value="attack" onClick={event => handleOptions(event,"order")} onTouchStart={event => handleOptions(event,"order")}>attack</option>
+                            <option value="name" onClick={event => handleOptions(event,"order")}>name</option>
+                            <option value="attack" onClick={event => handleOptions(event,"order")}>attack</option>
                         </select>
                         <select defaultValue={'DEFAULT'}>
                             <option value="DEFAULT" disabled>select mode</option>
-                            <option value="asc" onClick={event => handleOptions(event,"mode")} onTouchStart={event => handleOptions(event,"order")}>asc</option>
-                            <option value="desc" onClick={event => handleOptions(event,"mode")} onTouchStart={event => handleOptions(event,"order")}>desc</option>
+                            <option value="asc" onClick={event => handleOptions(event,"mode")}>asc</option>
+                            <option value="desc" onClick={event => handleOptions(event,"mode")}>desc</option>
                         </select>
                     </div>
                 </div>}
@@ -129,7 +129,7 @@ const Pokemons = () => {
                     {!name ? <Page 
                     currentPage={currentPage}
                     totalCount={pokemons.length}
-                    onPageChange={page => setCurrentPage(page)}
+                    onPageChange={(page:number) => setCurrentPage(page)}
                     pageSize={PageSize}
                     /> : <h3>footer</h3>}
                 </div>: pokemons.length && typeof pokemons === "string" ? <p id="Pokemons_NoFound">{pokemons}</p> : <Loading/>
