@@ -5,7 +5,6 @@ import { RootState } from "../redux/store";
 import { getPokemons } from "../redux/pokemonActions";
 import { useSearchParams } from "react-router-dom";
 import Card from "./Card";
-import pokemonSlice, { PokemonSlice } from "../redux/pokemonSlice";
 
 const Pokedex = () => {
     const dispatch = useDispatch();

@@ -82,16 +82,30 @@ import { RootState } from "./store";
     }
 };*/
 
-export type PokemonsState = {
+export interface PokemonsState{
     data:Pokemon[],
-    detail:Pokemon | {},
+    detail:Pokemon,
     types:string[],
     status:'idle' | 'loading' | 'failed',
 }
 
 const initialState : PokemonsState = {
     data:[],
-    detail:{},
+    detail:{
+        name:"",
+        id:"",
+        classes:[],
+        height:0,
+        weight:0,
+        speed:0,
+        hp:0,
+        attack:0,
+        defense:0,
+        img:"",
+        origin:"",
+        createdAt:"",
+        updatedAt:"",
+    },
     types:[],
     status:'idle',
 };

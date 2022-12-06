@@ -15,6 +15,14 @@ export const getPokemons = (name : string) => {
     }
    }
 } 
+
+export const getDetail = (id: string) => {
+    return (dispatch:AppDispatch) => {
+        axios(`/pokemons/${id}`)
+        .then(res => dispatch(fetchDetail(res.data)))
+        .catch(e => console.log(e));
+    }
+}
 /*export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_DETAIL = "GET_DETAIL";
 export const GET_NAME = "GET_NAME";

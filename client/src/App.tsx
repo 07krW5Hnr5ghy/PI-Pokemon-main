@@ -1,7 +1,7 @@
 import {Routes,Route} from "react-router-dom";
 import Landing from "./components/Landing";
 import Pokedex from "./components/Pokedex";
-//import Details from "./components/Details";
+import Details from "./components/Details";
 import NotFound from "./components/NotFound";
 //import Form from "./components/Form";
 
@@ -15,7 +15,10 @@ import NotFound from "./components/NotFound";
 
 function App() {
   return (
-    <Pokedex/>
+    <Routes>
+      <Route path="/pokemons" element={<Pokedex/>}/>
+      <Route path="/pokemons/:id" element={<Details/>}/>
+    </Routes>
   );
 }
 
