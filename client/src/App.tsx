@@ -1,6 +1,6 @@
 import {Routes,Route} from "react-router-dom";
 import Landing from "./components/Landing";
-import Pokemons from "./components/Pokemons";
+import Pokedex from "./components/Pokedex";
 //import Details from "./components/Details";
 import NotFound from "./components/NotFound";
 //import Form from "./components/Form";
@@ -15,7 +15,7 @@ import NotFound from "./components/NotFound";
 
 function App() {
   return (
-    <Pokemons/>
+    <Pokedex/>
   );
 }
 

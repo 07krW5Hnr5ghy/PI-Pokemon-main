@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import { Pokemon } from "../interfaces";
+import { RootState } from "./store";
 
 /*export const reducerPokemon = (state = initialState,action) => {
     switch(action.type){
@@ -81,7 +82,7 @@ import { Pokemon } from "../interfaces";
     }
 };*/
 
-export interface PokemonsState{
+export type PokemonsState = {
     data:Pokemon[],
     detail:Pokemon | {},
     types:string[],
@@ -109,4 +110,5 @@ export const PokemonSlice = createSlice({
 })
 
 export const {fetchPokemons,fetchDetail} = PokemonSlice.actions;
+export const selectPokemons = (state:RootState) => state.pokemons.data;
 export default PokemonSlice.reducer;

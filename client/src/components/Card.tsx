@@ -1,3 +1,24 @@
+import { useDispatch } from "react-redux";
+import { Link,useNavigate } from "react-router-dom";
+
+const Card = ({name,img,classes,id} : {name:string,img:string,classes:string[],id:string}) => {
+    const dispatch = useDispatch();
+    return(
+        <div className="Pokemon_card">
+            <h2>{`< ${name.charAt(0).toUpperCase()}${name.slice(1)} >`}</h2>
+            <img src={img} alt={`${name.charAt(0).toUpperCase}${name.slice(1)}`} loading="lazy"/>
+            <div id="Pokemon_types">
+                {classes.map(type => <span key={type}>{type}</span>)}
+            </div>
+            <Link to={`/pokemons/${id}`}>
+                <p>{"< details >"}</p>
+            </Link>
+            {!/^[0-9]*c$/.test(id) ? null : <button id="Pokemon_delete">Delete</button> }
+        </div>
+    );
+}
+
+export default Card;
 /*import {Link} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -31,4 +52,3 @@ const Pokemon = ({name,img,classes,id}) => {
 }
 
 export default Pokemon;*/
-export const pokemon : string = "pokemon";

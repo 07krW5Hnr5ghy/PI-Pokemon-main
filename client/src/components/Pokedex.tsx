@@ -1,18 +1,42 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+//import { useAppDispatch,useAppSelector } from "../redux/hooks";
+import { RootState } from "../redux/store";
 import { getPokemons } from "../redux/pokemonActions";
-// export default Pokemons;
-const Pokemons = () => {
+import { useSearchParams } from "react-router-dom";
+import Card from "./Card";
+import pokemonSlice, { PokemonSlice } from "../redux/pokemonSlice";
+
+const Pokedex = () => {
     const dispatch = useDispatch();
+    const [searchParams] = useSearchParams();
+    const name = searchParams.get('name');
+    const {data} = useSelector((state:RootState) => state.pokemons);
     useEffect(() => {
-        dispatch(getPokemons(""));
-    },[]);
+        console.count("mount");
+        if(name){
+            dispatch(getPokemons(name));
+        }
+
+        if(!data.length){
+            dispatch(getPokemons(""));
+        }
+    },[dispatch,name,data.length]);
     return(
-        <div>Characters</div>
+        <div id="Pokedex_container">
+            <h1>Pokemons</h1>
+            {!data.length ? null : data.map(pokemon => <Card 
+            name={pokemon.name}
+            img={pokemon.img}
+            classes={pokemon.classes}
+            id={pokemon.id}
+            key={pokemon.id}
+            />)}
+        </div>
     );
 }
 
-export default Pokemons;
+export default Pokedex;
 
 // import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
