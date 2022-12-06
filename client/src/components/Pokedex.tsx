@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import { useAppDispatch,useAppSelector } from "../redux/hooks";
 import { RootState } from "../redux/store";
-import { getPokemons } from "../redux/pokemonActions";
+import { getPokemons,getTypes } from "../redux/pokemonActions";
 import { useSearchParams } from "react-router-dom";
 import Card from "./Card";
 
@@ -10,7 +10,8 @@ const Pokedex = () => {
     const dispatch = useDispatch();
     const [searchParams] = useSearchParams();
     const name = searchParams.get('name');
-    const {data} = useSelector((state:RootState) => state.pokemons);
+    // selectors 
+    const {data,types} = useSelector((state:RootState) => state.pokemons);
     useEffect(() => {
         console.count("mount");
         if(name){
@@ -19,6 +20,10 @@ const Pokedex = () => {
 
         if(!data.length){
             dispatch(getPokemons(""));
+        }
+
+        if(!types.length){
+            dispatch(getTypes());
         }
     },[dispatch,name,data.length]);
     return(
