@@ -16,8 +16,10 @@ import NotFound from "./components/NotFound";
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<Landing/>}/>
       <Route path="/pokemons" element={<Pokedex/>}/>
       <Route path="/pokemons/:id" element={<Details/>}/>
+      <Route path="*" element={<NotFound/>}/>
     </Routes>
   );
 }
