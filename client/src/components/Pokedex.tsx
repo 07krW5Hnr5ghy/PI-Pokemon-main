@@ -5,6 +5,7 @@ import { RootState } from "../redux/store";
 import { getPokemons,getTypes } from "../redux/pokemonActions";
 import { useSearchParams } from "react-router-dom";
 import Card from "./Card";
+import Loading from "./Loading";
 
 const Pokedex = () => {
     const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const Pokedex = () => {
     return(
         <div id="Pokedex_container">
             <h1>Pokemons</h1>
-            {!data.length ? null : data.map(pokemon => <Card 
+            {!data.length ? <Loading/> : data.map(pokemon => <Card 
             name={pokemon.name}
             img={pokemon.img}
             classes={pokemon.classes}

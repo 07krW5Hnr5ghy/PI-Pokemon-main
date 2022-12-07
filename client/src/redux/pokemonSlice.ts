@@ -125,10 +125,13 @@ export const PokemonSlice = createSlice({
         },
         flushDetail: (state,action) => {
             state.detail = action.payload;
+        },
+        flushRecord: (state,action) => {
+            state.data = state.data.filter(record => action.payload !== record.id);
         }
     }
 })
 
-export const {fetchPokemons,fetchDetail,fetchTypes,flushDetail} = PokemonSlice.actions;
+export const {fetchPokemons,fetchDetail,fetchTypes,flushDetail,flushRecord} = PokemonSlice.actions;
 export const selectPokemons = (state:RootState) => state.pokemons.data;
 export default PokemonSlice.reducer;
