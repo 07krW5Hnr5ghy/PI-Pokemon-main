@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { deleteRecord } from "../redux/pokemonActions";
 
 const Card = ({name,img,classes,id} : {name:string,img:string,classes:string[],id:string}) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     return(
         <div className="Pokemon_card">
             <h2>{`< ${name.charAt(0).toUpperCase()}${name.slice(1)} >`}</h2>
@@ -14,7 +15,11 @@ const Card = ({name,img,classes,id} : {name:string,img:string,classes:string[],i
             <Link to={`/pokemons/${id}`}>
                 <p>{"< details >"}</p>
             </Link>
-            {!/^[0-9]*c$/.test(id) ? null : <button id="Pokemon_delete" onClick={() => deleteRecord(id)}>Delete</button> }
+            {!/^[0-9]*c$/.test(id) ? null : 
+            <button id="Pokemon_delete" onClick={() => {
+                dispatch(deleteRecord(id));
+                navigate("/pokemons");
+            }}>Delete</button> }
         </div>
     );
 }
