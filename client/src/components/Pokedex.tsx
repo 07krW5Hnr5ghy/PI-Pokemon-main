@@ -12,6 +12,7 @@ const Pokedex = () => {
     const name = searchParams.get('name');
     // selectors 
     const {data,types} = useSelector((state:RootState) => state.pokemons);
+
     useEffect(() => {
         console.count("mount");
         if(name){
@@ -25,7 +26,13 @@ const Pokedex = () => {
         if(!types.length){
             dispatch(getTypes());
         }
-    },[dispatch,name,data.length]);
+    },[
+        dispatch,
+        name,
+        data.length,
+        types.length
+    ]);
+
     return(
         <div id="Pokedex_container">
             <h1>Pokemons</h1>

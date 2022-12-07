@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams,Link } from "react-router-dom";
 import {RootState} from "../redux/store";
-import { getDetail } from "../redux/pokemonActions";
+import { getDetail, resetDetail } from "../redux/pokemonActions";
 
 const Detail = () => {
     const {id} = useParams();
@@ -34,7 +34,7 @@ const Detail = () => {
                     <span>weight: {detail.weight}</span>
                 </div>
                 <Link to={"/pokemons"}>
-                    <button id="Details_button"></button>
+                    <button id="Details_button" onClick={() => dispatch(resetDetail())}>Return</button>
                 </Link>
             </div>
             }

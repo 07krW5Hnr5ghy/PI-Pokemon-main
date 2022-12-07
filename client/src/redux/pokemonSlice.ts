@@ -122,10 +122,13 @@ export const PokemonSlice = createSlice({
         },
         fetchTypes: (state,action) => {
             state.types = action.payload;
+        },
+        flushDetail: (state,action) => {
+            state.detail = action.payload;
         }
     }
 })
 
-export const {fetchPokemons,fetchDetail,fetchTypes} = PokemonSlice.actions;
+export const {fetchPokemons,fetchDetail,fetchTypes,flushDetail} = PokemonSlice.actions;
 export const selectPokemons = (state:RootState) => state.pokemons.data;
 export default PokemonSlice.reducer;

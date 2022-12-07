@@ -1,5 +1,5 @@
 import axios from "axios";
-import { fetchPokemons,fetchDetail,fetchTypes } from "./pokemonSlice";
+import { fetchPokemons,fetchDetail,fetchTypes,flushDetail } from "./pokemonSlice";
 import type {AppDispatch} from '../redux/store';
 
 export const getPokemons = (name : string) => {
@@ -29,6 +29,12 @@ export const getTypes = () => {
         axios(`/types`)
         .then(res => dispatch(fetchTypes(res.data)))
         .catch(e => console.log(e));
+    }
+}
+
+export const resetDetail = () => {
+    return (dispatch:AppDispatch) => {
+        dispatch(flushDetail([]));
     }
 }
 /*export const GET_POKEMONS = "GET_POKEMONS";
