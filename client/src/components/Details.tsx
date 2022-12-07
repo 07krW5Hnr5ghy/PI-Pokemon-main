@@ -8,13 +8,15 @@ const Detail = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
 
+    const {detail} = useSelector((state:RootState) => state.pokemons);
+
     useEffect(() => {
-        if(id){
+        if(id && !Object.keys(detail).length){
             dispatch(getDetail(id));
         }
-    },[dispatch,id]);
+    },[dispatch,id,detail]);
 
-    const {detail} = useSelector((state:RootState) => state.pokemons);
+    
 
     return(
         <div>
