@@ -1,44 +1,127 @@
 @use "../base";
+@use "../base/breakpoints" as b;
+@use "../base/functions" as f;
+@import url('https://fonts.googleapis.com/css2?family=Amaranth:wght@700&display=swap');
 /*container of Landing page */
 #Landing_container{
-    background-image: url('../img/324268.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     height: 100vh;
     width: 100vw;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    object-fit: contain; 
-}
-
-#Landing_button{
-    margin: 0 30vw;
-    height: 10vh; 
-    text-decoration: none;
-    
-    button{
-        text-decoration: none;
-        font-size: 2em;
-        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-weight: 700;
-        color:#f60e1ac9;
-        border-radius: 25px;
-        background-color: #04095794;
-        padding: 0 1vw;
-        text-align: center;
-    }
-
-}
-
-#Landing_button:hover{
-    outline: 0;
-    button{
-        color:#080bc2c9;
-        background-color:#f60e1aa4;
+    @include b.breakpoint-down(medium){
+        flex-direction: column;
     }
 }
 
+#Landing_Call{
+    flex:1;
+    display: flex;
+    padding:1em;
+    text-align: left;
+    font-family: 'Amaranth', sans-serif;
+    line-height: 1.7em;
+    @include b.breakpoint-down(medium){
+        flex:0.5;
+        justify-content: center;
+        align-items: flex-end;
+    }
+}
 
+#Landing_Button{
+    flex:1;
+    display:flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    @include b.breakpoint-down(small){
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+}
+
+#Landing_Pokeball{
+    width: 15em;
+    height: 15em;
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    border-radius: 50%;
+    border: 0.15em solid black;
+    @include b.breakpoint-down(small){
+        height: 10em;
+        width: 10em;
+        border: 3px solid black;
+    }
+}
+
+#Pokeball_Upper{
+    flex:1;
+    position: relative;
+    background-color: white;
+    border-radius: 10em 10em 0 0;
+    border-bottom: 0.3em solid black;
+    z-index: 1;
+    @include b.breakpoint-down(small){
+        border-radius: 4.75em 4.75em 0 0;
+    }
+}
+
+#Pokeball_Center{
+    background-color: black;
+    border-radius: 50%;
+    height: 3.5em;
+    width: 3.5em;
+    position:absolute;
+    top:38%;
+    left:38%;
+    z-index: 2;
+    @include b.breakpoint-down(small){
+        height: 3.2em;
+        width: 3.2em;
+        top:34%;
+        left:34%;
+    }
+}
+
+#Pokeball_Button{
+    background-color: white;
+    border-radius: 50%;
+    height: 2.5em;
+    width: 2.5em;
+    position:absolute;
+    top:15%;
+    left:15%;
+    @include b.breakpoint-down(small){
+        top:11%;
+        left:11%;
+    }
+}
+
+#Pokeball_InnerButton{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 2em;
+    width: 2em;
+    position: absolute;
+    top:10%;
+    left:10%;
+}
+
+#Pokeball_Link{
+    position:absolute;
+    top:-5%;
+    left: -5%;
+    color:black;
+}
+
+#Pokeball_Lower{
+    flex:1;
+    background-color: red;
+    border-radius: 0 0 10em 10em;
+    border-top: 0.3em solid black;
+    @include b.breakpoint-down(small){
+        border-radius: 0 0 4.75em 4.75em;
+    }
+}

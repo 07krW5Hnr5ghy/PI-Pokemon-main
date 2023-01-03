@@ -1,17 +1,19 @@
 @use "./settings";
-*{
+*,*::before,*::after{
     box-sizing: border-box;
     margin:0;
     padding: 0;
-    height: 100%;
-    object-fit: contain;
+    font-size: 100%;
 }
 
-body{
-    margin: 0;
-    padding: 0;
+html{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 1.6rem;
     height: auto;
-    background-color: settings.$main;
+    //background-color: settings.$main;
+    display: flex;
+}
+
+a{
+    text-decoration: none;
 }
