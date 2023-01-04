@@ -6,8 +6,9 @@ import { getPokemons,getTypes } from "../redux/pokemonActions";
 import { useSearchParams } from "react-router-dom";
 import Card from "./Card";
 import Loading from "./Loading";
+import Nav from "./Nav";
 
-const Pokedex = () => {
+const Home = () => {
     const dispatch = useDispatch();
     const [searchParams] = useSearchParams();
     const name = searchParams.get('name');
@@ -35,20 +36,23 @@ const Pokedex = () => {
     ]);
 
     return(
-        <div id="Pokedex_container">
-            <h1>Pokemons</h1>
-            {!data.length ? <Loading/> : data.map(pokemon => <Card 
-            name={pokemon.name}
-            img={pokemon.img}
-            classes={pokemon.classes}
-            id={pokemon.id}
-            key={pokemon.id}
-            />)}
+        <div id="Home_container">
+            <Nav/>
+            <h1>body</h1>
         </div>
     );
 }
 
-export default Pokedex;
+export default Home;
+
+// <h1>Pokemons</h1>
+//             {!data.length ? <Loading/> : data.map(pokemon => <Card 
+//             name={pokemon.name}
+//             img={pokemon.img}
+//             classes={pokemon.classes}
+//             id={pokemon.id}
+//             key={pokemon.id}
+//             />)}
 
 // import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";

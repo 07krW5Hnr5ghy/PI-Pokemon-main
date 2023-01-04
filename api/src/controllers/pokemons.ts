@@ -15,7 +15,7 @@ export const fetchPokemons = async (req:Request,res:Response) => {
         });
 
         if(pokeDb == 0){
-            await getApiData(50);
+            await getApiData(12);
         }
 
         if(name){

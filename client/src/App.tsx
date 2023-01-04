@@ -1,6 +1,6 @@
 import {Routes,Route} from "react-router-dom";
 import Landing from "./components/Landing";
-import Pokedex from "./components/Pokedex";
+import Home from "./components/Home";
 import Details from "./components/Details";
 import NotFound from "./components/NotFound";
 //import Form from "./components/Form";
@@ -17,7 +17,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Landing/>}/>
-      <Route path="/pokemons" element={<Pokedex/>}/>
+      <Route path="/pokemons" element={<Home/>}/>
       <Route path="/pokemons/:id" element={<Details/>}/>
       <Route path="*" element={<NotFound/>}/>
     </Routes>

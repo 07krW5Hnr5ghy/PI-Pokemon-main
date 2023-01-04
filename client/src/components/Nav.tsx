@@ -1,19 +1,32 @@
-/*import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Search from "./Search";
 import logo from "../styles/img/pokemon.svg";
 
 const Nav = () => {
     return(
-        <nav id="Nav_navbar">
-            <img src={logo} alt="Pokemon logo"/>
-            <ul>
-                <li><Link to={'/pokemons'}>Home</Link></li>
-                <li><Link to={'/create'}>New/Update</Link></li>
-            </ul>
-            <Search/>
-        </nav>
+    <nav>
+      <div className="navbar">
+        <div className="container nav-container">
+            <input className="checkbox" type="checkbox" name="" id="" />
+            <div className="hamburger-lines">
+              <span className="line line1"></span>
+              <span className="line line2"></span>
+              <span className="line line3"></span>
+            </div>  
+          <div className="logo">
+            <h1>Navbar</h1>
+          </div>
+          <div className="menu-items">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">about</a></li>
+            <li><a href="#">blogs</a></li>
+            <li><a href="#">portfolio</a></li>
+            <li><a href="#">contact</a></li>
+          </div>
+        </div>
+      </div>
+    </nav>
     );
 }
 
-export default Nav;*/
-export const nav : string = "nav";
+export default Nav;
