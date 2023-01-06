@@ -38,7 +38,44 @@ const Home = () => {
     return(
         <div id="Home_container">
             <Nav/>
-            <h1>body</h1>
+            <div className="Info_container">
+                <div className="Filter_container">
+                    <div className="Filter">
+                        <span className="Filter_title">Filters</span>
+                        <select className="Filter_select" name="type" id="">
+                            <option value="type" selected disabled>type</option>
+                            <option value="normal">normal</option>
+                            <option value="grass">grass</option>
+                            <option value="fire">fire</option>
+                            <option value="water">water</option>
+                        </select>
+                        <select className="Filter_select" name="origin" id="">
+                            <option value="origin" selected disabled>origin</option>
+                            <option value="api+">api</option>
+                            <option value="custom+">custom</option>
+                        </select>
+                    </div>
+                    <div className="Filter">
+                        <span className="Filter_title">Sort</span>
+                        <select className="Filter_select" name="sort" id="">
+                            <option value="sort" selected disabled>Name</option>
+                            <option value="asc">Name (Asc)</option>
+                            <option value="desc">Name (Desc)</option>
+                        </select>
+                    </div>
+                </div>
+                <div className="Card_container">
+                    {!data.length ? <Loading/> : 
+                    data.map(pokemon => 
+                    <Card
+                    name={pokemon.name}
+                    img={pokemon.img}
+                    classes={pokemon.classes}
+                    id={pokemon.id}
+                    key={pokemon.id}
+                    />)}
+                </div>
+            </div>
         </div>
     );
 }

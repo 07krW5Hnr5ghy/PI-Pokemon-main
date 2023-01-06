@@ -13,16 +13,16 @@ const Nav = () => {
               <span className="line line2"></span>
               <span className="line line3"></span>
             </div>  
-          <div className="logo">
-            <h1>Navbar</h1>
-          </div>
-          <div className="menu-items">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">about</a></li>
-            <li><a href="#">blogs</a></li>
-            <li><a href="#">portfolio</a></li>
-            <li><a href="#">contact</a></li>
-          </div>
+            <div className="logo">
+                <h1>Navbar</h1>
+            </div>
+            <div className="menu-items">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">about</a></li>
+                <li><a href="#">blogs</a></li>
+                <li><a href="#">portfolio</a></li>
+                <li><a href="#">contact</a></li>
+            </div>
         </div>
       </div>
     </nav>

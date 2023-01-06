@@ -1,0 +1,39 @@
+@use "../base";
+@use "../base/breakpoints" as b;
+@use "../base/functions" as f;
+
+.Pokemon_card{
+    border: 1px solid black;
+    border-radius: 50%;
+    width: f.rem(200);
+    height: f.rem(200);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    margin:f.rem(5) 0;
+}
+
+.Image{
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.Info{
+    position: absolute;
+    margin-left: f.rem(5);
+    margin-bottom: f.rem(5);
+}
+
+.Types{
+    display: flex;
+    flex-direction: row;
+}
+
+.Type{
+    margin-right: f.rem(10);
+    padding: f.rem(0.5) f.rem(5);
+    color:white;
+    background-color: black;
+}
