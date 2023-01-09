@@ -6,6 +6,8 @@ import { getDetail, resetDetail } from "../redux/pokemonActions";
 import Loading from "./Loading";
 import Chart from "./Chart";
 
+
+
 const Detail = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
@@ -21,8 +23,15 @@ const Detail = () => {
     },[dispatch,id,detail]);
     console.log(detail);
 
-    const info = [100,200,300,400];
-    
+    const stats = [
+        detail.attack,
+        detail.defense,
+        detail.hp,
+        detail.speed,
+        detail.weight,
+        detail.height
+    ];
+    console.log(stats);
     return(
         <div>
              {!Object.keys(detail).length ? 
@@ -31,11 +40,11 @@ const Detail = () => {
                  <div className="Basic_info">
                      <h2>{detail.name}</h2>
                      <span>{detail.id}</span>
-                     <img src={detail.img}/>
+                     <img src={detail.img} alt=""/>
                  </div>
                  <div className="Stats">
                     <div className="Chart">
-                        <Chart/>
+                        <Chart stats={stats}/>
                     </div>
                  </div>
              </div>
