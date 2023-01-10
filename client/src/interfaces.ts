@@ -2,8 +2,8 @@ export interface Pokemon{
     name:string;
     id:string;
     classes:string[];
-    height:number;
-    weight:number;
+    specialAttack:number;
+    specialDefense:number;
     speed:number;
     hp:number;
     attack:number;

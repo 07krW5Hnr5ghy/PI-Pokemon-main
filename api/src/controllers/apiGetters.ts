@@ -15,7 +15,7 @@ export const getApiData = async (limit: number) => {
 
     // map the pokemon data into objects with the nedeed info
     let pokeData = pokemonList.map((pokemon) => {
-        let hp,attack,defense,speed;
+        let hp,attack,defense,speed,specialAttack,specialDefense;
         let types = [];
             
         for(let item of pokemon.types){
@@ -27,6 +27,8 @@ export const getApiData = async (limit: number) => {
             if(item.stat.name === "attack") attack = item.base_stat;
             if(item.stat.name === "defense") defense = item.base_stat;
             if(item.stat.name === "speed") speed = item.base_stat;
+            if(item.stat.name === "special-attack") specialAttack = item.base_stat;
+            if(item.stat.name === "special-defense") specialDefense = item.base_stat;
         }
 
         return {
@@ -37,8 +39,8 @@ export const getApiData = async (limit: number) => {
             attack:attack,
             defense:defense,
             speed:speed,
-            height:pokemon.height,
-            weight:pokemon.weight,
+            specialAttack:specialAttack,
+            specialDefense:specialDefense,
             img:pokemon.sprites.other.dream_world.front_default,
             origin:"api+",
         };

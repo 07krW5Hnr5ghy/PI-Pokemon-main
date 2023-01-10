@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -9,6 +8,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
+import {Bolt} from '@mui/icons-material';
 
 ChartJS.register(
   RadialLinearScale,
@@ -22,7 +22,7 @@ ChartJS.register(
 interface ChartData {stats:number[]}
 
 const Chart : React.FC<ChartData>= (props:ChartData) => {
-  const labels = ["attack","defense","health","speed","weight","height"];
+  const labels = ["attack","defense","health","speed","special attack","special defense"];
   const data = {
     labels,
     datasets: [

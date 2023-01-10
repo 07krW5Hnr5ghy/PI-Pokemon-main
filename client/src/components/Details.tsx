@@ -28,8 +28,8 @@ const Detail = () => {
         detail.defense,
         detail.hp,
         detail.speed,
-        detail.weight,
-        detail.height
+        detail.specialAttack,
+        detail.specialDefense
     ];
     console.log(stats);
     return(
