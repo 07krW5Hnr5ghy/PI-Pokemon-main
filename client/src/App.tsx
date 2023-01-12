@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Details from "./components/Details";
 import NotFound from "./components/NotFound";
 //import Form from "./components/Form";
+import New from "./components/New";
 
 /*<Routes>
       <Route path="/" element={<Landing/>}/>
@@ -19,6 +20,7 @@ function App() {
       <Route path="/" element={<Landing/>}/>
       <Route path="/pokemons" element={<Home/>}/>
       <Route path="/pokemons/:id" element={<Details/>}/>
+      <Route path="/new" element={<New/>}/>
       <Route path="*" element={<NotFound/>}/>
     </Routes>
   );

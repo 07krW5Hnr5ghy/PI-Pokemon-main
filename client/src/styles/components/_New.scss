@@ -1,0 +1,68 @@
+@use "../base";
+@use "../base/breakpoints" as b;
+@use "../base/functions" as f;
+
+.form{
+    margin-top: f.rem(60);
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    @include b.breakpoint(medium){
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+.column{
+    display:flex;
+    flex-direction: column;
+    width: 100vw;
+}
+
+.first,.second{
+    @include b.breakpoint(medium){
+        width: 50vw;
+    }
+    @include b.breakpoint(large){
+        width: 33.33vw;
+    }
+}
+
+.first{
+    @include b.breakpoint(medium){
+        justify-content: center;
+    }
+}
+
+.third{
+    @include b.breakpoint(medium){
+        align-items: center;
+    }
+    @include b.breakpoint(large){
+        width: 33.33vw;
+        justify-content: center;
+    }
+}
+
+input,select,label,.button,.link{
+    margin:f.rem(2) f.rem(15);
+    @include b.breakpoint(medium){
+        margin:f.rem(8) f.rem(40);
+    }
+    @include b.breakpoint(large){
+        margin:f.rem(5) f.rem(12);
+    }
+}
+
+.submit{
+    display:flex;
+    flex-direction: row;
+    width: 100vw;
+    justify-content: center;
+    padding: f.rem(15);
+}
+
+.send{
+    padding: f.rem(5) f.rem(10);
+    border:none;
+}

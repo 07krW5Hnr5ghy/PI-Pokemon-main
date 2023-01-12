@@ -40,11 +40,16 @@ const Detail = () => {
                  <div className="Basic_info">
                      <h2>{detail.name}</h2>
                      <span>{detail.id}</span>
-                     <img src={detail.img} alt=""/>
+                     <div className="Img_container">
+                        <img src={detail.img} alt=""/>
+                     </div>
+                     <div className="types">
+                        {detail.classes.map(type=><span key={type}>{` ${type} `}</span>)}
+                     </div>
                  </div>
                  <div className="Stats">
                     <div className="Chart">
-                        <Chart stats={stats}/>
+                        <Chart stats={stats} />
                     </div>
                  </div>
              </div>

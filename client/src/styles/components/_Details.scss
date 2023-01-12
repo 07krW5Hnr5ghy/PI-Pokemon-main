@@ -1,16 +1,51 @@
-@use "../base/settings";
+@use "../base";
+@use "../base/breakpoints" as b;
+@use "../base/functions" as f;
 
 .Detail_container{
     display: flex;
+    width:100vw;
+    justify-content: center;
+    flex-direction: column;
+    @include b.breakpoint(medium){
+        flex-direction: row;
+        align-items: center;
+        height: 100vh;
+        width: f.rem(750);
+    }
 }
 
 .Basic_info{
     flex:1;
     border: 1px solid black;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: f.rem(400);
+    border-radius: 50%;
+    margin:f.rem(5);
+    overflow: hidden;
+    padding: f.rem(10);
+}
+
+.Img_container{
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.types{
+    display: flex;
+    flex-direction: column;
+    @include b.breakpoint(medium){
+    }
 }
 
 .Stats{
     flex:1;
+    border:1px solid black;
+    display: flex;
+    justify-content: center;
 }
 
 .Chart{

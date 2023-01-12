@@ -22,7 +22,13 @@ ChartJS.register(
 interface ChartData {stats:number[]}
 
 const Chart : React.FC<ChartData>= (props:ChartData) => {
-  const labels = ["attack","defense","health","speed","special attack","special defense"];
+  const labels = [
+    "attack",
+    "defense",
+    "health",
+    "speed",
+    `special attack`,
+    "special defense"];
   const data = {
     labels,
     datasets: [
@@ -35,7 +41,12 @@ const Chart : React.FC<ChartData>= (props:ChartData) => {
       },
     ],
   };
-    return <Radar data={data} />
+    return <Radar 
+    data={data} 
+    options={{maintainAspectRatio:false,responsive:true}} 
+    height="350"
+    width="350"
+    />
 }
 
 export default Chart;

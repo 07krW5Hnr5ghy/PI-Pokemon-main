@@ -1,3 +1,74 @@
+import Nav from "./Nav";
+import { useState } from "react";
+import { Publish } from "@mui/icons-material";
+
+
+const New = () => {
+    const [upload,setUpload] = useState<boolean>(false); 
+    const toggleUpload = () => {
+        setUpload(!upload);
+    }
+    return(
+        <div className="container">
+            <Nav/>
+            <form className="form">
+                <div className="column first">
+                    <label htmlFor="name">NAME</label>
+                    <input type="text" name="name" className="name" placeholder="name" />
+                    <label htmlFor="types">TYPES</label>
+                    <select name="types" id="" className="types">
+                        <option value="type" selected disabled>select type</option>
+                        <option value="normal">normal</option>
+                        <option value="grass">grass</option>
+                        <option value="fire">fire</option>
+                        <option value="water">water</option>
+                    </select>
+                </div>
+                <div className="column second">
+                    <label htmlFor="attack">ATTACK</label>
+                    <input type="number" name="attack" className="attack" min={1}/>
+                    <label htmlFor="defense">DEFENSE</label>
+                    <input type="number" name="defense" className="defense" min={1}/>
+                    <label htmlFor="special-attack">SPECIAL ATTACK</label>
+                    <input type="number" name="special-attack" className="special-attack" min={1} />
+                    <label htmlFor="special-defense">SPECIAL DEFENSE</label>
+                    <input type="number" name="special-defense" className="special-defense" min={1} />
+                    <label htmlFor="speed">SPEED</label>
+                    <input type="number" name="speed" className="speed" min={1} />
+                    <label htmlFor="health">HEALTH</label>
+                    <input type="number" name="health" className="health" min={1} />
+                </div>
+                <div className="column third">
+                    {!upload ? 
+                    <div className="upload">
+                        <div className="button" onClick={toggleUpload}>
+                            Upload
+                        </div>
+                        <label htmlFor="file">
+                            <Publish/>
+                        </label>
+                        <input type="file" className="picture" name="file" id="file" style={{display:"none"}}/>
+                    </div> 
+                     :
+                    <div className="upload">
+                        <div className="link" onClick={toggleUpload}>
+                            Link
+                        </div>
+                        <label htmlFor="picture">PICTURE</label>
+                        <input type="text" className="picture" name="picture" />
+                    </div>
+                    }
+                </div>
+                <div className="submit">
+                    <button className="send">CREATE</button>
+                </div>
+            </form>
+        </div>
+    )
+}
+
+export default New;
+
 /*import { getPokemons,getTypes,postCreate,updatePokemon } from '../redux/pokemonActions';
 import { useState,useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
@@ -271,4 +342,3 @@ const Form = () => {
 };
 
 export default Form;*/
-export const form : string = "form";
