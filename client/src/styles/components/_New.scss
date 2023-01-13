@@ -44,14 +44,23 @@
     }
 }
 
-input,select,label,.button,.link{
+.new-data,.types,.new-label,.button,.link{
     margin:f.rem(2) f.rem(15);
     @include b.breakpoint(medium){
         margin:f.rem(8) f.rem(40);
     }
     @include b.breakpoint(large){
-        margin:f.rem(5) f.rem(12);
+        margin:f.rem(5) f.rem(14);
     }
+}
+
+.types{
+    background-color: white;
+    padding: f.rem(2) f.rem(5);
+}
+
+.new-data{
+    padding: f.rem(2) f.rem(5);
 }
 
 .submit{
@@ -65,4 +74,5 @@ input,select,label,.button,.link{
 .send{
     padding: f.rem(5) f.rem(10);
     border:none;
+    cursor: pointer;
 }

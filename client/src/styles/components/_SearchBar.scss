@@ -1,0 +1,27 @@
+@use "../base";
+@use "../base/breakpoints" as b;
+@use "../base/functions" as f;
+
+#container{
+    display: flex;
+    flex-direction: row;
+}
+
+.search{
+    border:none;
+}
+
+.search{
+    width: f.rem(100);
+    padding: f.rem(2) 0;
+}
+
+#container button{
+    border: none;
+    background-color: white;
+    width: f.rem(30);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

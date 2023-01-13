@@ -13,9 +13,9 @@ const New = () => {
             <Nav/>
             <form className="form">
                 <div className="column first">
-                    <label htmlFor="name">NAME</label>
-                    <input type="text" name="name" className="name" placeholder="name" />
-                    <label htmlFor="types">TYPES</label>
+                    <label htmlFor="name" className="new-label">NAME</label>
+                    <input type="text" name="name" className="new-data name" placeholder="name" />
+                    <label htmlFor="types" className="new-label">TYPES</label>
                     <select name="types" id="" className="types">
                         <option value="type" selected disabled>select type</option>
                         <option value="normal">normal</option>
@@ -25,18 +25,18 @@ const New = () => {
                     </select>
                 </div>
                 <div className="column second">
-                    <label htmlFor="attack">ATTACK</label>
-                    <input type="number" name="attack" className="attack" min={1}/>
-                    <label htmlFor="defense">DEFENSE</label>
-                    <input type="number" name="defense" className="defense" min={1}/>
-                    <label htmlFor="special-attack">SPECIAL ATTACK</label>
-                    <input type="number" name="special-attack" className="special-attack" min={1} />
-                    <label htmlFor="special-defense">SPECIAL DEFENSE</label>
-                    <input type="number" name="special-defense" className="special-defense" min={1} />
-                    <label htmlFor="speed">SPEED</label>
-                    <input type="number" name="speed" className="speed" min={1} />
-                    <label htmlFor="health">HEALTH</label>
-                    <input type="number" name="health" className="health" min={1} />
+                    <label htmlFor="attack" className="new-label">ATTACK</label>
+                    <input type="number" name="attack" className="new-data attack" min={1}/>
+                    <label htmlFor="defense" className="new-label">DEFENSE</label>
+                    <input type="number" name="defense" className="new-data defense" min={1}/>
+                    <label htmlFor="special-attack" className="new-label">SPECIAL ATTACK</label>
+                    <input type="number" name="special-attack" className="new-data special-attack" min={1} />
+                    <label htmlFor="special-defense" className="new-label">SPECIAL DEFENSE</label>
+                    <input type="number" name="special-defense" className="new-data special-defense" min={1} />
+                    <label htmlFor="speed" className="new-label">SPEED</label>
+                    <input type="number" name="speed" className="new-data speed" min={1} />
+                    <label htmlFor="health" className="new-label">HEALTH</label>
+                    <input type="number" name="health" className="new-data health" min={1} />
                 </div>
                 <div className="column third">
                     {!upload ? 
@@ -44,18 +44,18 @@ const New = () => {
                         <div className="button" onClick={toggleUpload}>
                             Upload
                         </div>
-                        <label htmlFor="file">
+                        <label htmlFor="file" className="new-label">
                             <Publish/>
                         </label>
-                        <input type="file" className="picture" name="file" id="file" style={{display:"none"}}/>
+                        <input type="file" className="new-data picture" name="file" id="file" style={{display:"none"}}/>
                     </div> 
                      :
                     <div className="upload">
                         <div className="link" onClick={toggleUpload}>
                             Link
                         </div>
-                        <label htmlFor="picture">PICTURE</label>
-                        <input type="text" className="picture" name="picture" />
+                        <label htmlFor="picture" className="new-label">PICTURE</label>
+                        <input type="text" className="new-data picture" name="picture" />
                     </div>
                     }
                 </div>

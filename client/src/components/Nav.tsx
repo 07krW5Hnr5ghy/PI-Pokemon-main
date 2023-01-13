@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import Search from "./Search";
+import SearchBar from "./SearchBar";
 import logo from "../styles/img/pokemon.svg";
 
 const Nav = () => {
@@ -12,11 +12,17 @@ const Nav = () => {
               <span className="line line1"></span>
               <span className="line line2"></span>
               <span className="line line3"></span>
-            </div>  
+            </div>
+            {/*<div className="search-bar">
+              <SearchBar/>
+              </div>*/}
             <div className="logo">
                 <h1>Navbar</h1>
             </div>
             <div className="menu-items">
+                <li>
+                  <SearchBar/>
+                </li>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">about</a></li>
                 <li><a href="#">blogs</a></li>
