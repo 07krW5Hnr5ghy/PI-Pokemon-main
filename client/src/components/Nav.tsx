@@ -13,9 +13,6 @@ const Nav = () => {
               <span className="line line2"></span>
               <span className="line line3"></span>
             </div>
-            {/*<div className="search-bar">
-              <SearchBar/>
-              </div>*/}
             <div className="logo">
                 <h1>Navbar</h1>
             </div>

@@ -5,6 +5,7 @@ import {RootState} from "../redux/store";
 import { getDetail, resetDetail } from "../redux/pokemonActions";
 import Loading from "./Loading";
 import Chart from "./Chart";
+import Nav from "./Nav";
 
 
 
@@ -34,6 +35,7 @@ const Detail = () => {
     console.log(stats);
     return(
         <div>
+            <Nav/>
              {!Object.keys(detail).length ? 
              <Loading/> :
              <div className="Detail_container">
