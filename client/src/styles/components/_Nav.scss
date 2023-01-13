@@ -101,7 +101,7 @@ nav{
 .navbar .menu-items {
     background-color: red;
     padding-top: f.rem(120);
-    box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255,.5);
     height: 100vh;
     width: 110%;
     transform: translate(-150%);
@@ -125,17 +125,6 @@ nav{
     margin-bottom: 1.2rem;
     font-size: 1.5rem;
     font-weight: 500;
-}
-
-.search-bar{
-    border-bottom: black solid 1px;
-    //position:absolute;
-    //top:f.rem(95);
-    width: f.rem(100);
-    //left:f.rem(60);
-    @include b.breakpoint(large){
-        //left:f.rem(80);
-    }
 }
   
 .logo {

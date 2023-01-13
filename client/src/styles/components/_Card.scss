@@ -18,12 +18,14 @@
     flex-shrink: 0;
     min-width: 100%;
     min-height: 100%;
+    z-index: -1;
 }
 
 .Info{
     position: absolute;
     margin-left: f.rem(5);
     margin-bottom: f.rem(5);
+    z-index: -1;
 }
 
 .Title{

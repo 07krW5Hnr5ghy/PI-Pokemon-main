@@ -20,11 +20,12 @@ const Nav = () => {
                 <li>
                   <SearchBar/>
                 </li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">about</a></li>
-                <li><a href="#">blogs</a></li>
-                <li><a href="#">portfolio</a></li>
-                <li><a href="#">contact</a></li>
+                <li>
+                  <Link to={"/pokemons"}>Home</Link>
+                </li>
+                <li>
+                  <Link to={"/new"}>New</Link>
+                </li>
             </div>
         </div>
       </div>
