@@ -16,7 +16,7 @@ const New = () => {
                     <label htmlFor="name" className="new-label">NAME</label>
                     <input type="text" name="name" className="new-data name" placeholder="name" />
                     <label htmlFor="types" className="new-label">TYPES</label>
-                    <select name="types" id="" className="types">
+                    <select name="types" id="" className="new-types">
                         <option value="type" selected disabled>select type</option>
                         <option value="normal">normal</option>
                         <option value="grass">grass</option>
@@ -38,11 +38,11 @@ const New = () => {
                     <label htmlFor="health" className="new-label">HEALTH</label>
                     <input type="number" name="health" className="new-data health" min={1} />
                 </div>
-                <div className="column third">
                     {!upload ? 
-                    <div className="upload">
-                        <div className="button" onClick={toggleUpload}>
-                            Upload
+                <div className="column third">
+                        <label htmlFor="picture" className="new-label">PICTURE</label>
+                        <div className="button mode" onClick={toggleUpload}>
+                            Link
                         </div>
                         <label htmlFor="file" className="new-label">
                             <Publish/>
@@ -50,15 +50,14 @@ const New = () => {
                         <input type="file" className="new-data picture" name="file" id="file" style={{display:"none"}}/>
                     </div> 
                      :
-                    <div className="upload">
-                        <div className="link" onClick={toggleUpload}>
-                            Link
-                        </div>
+                    <div className="column third">
                         <label htmlFor="picture" className="new-label">PICTURE</label>
+                        <div className="link mode" onClick={toggleUpload}>
+                            Upload
+                        </div>
                         <input type="text" className="new-data picture" name="picture" />
                     </div>
                     }
-                </div>
                 <div className="submit">
                     <button className="send">CREATE</button>
                 </div>

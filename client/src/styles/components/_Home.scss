@@ -2,7 +2,7 @@
 @use "../base/breakpoints" as b;
 @use "../base/functions" as f;
 
-#Home_container{
+#home-container{
     display: flex;
     flex-direction: column;
     margin-top:f.rem(80);
@@ -12,41 +12,47 @@
     }
 }
 
-.Info_container{
+.info-container{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.Filter_container{
+.filter-container{
     flex:1;
     display: flex;
     flex-direction: column;
     border: 1px solid black;
+    background-color: gray;
+    border-radius: f.rem(8);
+    padding: f.rem(8);
     @include b.breakpoint(large){
         flex-direction: row;
     }
 }
 
-.Filter{
+.filter{
     display: flex;
     flex-direction: column;
     align-items:baseline;
-    margin: f.rem(5);
+    margin: f.rem(4);
     @include b.breakpoint(large){
         flex-direction: row;
     }
 }
 
-.Filter_title{
-    margin-right: f.rem(5);
+.filter-title{
+    margin-right: f.rem(4);
+    font-weight: 600;
 }
 
-.Filter_select{
-    margin-right: f.rem(5);
+.filter-select{
+    margin: f.rem(4);
+    background-color: white;
+    text-align: center;
 }
 
-.Card_container{
+.card-container{
     flex:1;
     display: flex;
     flex-wrap: wrap;

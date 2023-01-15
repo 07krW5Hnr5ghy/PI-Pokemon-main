@@ -1,52 +1,69 @@
-import {
-  Chart as ChartJS,
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Radar } from 'react-chartjs-2';
-import {Bolt} from '@mui/icons-material';
 
-ChartJS.register(
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  Tooltip,
-  Legend
-);
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
+
+const data = [
+  {
+    subject: 'Math',
+    A: 120,
+    B: 110,
+    fullMark: 150,
+  },
+  {
+    subject: 'Chinese',
+    A: 98,
+    B: 130,
+    fullMark: 150,
+  },
+  {
+    subject: 'English',
+    A: 86,
+    B: 130,
+    fullMark: 150,
+  },
+  {
+    subject: 'Geography',
+    A: 99,
+    B: 100,
+    fullMark: 150,
+  },
+  {
+    subject: 'Physics',
+    A: 85,
+    B: 90,
+    fullMark: 150,
+  },
+  {
+    subject: 'History',
+    A: 65,
+    B: 85,
+    fullMark: 150,
+  },
+];
 
 interface ChartData {stats:number[]}
 
-const Chart : React.FC<ChartData>= (props:ChartData) => {
-  const labels = [
-    "attack",
-    "defense",
-    "health",
-    "speed",
-    `special attack`,
-    "special defense"];
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: 'points',
-        data: props.stats,
-        borderColor: "rgba(255, 99, 132, 1)",
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderWidth:1,
-      },
-    ],
-  };
-    return <Radar 
-    data={data} 
-    options={{maintainAspectRatio:false,responsive:true}} 
-    height="350"
-    width="350"
-    />
+const Chart :React.FC = () => {
+  return(
+    <ResponsiveContainer width="100%" height="100%" className="radar">
+        <RadarChart 
+        cx="50%" 
+        cy="50%" 
+        outerRadius="60%" 
+        data={data}
+        >
+          <PolarGrid />
+          <PolarAngleAxis dataKey="subject" />
+          <PolarRadiusAxis />
+          <Radar 
+          name="Mike" 
+          dataKey="A" 
+          stroke="#8884d8" 
+          fill="#8884d8" 
+          fillOpacity={0.6} 
+          />
+        </RadarChart>
+    </ResponsiveContainer>
+  );
 }
 
 export default Chart;

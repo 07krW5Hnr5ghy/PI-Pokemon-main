@@ -38,21 +38,20 @@ const Detail = () => {
             <Nav/>
              {!Object.keys(detail).length ? 
              <Loading/> :
-             <div className="Detail_container">
-                 <div className="Basic_info">
-                     <h2>{detail.name}</h2>
-                     <span>{detail.id}</span>
-                     <div className="Img_container">
-                        <img src={detail.img} alt=""/>
+             <div className="detail-container">
+                 <div className="basic-info">
+                     <h1 className="name">{detail.name}</h1>
+                     <span className="detail">{detail.id}</span>
+                     <div className="img-container">
+                        <img src={detail.img} alt="" loading="lazy"/>
                      </div>
                      <div className="types">
-                        {detail.classes.map(type=><span key={type}>{` ${type} `}</span>)}
+                        {detail.classes.map(type=><span className="detail-type" key={type}>{` ${type} `}</span>)}
                      </div>
                  </div>
-                 <div className="Stats">
-                    <div className="Chart">
-                        <Chart stats={stats} />
-                    </div>
+                 <div className="stats">
+                    <h3>Stats</h3>
+                    <Chart/>
                  </div>
              </div>
              }

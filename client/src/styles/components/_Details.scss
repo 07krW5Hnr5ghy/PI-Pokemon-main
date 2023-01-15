@@ -2,52 +2,72 @@
 @use "../base/breakpoints" as b;
 @use "../base/functions" as f;
 
-.Detail_container{
+.detail-container{
     display: flex;
     width:100vw;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
     @include b.breakpoint(medium){
         flex-direction: row;
-        align-items: center;
-        height: 100vh;
-        width: f.rem(750);
+        padding: f.rem(8);
     }
 }
 
-.Basic_info{
-    flex:1;
+.basic-info{
     border: 1px solid black;
     display:flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    height: f.rem(400);
-    border-radius: 50%;
-    margin:f.rem(5);
+    align-items:center;
+    margin:f.rem(72) 20pt 0 20pt;
     overflow: hidden;
-    padding: f.rem(10);
+    padding: f.rem(4);
+    background-color: gray;
+    @include b.breakpoint(medium){
+        margin:f.rem(72) f.rem(16) 0 f.rem(16);
+        padding: f.rem(32);
+    }
 }
 
-.Img_container{
+.name{
+    text-transform: capitalize;
+}
+
+.img-container{
     border: 1px solid black;
+    background-color: white;
     border-radius: 50%;
+    padding: f.rem(8);
 }
 
 .types{
     display: flex;
     flex-direction: column;
-    @include b.breakpoint(medium){
-    }
+    width: 100%;
+    align-items: flex-end;
+    text-align: center;
+    justify-content: space-between;
+    padding: f.rem(4) f.rem(4);
+    background-color: gray;
 }
 
-.Stats{
-    flex:1;
-    border:1px solid black;
+.detail-type{
+    background-color: black;
+    color: white;
+    margin:f.rem(4) 0;
+    padding: 0 f.rem(12);
+    border-radius: f.rem(8);
+}
+
+.stats{
+    width: 300px;
+    height: 350px;
+    margin:f.rem(8) 20pt 0 20pt;
     display: flex;
-    justify-content: center;
-}
-
-.Chart{
-    
+    flex-direction: column;
+    align-items: center;
+    @include b.breakpoint(medium){
+        margin: f.rem(8) f.rem(16) 0 f.rem(16);
+    }
 }

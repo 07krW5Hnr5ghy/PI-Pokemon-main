@@ -2,7 +2,7 @@
 @use "../base/breakpoints" as b;
 @use "../base/functions" as f;
 
-.Pokemon_card{
+.pokemon-card{
     border: 1px solid black;
     border-radius: 50%;
     width: f.rem(200);
@@ -14,32 +14,36 @@
     margin:f.rem(5) 0;
 }
 
-.Image{
+.image{
     flex-shrink: 0;
     min-width: 100%;
     min-height: 100%;
     z-index: -1;
+    background-color: gray;
 }
 
-.Info{
+.info{
     position: absolute;
     margin-left: f.rem(5);
     margin-bottom: f.rem(5);
+    color:black;
     z-index: -1;
 }
 
-.Title{
+.title{
     margin-bottom: f.rem(2);
+    text-transform: capitalize;
 }
 
-.Types{
+.types-container{
     display: flex;
     flex-direction: row;
 }
 
-.Type{
+.type{
     margin-right: f.rem(10);
     padding: f.rem(0.5) f.rem(5);
     color:white;
     background-color: black;
+    border-radius: f.rem(8);
 }
