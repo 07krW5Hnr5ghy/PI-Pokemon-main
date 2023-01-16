@@ -22,8 +22,10 @@
     flex:1;
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
-    background-color: gray;
+    //border: 1px solid black;
+    background-color: var(--primary-tint4);
+    color: var(--secondary-shade3);
+    font-size:20pt;
     border-radius: f.rem(8);
     padding: f.rem(8);
     @include b.breakpoint(large){
@@ -48,8 +50,12 @@
 
 .filter-select{
     margin: f.rem(4);
-    background-color: white;
+    padding: f.rem(4) 0;
+    background-color: var(--secondary-grayscale7);
+    color:var(--primary-grayscale3);
     text-align: center;
+    border: none;
+    border-radius: f.rem(4);
 }
 
 .card-container{
@@ -57,4 +63,5 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin-top: f.rem(16);
 }

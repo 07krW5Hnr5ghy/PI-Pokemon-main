@@ -14,7 +14,7 @@ const Nav = () => {
               <span className="line line3"></span>
             </div>
             <div className="logo">
-                <h1>Navbar</h1>
+                <h1>Pokeindex</h1>
             </div>
             <div className="menu-items">
                 <li>

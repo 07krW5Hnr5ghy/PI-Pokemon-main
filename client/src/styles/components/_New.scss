@@ -55,12 +55,19 @@
 }
 
 .new-types{
-    background-color: white;
     padding: f.rem(2) f.rem(5);
+}
+
+.new-label{
+    color:var(--primary-grayscale3);
 }
 
 .new-data{
     padding: f.rem(2) f.rem(5);
+    background-color: var(--primary-tint5);
+    border: none;
+    border-radius: f.rem(4);
+    color: var(--secondary-grayscale4);
 }
 
 .submit{
@@ -72,13 +79,12 @@
 }
 
 .mode{
-    border: 1px solid black;
     width: 28vw;
     text-align: center;
-    background-color: black;
-    color:white;
+    background-color: var(--primary-tint2);
+    color:var(--secondary-grayscale3);
     border-radius: f.rem(8);
-    margin-top: f.rem(8);
+    margin-bottom: f.rem(16);
     cursor: pointer;
     padding: 0 f.rem(4);
     @include b.breakpoint(large){
@@ -89,8 +95,8 @@
 .send{
     padding: f.rem(5) f.rem(10);
     border:none;
-    background-color: black;
-    color: white;
+    background-color: var(--primary-tint2);
+    color: var(--secondary-grayscale3);
     border-radius: f.rem(8);
     cursor: pointer;
 }

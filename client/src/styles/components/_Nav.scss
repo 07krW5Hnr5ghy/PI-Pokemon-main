@@ -16,6 +16,8 @@ nav{
 .navbar {
     width: 100vw;
     box-shadow: 0 f.em(1) f.em(4) rgb(146 161 176 / 15%);
+    background-color: var(--primary-tint4);
+    color: var(--secondary-grayscale3);
 }
   
 .nav-container {
@@ -34,8 +36,8 @@ nav{
 }
 
 .navbar .nav-container a {
+    color:var(--secondary-grayscale3);
     text-decoration: none;
-    color: #0e2431;
     font-weight: 600;
     font-size: f.rem(20);
 }
@@ -67,7 +69,7 @@ nav{
     height: f.em(20);
     width: f.em(24);
     position: absolute;
-    top: f.em(17);
+    top: f.em(16);
     left: f.em(20);
     z-index: 2;
     display: flex;
@@ -79,8 +81,8 @@ nav{
     display: block;
     height: f.em(4);
     width: 100%;
-    border-radius: f.em(10);
-    background: #0e2431;
+    border-radius: f.em(12);
+    background-color: var(--secondary-grayscale3);
 }
   
 .nav-container .hamburger-lines .line1 {
@@ -98,9 +100,9 @@ nav{
 }
   
 .navbar .menu-items {
-    background-color: white;
+    background-color: var(--primary-tint5);
     padding-top: f.rem(64);
-    box-shadow: inset 0 0 2000px rgba(255, 255, 255,.5);
+    //box-shadow: inset 0 0 2000px rgba(0, 0, 0,0.5);
     height: 100vh;
     width: 110%;
     transform: translate(-150%);
@@ -126,9 +128,8 @@ nav{
 .logo {
     position: absolute;
     top: f.rem(16);
-    right: f.rem(15);
+    right: f.rem(20);
     font-size: 1.2rem;
-    color: #0e2431;
 }
   
 .nav-container input[type="checkbox"]:checked ~ .menu-items {

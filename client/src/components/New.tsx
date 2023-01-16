@@ -16,7 +16,7 @@ const New = () => {
                     <label htmlFor="name" className="new-label">NAME</label>
                     <input type="text" name="name" className="new-data name" placeholder="name" />
                     <label htmlFor="types" className="new-label">TYPES</label>
-                    <select name="types" id="" className="new-types">
+                    <select name="types" id="" className="new-types new-data">
                         <option value="type" selected disabled>select type</option>
                         <option value="normal">normal</option>
                         <option value="grass">grass</option>

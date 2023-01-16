@@ -5,24 +5,25 @@
 #container{
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid black;
 }
 
 .search{
     border:none;
-}
-
-.search{
     width: f.rem(100);
     padding: f.rem(2) 0;
+    background-color: var(--secondary-tint4);
+    color:var(--primary-grayscale1);
+    border-radius: 0 f.rem(4) f.rem(4) 0;
 }
 
 #container button{
     border: none;
-    background-color: white;
+    background-color: var(--secondary-tint4);
+    color:var(--primary-grayscale1);
     width: f.rem(30);
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: f.rem(4) 0 0 f.rem(4);
     cursor: pointer;
 }

@@ -57,9 +57,9 @@ const Chart :React.FC = () => {
           <Radar 
           name="Mike" 
           dataKey="A" 
-          stroke="#8884d8" 
-          fill="#8884d8" 
-          fillOpacity={0.6} 
+          stroke="#29333D" 
+          fill="#FAB36B" 
+          fillOpacity={0.5} 
           />
         </RadarChart>
     </ResponsiveContainer>

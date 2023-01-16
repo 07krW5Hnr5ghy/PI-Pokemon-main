@@ -40,8 +40,8 @@ const Detail = () => {
              <Loading/> :
              <div className="detail-container">
                  <div className="basic-info">
-                     <h1 className="name">{detail.name}</h1>
-                     <span className="detail">{detail.id}</span>
+                     <h1 className="detail-name">{detail.name}</h1>
+                     <span className="detail-id">{detail.id}</span>
                      <div className="img-container">
                         <img src={detail.img} alt="" loading="lazy"/>
                      </div>
@@ -50,36 +50,18 @@ const Detail = () => {
                      </div>
                  </div>
                  <div className="stats">
-                    <h3>Stats</h3>
+                    <h2>Stats</h2>
                     <Chart/>
                  </div>
              </div>
              }
+             <div className="detail-back">
+                <Link to={"/pokemons"}>
+                    <button className="back-button" onClick={() => dispatch(resetDetail())}>Return</button>
+                </Link>
+             </div>
          </div>
     );
 }
 
 export default Detail;
-
-{/* <div>
-            {!Object.keys(detail).length ? <Loading/> :
-            <div id="Details_container">
-                <h2>{`< ${detail.name.charAt(0).toUpperCase() + detail.name.slice(1)} >`}</h2>
-                <span id="Details_id">{detail.id}</span>
-                <img src={detail.img} alt={detail.name}/>
-                <div id="Details_types">
-                    {detail.classes.map(type => <span key={type}>{` ${type} `}</span>)}
-                </div>
-                <div id="Details_stats">
-                    <span>health: {detail.hp}</span>
-                    <span>attack: {detail.attack}</span>
-                    <span>speed: {detail.speed}</span>
-                    <span>height: {detail.height}</span>
-                    <span>weight: {detail.weight}</span>
-                </div>
-                <Link to={"/pokemons"}>
-                    <button id="Details_button" onClick={() => dispatch(resetDetail())}>Return</button>
-                </Link>
-            </div>
-            }
-        </div> */}

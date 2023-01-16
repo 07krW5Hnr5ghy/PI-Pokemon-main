@@ -14,6 +14,7 @@ html{
     line-height: 1.6rem;
     height: auto;
     display: flex;
+    background-color: var(--secondary-grayscale9);
 }
 
 a{
@@ -22,4 +23,47 @@ a{
 
 h1{
     font-size: 1.6rem;
+}
+
+:root{
+    /* colors */
+    --primary:#F07E0F;
+    --primary-tint2:#F99939;
+    --primary-tint3:#FAB36B;
+    --primary-tint4:#FCCC9C;
+    --primary-tint5:#FDE6CE;
+    --primary-shade2:#C66606;
+    --primary-shade3:#944C05;
+    --primary-shade4:#633303;
+    --primary-shade5:#311A02;
+    --primary-grayscale1:#1F1A14;
+    --primary-grayscale2:#3D3329;
+    --primary-grayscale3:#5C4D3D;
+    --primary-grayscale4:#7A6652;
+    --primary-grayscale5:#998066;
+    --primary-grayscale6:#AD9985;
+    --primary-grayscale7:#C2B3A3;
+    --primary-grayscale8:#D6CCC2;
+    --primary-grayscale9:#EBE6E0;
+
+
+    --secondary:#0F81F0;
+    --secondary-tint2:#3F99F3;
+    --secondary-tint3:#6FB2F6;
+    --secondary-tint4:#9FCCF9;
+    --secondary-tint5:#CFE5FC;
+    --secondary-shade2:#0C66C0;
+    --secondary-shade3:#094C90;
+    --secondary-shade4:#063360;
+    --secondary-shade5:#031930;
+    --secondary-grayscale1:#14191F;
+    --secondary-grayscale2:#29333D;
+    --secondary-grayscale3:#3D4C5C;
+    --secondary-grayscale4:#52667A;
+    --secondary-grayscale5:#667F99;
+    --secondary-grayscale6:#8599AD;
+    --secondary-grayscale7:#A3B3C2;
+    --secondary-grayscale8:#C2CCD6;
+    --secondary-grayscale9: #E0E6EB;
+
 }
