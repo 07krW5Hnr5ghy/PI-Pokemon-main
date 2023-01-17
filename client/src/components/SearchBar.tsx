@@ -18,13 +18,13 @@ const SearchBar = () => {
 
     return(
         <div id="container">
-            <button onClick={(e) => submitSearch}>
+            <button onClick={(e) => submitSearch} className="search-button">
                 <Search/>
             </button>
             <input 
             type="text" 
             placeholder="name" 
-            className="search" 
+            className="search-input" 
             onChange={(e) => handleSearch}
             />
         </div>

@@ -6,6 +6,7 @@ nav{
     position: fixed;
     top:0;
     left:0;
+    z-index: 2;
 }
 
 .container {
@@ -29,6 +30,7 @@ nav{
   
 .navbar .menu-items {
     display: flex;
+    z-index: 2;
 }
   
 .navbar .nav-container li {
@@ -39,11 +41,11 @@ nav{
     color:var(--secondary-grayscale3);
     text-decoration: none;
     font-weight: 600;
-    font-size: f.rem(20);
+    font-size: f.rem(24);
 }
   
 .navbar .nav-container a:hover{
-      font-weight: bolder;
+    font-weight: bolder;
 }
   
 .nav-container {
@@ -57,8 +59,8 @@ nav{
     display: block;
     height: f.em(40);
     width: f.em(40);
-    top: f.em(8);
-    left: f.em(5);
+    top: f.em(10);
+    left: f.em(12);
     z-index: 5;
     opacity: 0;
     cursor: pointer;
@@ -69,9 +71,9 @@ nav{
     height: f.em(20);
     width: f.em(24);
     position: absolute;
-    top: f.em(16);
+    top: f.em(20);
     left: f.em(20);
-    z-index: 2;
+    z-index: 3;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -102,7 +104,6 @@ nav{
 .navbar .menu-items {
     background-color: var(--primary-tint5);
     padding-top: f.rem(64);
-    //box-shadow: inset 0 0 2000px rgba(0, 0, 0,0.5);
     height: 100vh;
     width: 110%;
     transform: translate(-150%);
@@ -112,6 +113,8 @@ nav{
     margin-left: f.rem(-16);
     transition: transform 0.5s ease-in-out;
     text-align: center;
+    position: relative;
+    z-index: 2;
     @include b.breakpoint(medium){
         width: 50%;
     }
@@ -121,8 +124,32 @@ nav{
 }
   
 .navbar .menu-items li {
-    margin: f.rem(12) 0;
+    margin: f.rem(8) 0;
     font-size: f.rem(20);
+}
+
+.nav-link{
+    border-radius: f.rem(8);
+    padding:f.rem(4);
+    width: 50%;
+}
+
+.nav-link:hover{
+    background-color: var(--secondary-tint3);
+}
+
+.link-span{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.link-icon{
+    margin-left: f.rem(4);
+}
+
+.link-text{
+    margin-left: f.rem(12);
 }
   
 .logo {

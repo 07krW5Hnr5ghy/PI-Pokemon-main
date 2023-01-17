@@ -2,7 +2,7 @@
 @use "../base/breakpoints" as b;
 @use "../base/functions" as f;
 /*container of Landing page */
-#Landing_container{
+#landing-container{
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -13,12 +13,14 @@
     }
 }
 
-#Landing_Call{
+#landing-call{
     flex:1;
     display: flex;
     padding:1em;
     text-align: left;
-    line-height: 1.7em;
+    line-height: 1.5;
+    font-size:28pt;
+    color:var(--primary-grayscale2);
     @include b.breakpoint-down(medium){
         flex:0.5;
         justify-content: center;
@@ -26,7 +28,7 @@
     }
 }
 
-#Landing_Button{
+#landing-button{
     flex:1;
     display:flex;
     height: 100vh;
@@ -38,35 +40,34 @@
     }
 }
 
-#Landing_Pokeball{
+#landing-pokeball{
     width: 15em;
     height: 15em;
     position: relative;
     display:flex;
     flex-direction: column;
     border-radius: 50%;
-    border: 0.15em solid black;
+    box-shadow: 10px 30px 25px rgb(242,242,242,20%);
     @include b.breakpoint-down(small){
         height: 10em;
         width: 10em;
-        border: 3px solid black;
     }
 }
 
-#Pokeball_Upper{
+#pokeball-upper{
     flex:1;
     position: relative;
-    background-color: white;
+    background: radial-gradient(circle, #f21b1b,#F2641C);
     border-radius: 10em 10em 0 0;
-    border-bottom: 0.3em solid black;
+    border-bottom: 0.3em solid #000000;
     z-index: 1;
     @include b.breakpoint-down(small){
         border-radius: 4.75em 4.75em 0 0;
     }
 }
 
-#Pokeball_Center{
-    background-color: black;
+#pokeball-center{
+    background-color: #000000;
     border-radius: 50%;
     height: 3.5em;
     width: 3.5em;
@@ -82,8 +83,8 @@
     }
 }
 
-#Pokeball_Button{
-    background-color: white;
+#pokeball-button{
+    background-color: #f2f2f2;
     border-radius: 50%;
     height: 2.5em;
     width: 2.5em;
@@ -96,9 +97,9 @@
     }
 }
 
-#Pokeball_InnerButton{
-    background-color: white;
-    border: 1px solid black;
+#pokeball-innerbutton{
+    background-color: #f2f2f2;
+    border: 1px solid #000000;
     border-radius: 50%;
     height: 2em;
     width: 2em;
@@ -107,18 +108,18 @@
     left:10%;
 }
 
-#Pokeball_Link{
+#pokeball-link{
     position:absolute;
     top:-5%;
     left: -5%;
     color:black;
 }
 
-#Pokeball_Lower{
+#pokeball-lower{
     flex:1;
-    background-color: red;
+    background: radial-gradient(circle,#f2f2f2,#F7F1ED);
     border-radius: 0 0 10em 10em;
-    border-top: 0.3em solid black;
+    border-top: 0.3em solid #000000;
     @include b.breakpoint-down(small){
         border-radius: 0 0 4.75em 4.75em;
     }

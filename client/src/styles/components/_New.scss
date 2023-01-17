@@ -2,8 +2,16 @@
 @use "../base/breakpoints" as b;
 @use "../base/functions" as f;
 
+.new-title{
+    margin-top: f.rem(72);
+    margin-left: 18pt;
+    text-align: left;
+    font-size: 24pt;
+    color:var(--primary-grayscale4);
+}
+
 .form{
-    margin-top: f.rem(60);
+    margin-top: f.rem(8);
     display: flex;
     flex-direction: column;
     width: 100vw;
@@ -66,8 +74,49 @@
     padding: f.rem(2) f.rem(5);
     background-color: var(--primary-tint5);
     border: none;
-    border-radius: f.rem(4);
+    border-radius: f.rem(8);
     color: var(--secondary-grayscale4);
+}
+
+.new-data:focus{
+    outline: none;
+    border: 3pt solid var(--primary);
+}
+
+
+
+.mode{
+    width: 28vw;
+    text-align: center;
+    background-color: var(--primary-tint4);
+    border:solid 2pt var(--primary-shade2);
+    color:var(--primary-shade2);
+    border-radius: f.rem(8);
+    margin-bottom: f.rem(16);
+    cursor: pointer;
+    padding: 0 f.rem(20);
+    @include b.breakpoint(large){
+        width: 12vw;
+    }
+}
+
+
+.mode:hover{
+    background-color: var(--primary);
+    border-color: var(--primary-tint4);
+    color: var(--primary-tint4);
+}
+
+.mode:active{
+    background-color: var(--secondary-tint2);
+    border-color: var(--secondary);
+    color: var(--secondary-tint4);
+}
+
+
+.file{
+    cursor: pointer;
+    padding: f.rem(12);
 }
 
 .submit{
@@ -78,25 +127,29 @@
     padding: f.rem(15);
 }
 
-.mode{
-    width: 28vw;
-    text-align: center;
-    background-color: var(--primary-tint2);
-    color:var(--secondary-grayscale3);
-    border-radius: f.rem(8);
-    margin-bottom: f.rem(16);
-    cursor: pointer;
-    padding: 0 f.rem(4);
-    @include b.breakpoint(large){
-        width: 12vw;
-    }
-}
-
 .send{
-    padding: f.rem(5) f.rem(10);
+    padding: f.rem(5) f.rem(20);
     border:none;
-    background-color: var(--primary-tint2);
+    background: linear-gradient(180deg,#F9D939 15%,var(--primary-tint3) 80%);
+    box-shadow: 10px 25px 25px rgba(92,77,61,20%);
     color: var(--secondary-grayscale3);
     border-radius: f.rem(8);
     cursor: pointer;
+}
+
+.send:hover{
+    background: var(--primary-tint2);
+    color:var(--primary-tint4);
+}
+
+.send:active{
+    background: var(--secondary);
+    color:var(--primary);
+}
+
+.send:disabled{
+    background: var(--primary-grayscale9);
+    color:var(--secondary-grayscale5);
+    border: 2pt solid var(--secondary-grayscale5);
+    cursor:not-allowed;
 }

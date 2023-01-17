@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import SearchBar from "./SearchBar";
-import logo from "../styles/img/pokemon.svg";
+import { Home, AddCircle } from "@mui/icons-material"; 
 
 const Nav = () => {
     return(
@@ -20,11 +20,21 @@ const Nav = () => {
                 <li>
                   <SearchBar/>
                 </li>
-                <li>
-                  <Link to={"/pokemons"}>Home</Link>
+                <li className="nav-link">
+                  <Link className="redirect" to={"/pokemons"}>
+                    <span className="link-span">
+                      <Home fontSize="medium" className="link-icon"/> 
+                      <span className="link-text"> Home</span>
+                    </span>
+                  </Link>
                 </li>
-                <li>
-                  <Link to={"/new"}>New</Link>
+                <li className="nav-link">
+                  <Link className="redirect" to={"/new"}>
+                    <span className="link-span">
+                      <AddCircle fontSize="medium" className="link-icon"/> 
+                      <span className="link-text"> New</span>
+                    </span>
+                  </Link>
                 </li>
             </div>
         </div>

@@ -11,10 +11,13 @@ const New = () => {
     return(
         <div className="container">
             <Nav/>
+            <div className="new-title">
+                <h2>Create a Pokemon</h2>
+            </div>
             <form className="form">
                 <div className="column first">
                     <label htmlFor="name" className="new-label">NAME</label>
-                    <input type="text" name="name" className="new-data name" placeholder="name" />
+                    <input type="text" name="name" className="new-data name" placeholder="Enter a name" />
                     <label htmlFor="types" className="new-label">TYPES</label>
                     <select name="types" id="" className="new-types new-data">
                         <option value="type" selected disabled>select type</option>
@@ -41,10 +44,10 @@ const New = () => {
                     {!upload ? 
                 <div className="column third">
                         <label htmlFor="picture" className="new-label">PICTURE</label>
-                        <div className="button mode" onClick={toggleUpload}>
+                        <div className="mode" onClick={toggleUpload}>
                             Link
                         </div>
-                        <label htmlFor="file" className="new-label">
+                        <label htmlFor="file" className="new-label file">
                             <Publish/>
                         </label>
                         <input type="file" className="new-data picture" name="file" id="file" style={{display:"none"}}/>
@@ -52,8 +55,8 @@ const New = () => {
                      :
                     <div className="column third">
                         <label htmlFor="picture" className="new-label">PICTURE</label>
-                        <div className="link mode" onClick={toggleUpload}>
-                            Upload
+                        <div className="mode" onClick={toggleUpload}>
+                            File
                         </div>
                         <input type="text" className="new-data picture" name="picture" />
                     </div>
