@@ -1,17 +1,83 @@
 import Nav from "./Nav";
-import { useState } from "react";
+import Basic from "./Basic";
+import AD from "./AD";
+import Special from "./Special";
+import SH from "./SH";
+import Picture from "./Picture";
+import { FormEvent, useState } from "react";
 import { Publish } from "@mui/icons-material";
+import { useMultistepForm } from "../redux/hooks";
 
+type FormData = {
+    name:string,
+    types:string,
+    attack:number,
+    defense:number,
+    specialAttack:number,
+    specialDefense:number,
+    speed:number,
+    health:number,
+    picture:string,
+}
+
+const INITIAL_DATA : FormData = {
+    name:"",
+    types:"",
+    attack:0,
+    defense:0,
+    specialAttack:0,
+    specialDefense:0,
+    speed:0,
+    health:0,
+    picture:"",
+}
 
 const New = () => {
-    const [upload,setUpload] = useState<boolean>(false); 
-    const toggleUpload = () => {
-        setUpload(!upload);
+    const [data,setData] = useState(INITIAL_DATA); 
+    const updateFields = (fields:Partial<FormData>) => {
+        setData(prev => {
+            return {...prev,...fields}
+        });
+    }
+    const {
+        steps,
+        currentStepIndex,
+        step,
+        isFirstStep,
+        isLastStep,
+        back,
+        next
+    } = useMultistepForm([
+        <Basic {...data} updateFields={updateFields}/>,
+        <AD {...data} updateFields={updateFields}/>,
+        <Special {...data} updateFields={updateFields}/>,
+        <SH {...data} updateFields={updateFields}/>,
+        <Picture {...data} updateFields={updateFields}/>
+    ]);
+
+    const onSubmit = (e:FormEvent) => {
+        e.preventDefault();
+        if(!isLastStep) return next();
+        alert("Successfull Creation")
     }
     return(
-        <div className="container">
+        <div className="new-container">
             <Nav/>
-            <div className="new-title">
+            <div className="form-container">
+                <form onSubmit={onSubmit}>
+                    <div className="new-steps">
+                        {currentStepIndex + 1} / {steps.length}
+                    </div>
+                    {step}
+                    <div className="new-buttons">
+                        {!isFirstStep && <button type="button" onClick={back} >Back</button>}
+                        <button type="submit" >
+                            {!isLastStep ? "Next" : "Finish"}
+                        </button>
+                    </div>
+                </form>
+            </div>
+            {/* <div className="new-title">
                 <h2>Create a Pokemon</h2>
             </div>
             <form className="form">
@@ -64,7 +130,7 @@ const New = () => {
                 <div className="submit">
                     <button className="send">CREATE</button>
                 </div>
-            </form>
+            </form> */}
         </div>
     )
 }
