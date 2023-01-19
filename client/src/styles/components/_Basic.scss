@@ -1,0 +1,21 @@
+@use "../base";
+@use "../base/breakpoints" as b;
+@use "../base/functions" as f;
+
+.new-label{
+    margin:f.rem(4) 0;
+}
+
+.new-input, .new-select{
+    border-radius: f.rem(4);
+    border:none;
+    width: 100%;
+    border:2pt solid var(--secondary-shade2);
+    background-color: var(--secondary-tint4);
+    color:var(--primary-grayscale4);
+    padding: f.rem(4) 0 f.rem(4) f.rem(4);
+}
+
+.new-input:focus{
+    outline: none;
+}

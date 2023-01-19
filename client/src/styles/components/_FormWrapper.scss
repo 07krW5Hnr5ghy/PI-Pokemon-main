@@ -1,0 +1,8 @@
+@use "../base";
+@use "../base/breakpoints" as b;
+@use "../base/functions" as f;
+
+.wrapper-container{
+    display: flex;
+    flex-direction: column;
+}

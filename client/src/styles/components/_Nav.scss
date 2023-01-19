@@ -16,9 +16,10 @@ nav{
   
 .navbar {
     width: 100vw;
-    box-shadow: 0 f.em(1) f.em(4) rgb(146 161 176 / 15%);
+    //box-shadow: 0 f.em(1) f.em(4) rgb(146 161 176 / 15%);
     background-color: var(--primary-tint4);
     color: var(--secondary-grayscale3);
+    border-bottom: 2pt solid var(--primary);
 }
   
 .nav-container {

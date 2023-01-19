@@ -12,10 +12,15 @@ type SHProps = SHData & {
 const SH = ({speed,health,updateFields}:SHProps) => {
     return(
         <FormWrapper title="Secondary Stats">
-            <label htmlFor="">Speed</label>
-            <input type="text" className="new-speed" value={speed} onChange={e => updateFields({speed:Number(e.target.value)})}/>
-            <label htmlFor="">Health</label>
-            <input type="text" className="new-health" value={health} onChange={e => updateFields({health:Number(e.target.value)})}/>
+            <label htmlFor="" className="new-label">Speed</label>
+            <input 
+            type="number" 
+            className="new-input" 
+            value={speed} 
+            onChange={e => updateFields({speed:Number(e.target.value)})}
+            />
+            <label htmlFor="" className="new-label">Health</label>
+            <input type="number" className="new-input" value={health} onChange={e => updateFields({health:Number(e.target.value)})}/>
         </FormWrapper>
     );
 }

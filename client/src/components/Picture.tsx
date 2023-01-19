@@ -16,24 +16,24 @@ const Picture = ({picture,updateFields} : PictureProps) => {
     return(
         <FormWrapper title="Set an image">
             {!upload ? 
-                <div>
-                    <label htmlFor="picture" className="new-label">PICTURE</label>
-                    <div className="mode" onClick={toggleUpload}>
+                <div className="picture">
+                    <label htmlFor="picture" className="new-label">Picture mode</label>
+                    <button className="mode" type="button" onClick={toggleUpload}>
+                        Upload file
+                    </button>
+                    <input type="text" className="new-input" name="picture" value={picture} onChange={e => updateFields({picture:e.target.value})}/>
+                </div>
+                     :
+                <div className="picture">
+                    <label htmlFor="picture" className="new-label">Picture</label>
+                    <button className="mode" type="button" onClick={toggleUpload}>
                         Paste url
-                    </div>
+                    </button>
                     <label htmlFor="file" className="new-label file">
                         <Publish/>
                     </label>
-                    <input type="file" className="new-data picture" name="file" id="file" style={{display:"none"}} value={picture} onChange={e => updateFields({picture:e.target.value})}/>
-                </div>
-                     :
-                <div>
-                    <label htmlFor="picture" className="new-label">PICTURE</label>
-                    <div className="mode" onClick={toggleUpload}>
-                        Upload file
-                    </div>
-                    <input type="text" className="new-data picture" name="picture" value={picture} onChange={e => updateFields({picture:e.target.value})}/>
-                </div>
+                <input type="file" className="new-input" name="file" id="file" style={{display:"none"}} value={picture} onChange={e => updateFields({picture:e.target.value})}/>
+            </div>
                 }
         </FormWrapper>
     );

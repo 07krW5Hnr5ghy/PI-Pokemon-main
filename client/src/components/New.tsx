@@ -64,14 +64,21 @@ const New = () => {
         <div className="new-container">
             <Nav/>
             <div className="form-container">
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} className="new-form">
                     <div className="new-steps">
                         {currentStepIndex + 1} / {steps.length}
                     </div>
                     {step}
                     <div className="new-buttons">
-                        {!isFirstStep && <button type="button" onClick={back} >Back</button>}
-                        <button type="submit" >
+                        {!isFirstStep && 
+                        <button 
+                        className="new-back" 
+                        type="button" 
+                        onClick={back} 
+                        >
+                            Back
+                        </button>}
+                        <button className="new-next" type="submit">
                             {!isLastStep ? "Next" : "Finish"}
                         </button>
                     </div>
