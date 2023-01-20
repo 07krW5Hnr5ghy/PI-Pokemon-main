@@ -22,12 +22,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(30deg, 
+    background: linear-gradient(50deg, 
     var(--primary-grayscale1)20%,
     rgba(31,26,20,30%)40%,
-    rgba(31,26,20,20%)60%,
-    rgba(31,26,20,5%)80%,
-    rgba(31,26,20,0%)100%
+    rgba(31,26,20,20%)50%,
+    rgba(31,26,20,5%)70%,
+    var(--secondary-tint5)80%
     );
     animation:spin 1s linear infinite;
 }
