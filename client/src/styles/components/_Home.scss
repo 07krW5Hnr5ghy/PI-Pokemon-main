@@ -26,6 +26,7 @@
     color: var(--secondary-shade3);
     font-size:20pt;
     border-radius: f.rem(8);
+    border:2pt solid var(--primary);
     padding: f.rem(8);
     @include b.breakpoint(large){
         flex-direction: row;
@@ -50,10 +51,10 @@
 .filter-select{
     margin: f.rem(4);
     padding: f.rem(4) 0;
-    background-color: var(--secondary-grayscale7);
+    background-color: var(--secondary-grayscale8);
     color:var(--primary-grayscale3);
     text-align: center;
-    border: none;
+    border: 2pt solid var(--secondary);
     border-radius: f.rem(4);
 }
 

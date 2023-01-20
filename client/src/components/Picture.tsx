@@ -25,7 +25,7 @@ const Picture = ({picture,updateFields} : PictureProps) => {
                 </div>
                      :
                 <div className="picture">
-                    <label htmlFor="picture" className="new-label">Picture</label>
+                    <label htmlFor="picture" className="new-label">Picture mode</label>
                     <button className="mode" type="button" onClick={toggleUpload}>
                         Paste url
                     </button>

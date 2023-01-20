@@ -1,6 +1,6 @@
 @use "../base/settings";
 
-#Loading_container{
+.loading-container{
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -12,7 +12,7 @@
     }
 }
 
-#Loading_load{
+.loading-load{
     position: relative;
     height: 200vh;
     width: 40vh;
@@ -22,7 +22,7 @@
     animation: spin 1s linear infinite;
 }
 
-#Loading_load::before{
+.loading-load::before{
     position: absolute;
     content: "";
     background: #9bf0a7;

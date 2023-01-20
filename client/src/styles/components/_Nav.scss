@@ -139,6 +139,34 @@ nav{
     background-color: var(--secondary-tint3);
 }
 
+.search-container{
+    display: flex;
+    flex-direction: row;
+    border: 3pt solid var(--secondary);
+    border-radius: f.rem(8);
+    background-color: var(--secondary-tint3);
+}
+
+.search-button{
+    display: flex;
+    border-radius: f.rem(8) 0 0 f.rem(8);
+    border:none;
+    padding: f.rem(2) 0 f.rem(2) f.rem(2);
+    background-color: var(--secondary-tint3);
+}
+
+.search-input{
+    width: f.rem(115);
+    border-radius: 0 f.rem(8) f.rem(8) 0;
+    border:none;
+    padding: 0 0 f.rem(4) f.rem(12);
+    background-color: var(--secondary-tint3);
+}
+
+.search-input:focus{
+    outline: none;
+}
+
 .link-span{
     display: flex;
     justify-content: flex-start;

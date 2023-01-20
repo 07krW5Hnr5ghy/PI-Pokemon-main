@@ -17,6 +17,20 @@
     cursor: pointer;
 }
 
+.mode:hover{
+    background-color: var(--secondary);
+    border-color: var(--secondary-tint4);
+    color: var(--secondary-tint4);
+}
+
+.mode:active{
+    background-color: var(--primary);
+    border-color: var(--primary-tint4);
+    color:var(--primary-tint4);
+}
+
 .file{
     text-align: center;
+    padding: f.rem(4) 0 0 0;
+    cursor: pointer;
 }

@@ -1,9 +1,9 @@
 
 const Loading = () => {
     return(
-        <div id="Loading_container">
-            <div id="Loading_filler"></div>
-            <div id="Loading_load"></div>
+        <div className="loading-container">
+            <div className="loading-filler"></div>
+            <div className="loading-load"></div>
             <h3>Loading data ...</h3>
         </div>
     );

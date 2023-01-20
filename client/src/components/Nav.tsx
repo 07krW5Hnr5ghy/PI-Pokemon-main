@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import SearchBar from "./SearchBar";
+import { Search } from "@mui/icons-material";
 import { Home, AddCircle } from "@mui/icons-material"; 
 
 const Nav = () => {
@@ -17,8 +18,16 @@ const Nav = () => {
                 <h1>Pokeindex</h1>
             </div>
             <div className="menu-items">
-                <li>
-                  <SearchBar/>
+                <li className="nav-link">
+                  <div className="search-container">
+                    <button className="search-button">
+                      <Search fontSize="medium"/>
+                    </button>
+                    <input 
+                    type="text" 
+                    placeholder="name" 
+                    className="search-input" />
+                  </div>
                 </li>
                 <li className="nav-link">
                   <Link className="redirect" to={"/pokemons"}>

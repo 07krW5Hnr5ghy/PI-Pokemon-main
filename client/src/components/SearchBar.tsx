@@ -19,7 +19,7 @@ const SearchBar = () => {
     return(
         <div id="container">
             <button onClick={(e) => submitSearch} className="search-button">
-                <Search/>
+                <Search fontSize="medium"/>
             </button>
             <input 
             type="text" 

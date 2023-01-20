@@ -10,9 +10,15 @@
     flex-direction: column;
     justify-content: flex-end;
     overflow: hidden;
-    margin:f.rem(5) 0;
-    border:3pt solid var(--primary-shade2);
+    margin:f.rem(24) 0;
+    border:3pt solid var(--primary);
     box-shadow: 10px 30px 50px rgba(153,128,102,70%);
+    background: linear-gradient(180deg,rgba(111,178,246,0.25) 60%,var(--secondary-tint3) 95%);
+}
+
+.pokemon-card:hover{
+    width: f.rem(208);
+    height: f.rem(208);
 }
 
 .image{
@@ -33,7 +39,7 @@
 .title{
     margin-bottom: f.rem(2);
     text-transform: capitalize;
-    color:var(--secondary-shade3);
+    color:var(--secondary-grayscale2);
 }
 
 .types-container{
