@@ -54,12 +54,19 @@
     }
 }
 
+#landing-pokeball:hover{
+    height: 16em;
+    width: 16em;
+}
+
+
+
 #pokeball-upper{
     flex:1;
     position: relative;
     background: radial-gradient(circle, #f21b1b,#F2641C);
     border-radius: 10em 10em 0 0;
-    border-bottom: 0.3em solid #000000;
+    border-bottom: 0.3em solid var(--secondary-grayscale1);
     z-index: 1;
     @include b.breakpoint-down(small){
         border-radius: 4.75em 4.75em 0 0;
@@ -67,13 +74,13 @@
 }
 
 #pokeball-center{
-    background-color: #000000;
+    background-color: var(--secondary-grayscale1);
     border-radius: 50%;
     height: 3.5em;
     width: 3.5em;
     position:absolute;
-    top:38%;
-    left:38%;
+    top:39%;
+    left:39%;
     z-index: 2;
     @include b.breakpoint-down(small){
         height: 3.2em;
@@ -89,17 +96,21 @@
     height: 2.5em;
     width: 2.5em;
     position:absolute;
-    top:15%;
-    left:15%;
+    top:14%;
+    left:14%;
     @include b.breakpoint-down(small){
         top:11%;
         left:11%;
     }
 }
 
+#pokeball-button:hover{
+    background-color: var(--secondary-grayscale5);
+}
+
 #pokeball-innerbutton{
     background-color: #f2f2f2;
-    border: 1px solid #000000;
+    border: 1px solid var(--secondary-grayscale1);
     border-radius: 50%;
     height: 2em;
     width: 2em;
@@ -108,18 +119,30 @@
     left:10%;
 }
 
+#pokeball-innerbutton:hover{
+    background-color: var(--secondary-grayscale5);
+}
+
 #pokeball-link{
     position:absolute;
     top:-5%;
     left: -5%;
-    color:black;
+    color: var(--secondary-grayscale2);
+}
+
+#pokeball-link:hover{
+    color: #f2f2f2;
+}
+
+#pokeball-link:active{
+    color:#ffb800;
 }
 
 #pokeball-lower{
     flex:1;
     background: radial-gradient(circle,#f2f2f2,#F7F1ED);
     border-radius: 0 0 10em 10em;
-    border-top: 0.3em solid #000000;
+    border-top: 0.3em solid var(--secondary-grayscale1);
     @include b.breakpoint-down(small){
         border-radius: 0 0 4.75em 4.75em;
     }

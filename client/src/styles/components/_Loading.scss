@@ -1,40 +1,48 @@
-@use "../base/settings";
+@use "../base";
+@use "../base/breakpoints" as b;
+@use "../base/functions" as f;
 
 .loading-container{
-    height: 100vh;
+    display: flex;
+    width: 100vw;
+    padding: 0 20pt 0 20pt;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:var(--secondary-grayscale1);
+    font-size: f.rem(20);
+}
+
+.loading-outer{
+    width: f.rem(140);
+    height: f.rem(140);
+    border-radius: 50%;
+    margin: f.rem(80) 0 f.rem(40) 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    justify-items: center;
-    h3{
-        margin: 10vh 10vw;
-    }
+    background: linear-gradient(30deg, 
+    var(--primary-grayscale1)20%,
+    rgba(31,26,20,30%)40%,
+    rgba(31,26,20,20%)60%,
+    rgba(31,26,20,5%)80%,
+    rgba(31,26,20,0%)100%
+    );
+    animation:spin 1s linear infinite;
 }
 
-.loading-load{
-    position: relative;
-    height: 200vh;
-    width: 40vh;
-    background: linear-gradient(45deg,settings.$loading 10%,settings.$loading2 90%);
+.loading-inner{
+    width: 90%;
+    height: 90%;
     border-radius: 50%;
-    object-fit: fill;
-    animation: spin 1s linear infinite;
-}
-
-.loading-load::before{
-    position: absolute;
-    content: "";
-    background: #9bf0a7;
-    left:50%;
-    top:50%;
-    transform: translate(-50%,-50%);
-    width: 80%;
-    height: 80%;
-    border-radius: 50%;
+    background-color: var(--secondary-tint5);
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg);}
-    100% { transform: rotate(360deg);}
+    0% {transform: rotate(0deg);}
+    25% {transform: rotate(90deg);}
+    50% {transform: rotate(180deg);}
+    75% {transform: rotate(270deg);}
+    100% {transform: rotate(360deg);}
 }

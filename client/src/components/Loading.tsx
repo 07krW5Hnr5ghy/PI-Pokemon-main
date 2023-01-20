@@ -2,9 +2,10 @@
 const Loading = () => {
     return(
         <div className="loading-container">
-            <div className="loading-filler"></div>
-            <div className="loading-load"></div>
-            <h3>Loading data ...</h3>
+            <div className="loading-outer">
+                <div className="loading-inner"></div>
+            </div>
+            <h2>Loading data ...</h2>
         </div>
     );
 }
