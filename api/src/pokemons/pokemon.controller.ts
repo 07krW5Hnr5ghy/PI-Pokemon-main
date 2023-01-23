@@ -1,9 +1,19 @@
 import {Request,Response,NextFunction} from "express";
 import { DatabaseRepository } from "../declaration";
 import {Pokemon} from "../entity/Pokemon";
+import { getApiPokemons } from "../controllers/apiGetters";
 
 export class PokemonController{
     constructor(private repository:DatabaseRepository<Pokemon>){}
+
+    async download(req:Request,res:Response,next:NextFunction):Promise<void>{
+        try{
+            let data = await this.repository.download(); 
+            res.status(200).json(data);
+        }catch(error){
+            next(error);
+        }
+    }
 
     async create(req:Request, res:Response, next:NextFunction):Promise<void>{
         try{

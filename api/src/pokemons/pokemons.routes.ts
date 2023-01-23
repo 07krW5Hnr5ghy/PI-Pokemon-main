@@ -9,6 +9,7 @@ const controller = new PokemonController(
     new PokemonRepository()
 );
 
+router.get("/data",controller.download.bind(controller));
 router.post("/pokemons",controller.create.bind(controller));
 router.get("/pokemons", controller.list.bind(controller));
 router.get("/pokemons/:pokeId", controller.get.bind(controller));

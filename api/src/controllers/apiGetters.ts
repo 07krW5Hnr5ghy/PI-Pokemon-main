@@ -17,8 +17,8 @@ export const getApiPokemons = async (limit: number) => {
         let health,attack,defense,speed,specialAttack,specialDefense;
         let types = [];
 
-        for(let type of pokemon.types){
-            types.push(pokemon.type.name);
+        for(let item of pokemon.types){
+            types.push(item.type.name);
         }
 
         for(let item of pokemon.stats){
@@ -41,9 +41,10 @@ export const getApiPokemons = async (limit: number) => {
             specialAttack,
             specialDefense,
             picture:pokemon.sprites.other.dream_world.front_default,
-            origin:"api",
         }
     });
+
+    return data;
 }
 // import Pokemon from '../models/Pokemon';
 // import Type from '../models/Type';

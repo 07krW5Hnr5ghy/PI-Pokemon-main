@@ -37,8 +37,8 @@ export class Pokemon {
 
     @Column({
         type:'enum',
-        enum: ["api","custom"],
-        default : "api",
+        enum: Origin,
+        default : Origin.API,
     })
     origin!: Origin;
 

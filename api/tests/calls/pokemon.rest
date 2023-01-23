@@ -13,3 +13,9 @@ Content-Type: application/json
     "speed":8,
     "origin":"custom"
 }
+
+###
+
+GET http://localhost:3001/api/data
+
+{}

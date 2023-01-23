@@ -1,8 +1,12 @@
 
-export type Origin = "api" | "custom";
+export enum Origin {
+    API = "api" ,
+    CUSTOM = "custom"
+} 
 export type Query = Record<string,unknown>;
 export type Id = string | number;
 export interface DatabaseRepository<T = unknown>{
+    download(): Promise<void>;
     create(data: T, query?: Query): Promise<T>;
     list(query?:Query): Promise<T[]>;
     get(id:Id,query?:Query): Promise<T|null>;
