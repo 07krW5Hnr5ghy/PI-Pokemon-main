@@ -17,6 +17,22 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+import database from "./src/config/database";
+import server from './src/app';
+import dotenv from 'dotenv';
+import "reflect-metadata";
+
+dotenv.config();
+
+database.initialize()
+  .then(() => console.log("Database connected"))
+  .catch(console.error)
+
+const port = process.env.PORT || 3001;
+
+server.listen(port,()=>{
+  console.log(`Server is running at https://localhost:${port}`);
+})
 /* JS code
 const server = require('./src/app.js');
 const { db } = require('./src/db.js');
@@ -28,23 +44,23 @@ db.sync({ force: false, alter:false }).then(() => {
     console.log(`listening at ${process.env.PORT}`); // eslint-disable-line no-console
   });
 });*/
-import http from 'http';
-import express,{Application} from 'express';
-import dotenv from 'dotenv';
-import server from './src/app';
-import router from './src/routes';
-import {sequelize} from './src/db';
+// import http from 'http';
+// import express,{Application} from 'express';
+// import dotenv from 'dotenv';
+// import server from './src/app';
+// import router from './src/routes';
+// //import {sequelize} from './src/db';
 
-dotenv.config();
+// dotenv.config();
 
-const port = process.env.PORT || 3001;
+// const port = process.env.PORT || 3001;
 
-sequelize.sync({ force: true }).then(() => {
-  server.listen(process.env.PORT, () => {
-    console.log(`listening at ${process.env.PORT}`); // eslint-disable-line no-console
-  });
-});
+// sequelize.sync({ force: true }).then(() => {
+//   server.listen(process.env.PORT, () => {
+//     console.log(`listening at ${process.env.PORT}`); // eslint-disable-line no-console
+//   });
+// });
 
-/*app.listen(port, () => {
-  console.log(`Server is running at https://localhost:${port}`);
-});*/
+// /*app.listen(port, () => {
+//   console.log(`Server is running at https://localhost:${port}`);
+// });*/

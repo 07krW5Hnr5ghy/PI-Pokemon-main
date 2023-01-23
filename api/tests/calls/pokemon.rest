@@ -1,0 +1,15 @@
+POST http://localhost:3001/api/pokemons
+Content-Type: application/json
+
+{
+    "id":"01c",
+    "name":"squarol",
+    "classes":["bug"],
+    "attack":10,
+    "defense":10,
+    "specialAttack":5,
+    "specialDefense":5,
+    "health":10,
+    "speed":8,
+    "origin":"custom"
+}

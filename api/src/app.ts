@@ -2,9 +2,11 @@ import express,{Express,Request,Response,NextFunction} from 'express';
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-import routes from './routes/index';
+import database from './config/database';
+import PokemonRoutes from "./pokemons/pokemons.routes";
+//import routes from './routes/index';
 
-require('./db');
+//require('./db');
 
 const server : Express = express();
 
@@ -22,7 +24,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use('/', routes);
+server.use('/api', PokemonRoutes);
 
 // Error catching endware.
 server.use((err:Error, req: Request, res:Response, next:NextFunction) => { 
