@@ -1,3 +1,5 @@
+### create a pokemon
+
 POST http://localhost:3001/api/pokemons
 Content-Type: application/json
 
@@ -14,8 +16,15 @@ Content-Type: application/json
     "origin":"custom"
 }
 
-###
+### fetch api pokemons
 
-GET http://localhost:3001/api/data
+GET http://localhost:3001/api/p-data
 
 {}
+
+### get all stored pokemons
+
+GET http://localhost:3001/api/pokemons
+
+### get all the types
+GET http://localhost:3001/api/t-data

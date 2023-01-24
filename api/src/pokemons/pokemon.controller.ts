@@ -1,7 +1,6 @@
 import {Request,Response,NextFunction} from "express";
 import { DatabaseRepository } from "../declaration";
 import {Pokemon} from "../entity/Pokemon";
-import { getApiPokemons } from "../controllers/apiGetters";
 
 export class PokemonController{
     constructor(private repository:DatabaseRepository<Pokemon>){}
@@ -18,7 +17,7 @@ export class PokemonController{
     async create(req:Request, res:Response, next:NextFunction):Promise<void>{
         try{
             const body = req.body;
-            const pokemon = await this.repository.create(body);
+            const pokemon = await this.repository.create?.(body);
             res.status(200).json(pokemon);
         } catch(error){
             next(error);
@@ -27,8 +26,8 @@ export class PokemonController{
 
     async list(req:Request,res:Response,next:NextFunction):Promise<void>{
         try{
-            const pokemon = await this.repository.list();
-            res.status(200).json(pokemon);
+            const pokemons = await this.repository.list();
+            res.status(200).json(pokemons);
         }catch(error){
             next(error);
         }
@@ -37,7 +36,7 @@ export class PokemonController{
     async get(req:Request,res:Response, next:NextFunction): Promise<void>{
         try{
             const {pokeId} = req.params;
-            const pokemon = await this.repository.get(pokeId);
+            const pokemon = await this.repository.get?.(pokeId);
             res.status(200).json(pokemon);
         }catch(error){
             next(error);
@@ -49,7 +48,7 @@ export class PokemonController{
             const {pokeId} = req.params;
             const body = req.body;
             
-            const pokemon = await this.repository.update(pokeId,body);
+            const pokemon = await this.repository.update?.(pokeId,body);
 
             res.status(200).json(pokemon);
         }catch(error){
@@ -60,7 +59,7 @@ export class PokemonController{
     async remove(req:Request,res:Response,next:NextFunction):Promise<void>{
         try{
             const {pokeId} = req.params;
-            const pokemon = await this.repository.remove(pokeId);
+            const pokemon = await this.repository.remove?.(pokeId);
             res.status(200).json(pokemon);
         }catch(error){
             next(error);

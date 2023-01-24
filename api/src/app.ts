@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 import database from './config/database';
 import PokemonRoutes from "./pokemons/pokemons.routes";
+import TypeRoutes from "./types/type.routes";
 //import routes from './routes/index';
 
 //require('./db');
@@ -25,6 +26,7 @@ server.use((req, res, next) => {
 });
 
 server.use('/api', PokemonRoutes);
+server.use('/api', TypeRoutes);
 
 // Error catching endware.
 server.use((err:Error, req: Request, res:Response, next:NextFunction) => { 

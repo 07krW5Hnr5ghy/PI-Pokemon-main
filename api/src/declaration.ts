@@ -7,11 +7,11 @@ export type Query = Record<string,unknown>;
 export type Id = string | number;
 export interface DatabaseRepository<T = unknown>{
     download(): Promise<void>;
-    create(data: T, query?: Query): Promise<T>;
+    create?(data: T, query?: Query): Promise<T>;
     list(query?:Query): Promise<T[]>;
-    get(id:Id,query?:Query): Promise<T|null>;
-    update(id:Id,data:T,query?:Query):Promise<T|null>;
-    remove(id:Id,query?:Query):Promise<T|null>;
+    get?(id:Id,query?:Query): Promise<T|null>;
+    update?(id:Id,data:T,query?:Query):Promise<T|null>;
+    remove?(id:Id,query?:Query):Promise<T|null>;
 }
 export interface Pokemon{
     id:string;
@@ -25,4 +25,9 @@ export interface Pokemon{
     speed:number;
     picture:string;
     origin:Origin;
+}
+
+export interface Type{
+    id:number;
+    type:string;
 }

@@ -11,7 +11,7 @@ export class Pokemon {
     @Column()
     name!: string;
 
-    @Column('simple-array',{nullable:true})
+    @Column('simple-array',{nullable:false})
     classes!: string[];
 
     @Column()

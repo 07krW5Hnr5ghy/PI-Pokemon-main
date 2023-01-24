@@ -2,6 +2,7 @@ import "reflect-metadata";
 require('dotenv').config();
 import { DataSource } from "typeorm";
 import {Pokemon} from "../entity/Pokemon";
+import {Type} from "../entity/Type";
 const {
     DB_USER, DB_PASSWORD, DB_HOST,DB_NAME
 } = process.env;
@@ -14,8 +15,7 @@ export default new DataSource({
     database: DB_NAME,
     password: DB_PASSWORD,
     synchronize: true,
-    logging:false,
-    entities:[Pokemon],
-    migrations:[],
+    logging:"all",
+    entities:[Pokemon,Type],
     subscribers:[],
 });
