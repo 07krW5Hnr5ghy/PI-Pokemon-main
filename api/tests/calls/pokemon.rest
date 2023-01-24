@@ -26,5 +26,8 @@ GET http://localhost:3001/api/p-data
 
 GET http://localhost:3001/api/pokemons
 
+### get all pokemons by search in name
+GET http://localhost:3001/api/pokemons?search=ch
+
 ### get all the types
 GET http://localhost:3001/api/t-data

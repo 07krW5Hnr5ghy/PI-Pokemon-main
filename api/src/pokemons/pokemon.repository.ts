@@ -1,7 +1,9 @@
 import database from "../config/database";
-import { DatabaseRepository, Id, Query} from "../declaration";
+import { DatabaseRepository, Id, Query, Name} from "../declaration";
 import { Pokemon } from "../entity/Pokemon";
 import { getApiPokemons } from "../controllers/apiGetters";
+
+const repository = database.getRepository(Pokemon);
 
 export class PokemonRepository implements DatabaseRepository<Pokemon>{
 
@@ -13,19 +15,22 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
     }
 
     async create(data: Partial<Pokemon>, query?:Query): Promise<Pokemon>{
-        const repository =  database.getRepository(Pokemon);
         const pokemon =  repository.create(data);
         await repository.save(pokemon);
         return pokemon;
     }
 
     async list(query?:Query): Promise<Pokemon[]>{
-        const repository = database.getRepository(Pokemon);
         return repository.find();
     }
 
+    async search(name:Name,query?:Query):Promise<Pokemon[]>{
+        const search = await repository.createQueryBuilder("pokemon")
+        .where("pokemon.name LIKE :s",{s: `%${name}%`}).getMany();
+        return search;
+    }
+
     async get(id:Id,query?:Query): Promise<Pokemon | null>{
-        const repository = database.getRepository(Pokemon);
         const pokemon = await repository.findOneBy({id:id as any});
         if(!pokemon){
             console.log("pokemon doesnt not exist");
@@ -34,13 +39,11 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
     }
 
     async update(id:Id,data:Pokemon,query?:Query):Promise<Pokemon | null>{
-        const repository = database.getRepository(Pokemon);
         await repository.update(id,data);
         return this.get(id,query);
     }
 
     async remove(id:Id,query?:Query): Promise<Pokemon | null>{
-        const repository = database.getRepository(Pokemon);
         const pokemon = await this.get(id,query);
         await repository.delete(id);
         return pokemon;

@@ -2,6 +2,16 @@ import {Request,Response,NextFunction} from "express";
 import { DatabaseRepository } from "../declaration";
 import {Pokemon} from "../entity/Pokemon";
 
+interface RequestParams {}
+
+interface ResponseBody {}
+
+interface RequestBody {}
+
+interface RequestQuery{
+    search:string;
+}
+
 export class PokemonController{
     constructor(private repository:DatabaseRepository<Pokemon>){}
 
@@ -24,10 +34,20 @@ export class PokemonController{
         }
     }
 
-    async list(req:Request,res:Response,next:NextFunction):Promise<void>{
+    async list(
+        req:Request<RequestParams, ResponseBody, RequestBody, RequestQuery>,
+        res:Response,next:NextFunction):Promise<void>{
+        const {query} =  req;
+        let pokemons;
         try{
-            const pokemons = await this.repository.list();
+
+            if(!query.search){
+                pokemons = await this.repository.list();
+            }else{
+                pokemons = await this.repository.search?.(query.search);
+            }
             res.status(200).json(pokemons);
+
         }catch(error){
             next(error);
         }
