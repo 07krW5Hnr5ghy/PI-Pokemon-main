@@ -1,16 +1,9 @@
 import {Request,Response,NextFunction} from "express";
 import { DatabaseRepository } from "../declaration";
 import {Pokemon} from "../entity/Pokemon";
+import { Sorting,RequestParams,RequestBody,ResponseBody,RequestQuery } from "../declaration";
 
-interface RequestParams {}
 
-interface ResponseBody {}
-
-interface RequestBody {}
-
-interface RequestQuery{
-    search:string;
-}
 
 export class PokemonController{
     constructor(private repository:DatabaseRepository<Pokemon>){}
@@ -41,11 +34,15 @@ export class PokemonController{
         let pokemons;
         try{
 
-            if(!query.search){
-                pokemons = await this.repository.list();
-            }else{
-                pokemons = await this.repository.search?.(query.search);
-            }
+            pokemons = await this.repository.list(query.sorting,query.sortColumn,query.search);
+            // if(query.search){
+            //     pokemons = await this.repository.search?.(query.search);
+            // }
+
+            // if(query.sorting && query.sortColumn){
+            //     pokemons = await this.repository.sort?.(query.sorting,query.sortColumn);
+            // }
+            
             res.status(200).json(pokemons);
 
         }catch(error){

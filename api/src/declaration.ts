@@ -2,12 +2,15 @@
 export type Query = Record<string,unknown>;
 export type Id = string | number;
 export type Name = string;
+export type Sorting = "ASC" | "DESC";
+export type Column = string | number;
 export interface DatabaseRepository<T = unknown>{
     download(): Promise<void>;
     create?(data: T, query?: Query): Promise<T>;
-    list(query?:Query): Promise<T[]>;
+    list(sorting:Sorting,column:string,name?:Name): Promise<T[]>;
     get?(id:Id,query?:Query): Promise<T|null>;
-    search?(name:Name,query?:Query):Promise<T[]>;
+    search?(name:Name):Promise<T[]>;
+    sort?(sorting:Sorting,column:Column):Promise<T[]>;
     update?(id:Id,data:T,query?:Query):Promise<T|null>;
     remove?(id:Id,query?:Query):Promise<T|null>;
 }
@@ -35,4 +38,17 @@ export interface Pokemon{
 export interface Type{
     id:number;
     type:string;
+}
+
+/* express types */
+export interface RequestParams {}
+
+export interface ResponseBody {}
+
+export interface RequestBody {}
+
+export interface RequestQuery{
+    search:string;
+    sorting:Sorting;
+    sortColumn:string;
 }

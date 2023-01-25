@@ -27,7 +27,10 @@ GET http://localhost:3001/api/p-data
 GET http://localhost:3001/api/pokemons
 
 ### get all pokemons by search in name
-GET http://localhost:3001/api/pokemons?search=ch
+GET http://localhost:3001/api/pokemons?search=
+
+### get all pokemons by search and order ASC
+GET http://localhost:3001/api/pokemons?search=&sorting=ASC&sortColumn=name
 
 ### get all the types
 GET http://localhost:3001/api/t-data

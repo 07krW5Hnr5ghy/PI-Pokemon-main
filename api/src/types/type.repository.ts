@@ -1,5 +1,5 @@
 import database from "../config/database";
-import { DatabaseRepository, Query } from "../declaration";
+import { DatabaseRepository, Query,Sorting,Name } from "../declaration";
 import { Type } from "../entity/Type";
 import { getApiTypes } from "../controllers/apiGetters";
 
@@ -12,7 +12,7 @@ export class TypeRepository implements DatabaseRepository<Type>{
         .values(await getApiTypes()).execute();
     }
 
-    async list(query?: Query | undefined): Promise<Type[]> {
+    async list(sorting:Sorting,column:string,name?:Name): Promise<Type[]> {
         const repository = database.getRepository(Type);
         return repository.find();
     }

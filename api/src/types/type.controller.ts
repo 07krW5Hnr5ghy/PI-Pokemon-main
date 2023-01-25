@@ -2,6 +2,7 @@ import { Request,Response,NextFunction } from "express";
 import { DatabaseRepository } from "../declaration";
 import { Type } from "../entity/Type";
 import { getApiTypes } from "../controllers/apiGetters";
+import { Sorting,RequestParams,RequestBody,ResponseBody,RequestQuery } from "../declaration";
 
 export class TypeController{
     constructor(private repository:DatabaseRepository<Type>){}
@@ -15,9 +16,10 @@ export class TypeController{
         }
     }
 
-    async list(req:Request,res:Response,next:NextFunction):Promise<void>{
+    async list(req:Request<RequestParams, ResponseBody, RequestBody, RequestQuery>,res:Response,next:NextFunction):Promise<void>{
+        const {query} =  req;
         try{
-            const types = await this.repository.list();
+            const types = await this.repository.list(query.sorting,query.sortColumn,query.search);
             res.status(200).json(types);
         }catch(error){
             next(error);
