@@ -27,7 +27,7 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
 
         // filter by type
         if(type){
-            pokemons.andWhere(":type = ANY (string_to_array(classes,','))",{type:type})
+            pokemons.andWhere(":type = ANY (classes)",{type:type})
         }
 
         // filter by origin
