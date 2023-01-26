@@ -1,5 +1,5 @@
 import database from "../config/database";
-import { DatabaseRepository, Id, Query, Name,Sorting,Column} from "../declaration";
+import { DatabaseRepository, Id, Query, Name,Sorting,Column,Origin} from "../declaration";
 import { Pokemon } from "../entity/Pokemon";
 import { getApiPokemons } from "../controllers/apiGetters";
 
@@ -20,18 +20,28 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
         return pokemon;
     }
 
-    async list(sorting:Sorting="ASC",column:string="name",name?:Name): Promise<Pokemon[]>{
-        const pokemons = repository.createQueryBuilder("pokemon")
-        .where("pokemon.name LIKE :s",{s: `%${name}%`})
-        .orderBy(column,sorting).getMany();
-        // if(!name){
-        //     return pokemon.find();
-        // }
-        // if(name){
-        //     pokemon.createQueryBuilder("pokemon")
-        //     .where("pokemon.name LIKE :s",{s: `%${name}%`}).getMany();
-        // }
-        return pokemons;
+    async list(sorting?:Sorting,column?:string,name?:Name,type?:string,origin?:Origin): Promise<Pokemon[]>{
+        // get pokemon table and search by name
+        let pokemons = repository.createQueryBuilder("pokemon")
+        .where("pokemon.name LIKE :search",{search: `%${name}%`});
+
+        // filter by type
+        if(type){
+            pokemons.andWhere(":type = ANY (string_to_array(classes,','))",{type:type})
+        }
+
+        // filter by origin
+        if(origin){
+            pokemons.andWhere("pokemon.origin = :origin",{origin:origin})
+        }
+
+        // sort mode and column to sort
+        if(sorting && column){
+            pokemons.orderBy(column,sorting)
+        }
+
+        // return the result of the request to pokemon table
+        return pokemons.getMany();
     }
 
     async search(name:Name,query?:Query):Promise<Pokemon[]>{

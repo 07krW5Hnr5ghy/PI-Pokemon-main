@@ -34,7 +34,7 @@ export class PokemonController{
         let pokemons;
         try{
 
-            pokemons = await this.repository.list(query.sorting,query.sortColumn,query.search);
+            pokemons = await this.repository.list(query.sorting,query.sortColumn,query.search,query.type,query.origin);
             // if(query.search){
             //     pokemons = await this.repository.search?.(query.search);
             // }

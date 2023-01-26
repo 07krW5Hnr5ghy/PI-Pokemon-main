@@ -12,7 +12,7 @@ export class TypeRepository implements DatabaseRepository<Type>{
         .values(await getApiTypes()).execute();
     }
 
-    async list(sorting:Sorting,column:string,name?:Name): Promise<Type[]> {
+    async list(sorting?:Sorting,column?:string,name?:Name): Promise<Type[]> {
         const repository = database.getRepository(Type);
         return repository.find();
     }
