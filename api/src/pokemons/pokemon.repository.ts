@@ -1,5 +1,5 @@
 import database from "../config/database";
-import { DatabaseRepository, Id, Query, Name,Sorting,Column,Origin} from "../declaration";
+import { DatabaseRepository, Id, Query, Name,Sorting,Column,Origin, Data} from "../declaration";
 import { Pokemon } from "../entity/Pokemon";
 import { getApiPokemons } from "../controllers/apiGetters";
 
@@ -20,7 +20,9 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
         return pokemon;
     }
 
-    async list(sorting?:Sorting,column?:string,name?:Name,type?:string,origin?:Origin): Promise<Pokemon[]>{
+    async list(sorting?:Sorting,column?:string,name?:Name,type?:string,origin?:Origin,page?:number): Promise<Data>{
+        const currentPage = Number(page) || 1;
+        const perPage = 12;
         // get pokemon table and search by name
         let pokemons = repository.createQueryBuilder("pokemon")
         .where("pokemon.name LIKE :search",{search: `%${name}%`});
@@ -40,8 +42,17 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
             pokemons.orderBy(column,sorting)
         }
 
+        const total = await pokemons.getCount();
+
+        pokemons.skip((currentPage-1)*perPage).take(perPage);
+
         // return the result of the request to pokemon table
-        return pokemons.getMany();
+        return {
+            data:pokemons.getMany(),
+            total,
+            currentPage,
+            last_page:Math.ceil(total/perPage),
+        }
     }
 
     async search(name:Name,query?:Query):Promise<Pokemon[]>{

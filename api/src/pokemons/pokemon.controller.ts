@@ -34,14 +34,7 @@ export class PokemonController{
         let pokemons;
         try{
 
-            pokemons = await this.repository.list(query.sorting,query.sortColumn,query.search,query.type,query.origin);
-            // if(query.search){
-            //     pokemons = await this.repository.search?.(query.search);
-            // }
-
-            // if(query.sorting && query.sortColumn){
-            //     pokemons = await this.repository.sort?.(query.sorting,query.sortColumn);
-            // }
+            pokemons = await this.repository.list(query.sorting,query.sortColumn,query.search,query.type,query.origin,query.page);
             
             res.status(200).json(pokemons);
 

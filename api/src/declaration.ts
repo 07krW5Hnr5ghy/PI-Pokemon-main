@@ -7,7 +7,7 @@ export type Column = string | number;
 export interface DatabaseRepository<T = unknown>{
     download(): Promise<void>;
     create?(data: T, query?: Query): Promise<T>;
-    list(sorting?:Sorting,column?:string,name?:Name,type?:string,origin?:Origin): Promise<T[]>;
+    list(sorting?:Sorting,column?:string,name?:Name,type?:string,origin?:Origin,page?:number): Promise<Data>;
     get?(id:Id,query?:Query): Promise<T|null>;
     search?(name:Name):Promise<T[]>;
     sort?(sorting:Sorting,column:Column):Promise<T[]>;
@@ -53,4 +53,12 @@ export interface RequestQuery{
     sortColumn:string;
     type:string;
     origin:Origin;
+    page:number;
+}
+
+export interface Data{
+    data:Promise<Pokemon[]>;
+    total:number;
+    currentPage:number;
+    last_page:number;
 }
