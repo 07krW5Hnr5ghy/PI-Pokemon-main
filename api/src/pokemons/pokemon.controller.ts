@@ -22,14 +22,8 @@ export class PokemonController{
         try{
             const body = req.body;
             let id = await keyGenerator.next();
-            console.log(id);
-            if(id.value){
-                const pokemon = await this.repository.create?.({...body,id:id.value});
-                res.status(200).json(pokemon);
-            }else{
-                console.log("fuck you");
-            }
-            
+            const pokemon = await this.repository.create?.({...body,id:id.value,origin:"custom"});
+            res.status(200).json(pokemon);
         } catch(error){
             next(error);
         }

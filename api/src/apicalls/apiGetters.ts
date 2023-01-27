@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Origin } from "../declaration";
 
 export const getApiPokemons = async (limit: number) => {
     
@@ -39,6 +40,7 @@ export const getApiPokemons = async (limit: number) => {
             speed,
             specialAttack,
             specialDefense,
+            origin:Origin.API,
             picture:pokemon.sprites.other.dream_world.front_default,
         }
     });
