@@ -11,7 +11,7 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
         await database.createQueryBuilder()
         .insert()
         .into(Pokemon)
-        .values(await getApiPokemons(10)).execute();  
+        .values(await getApiPokemons(50)).execute();  
     }
 
     async create(data: Partial<Pokemon>, query?:Query): Promise<Pokemon>{
@@ -20,7 +20,7 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
         return pokemon;
     }
 
-    async list(sorting?:Sorting,column?:string,name?:Name,type?:string,origin?:Origin,page?:number): Promise<Pokemon[]>{
+    async list(sorting?:Sorting,column?:string,name?:Name,type?:string,origin?:Origin,page?:number): Promise<Data>{
         const currentPage = Number(page) || 1;
         const perPage = 12;
         // get pokemon table and search by name
@@ -42,18 +42,18 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
             pokemons.orderBy(column,sorting)
         }
 
-        //const total = await pokemons.getCount();
-        console.log(await pokemons.getMany());
-        //pokemons.offset((currentPage-1)*perPage).limit(perPage);
-        // return the result of the request to pokemon table
-        // return {
-        //     data:"", 
-        //     total:2,
-        //     currentPage,
-        //     last_page:Math.ceil(2/perPage),
-        // }
+        const total = await pokemons.getCount();
 
-        return pokemons.getMany();
+        const records = await pokemons.offset((currentPage-1)*perPage).limit(perPage).getMany();
+
+        const data : Data = {
+            data: records,
+            total,
+            currentPage,
+            last_page:Math.ceil(total/perPage),
+        };
+
+        return data;
     }
 
     async search(name:Name,query?:Query):Promise<Pokemon[]>{
