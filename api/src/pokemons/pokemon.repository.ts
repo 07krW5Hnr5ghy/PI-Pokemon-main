@@ -20,7 +20,7 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
         return pokemon;
     }
 
-    async list(sorting?:Sorting,column?:string,name?:Name,type?:string,origin?:Origin,page?:number): Promise<Data>{
+    async list(sorting?:Sorting,column?:string,name?:Name,type?:string,origin?:Origin,page?:number): Promise<Pokemon[]>{
         const currentPage = Number(page) || 1;
         const perPage = 12;
         // get pokemon table and search by name
@@ -42,17 +42,18 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
             pokemons.orderBy(column,sorting)
         }
 
-        const total = await pokemons.getCount();
-
-        pokemons.skip((currentPage-1)*perPage).take(perPage);
-
+        //const total = await pokemons.getCount();
+        console.log(await pokemons.getMany());
+        //pokemons.offset((currentPage-1)*perPage).limit(perPage);
         // return the result of the request to pokemon table
-        return {
-            data:pokemons.getMany(),
-            total,
-            currentPage,
-            last_page:Math.ceil(total/perPage),
-        }
+        // return {
+        //     data:"", 
+        //     total:2,
+        //     currentPage,
+        //     last_page:Math.ceil(2/perPage),
+        // }
+
+        return pokemons.getMany();
     }
 
     async search(name:Name,query?:Query):Promise<Pokemon[]>{

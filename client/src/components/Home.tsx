@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import { useAppDispatch,useAppSelector } from "../redux/hooks";
 import { RootState } from "../redux/store";
-import { getPokemons,getTypes } from "../redux/pokemonActions";
+import { getDBPokemons,getTypes } from "../redux/pokemonActions";
 import { useSearchParams } from "react-router-dom";
 import Card from "./Card";
 import Loading from "./Loading";
@@ -17,22 +17,22 @@ const Home = () => {
 
     useEffect(() => {
         console.count("mount");
-        if(name){
-            dispatch(getPokemons(name));
-        }
+        // if(name){
+        //     dispatch(getPokemons(name));
+        // }
 
         if(!data.length){
-            dispatch(getPokemons(""));
+            dispatch(getDBPokemons());
         }
 
-        if(!types.length){
-            dispatch(getTypes());
-        }
+        // if(!types.length){
+        //     dispatch(getTypes());
+        // }
     },[
         dispatch,
         name,
         data.length,
-        types.length
+        //types.length
     ]);
 
     return(

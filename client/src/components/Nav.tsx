@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import SearchBar from "./SearchBar";
+//import SearchBar from "./SearchBar";
 import { Search } from "@mui/icons-material";
 import { Home, AddCircle } from "@mui/icons-material"; 
 

@@ -1,7 +1,16 @@
 import {Link} from "react-router-dom";
 import { PlayArrow } from "@mui/icons-material";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAPIData } from "../redux/pokemonActions";
+
+
 
 const Landing = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getAPIData);
+    },[dispatch]);
     return(
         <div id="landing-container">
             <div id="landing-call">

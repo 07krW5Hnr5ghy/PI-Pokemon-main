@@ -3,16 +3,28 @@ import { DatabaseRepository } from "../declaration";
 import { keyGenerator } from "../utils/utils";
 import {Pokemon} from "../entity/Pokemon";
 import {RequestParams,RequestBody,ResponseBody,RequestQuery,Origin } from "../declaration";
+import database from "../config/database";
 
-
+const repository = database.getRepository(Pokemon);
 
 export class PokemonController{
     constructor(private repository:DatabaseRepository<Pokemon>){}
 
     async download(req:Request,res:Response,next:NextFunction):Promise<void>{
         try{
-            let data = await this.repository.download(); 
-            res.status(200).json(data);
+            let records = await repository.createQueryBuilder("pokemon")
+            .select("COUNT(*)")
+            .getRawOne();
+
+            console.log(records);
+
+            if(Number(records.count) === 0){
+                let data = await this.repository.download(); 
+                res.status(200).json({message:"api records downloaded"});
+            }else{
+                res.status(200).json({message:"the api records already were retrieved"});
+            }
+            
         }catch(error){
             next(error);
         }

@@ -114,7 +114,7 @@ export const PokemonSlice = createSlice({
     name:'pokemon',
     initialState,
     reducers:{
-        fetchPokemons: (state,action) => {
+        fetchDB: (state,action) => {
             state.data = action.payload;
         },
         fetchDetail: (state,action) => {
@@ -132,6 +132,6 @@ export const PokemonSlice = createSlice({
     }
 })
 
-export const {fetchPokemons,fetchDetail,fetchTypes,flushDetail,flushRecord} = PokemonSlice.actions;
+export const {fetchDB,fetchDetail,fetchTypes,flushDetail,flushRecord} = PokemonSlice.actions;
 export const selectPokemons = (state:RootState) => state.pokemons.data;
 export default PokemonSlice.reducer;

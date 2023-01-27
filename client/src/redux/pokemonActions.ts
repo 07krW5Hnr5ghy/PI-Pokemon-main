@@ -1,18 +1,27 @@
 import axios from "axios";
-import { fetchPokemons,fetchDetail,fetchTypes,flushDetail,flushRecord } from "./pokemonSlice";
+import { fetchDB,fetchDetail,fetchTypes,flushDetail,flushRecord } from "./pokemonSlice";
 import type {AppDispatch} from '../redux/store';
 
-export const getPokemons = (name : string) => {
+export const getAPIData = () => {
+    axios(`/api/p-data`)
+    .then(res => console.log(res))
+    .catch(e => console.log(e));
+}
+
+export const getDBPokemons = () => {
    return (dispatch:AppDispatch) => {
-    if(name){
-        axios(`/pokemons?name=${name}`)
-        .then(res => dispatch(fetchPokemons(res.data)))
-        .catch(e => console.log(e));
-    }else{
-        axios(`/pokemons`)
-        .then(res => dispatch(fetchPokemons(res.data)))
-        .catch(e => console.log(e));
-    }
+    // if(name){
+    //     axios(`/pokemons?name=${name}`)
+    //     .then(res => dispatch(fetchPokemons(res.data)))
+    //     .catch(e => console.log(e));
+    // }else{
+    //     axios(`/pokemons`)
+    //     .then(res => dispatch(fetchPokemons(res.data)))
+    //     .catch(e => console.log(e));
+    // }
+    axios(`/api/pokemons`)
+    .then(res => console.log(res))
+    .catch(e => console.log(e));
    }
 } 
 
