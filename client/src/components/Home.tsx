@@ -21,9 +21,11 @@ const Home = () => {
         //     dispatch(getPokemons(name));
         // }
 
-        if(!data.length){
+        if(!data.records.length){
             dispatch(getDBPokemons());
         }
+
+        console.log(data);
 
         // if(!types.length){
         //     dispatch(getTypes());
@@ -31,7 +33,7 @@ const Home = () => {
     },[
         dispatch,
         name,
-        data.length,
+        data.records,
         //types.length
     ]);
 
@@ -65,11 +67,11 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="card-container">
-                    {!data.length ? <Loading/> : 
-                    data.map(pokemon => 
+                    {!data.records.length ? <Loading/> : 
+                    data.records.map(pokemon => 
                     <Card
                     name={pokemon.name}
-                    img={pokemon.img}
+                    img={pokemon.picture}
                     classes={pokemon.classes}
                     id={pokemon.id}
                     key={pokemon.id}

@@ -8,7 +8,7 @@ export interface Pokemon{
     hp:number;
     attack:number;
     defense:number;
-    img:string;
+    picture:string;
     origin:string;
     createdAt:string;
     updatedAt:string;

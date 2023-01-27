@@ -47,7 +47,7 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
         const records = await pokemons.offset((currentPage-1)*perPage).limit(perPage).getMany();
 
         const data : Data = {
-            data: records,
+            records,
             total,
             currentPage,
             last_page:Math.ceil(total/perPage),

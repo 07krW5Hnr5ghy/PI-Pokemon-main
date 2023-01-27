@@ -43,7 +43,7 @@ const Detail = () => {
                      <h1 className="detail-name">{detail.name}</h1>
                      <span className="detail-id">{detail.id}</span>
                      <div className="img-container">
-                        <img src={detail.img} alt="" loading="lazy"/>
+                        <img src={detail.picture} alt="" loading="lazy"/>
                      </div>
                      <div className="types">
                         {detail.classes.map(type=><span className="detail-type" key={type}>{` ${type} `}</span>)}

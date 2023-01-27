@@ -57,7 +57,7 @@ export interface RequestQuery{
 }
 
 export interface Data{
-    data:Pokemon[];
+    records:Pokemon[];
     total:number;
     currentPage:number;
     last_page:number;

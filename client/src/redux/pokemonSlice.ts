@@ -83,14 +83,24 @@ import { RootState } from "./store";
 };*/
 
 export interface PokemonsState{
-    data:Pokemon[],
+    data:{
+        records:Pokemon[],
+        currentPage:number,
+        last_page:number,
+        total:number,
+    },
     detail:Pokemon,
     types:string[],
     status:'idle' | 'loading' | 'failed',
 }
 
 const initialState : PokemonsState = {
-    data:[],
+    data:{
+        records:[],
+        currentPage:1,
+        last_page:1,
+        total:1,
+    },
     detail:{
         name:"",
         id:"",
@@ -101,7 +111,7 @@ const initialState : PokemonsState = {
         hp:0,
         attack:0,
         defense:0,
-        img:"",
+        picture:"",
         origin:"",
         createdAt:"",
         updatedAt:"",
@@ -127,7 +137,7 @@ export const PokemonSlice = createSlice({
             state.detail = action.payload;
         },
         flushRecord: (state,action) => {
-            state.data = state.data.filter(record => action.payload !== record.id);
+            //state.data = state.data.filter(record => action.payload !== record.id);
         }
     }
 })
