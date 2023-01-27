@@ -1,7 +1,7 @@
 import database from "../config/database";
 import { DatabaseRepository, Id, Query, Name,Sorting,Column,Origin, Data} from "../declaration";
 import { Pokemon } from "../entity/Pokemon";
-import { getApiPokemons } from "../controllers/apiGetters";
+import { getApiPokemons } from "../apicalls/apiGetters";
 
 const repository = database.getRepository(Pokemon);
 

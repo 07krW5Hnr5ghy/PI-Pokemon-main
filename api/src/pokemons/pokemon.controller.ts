@@ -1,7 +1,8 @@
 import {Request,Response,NextFunction} from "express";
 import { DatabaseRepository } from "../declaration";
+import { keyGenerator } from "../utils/utils";
 import {Pokemon} from "../entity/Pokemon";
-import { Sorting,RequestParams,RequestBody,ResponseBody,RequestQuery } from "../declaration";
+import {RequestParams,RequestBody,ResponseBody,RequestQuery,Origin } from "../declaration";
 
 
 
@@ -20,8 +21,15 @@ export class PokemonController{
     async create(req:Request, res:Response, next:NextFunction):Promise<void>{
         try{
             const body = req.body;
-            const pokemon = await this.repository.create?.(body);
-            res.status(200).json(pokemon);
+            let id = await keyGenerator.next();
+            console.log(id);
+            if(id.value){
+                const pokemon = await this.repository.create?.({...body,id:id.value});
+                res.status(200).json(pokemon);
+            }else{
+                console.log("fuck you");
+            }
+            
         } catch(error){
             next(error);
         }

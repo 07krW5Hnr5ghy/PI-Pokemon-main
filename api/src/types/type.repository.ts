@@ -1,7 +1,7 @@
 import database from "../config/database";
 import { DatabaseRepository, Query,Sorting,Name } from "../declaration";
 import { Type } from "../entity/Type";
-import { getApiTypes } from "../controllers/apiGetters";
+import { getApiTypes } from "../apicalls/apiGetters";
 
 export class TypeRepository implements DatabaseRepository<Type>{
     

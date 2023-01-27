@@ -1,7 +1,7 @@
 import { Request,Response,NextFunction } from "express";
 import { DatabaseRepository } from "../declaration";
 import { Type } from "../entity/Type";
-import { getApiTypes } from "../controllers/apiGetters";
+import { getApiTypes } from "../apicalls/apiGetters";
 import { Sorting,RequestParams,RequestBody,ResponseBody,RequestQuery } from "../declaration";
 
 export class TypeController{
