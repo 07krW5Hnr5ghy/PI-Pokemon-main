@@ -19,7 +19,7 @@ export const getDBPokemons = (search?:string,type?:string,sorting?:string,sortCo
     //     .then(res => dispatch(fetchPokemons(res.data)))
     //     .catch(e => console.log(e));
     // }
-    axios(`http://localhost:3001/api/pokemons?search=&type=&sorting=&sortColumn=&origin=&page=`)
+    axios(`/api/pokemons?search=&type=&sorting=&sortColumn=&origin=&page=`)
     .then(res => dispatch(fetchDB(res.data)))
     .catch(e => console.log(e));
    }
@@ -27,7 +27,7 @@ export const getDBPokemons = (search?:string,type?:string,sorting?:string,sortCo
 
 export const getDetail = (id: string) => {
     return (dispatch:AppDispatch) => {
-        axios(`/pokemons/${id}`)
+        axios(`/api/pokemons/${id}`)
         .then(res => dispatch(fetchDetail(res.data)))
         .catch(e => console.log(e));
     }
@@ -35,7 +35,7 @@ export const getDetail = (id: string) => {
 
 export const getTypes = () => {
     return (dispatch:AppDispatch) => {
-        axios(`/types`)
+        axios(`/api/types`)
         .then(res => dispatch(fetchTypes(res.data)))
         .catch(e => console.log(e));
     }

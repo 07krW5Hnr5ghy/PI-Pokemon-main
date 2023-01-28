@@ -13,3 +13,9 @@ export interface Pokemon{
     createdAt:string;
     updatedAt:string;
 }
+
+export interface Type{
+    id:number;
+    type:string;
+    createdAt:string;
+}

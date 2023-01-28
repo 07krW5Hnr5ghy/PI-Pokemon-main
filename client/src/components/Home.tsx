@@ -25,16 +25,14 @@ const Home = () => {
             dispatch(getDBPokemons());
         }
 
-        console.log(data);
-
-        // if(!types.length){
-        //     dispatch(getTypes());
-        // }
+        if(!types.length){
+            dispatch(getTypes());
+        }
     },[
         dispatch,
         name,
         data.records,
-        //types.length
+        types.length
     ]);
 
     return(
@@ -46,15 +44,15 @@ const Home = () => {
                         <span className="filter-title">Filters</span>
                         <select className="filter-select" name="type" id="">
                             <option value="type" selected disabled>type</option>
-                            <option value="normal">normal</option>
-                            <option value="grass">grass</option>
-                            <option value="fire">fire</option>
-                            <option value="water">water</option>
+                            {!types.length ? 
+                            null :
+                            types.map(item => <option value={item.type} key={item.id}>{item.type}</option>)
+                            }
                         </select>
                         <select className="filter-select" name="origin" id="">
                             <option value="origin" selected disabled>origin</option>
-                            <option value="api+">api</option>
-                            <option value="custom+">custom</option>
+                            <option value="api">api</option>
+                            <option value="custom">custom</option>
                         </select>
                     </div>
                     <div className="filter">

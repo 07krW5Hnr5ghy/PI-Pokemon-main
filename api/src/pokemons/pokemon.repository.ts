@@ -69,7 +69,7 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
     }
 
     async get(id:Id,query?:Query): Promise<Pokemon | null>{
-        const pokemon = await repository.findOneBy({id:id as any});
+        const pokemon = await repository.findOneBy({id:id as string});
         if(!pokemon){
             console.log("pokemon doesnt not exist");
         }

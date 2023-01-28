@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { Pokemon } from "../interfaces";
+import { Pokemon,Type } from "../interfaces";
 import { RootState } from "./store";
 
 /*export const reducerPokemon = (state = initialState,action) => {
@@ -90,7 +90,7 @@ export interface PokemonsState{
         total:number,
     },
     detail:Pokemon,
-    types:string[],
+    types:Type[],
     status:'idle' | 'loading' | 'failed',
 }
 
