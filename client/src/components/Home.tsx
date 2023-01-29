@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-//import { useAppDispatch,useAppSelector } from "../redux/hooks";
+import { Filters } from "../interfaces";
 import { RootState } from "../redux/store";
 import { getDBPokemons,getTypes } from "../redux/pokemonActions";
 import { useSearchParams } from "react-router-dom";
@@ -12,14 +12,19 @@ const Home = () => {
     const dispatch = useDispatch();
     const [searchParams] = useSearchParams();
     const name = searchParams.get('name');
+    const [filters,setFilters] = useState<Filters>({
+        type:"",
+        origin:"",
+        sort:"",
+        column:"",
+        page:1,
+    });
+    const [sort,setSort] = useState("newest");
     // selectors 
     const {data,types} = useSelector((state:RootState) => state.pokemons);
 
     useEffect(() => {
         console.count("mount");
-        // if(name){
-        //     dispatch(getPokemons(name));
-        // }
 
         if(!data.records.length){
             dispatch(getDBPokemons());
@@ -28,12 +33,41 @@ const Home = () => {
         if(!types.length){
             dispatch(getTypes());
         }
+
+        if(filters.type || filters.origin || filters.sort || filters.column || filters.page != data.currentPage){
+            dispatch(getDBPokemons(filters.page,"",filters.type,filters.sort,filters.column,filters.origin));
+        }
     },[
         dispatch,
         name,
         data.records,
-        types.length
+        types.length,
+        filters
     ]);
+
+    const handleFilters = (e:React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
+        setFilters({
+            ...filters,
+            [e.target.name]: value,
+        });
+    }
+
+    const handlePages = (e:React.MouseEvent<HTMLButtonElement>,page:number) => {
+        setFilters({
+            ...filters,
+            page,
+        })
+    }
+
+    const pages = [];
+
+    for(let i = 1; i <= data.last_page; i++){
+        pages.push(i);
+    }
+
+    console.log(filters);
+    console.log(pages);
 
     return(
         <div id="home-container">
@@ -42,14 +76,14 @@ const Home = () => {
                 <div className="filter-container">
                     <div className="filter">
                         <span className="filter-title">Filters</span>
-                        <select className="filter-select" name="type" id="">
+                        <select className="filter-select" name="type" onChange={handleFilters}>
                             <option value="type" selected disabled>type</option>
                             {!types.length ? 
                             null :
                             types.map(item => <option value={item.type} key={item.id}>{item.type}</option>)
                             }
                         </select>
-                        <select className="filter-select" name="origin" id="">
+                        <select className="filter-select" name="origin" onChange={handleFilters}>
                             <option value="origin" selected disabled>origin</option>
                             <option value="api">api</option>
                             <option value="custom">custom</option>
@@ -57,10 +91,20 @@ const Home = () => {
                     </div>
                     <div className="filter">
                         <span className="filter-title">Sort</span>
-                        <select className="filter-select" name="sort" id="">
-                            <option value="sort" selected disabled>Name</option>
-                            <option value="asc">Name (Asc)</option>
-                            <option value="desc">Name (Desc)</option>
+                        <select className="filter-select" name="sort" onChange={handleFilters}>
+                            <option value="sort" selected disabled>mode</option>
+                            <option value="ASC">ASC</option>
+                            <option value="DESC">DESC</option>
+                        </select>
+                        <select className="filter-select" name="column" onChange={handleFilters}>
+                            <option value="column" selected disabled>sort by</option>
+                            <option value="name">name</option>
+                            <option value="attack">attack</option>
+                            <option value="defense">defense</option>
+                            <option value="specialAttack">special attack</option>
+                            <option value="specialDefense">special defense</option>
+                            <option value="health">health</option>
+                            <option value="speed">speed</option>
                         </select>
                     </div>
                 </div>
@@ -74,6 +118,11 @@ const Home = () => {
                     id={pokemon.id}
                     key={pokemon.id}
                     />)}
+                </div>
+                <div className="pagination-container">
+                    <button type="button">{`<`}</button>
+                    {pages.map(item => <button type="button" className="page" onClick={(e) => handlePages(e,item)}>{item}</button>)}
+                    <button type="button">{`>`}</button>
                 </div>
             </div>
         </div>

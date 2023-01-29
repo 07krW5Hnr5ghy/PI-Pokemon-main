@@ -8,18 +8,9 @@ export const getAPIData = () => {
     .catch(e => console.log(e));
 }
 
-export const getDBPokemons = (search?:string,type?:string,sorting?:string,sortColumn?:string,origin?:string,page?:number) => {
+export const getDBPokemons = (page?:number,search?:string,type?:string,sorting?:string,sortColumn?:string,origin?:string) => {
    return (dispatch:AppDispatch) => {
-    // if(name){
-    //     axios(`/pokemons?name=${name}`)
-    //     .then(res => dispatch(fetchPokemons(res.data)))
-    //     .catch(e => console.log(e));
-    // }else{
-    //     axios(`/pokemons`)
-    //     .then(res => dispatch(fetchPokemons(res.data)))
-    //     .catch(e => console.log(e));
-    // }
-    axios(`/api/pokemons?search=&type=&sorting=&sortColumn=&origin=&page=`)
+    axios(`/api/pokemons?search=${search || ""}&type=${type || ""}&sorting=${sorting || ""}&sortColumn=${sortColumn || ""}&origin=${origin || ""}&page=${page || 1}`)
     .then(res => dispatch(fetchDB(res.data)))
     .catch(e => console.log(e));
    }

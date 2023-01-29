@@ -19,3 +19,11 @@ export interface Type{
     type:string;
     createdAt:string;
 }
+
+export interface Filters{
+    type:string;
+    origin:string;
+    sort:string;
+    column:string;
+    page:number;
+}
