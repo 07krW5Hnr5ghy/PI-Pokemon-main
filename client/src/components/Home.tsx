@@ -19,7 +19,6 @@ const Home = () => {
         column:"",
         page:1,
     });
-    const [sort,setSort] = useState("newest");
     // selectors 
     const {data,types} = useSelector((state:RootState) => state.pokemons);
 
@@ -41,6 +40,7 @@ const Home = () => {
         dispatch,
         name,
         data.records,
+        data.currentPage,
         types.length,
         filters
     ]);
@@ -57,6 +57,20 @@ const Home = () => {
         setFilters({
             ...filters,
             page,
+        })
+    }
+
+    const forwardPage = (e:React.MouseEvent<HTMLButtonElement>) => {
+        setFilters({
+            ...filters,
+            page:filters.page-1,
+        })
+    }
+
+    const backwardPage = (e:React.MouseEvent<HTMLButtonElement>) => {
+        setFilters({
+            ...filters,
+            page:filters.page+1,
         })
     }
 
@@ -120,9 +134,9 @@ const Home = () => {
                     />)}
                 </div>
                 <div className="pagination-container">
-                    <button type="button">{`<`}</button>
+                    {data.currentPage === 1 ? null : <button type="button" onClick={forwardPage}>{`<`}</button>}
                     {pages.map(item => <button type="button" className="page" onClick={(e) => handlePages(e,item)}>{item}</button>)}
-                    <button type="button">{`>`}</button>
+                    {data.currentPage !== data.last_page ? <button type="button" onClick={backwardPage}>{`>`}</button> : null }
                 </div>
             </div>
         </div>
