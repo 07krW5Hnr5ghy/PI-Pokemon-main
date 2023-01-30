@@ -1,6 +1,78 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { Pokemon,Type } from "../interfaces";
+import { Filters, Pokemon,Type } from "../interfaces";
 import { RootState } from "./store";
+
+export interface PokemonsState{
+    data:{
+        records:Pokemon[],
+        currentPage:number,
+        last_page:number,
+        total:number,
+    },
+    detail:Pokemon,
+    types:Type[],
+    filters:Filters,
+    status:'idle' | 'loading' | 'failed',
+}
+
+const initialState : PokemonsState = {
+    data:{
+        records:[],
+        currentPage:1,
+        last_page:1,
+        total:1,
+    },
+    detail:{
+        name:"",
+        id:"",
+        classes:[],
+        specialAttack:0,
+        specialDefense:0,
+        speed:0,
+        health:0,
+        attack:0,
+        defense:0,
+        picture:"",
+        origin:"",
+        createdAt:"",
+        updatedAt:"",
+    },
+    types:[],
+    filters:{
+        type:"",
+        origin:"",
+        sort:"",
+        column:"",
+        page:1,
+    },
+    status:'idle',
+};
+
+export const PokemonSlice = createSlice({
+    name:'pokemon',
+    initialState,
+    reducers:{
+        fetchDB: (state,action) => {
+            state.data = action.payload;
+        },
+        fetchDetail: (state,action) => {
+            state.detail = action.payload;
+        },
+        fetchTypes: (state,action) => {
+            state.types = action.payload;
+        },
+        flushDetail: (state,action) => {
+            state.detail = action.payload;
+        },
+        setFilterData: (state,action) => {
+            state.filters = action.payload;
+        }
+    }
+})
+
+export const {fetchDB,fetchDetail,fetchTypes,flushDetail,setFilterData} = PokemonSlice.actions;
+export const selectPokemons = (state:RootState) => state.pokemons.data;
+export default PokemonSlice.reducer;
 
 /*export const reducerPokemon = (state = initialState,action) => {
     switch(action.type){
@@ -81,67 +153,3 @@ import { RootState } from "./store";
             return state;
     }
 };*/
-
-export interface PokemonsState{
-    data:{
-        records:Pokemon[],
-        currentPage:number,
-        last_page:number,
-        total:number,
-    },
-    detail:Pokemon,
-    types:Type[],
-    status:'idle' | 'loading' | 'failed',
-}
-
-const initialState : PokemonsState = {
-    data:{
-        records:[],
-        currentPage:1,
-        last_page:1,
-        total:1,
-    },
-    detail:{
-        name:"",
-        id:"",
-        classes:[],
-        specialAttack:0,
-        specialDefense:0,
-        speed:0,
-        hp:0,
-        attack:0,
-        defense:0,
-        picture:"",
-        origin:"",
-        createdAt:"",
-        updatedAt:"",
-    },
-    types:[],
-    status:'idle',
-};
-
-export const PokemonSlice = createSlice({
-    name:'pokemon',
-    initialState,
-    reducers:{
-        fetchDB: (state,action) => {
-            state.data = action.payload;
-        },
-        fetchDetail: (state,action) => {
-            state.detail = action.payload;
-        },
-        fetchTypes: (state,action) => {
-            state.types = action.payload;
-        },
-        flushDetail: (state,action) => {
-            state.detail = action.payload;
-        },
-        flushRecord: (state,action) => {
-            //state.data = state.data.filter(record => action.payload !== record.id);
-        }
-    }
-})
-
-export const {fetchDB,fetchDetail,fetchTypes,flushDetail,flushRecord} = PokemonSlice.actions;
-export const selectPokemons = (state:RootState) => state.pokemons.data;
-export default PokemonSlice.reducer;

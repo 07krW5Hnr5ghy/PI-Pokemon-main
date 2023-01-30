@@ -1,6 +1,7 @@
 import axios from "axios";
-import { fetchDB,fetchDetail,fetchTypes,flushDetail,flushRecord } from "./pokemonSlice";
+import { fetchDB,fetchDetail,fetchTypes,flushDetail,setFilterData } from "./pokemonSlice";
 import type {AppDispatch} from '../redux/store';
+import { Filters } from "../interfaces";
 
 export const getAPIData = () => {
     axios(`/api/p-data`)
@@ -38,12 +39,18 @@ export const resetDetail = () => {
     }
 }
 
-export const deleteRecord = (id:string) => {
+export const updateFilter = (filters:Filters) => {
     return (dispatch:AppDispatch) => {
-        axios.delete(`/pokemons/${id}`);
-        dispatch(flushRecord(id));
+        dispatch(setFilterData(filters));
     }
 }
+
+// export const deleteRecord = (id:string) => {
+//     return (dispatch:AppDispatch) => {
+//         axios.delete(`/pokemons/${id}`);
+//         dispatch(flushRecord(id));
+//     }
+// }
 /*export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_DETAIL = "GET_DETAIL";
 export const GET_NAME = "GET_NAME";

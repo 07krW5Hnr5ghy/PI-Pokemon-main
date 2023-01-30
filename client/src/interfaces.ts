@@ -5,7 +5,7 @@ export interface Pokemon{
     specialAttack:number;
     specialDefense:number;
     speed:number;
-    hp:number;
+    health:number;
     attack:number;
     defense:number;
     picture:string;

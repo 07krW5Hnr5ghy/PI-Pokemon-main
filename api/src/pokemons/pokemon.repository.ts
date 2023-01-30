@@ -11,7 +11,7 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
         await database.createQueryBuilder()
         .insert()
         .into(Pokemon)
-        .values(await getApiPokemons(50)).execute();  
+        .values(await getApiPokemons(250)).execute();  
     }
 
     async create(data: Partial<Pokemon>, query?:Query): Promise<Pokemon>{

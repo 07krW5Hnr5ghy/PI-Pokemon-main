@@ -27,7 +27,7 @@ const Detail = () => {
     const stats = [
         detail.attack,
         detail.defense,
-        detail.hp,
+        detail.health,
         detail.speed,
         detail.specialAttack,
         detail.specialDefense
