@@ -28,10 +28,6 @@ const Home = () => {
             dispatch(getTypes());
         }
 
-        // if(options.type || options.origin || options.sort || options.column || options.page !== data.currentPage){
-        //     dispatch(updateFilter(options));
-        //     dispatch(getDBPokemons(filters.page,"",filters.type,filters.sort,filters.column,filters.origin));
-        // }
     },[
         dispatch,
         name,
