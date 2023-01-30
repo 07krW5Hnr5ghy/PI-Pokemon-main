@@ -16,6 +16,8 @@ const Home = () => {
     // selectors 
     const {data,types,filters} = useSelector((state:RootState) => state.pokemons);
     const [options,setoptions] = useState<Filters>(filters);
+    const [begin,setBegin] = useState<number>(0);
+    const [end,setEnd] = useState<number>(9);
 
     useEffect(() => {
         console.count("mount");
@@ -77,20 +79,40 @@ const Home = () => {
             ...options,
             page,
         })
+        if(page > data.currentPage){
+            setBegin(begin + Math.abs(data.currentPage-page));
+            setEnd(end + Math.abs(data.currentPage-page));
+        }
+        if(page >= (data.last_page-9)){
+            setBegin(data.last_page-9);
+            setEnd(data.last_page);
+        }
     }
 
     const forwardPage = (e:React.MouseEvent<HTMLButtonElement>) => {
         setoptions({
             ...options,
-            page:options.page-1,
+            page:options.page+1,
         })
+        setBegin(begin + 1);
+        setEnd(end + 1);
+        if(data.currentPage >= (data.last_page-9)){
+            setBegin(data.last_page-9);
+            setEnd(data.last_page);
+        }
     }
 
     const backwardPage = (e:React.MouseEvent<HTMLButtonElement>) => {
         setoptions({
             ...options,
-            page:options.page+1,
+            page:options.page-1,
         })
+        setBegin(begin - 1);
+        setEnd(end - 1);
+        if(data.currentPage >= (data.last_page-9)){
+            setBegin(data.last_page-9);
+            setEnd(data.last_page);
+        }
     }
 
     const pages = [];
@@ -98,6 +120,8 @@ const Home = () => {
     for(let i = 1; i <= data.last_page; i++){
         pages.push(i);
     }
+
+    console.log("options",options);
 
     return(
         <div id="home-container">
@@ -150,9 +174,9 @@ const Home = () => {
                     />)}
                 </div>
                 <div className="pagination-container">
-                    {data.currentPage === 1 ? null : <button type="button" onClick={forwardPage}><ArrowBackIos/></button>}
-                    {pages.map(item => <button type="button" className="page" onClick={(e) => handlePages(e,item)}>{item}</button>)}
-                    {data.currentPage !== data.last_page ? <button type="button" onClick={backwardPage}><ArrowForwardIos/></button> : null }
+                    {data.currentPage === 1 ? null : <button type="button" onClick={backwardPage}><ArrowBackIos/></button>}
+                    {pages.slice(begin,end).map(item => <button type="button" className="page" onClick={(e) => handlePages(e,item)}>{item}</button>)}
+                    {data.currentPage !== data.last_page ? <button type="button" onClick={forwardPage}><ArrowForwardIos/></button> : null }
                 </div>
             </div>
         </div>
