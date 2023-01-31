@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { Filters, Pokemon,Type } from "../interfaces";
+import { Filters, Pokemon,Type,Navigation } from "../interfaces";
 import { RootState } from "./store";
 
 export interface PokemonsState{
@@ -12,6 +12,7 @@ export interface PokemonsState{
     detail:Pokemon,
     types:Type[],
     filters:Filters,
+    navigation:Navigation,
     status:'idle' | 'loading' | 'failed',
 }
 
@@ -45,6 +46,10 @@ const initialState : PokemonsState = {
         column:"",
         page:1,
     },
+    navigation:{
+        beginIndex:0,
+        endIndex:9,
+    },
     status:'idle',
 };
 
@@ -66,11 +71,15 @@ export const PokemonSlice = createSlice({
         },
         setFilterData: (state,action) => {
             state.filters = action.payload;
-        }
+        },
+        paginationBar:(state,action) => {
+            state.navigation = action.payload;
+        },
+        
     }
 })
 
-export const {fetchDB,fetchDetail,fetchTypes,flushDetail,setFilterData} = PokemonSlice.actions;
+export const {fetchDB,fetchDetail,fetchTypes,flushDetail,setFilterData,paginationBar} = PokemonSlice.actions;
 export const selectPokemons = (state:RootState) => state.pokemons.data;
 export default PokemonSlice.reducer;
 

@@ -27,3 +27,8 @@ export interface Filters{
     column:string;
     page:number;
 }
+
+export interface Navigation{
+    beginIndex:number;
+    endIndex:number;
+}

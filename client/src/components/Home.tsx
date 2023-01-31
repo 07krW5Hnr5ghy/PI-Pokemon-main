@@ -1,8 +1,8 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect,useState,useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Filters } from "../interfaces";
 import { RootState } from "../redux/store";
-import { getDBPokemons,getTypes,updateFilter } from "../redux/pokemonActions";
+import { getDBPokemons,getTypes,updateFilter,navigationBar} from "../redux/pokemonActions";
 import { useSearchParams } from "react-router-dom";
 import { ArrowForwardIos,ArrowBackIos } from "@mui/icons-material";
 import Card from "./Card";
@@ -14,7 +14,7 @@ const Home = () => {
     const [searchParams] = useSearchParams();
     const name = searchParams.get('name');
     // selectors 
-    const {data,types,filters} = useSelector((state:RootState) => state.pokemons);
+    const {data,types,filters,navigation} = useSelector((state:RootState) => state.pokemons);
     const [options,setoptions] = useState<Filters>(filters);
     const [begin,setBegin] = useState<number>(0);
     const [end,setEnd] = useState<number>(9);
@@ -71,6 +71,7 @@ const Home = () => {
         setoptions({
             ...options,
             [e.target.name]: value,
+            page:1,
         });
     }
 
@@ -94,6 +95,18 @@ const Home = () => {
             ...options,
             page:options.page+1,
         })
+        if(data.currentPage < (data.last_page-9)){
+            dispatch(navigationBar({
+                beginIndex:navigation.beginIndex + 1,
+                endIndex:navigation.endIndex + 1,
+            }))
+        }else{
+            dispatch(navigationBar({
+                beginIndex:data.last_page - 9,
+                endIndex:data.last_page,
+            }))
+        }
+        
         setBegin(begin + 1);
         setEnd(end + 1);
         if(data.currentPage >= (data.last_page-9)){
@@ -109,6 +122,18 @@ const Home = () => {
         })
         setBegin(begin - 1);
         setEnd(end - 1);
+        if(data.currentPage < (data.last_page-9)){
+            dispatch(navigationBar({
+                beginIndex:navigation.beginIndex - 1,
+                endIndex:navigation.endIndex - 1,
+            }));
+        }else{
+            dispatch(navigationBar({
+                beginIndex:data.last_page - 9,
+                endIndex:data.last_page,
+            }));
+        }
+        
         if(data.currentPage >= (data.last_page-9)){
             setBegin(data.last_page-9);
             setEnd(data.last_page);
@@ -175,7 +200,7 @@ const Home = () => {
                 </div>
                 <div className="pagination-container">
                     {data.currentPage === 1 ? null : <button type="button" onClick={backwardPage}><ArrowBackIos/></button>}
-                    {pages.slice(begin,end).map(item => <button type="button" className="page" onClick={(e) => handlePages(e,item)}>{item}</button>)}
+                    {(data.last_page <= 9 ? pages.slice(0,pages.length):pages.slice(navigation.beginIndex,navigation.endIndex)).map(item => <button type="button" className="page" onClick={(e) => handlePages(e,item)}>{item}</button>)}
                     {data.currentPage !== data.last_page ? <button type="button" onClick={forwardPage}><ArrowForwardIos/></button> : null }
                 </div>
             </div>
