@@ -81,12 +81,26 @@ const Home = () => {
             page,
         })
         if(page > data.currentPage){
+            dispatch(navigationBar({
+                beginIndex:navigation.beginIndex + Math.abs(data.currentPage-page),
+                endIndex:navigation.endIndex + Math.abs(data.currentPage-page),
+            }))
             setBegin(begin + Math.abs(data.currentPage-page));
             setEnd(end + Math.abs(data.currentPage-page));
         }
         if(page >= (data.last_page-9)){
+            dispatch(navigationBar({
+                beginIndex:data.last_page-9,
+                endIndex:data.last_page,
+            }))
             setBegin(data.last_page-9);
             setEnd(data.last_page);
+        }
+        if(pages.length <= 9){
+            dispatch(navigationBar({
+                beginIndex:0,
+                endIndex:pages.length,
+            }))
         }
     }
 
