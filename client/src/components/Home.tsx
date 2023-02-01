@@ -77,7 +77,7 @@ const Home = () => {
     }
 
     const handlePages = (e:React.MouseEvent<HTMLButtonElement>,page:number) => {
-        if(options.pageIndex < (pages.length-8)){
+        if(options.pageIndex < (pages.length-9)){
             setoptions({
                 ...options,
                 page,
@@ -99,12 +99,12 @@ const Home = () => {
     }
 
     const forwardPage = (e:React.MouseEvent<HTMLButtonElement>) => {
-        if(options.pageIndex < (pages.length-8)){
+        if(options.pageIndex < (pages.length-9)){
             setoptions({
                 ...options,
                 page:options.page+1,
                 pageIndex:options.pageIndex+1,
-                paginationStart:options.paginationStart+1,
+                paginationStart:options.pageIndex+1,
                 paginationEnd:options.paginationEnd+1,
             })
         }else{
@@ -119,12 +119,12 @@ const Home = () => {
     }
 
     const backwardPage = (e:React.MouseEvent<HTMLButtonElement>) => {
-        if(options.pageIndex < (pages.length-8)){
+        if(options.pageIndex <= (pages.length-9)){
             setoptions({
                 ...options,
                 page:options.page-1,
                 pageIndex:options.pageIndex-1,
-                paginationStart:options.paginationStart-1,
+                paginationStart:options.pageIndex-1,
                 paginationEnd:options.paginationEnd-1,
             })
         }else{
@@ -239,7 +239,7 @@ const Home = () => {
                         :pages.slice(filters.paginationStart,filters.paginationEnd)).map(item => 
                         <button 
                         type="button" 
-                        className="page" 
+                        className={item !== data.currentPage ? "page" : "page selected"} 
                         onClick={(e) => handlePages(e,item)}>
                             {item}
                         </button>)}
