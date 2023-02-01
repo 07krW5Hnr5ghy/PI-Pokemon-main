@@ -4,10 +4,9 @@ import {
     fetchDetail,
     fetchTypes,
     flushDetail,
-    setFilterData,
-    paginationBar } from "./pokemonSlice";
+    setFilterData } from "./pokemonSlice";
 import type {AppDispatch} from '../redux/store';
-import { Filters, Navigation } from "../interfaces";
+import { Filters } from "../interfaces";
 
 export const getAPIData = () => {
     axios(`/api/p-data`)
@@ -48,12 +47,6 @@ export const resetDetail = () => {
 export const updateFilter = (filters:Filters) => {
     return (dispatch:AppDispatch) => {
         dispatch(setFilterData(filters));
-    }
-}
-
-export const navigationBar = (navigation:Navigation) => {
-    return (dispatch:AppDispatch) => {
-        dispatch(paginationBar(navigation));
     }
 }
 

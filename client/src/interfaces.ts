@@ -26,9 +26,7 @@ export interface Filters{
     sort:string;
     column:string;
     page:number;
-}
-
-export interface Navigation{
-    beginIndex:number;
-    endIndex:number;
+    pageIndex:number;
+    paginationStart:number;
+    paginationEnd:number;
 }

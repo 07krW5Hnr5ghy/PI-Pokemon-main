@@ -62,7 +62,7 @@
 }
 
 .card-container{
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -72,13 +72,45 @@
 .pagination-container{
     border: 1px solid black;
     border-radius: f.rem(8);
-    width: 60%;
-    height: f.rem(48);
+    width: 100vw;
+    height: fit-content;
     margin-bottom: f.rem(16);
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+}
+
+.page,.left-arrow,.right-arrow{
+    width: f.rem(32);
+    height: f.rem(32);
 }
 
 .page{
-    border: 1px solid black;
+    margin: f.rem(4) f.rem(4) f.rem(4) f.rem(4);
+    padding: 0 f.rem(8) 0 f.rem(8);
+    
+}
+
+.left-arrow{
+    margin: f.rem(4) f.rem(4) f.rem(4) f.rem(4);
+    padding: 0 f.rem(3) 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-arrow{
+    margin: f.rem(4) f.rem(4) f.rem(4) f.rem(4);
+    padding: 0 0 0 f.rem(3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.double-left{
+    padding-right: f.rem(1);
+}
+
+.double-right{
+    padding-left: f.rem(1);
 }
