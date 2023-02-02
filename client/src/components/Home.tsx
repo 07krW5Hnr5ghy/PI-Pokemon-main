@@ -176,6 +176,7 @@ const Home = () => {
                         <span className="filter-title">options</span>
                         <select className="filter-select" name="type" onChange={handleOptions}>
                             <option value="type" selected disabled>type</option>
+                            <option value="">all</option>
                             {!types.length ? 
                             null :
                             types.map(item => <option value={item.type} key={item.id}>{item.type}</option>)
