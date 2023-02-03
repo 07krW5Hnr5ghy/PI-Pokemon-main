@@ -21,6 +21,7 @@ export interface Type{
 }
 
 export interface Filters{
+    search:string;
     type:string;
     origin:string;
     sort:string;

@@ -1,4 +1,4 @@
-import React, { useEffect,useState,useMemo } from "react";
+import React, { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Filters } from "../interfaces";
 import { RootState } from "../redux/store";
@@ -16,8 +16,6 @@ const Home = () => {
     // selectors 
     const {data,types,filters} = useSelector((state:RootState) => state.pokemons);
     const [options,setoptions] = useState<Filters>(filters);
-    const [begin,setBegin] = useState<number>(0);
-    const [end,setEnd] = useState<number>(9);
 
     useEffect(() => {
         console.count("mount");
@@ -45,10 +43,18 @@ const Home = () => {
             filters.column ||
             data.currentPage
         ){
-            dispatch(updateFilter(options));
+            dispatch(updateFilter({
+                type:options.type,
+                origin:options.origin,
+                sort:options.sort,
+                column:options.column,
+                page:options.page,
+                paginationStart:options.paginationStart,
+                paginationEnd:options.paginationEnd,
+            }));
             dispatch(getDBPokemons(
                 filters.page,
-                '',
+                filters.search,
                 filters.type,
                 filters.sort,
                 filters.column,
@@ -58,6 +64,7 @@ const Home = () => {
     },[
         dispatch,
         options,
+        filters.search,
         filters.type,
         filters.origin,
         filters.sort,
@@ -184,6 +191,7 @@ const Home = () => {
                         </select>
                         <select className="filter-select" name="origin" onChange={handleOptions}>
                             <option value="origin" selected disabled>origin</option>
+                            <option value="">all</option>
                             <option value="api">api</option>
                             <option value="custom">custom</option>
                         </select>
@@ -197,6 +205,7 @@ const Home = () => {
                         </select>
                         <select className="filter-select" name="column" onChange={handleOptions}>
                             <option value="column" selected disabled>sort by</option>
+                            <option value="">unsort</option>
                             <option value="name">name</option>
                             <option value="attack">attack</option>
                             <option value="defense">defense</option>

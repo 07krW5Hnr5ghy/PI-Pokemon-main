@@ -39,6 +39,7 @@ const initialState : PokemonsState = {
     },
     types:[],
     filters:{
+        search:"",
         type:"",
         origin:"",
         sort:"",
@@ -68,12 +69,15 @@ export const PokemonSlice = createSlice({
             state.detail = action.payload;
         },
         setFilterData: (state,action) => {
-            state.filters = action.payload;
+            state.filters = {...state.filters,...action.payload};
         },
+        setSearchData: (state,action) => {
+            state.filters.search = action.payload;
+        }
     }
 })
 
-export const {fetchDB,fetchDetail,fetchTypes,flushDetail,setFilterData} = PokemonSlice.actions;
+export const {fetchDB,fetchDetail,fetchTypes,flushDetail,setFilterData,setSearchData} = PokemonSlice.actions;
 export const selectPokemons = (state:RootState) => state.pokemons.data;
 export default PokemonSlice.reducer;
 

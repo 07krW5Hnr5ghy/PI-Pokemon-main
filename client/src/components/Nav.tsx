@@ -1,10 +1,19 @@
 import {Link} from "react-router-dom";
-//import SearchBar from "./SearchBar";
 import { Search } from "@mui/icons-material";
 import { Home, AddCircle } from "@mui/icons-material"; 
+import { RootState } from "../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { getDBPokemons,updateSearch } from "../redux/pokemonActions";
+import {useState} from "react";
 
 const Nav = () => {
-    return(
+  const dispatch = useDispatch();
+  const {filters} = useSelector((state:RootState) => state.pokemons);
+  const [search,setSearch] = useState<string>("");
+  const handleSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(updateSearch(e.target.value));
+  }
+  return(
     <nav>
       <div className="navbar">
         <div className="container nav-container">
@@ -26,7 +35,8 @@ const Nav = () => {
                     <input 
                     type="text" 
                     placeholder="name" 
-                    className="search-input" />
+                    className="search-input"
+                    onChange={handleSearch} />
                   </div>
                 </li>
                 <li className="nav-link">
@@ -49,7 +59,7 @@ const Nav = () => {
         </div>
       </div>
     </nav>
-    );
+  );
 }
 
 export default Nav;
