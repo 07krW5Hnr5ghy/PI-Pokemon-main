@@ -61,6 +61,12 @@ const Home = () => {
                 filters.origin
             ));
         }
+        if(data.last_page < 9){
+            dispatch(updateFilter({
+                paginationStart:0,
+                paginationEnd:data.last_page,
+            }))
+        }
     },[
         dispatch,
         options,
@@ -70,7 +76,8 @@ const Home = () => {
         filters.sort,
         filters.column,
         filters.page,
-        data.currentPage
+        data.currentPage,
+        data.last_page
     ]);
 
     const handleOptions = (e:React.ChangeEvent<HTMLSelectElement>) => {
@@ -244,9 +251,7 @@ const Home = () => {
                     className="left-arrow">
                         <KeyboardArrowLeft fontSize="large"/>
                     </button>}
-                    {(data.last_page <= 9 
-                        ? pages.slice(0,pages.length)
-                        :pages.slice(filters.paginationStart,filters.paginationEnd)).map(item => 
+                    {(pages.slice(filters.paginationStart,filters.paginationEnd)).map(item => 
                         <button 
                         type="button" 
                         className={item !== data.currentPage ? "page" : "page selected"} 

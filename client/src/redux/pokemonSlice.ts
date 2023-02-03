@@ -73,6 +73,7 @@ export const PokemonSlice = createSlice({
         },
         setSearchData: (state,action) => {
             state.filters.search = action.payload;
+            state.filters.page = 1;
         }
     }
 })

@@ -1,3 +1,14 @@
+
+
+const PaginationBar = (current:number,last:number,beginIndex:number,endIndex:number) => {
+    const buttonPages = [];
+    for(let i = 0; i <= last;i++){
+        
+    }
+}
+
+export default PaginationBar;
+
 // let {usePage,DOTS} = require('./utils');
 
 // const Page = (props) => {
@@ -62,4 +73,3 @@
 // };
 
 // export default Page;
-export const page : string = "page";
