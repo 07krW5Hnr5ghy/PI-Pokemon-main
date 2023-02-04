@@ -1,15 +1,25 @@
 import FormWrapper from "./FormWrapper";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import React, { useCallback } from "react";
+
+
 
 type BasicData = {
     name:string,
-    types:string,
+    typesSelected:string[],
 }
 
 type BasicProps = BasicData & {
     updateFields:(fields:Partial<BasicData>) => void
 }
 
-const Basic = ({name,types, updateFields}:BasicProps) => {
+const Basic = ({name,typesSelected, updateFields}:BasicProps) => {
+    const {types} = useSelector((state:RootState) => state.pokemons);
+    const deleteType = (e:React.MouseEvent<HTMLButtonElement>) => {
+        const buttonValue = e.currentTarget.value;
+        updateFields({typesSelected:typesSelected.filter(type => type !== buttonValue)});
+    }
     return(
         <FormWrapper title="Create your Pokemon">
             <label htmlFor="" className="new-label">Name</label>
@@ -24,15 +34,19 @@ const Basic = ({name,types, updateFields}:BasicProps) => {
             name="" 
             id="" 
             className="new-types new-select" 
-            value={types} 
-            onChange={e => updateFields({types:e.target.value})}
+            value={typesSelected} 
+            onChange={e => {
+                if(typesSelected.length < 2){
+                    updateFields({typesSelected:typesSelected.concat([e.target.value])})
+                }
+            }}
             >
                 <option value="" selected>select types</option>
-                <option value="">normal</option>
-                <option value="">grass</option>
-                <option value="">fire</option>
-                <option value="">water</option>
+                {types.map(item => <option key={item.id}>{item.type}</option>)}
             </select>
+            {typesSelected.map((item) => <div>
+                <button key={item} onClick={deleteType} type="button" value={item}>{`x ${item}`}</button>
+            </div>)}
         </FormWrapper>
     );
 }

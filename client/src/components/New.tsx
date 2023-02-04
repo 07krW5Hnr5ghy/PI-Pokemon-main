@@ -7,9 +7,10 @@ import Picture from "./Picture";
 import { FormEvent, useState } from "react";
 import { useMultistepForm } from "../redux/hooks";
 
+
 type FormData = {
     name:string,
-    types:string,
+    typesSelected:string[],
     attack:number,
     defense:number,
     specialAttack:number,
@@ -21,7 +22,7 @@ type FormData = {
 
 const INITIAL_DATA : FormData = {
     name:"",
-    types:"",
+    typesSelected:[],
     attack:0,
     defense:0,
     specialAttack:0,
@@ -33,6 +34,7 @@ const INITIAL_DATA : FormData = {
 
 const New = () => {
     const [data,setData] = useState(INITIAL_DATA); 
+    console.log(data);
     const updateFields = (fields:Partial<FormData>) => {
         setData(prev => {
             return {...prev,...fields}
@@ -73,7 +75,7 @@ const New = () => {
                         <button 
                         className="new-back" 
                         type="button" 
-                        onClick={back} 
+                        onClick={back}
                         >
                             Back
                         </button>}

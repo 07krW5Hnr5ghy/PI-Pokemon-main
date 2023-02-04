@@ -15,7 +15,7 @@ const Home = () => {
     const name = searchParams.get('name');
     // selectors 
     const {data,types,filters} = useSelector((state:RootState) => state.pokemons);
-    const [options,setoptions] = useState<Filters>(filters);
+    const [options,setOptions] = useState<Filters>(filters);
 
     useEffect(() => {
         console.count("mount");
@@ -82,7 +82,7 @@ const Home = () => {
 
     const handleOptions = (e:React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
-        setoptions({
+        setOptions({
             ...options,
             [e.target.name]: value,
             page:1,
@@ -92,7 +92,7 @@ const Home = () => {
 
     const handlePages = (e:React.MouseEvent<HTMLButtonElement>,page:number) => {
         if(options.pageIndex < (pages.length-9)){
-            setoptions({
+            setOptions({
                 ...options,
                 page,
                 pageIndex:page-1,
@@ -102,7 +102,7 @@ const Home = () => {
         }
         
         if(page >= (pages.length-9)){
-            setoptions({
+            setOptions({
                 ...options,
                 page,
                 pageIndex:page-1,
@@ -114,7 +114,7 @@ const Home = () => {
 
     const forwardPage = (e:React.MouseEvent<HTMLButtonElement>) => {
         if(options.pageIndex < (pages.length-9)){
-            setoptions({
+            setOptions({
                 ...options,
                 page:options.page+1,
                 pageIndex:options.pageIndex+1,
@@ -122,7 +122,7 @@ const Home = () => {
                 paginationEnd:options.paginationEnd+1,
             })
         }else{
-            setoptions({
+            setOptions({
                 ...options,
                 page:options.page+1,
                 pageIndex:options.pageIndex+1,
@@ -134,7 +134,7 @@ const Home = () => {
 
     const backwardPage = (e:React.MouseEvent<HTMLButtonElement>) => {
         if(options.pageIndex <= (pages.length-9)){
-            setoptions({
+            setOptions({
                 ...options,
                 page:options.page-1,
                 pageIndex:options.pageIndex-1,
@@ -142,7 +142,7 @@ const Home = () => {
                 paginationEnd:options.paginationEnd-1,
             })
         }else{
-            setoptions({
+            setOptions({
                 ...options,
                 page:options.page-1,
                 pageIndex:options.pageIndex-1,
@@ -153,7 +153,7 @@ const Home = () => {
     }
 
     const forwardSkip = (e:React.MouseEvent<HTMLButtonElement>) => {
-        setoptions({
+        setOptions({
             ...options,
             page:data.last_page,
             pageIndex:pages.length,
@@ -163,7 +163,7 @@ const Home = () => {
     }
 
     const backwardSkip = (e:React.MouseEvent<HTMLButtonElement>) => {
-        setoptions({
+        setOptions({
             ...options,
             page:1,
             pageIndex:0,
@@ -178,8 +178,8 @@ const Home = () => {
         pages.push(i);
     }
 
-    console.log("options",options);
-    console.log("pages",pages);
+    //onsole.log("options",options);
+    //console.log("pages",pages);
 
     return(
         <div id="home-container">
