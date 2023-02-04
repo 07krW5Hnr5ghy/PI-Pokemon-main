@@ -1,15 +1,11 @@
 import {Link} from "react-router-dom";
 import { Search } from "@mui/icons-material";
 import { Home, AddCircle } from "@mui/icons-material"; 
-import { RootState } from "../redux/store";
-import { useDispatch, useSelector } from "react-redux";
-import { getDBPokemons,updateSearch } from "../redux/pokemonActions";
-import {useState} from "react";
+import { useDispatch } from "react-redux";
+import { updateSearch } from "../redux/pokemonActions";
 
 const Nav = () => {
   const dispatch = useDispatch();
-  const {filters} = useSelector((state:RootState) => state.pokemons);
-  const [search,setSearch] = useState<string>("");
   const handleSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateSearch(e.target.value));
   }

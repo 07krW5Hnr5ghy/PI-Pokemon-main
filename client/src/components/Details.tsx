@@ -22,17 +22,33 @@ const Detail = () => {
             dispatch(getDetail(id));
         }
     },[dispatch,id,detail]);
-    console.log(detail);
 
     const stats = [
-        detail.attack,
-        detail.defense,
-        detail.health,
-        detail.speed,
-        detail.specialAttack,
-        detail.specialDefense
+        {
+            subject:'Special Attack',
+            points:detail.specialAttack,
+        },
+        {
+            subject:'Defense',
+            points:detail.defense,
+        },
+        {
+            subject:'Attack',
+            points:detail.attack,
+        },
+        {
+            subject:'Special Defense',
+            points:detail.specialDefense,
+        },
+        {
+            subject:'Health',
+            points:detail.health,
+        },
+        {
+            subject:'Speed',
+            points:detail.speed,
+        }
     ];
-    console.log(stats);
     return(
         <div>
             <Nav/>
@@ -51,7 +67,7 @@ const Detail = () => {
                  </div>
                  <div className="stats">
                     <h2>Stats</h2>
-                    <Chart/>
+                    <Chart stats={stats}/>
                  </div>
              </div>
              }

@@ -1,3 +1,19 @@
+@use "../base";
+@use "../base/breakpoints" as b;
+@use "../base/functions" as f;
+
 .radar{
     font-size: 12pt;
+    font-weight: 600;
+    margin-top: f.rem(8);
+    background: var(--primary-tint3);
+    border-radius: f.rem(8);
+    color:var(--primary-grayscale2);
+}
+
+.custom-tooltip{
+    background: var(--secondary-tint2);
+    border:2pt solid var(--primary-grayscale2);
+    border-radius: f.rem(4);
+    padding: 0 f.rem(3);
 }

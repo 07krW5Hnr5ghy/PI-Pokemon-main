@@ -31,3 +31,8 @@ export interface Filters{
     paginationStart:number;
     paginationEnd:number;
 }
+
+export interface Stats{
+    subject:string;
+    points:number;
+}

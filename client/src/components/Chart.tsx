@@ -1,64 +1,39 @@
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer,Tooltip } from 'recharts';
+import { Stats } from '../interfaces';
 
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
+const StatsTooltip = ({active,payload,label}:any) => {
+  if(active && payload && payload.length){
+    console.log("active",active);
+    console.log("payload",payload);
+    console.log("label",label);
+    return(
+      <div className="custom-tooltip">
+        <p className="label">{`${payload[0].value} points`}</p>
+      </div>
+    );
+  }
+  return null;
+};
 
-const data = [
-  {
-    subject: 'Math',
-    A: 120,
-    B: 110,
-    fullMark: 150,
-  },
-  {
-    subject: 'Chinese',
-    A: 98,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: 'English',
-    A: 86,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: 'Geography',
-    A: 99,
-    B: 100,
-    fullMark: 150,
-  },
-  {
-    subject: 'Physics',
-    A: 85,
-    B: 90,
-    fullMark: 150,
-  },
-  {
-    subject: 'History',
-    A: 65,
-    B: 85,
-    fullMark: 150,
-  },
-];
-
-interface ChartData {stats:number[]}
-
-const Chart :React.FC = () => {
+const Chart = (props:{stats:Stats[]}) => {
+  console.log(props);
   return(
     <ResponsiveContainer width="100%" height="100%" className="radar">
         <RadarChart 
         cx="50%" 
         cy="50%" 
         outerRadius="60%" 
-        data={data}
+        data={props.stats}
         >
-          <PolarGrid />
-          <PolarAngleAxis dataKey="subject" />
-          <PolarRadiusAxis />
+          <PolarGrid stroke="#3D3329"/>
+          <PolarAngleAxis dataKey="subject" stroke="#3D3329"/>
+          <PolarRadiusAxis stroke="#3D3329" />
+          <Tooltip content={<StatsTooltip />} cursor={{ stroke: '#C66606', strokeWidth: 2 }} />
           <Radar 
-          name="Mike" 
-          dataKey="A" 
-          stroke="#29333D" 
-          fill="#FAB36B" 
+          name="stats" 
+          dataKey="points" 
+          stroke="#0C66C0" 
+          fill="#0F81F0" 
           fillOpacity={0.5} 
           />
         </RadarChart>

@@ -5,7 +5,6 @@ import Special from "./Special";
 import SH from "./SH";
 import Picture from "./Picture";
 import { FormEvent, useState } from "react";
-import { Publish } from "@mui/icons-material";
 import { useMultistepForm } from "../redux/hooks";
 
 type FormData = {
