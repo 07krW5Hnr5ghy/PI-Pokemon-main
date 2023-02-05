@@ -109,3 +109,6 @@ package-lock.json
 # api calls test files
 *.rest
 api/tests/calls/pokemon.rest
+
+# firebase configuration
+client/src/firebase.ts

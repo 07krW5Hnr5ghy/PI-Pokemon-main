@@ -17,6 +17,7 @@ const Special = ({specialAttack,specialDefense,updateFields}:SpecialProps) => {
             type="number" 
             className="new-input" 
             value={specialAttack} 
+            min={1}
             onChange={e => updateFields({specialAttack:Number(e.target.value)})}
             />
             <label htmlFor="" className="new-label">Special Defense</label>
@@ -24,6 +25,7 @@ const Special = ({specialAttack,specialDefense,updateFields}:SpecialProps) => {
             type="number" 
             className="new-input" 
             value={specialDefense} 
+            min={1}
             onChange={e => updateFields({specialDefense:Number(e.target.value)})}
             />
         </FormWrapper>
