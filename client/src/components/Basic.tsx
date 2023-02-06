@@ -7,18 +7,18 @@ import React, { useCallback } from "react";
 
 type BasicData = {
     name:string,
-    typesSelected:string[],
+    classes:string[],
 }
 
 type BasicProps = BasicData & {
     updateFields:(fields:Partial<BasicData>) => void
 }
 
-const Basic = ({name,typesSelected, updateFields}:BasicProps) => {
+const Basic = ({name,classes, updateFields}:BasicProps) => {
     const {types} = useSelector((state:RootState) => state.pokemons);
     const deleteType = (e:React.MouseEvent<HTMLButtonElement>) => {
         const buttonValue = e.currentTarget.value;
-        updateFields({typesSelected:typesSelected.filter(type => type !== buttonValue)});
+        updateFields({classes:classes.filter(type => type !== buttonValue)});
     }
     return(
         <FormWrapper title="Create your Pokemon">
@@ -34,17 +34,17 @@ const Basic = ({name,typesSelected, updateFields}:BasicProps) => {
             name="" 
             id="" 
             className="new-types new-select" 
-            value={typesSelected} 
+            value={classes} 
             onChange={e => {
-                if(typesSelected.length < 2){
-                    updateFields({typesSelected:typesSelected.concat([e.target.value])})
+                if(classes.length < 2){
+                    updateFields({classes:classes.concat([e.target.value])})
                 }
             }}
             >
                 <option value="" selected>select types</option>
                 {types.map(item => <option key={item.id}>{item.type}</option>)}
             </select>
-            {typesSelected.map((item) => <div>
+            {classes.map((item) => <div>
                 <button key={item} onClick={deleteType} type="button" value={item}>{`x ${item}`}</button>
             </div>)}
         </FormWrapper>

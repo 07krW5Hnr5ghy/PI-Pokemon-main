@@ -7,7 +7,7 @@ import {
     setFilterData,
     setSearchData } from "./pokemonSlice";
 import type {AppDispatch} from '../redux/store';
-import { Filters } from "../interfaces";
+import { Filters,Pokemon } from "../interfaces";
 
 export const getAPIData = () => {
     axios(`/api/p-data`)
@@ -54,5 +54,13 @@ export const updateFilter = (filters:Partial<Filters>) => {
 export const updateSearch = (name:string) => {
     return (dispatch:AppDispatch) => {
         dispatch(setSearchData(name));
+    }
+}
+
+export const addPokemon = (pokemon:Partial<Pokemon>) => {
+    return(dispatch:AppDispatch) => {
+        axios.post(`/api/pokemons`,pokemon)
+        .then(res => console.log(res))
+        .catch(e => console.log(e));
     }
 }

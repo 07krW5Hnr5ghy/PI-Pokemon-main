@@ -64,6 +64,8 @@ const Picture = ({picture,updateFields} : PictureProps) => {
                 });
             });
 
+        }else{
+            console.log("dont");
         }
 
     }
@@ -98,8 +100,7 @@ const Picture = ({picture,updateFields} : PictureProps) => {
                     className="new-input" 
                     name="file" 
                     id="file" 
-                    style={{display:"none"}} 
-                    value={picture} 
+                    style={{display:"none"}}
                     onChange={handleFileInputChange}
                     />
                     {file?.name ? 

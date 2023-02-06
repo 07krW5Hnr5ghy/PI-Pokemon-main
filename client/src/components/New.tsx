@@ -5,12 +5,14 @@ import Special from "./Special";
 import SH from "./SH";
 import Picture from "./Picture";
 import { FormEvent, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useMultistepForm } from "../redux/hooks";
+import { addPokemon } from "../redux/pokemonActions";
 
 
 type FormData = {
     name:string,
-    typesSelected:string[],
+    classes:string[],
     attack:number,
     defense:number,
     specialAttack:number,
@@ -22,7 +24,7 @@ type FormData = {
 
 const INITIAL_DATA : FormData = {
     name:"",
-    typesSelected:[],
+    classes:[],
     attack:0,
     defense:0,
     specialAttack:0,
@@ -34,6 +36,7 @@ const INITIAL_DATA : FormData = {
 
 const New = () => {
     const [data,setData] = useState(INITIAL_DATA); 
+    const dispatch = useDispatch();
     console.log(data);
     const updateFields = (fields:Partial<FormData>) => {
         setData(prev => {
@@ -59,6 +62,7 @@ const New = () => {
     const onSubmit = (e:FormEvent) => {
         e.preventDefault();
         if(!isLastStep) return next();
+        dispatch(addPokemon(data));
         alert("Successfull Creation")
     }
     return(
