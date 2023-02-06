@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import { useMultistepForm } from "../redux/hooks";
 import { addPokemon } from "../redux/pokemonActions";
 
-
 type FormData = {
     name:string,
     classes:string[],

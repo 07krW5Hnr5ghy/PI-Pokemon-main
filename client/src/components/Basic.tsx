@@ -45,7 +45,12 @@ const Basic = ({name,classes, updateFields}:BasicProps) => {
                 {types.map(item => <option key={item.id}>{item.type}</option>)}
             </select>
             {classes.map((item) => <div>
-                <button key={item} onClick={deleteType} type="button" value={item}>{`x ${item}`}</button>
+                <button 
+                key={item} 
+                className="type-button" 
+                onClick={deleteType} 
+                type="button" 
+                value={item}>{`x ${item}`}</button>
             </div>)}
         </FormWrapper>
     );

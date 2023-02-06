@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import axios from 'axios';
 
-axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001/api";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

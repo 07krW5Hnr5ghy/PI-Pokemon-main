@@ -105,12 +105,12 @@ const Picture = ({picture,updateFields} : PictureProps) => {
                     />
                     {file?.name ? 
                     <div className="upload-confirm">
-                        <p>File Selected: {file.name}</p>
+                        <p className="file-selected">File selected: {file.name}</p>
                         <button 
-                        className="upload-confirm" 
+                        className="upload-file" 
                         type="button" 
                         onClick={handleUpload}>
-                            Upload this file
+                            Upload file
                         </button>
                     </div> : null}
                 </div>

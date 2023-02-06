@@ -17,20 +17,35 @@
     cursor: pointer;
 }
 
-.mode:hover{
+.file{
+    text-align: center;
+    padding: f.rem(4) 0 0 0;
+    cursor: pointer;
+}
+
+.file-selected{
+    padding: 0 0 0 f.rem(4);
+    color:var(--primary-grayscale4);
+}
+
+.upload-file{
+    margin-top: f.rem(12);
+    padding: 0 f.rem(4) f.rem(4) f.rem(4);
+    border-radius: f.rem(8);
+    border: 2pt solid var(--secondary-shade2);
+    color: var(--secondary-shade3);
+    background-color: var(--secondary-tint4);
+    cursor:pointer;
+}
+
+.mode:hover,.upload-file:hover{
     background-color: var(--secondary);
     border-color: var(--secondary-tint4);
     color: var(--secondary-tint4);
 }
 
-.mode:active{
+.mode:active,.upload-file:active{
     background-color: var(--primary);
     border-color: var(--primary-tint4);
     color:var(--primary-tint4);
-}
-
-.file{
-    text-align: center;
-    padding: f.rem(4) 0 0 0;
-    cursor: pointer;
 }
