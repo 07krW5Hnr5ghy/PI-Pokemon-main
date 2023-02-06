@@ -5,34 +5,34 @@ import { Origin } from "../declaration";
 @Entity()
 export class Pokemon {
 
-    @PrimaryColumn()
+    @PrimaryColumn({nullable:false})
     id!: string;
 
-    @Column()
+    @Column({nullable:false})
     name!: string;
 
     @Column({type:"text",array:true,nullable:false})
     classes!: string[];
 
-    @Column()
+    @Column({nullable:false})
     attack!: number;
 
-    @Column()
+    @Column({nullable:false})
     defense!:number;
 
-    @Column()
+    @Column({nullable:false})
     specialAttack!:number;
 
-    @Column()
+    @Column({nullable:false})
     specialDefense!:number;
 
-    @Column()
+    @Column({nullable:false})
     speed!:number;
 
-    @Column()
+    @Column({nullable:false})
     health!: number;
 
-    @Column()
+    @Column({nullable:true,default:"https://www.svgrepo.com/show/276264/pokeball-pokemon.svg"})
     picture!:string;
 
     @Column({
@@ -40,6 +40,9 @@ export class Pokemon {
         enum: Origin,
     })
     origin!: Origin;
+
+    @Column({default:true})
+    active!: boolean;
 
     @CreateDateColumn()
     createdAt!: Date;

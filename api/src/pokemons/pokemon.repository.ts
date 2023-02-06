@@ -37,6 +37,8 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
             pokemons.andWhere("pokemon.origin = :origin",{origin:origin})
         }
 
+        pokemons.andWhere("pokemon.active = :status",{status:true});
+
         // sort mode and column to sort
         if(sorting && column){
             pokemons.orderBy(column,sorting)
@@ -76,7 +78,7 @@ export class PokemonRepository implements DatabaseRepository<Pokemon>{
         return pokemon;
     }
 
-    async update(id:Id,data:Pokemon,query?:Query):Promise<Pokemon | null>{
+    async update(id:Id,data:Partial<Pokemon>,query?:Query):Promise<Pokemon | null>{
         await repository.update(id,data);
         return this.get(id,query);
     }

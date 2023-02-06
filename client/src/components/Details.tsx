@@ -1,8 +1,8 @@
 import { useEffect,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams,Link } from "react-router-dom";
+import { useParams,Link, useNavigate } from "react-router-dom";
 import {RootState} from "../redux/store";
-import { getDetail, resetDetail } from "../redux/pokemonActions";
+import { getDetail, resetDetail,removePokemon } from "../redux/pokemonActions";
 import Loading from "./Loading";
 import Chart from "./Chart";
 import Nav from "./Nav";
@@ -13,7 +13,7 @@ const Detail = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const {detail} = useSelector((state:RootState) => state.pokemons);
-
+    const navigate = useNavigate();
     useEffect(() => {
         if(detail.id && detail.id !== id){
             dispatch(resetDetail());
@@ -76,6 +76,13 @@ const Detail = () => {
                     <button className="back-button" onClick={() => dispatch(resetDetail())}>Return</button>
                 </Link>
              </div>
+             {!/^[0-9]*c$/.test(detail.id) ? null : 
+                    <button id="pokemon-delete" onClick={() => {
+                        //dispatch(deleteRecord(id));
+                        dispatch(removePokemon(detail.id));
+                        navigate("/pokemons");
+                        alert("Pokemon deleted");
+                    }}>Delete</button> }
          </div>
     );
 }

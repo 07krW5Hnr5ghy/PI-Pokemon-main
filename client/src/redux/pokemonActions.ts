@@ -4,6 +4,7 @@ import {
     fetchDetail,
     fetchTypes,
     flushDetail,
+    removeData,
     setFilterData,
     setSearchData } from "./pokemonSlice";
 import type {AppDispatch} from '../redux/store';
@@ -61,6 +62,17 @@ export const addPokemon = (pokemon:Partial<Pokemon>) => {
     return(dispatch:AppDispatch) => {
         axios.post(`/pokemons`,pokemon)
         .then(res => console.log(res))
+        .catch(e => console.log(e));
+    }
+}
+
+export const removePokemon = (id:string) => {
+    return(dispatch:AppDispatch) => {
+        axios.put(`/pokemons/${id}`,{active:false})
+        .then((res) => {
+            console.log(res)
+            dispatch(removeData(id));
+        })
         .catch(e => console.log(e));
     }
 }
