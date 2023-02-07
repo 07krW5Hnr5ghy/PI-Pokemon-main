@@ -1,10 +1,6 @@
-import { useDispatch } from "react-redux";
-import { Link,useNavigate } from "react-router-dom";
-import { removePokemon } from "../redux/pokemonActions";
+import { Link } from "react-router-dom";
 
 const Card = ({name,img,classes,id} : {name:string,img:string,classes:string[],id:string}) => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
     return(
         <Link to={`/pokemons/${id}`}>
             <div className="pokemon-card">
@@ -14,13 +10,6 @@ const Card = ({name,img,classes,id} : {name:string,img:string,classes:string[],i
                     <div className="types-container">
                         {classes.map(type => <span className="type" key={type}>{type}</span>)}
                     </div>
-                    {!/^[0-9]*c$/.test(id) ? null : 
-                    <button id="pokemon-delete" onClick={() => {
-                        //dispatch(deleteRecord(id));
-                        dispatch(removePokemon(id));
-                        //navigate("/pokemons");
-                        alert("Pokemon deleted");
-                    }}>Delete</button> }
                 </div>
             </div>
         </Link>

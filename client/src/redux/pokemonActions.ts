@@ -76,3 +76,11 @@ export const removePokemon = (id:string) => {
         .catch(e => console.log(e));
     }
 }
+
+export const updatePokemon = (id:string,data:Partial<Pokemon>) => {
+    return(dispatch:AppDispatch) => {
+        axios.put(`/pokemons/${id}`,data)
+        .then(res => console.log(res))
+        .catch(e => console.log(e));
+    }
+}

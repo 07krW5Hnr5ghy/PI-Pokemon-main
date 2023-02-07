@@ -8,30 +8,8 @@ import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useMultistepForm } from "../redux/hooks";
 import { addPokemon } from "../redux/pokemonActions";
+import { INITIAL_DATA,FormData } from "../interfaces";
 
-type FormData = {
-    name:string,
-    classes:string[],
-    attack:number,
-    defense:number,
-    specialAttack:number,
-    specialDefense:number,
-    speed:number,
-    health:number,
-    picture:string,
-}
-
-const INITIAL_DATA : FormData = {
-    name:"",
-    classes:[],
-    attack:0,
-    defense:0,
-    specialAttack:0,
-    specialDefense:0,
-    speed:0,
-    health:0,
-    picture:"",
-}
 
 const New = () => {
     const [data,setData] = useState(INITIAL_DATA); 

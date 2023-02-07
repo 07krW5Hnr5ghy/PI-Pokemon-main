@@ -1,7 +1,7 @@
 import FormWrapper from "./FormWrapper";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import React, { useCallback } from "react";
+import { useLocation } from "react-router-dom";
 
 
 
@@ -15,13 +15,16 @@ type BasicProps = BasicData & {
 }
 
 const Basic = ({name,classes, updateFields}:BasicProps) => {
+    const location = useLocation();
     const {types} = useSelector((state:RootState) => state.pokemons);
     const deleteType = (e:React.MouseEvent<HTMLButtonElement>) => {
         const buttonValue = e.currentTarget.value;
         updateFields({classes:classes.filter(type => type !== buttonValue)});
     }
     return(
-        <FormWrapper title="Create your Pokemon">
+        <FormWrapper title={location.pathname === "/new" 
+        ? "Create your Pokemon"
+        : "Edit your Pokemon" }>
             <label htmlFor="" className="new-label">Name</label>
             <input 
             type="text" 

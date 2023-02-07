@@ -36,3 +36,27 @@ export interface Stats{
     subject:string;
     points:number;
 }
+
+export type FormData = {
+    name:string,
+    classes:string[],
+    attack:number,
+    defense:number,
+    specialAttack:number,
+    specialDefense:number,
+    speed:number,
+    health:number,
+    picture:string,
+}
+
+export const INITIAL_DATA : FormData = {
+    name:"",
+    classes:[],
+    attack:0,
+    defense:0,
+    specialAttack:0,
+    specialDefense:0,
+    speed:0,
+    health:0,
+    picture:"",
+}

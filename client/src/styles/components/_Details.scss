@@ -88,17 +88,28 @@
     font-size: 28pt;
 }
 
+.detail-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin:f.rem(32) 0 0 0;
+}
+
+.pokemon-edit{
+    margin:0 f.rem(8) 0 0;
+}
+
 .detail-back{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: f.rem(32);
+    margin-top: f.rem(8);
     padding: f.rem(24) 0;
 }
 
 .back-button{
-    padding: f.rem(4) f.rem(12);
+    padding: 0  f.rem(12) f.rem(4) f.rem(12);
     font-size: 20pt;
     border:solid 2pt var(--primary-shade2);
     border-radius: f.rem(8);

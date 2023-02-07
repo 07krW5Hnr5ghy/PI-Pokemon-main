@@ -1,5 +1,3 @@
-import { useState } from "react";
-//import {getStorage,ref,uploadBytesResumable,getDonwloadURL} from "firebase/storage";
 import FormWrapper from "./FormWrapper";
 
 type SHData = {
@@ -11,12 +9,10 @@ type SHProps = SHData & {
     updateFields:(fields:Partial<SHData>) => void
 }
 
-interface FileInputState{
-    file:File|null;
-}
+
 
 const SH = ({speed,health,updateFields}:SHProps) => {
-    const [file,setFile] = useState<FileInputState>({file:null});
+    
     return(
         <FormWrapper title="Secondary Stats">
             <label htmlFor="" className="new-label">Speed</label>

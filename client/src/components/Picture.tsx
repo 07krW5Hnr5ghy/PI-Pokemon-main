@@ -12,10 +12,6 @@ type PictureProps = PictureData & {
     updateFields:(fields:Partial<PictureData>) => void
 }
 
-interface FileInputState{
-    file:File|null;
-}
-
 const Picture = ({picture,updateFields} : PictureProps) => {
     const [upload,setUpload] = useState<boolean>(false);
     const toggleUpload = () => {
@@ -24,7 +20,6 @@ const Picture = ({picture,updateFields} : PictureProps) => {
     const [file,setFile] = useState<File|null>(null);
     const handleFileInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         setFile(e.target.files?.[0]!);
-        //updateFields({picture:file.file?.name});
     }
     const handleUpload = (e:React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -71,7 +66,7 @@ const Picture = ({picture,updateFields} : PictureProps) => {
     }
     console.log(file);
     return(
-        <FormWrapper title="Set an image">
+        <FormWrapper title="Select your pokemon picture">
             {!upload ? 
                 <div className="picture">
                     <label htmlFor="picture" className="new-label">Picture mode</label>

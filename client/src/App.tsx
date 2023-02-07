@@ -5,6 +5,7 @@ import Details from "./components/Details";
 import NotFound from "./components/NotFound";
 import New from "./components/New";
 import Loading from "./components/Loading";
+import Update from "./components/Update";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/pokemons/:id" element={<Details/>}/>
       <Route path="/new" element={<New/>}/>
       <Route path="/loading" element={<Loading/>}/>
+      <Route path="/update/:id" element={<Update/>}/>
       <Route path="*" element={<NotFound/>}/>
     </Routes>
   );

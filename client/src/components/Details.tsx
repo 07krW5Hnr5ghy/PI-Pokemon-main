@@ -1,4 +1,4 @@
-import { useEffect,useRef } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams,Link, useNavigate } from "react-router-dom";
 import {RootState} from "../redux/store";
@@ -71,18 +71,23 @@ const Detail = () => {
                  </div>
              </div>
              }
+              {!/^[0-9]*c$/.test(detail.id) ? null : 
+                    <div className="detail-actions">
+                        <Link to={`/update/${detail.id}`}>
+                            <button className="pokemon-edit back-button">Edit</button>
+                        </Link>
+                        <button className="pokemon-delete back-button" onClick={() => {
+                        dispatch(removePokemon(detail.id));
+                        navigate("/pokemons");
+                        alert("Pokemon deleted");
+                        }}>Delete</button>
+                    </div>
+            }
              <div className="detail-back">
                 <Link to={"/pokemons"}>
                     <button className="back-button" onClick={() => dispatch(resetDetail())}>Return</button>
                 </Link>
              </div>
-             {!/^[0-9]*c$/.test(detail.id) ? null : 
-                    <button id="pokemon-delete" onClick={() => {
-                        //dispatch(deleteRecord(id));
-                        dispatch(removePokemon(detail.id));
-                        navigate("/pokemons");
-                        alert("Pokemon deleted");
-                    }}>Delete</button> }
          </div>
     );
 }
