@@ -6,7 +6,9 @@ import {
     flushDetail,
     removeData,
     setFilterData,
-    setSearchData } from "./pokemonSlice";
+    setSearchData,
+    setStatus
+ } from "./pokemonSlice";
 import type {AppDispatch} from '../redux/store';
 import { Filters,Pokemon } from "../interfaces";
 
@@ -19,7 +21,15 @@ export const getAPIData = () => {
 export const getDBPokemons = (page?:number,search?:string,type?:string,sorting?:string,sortColumn?:string,origin?:string) => {
    return (dispatch:AppDispatch) => {
     axios(`/pokemons?search=${search || ""}&type=${type || ""}&sorting=${sorting || ""}&sortColumn=${sortColumn || ""}&origin=${origin || ""}&page=${page || 1}`)
-    .then(res => dispatch(fetchDB(res.data)))
+    .then((res) => {
+        console.log(res.data);
+        if(res.data.total === 0){
+            dispatch(setStatus("failed"));
+        }else{
+            dispatch(setStatus("idle"));
+            dispatch(fetchDB(res.data));
+        }
+    })
     .catch(e => console.log(e));
    }
 } 

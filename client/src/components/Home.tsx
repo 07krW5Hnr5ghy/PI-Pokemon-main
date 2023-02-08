@@ -14,7 +14,7 @@ const Home = () => {
     const [searchParams] = useSearchParams();
     const name = searchParams.get('name');
     // selectors 
-    const {data,types,filters} = useSelector((state:RootState) => state.pokemons);
+    const {data,types,filters,status} = useSelector((state:RootState) => state.pokemons);
     const [options,setOptions] = useState<Filters>(filters);
 
     useEffect(() => {
@@ -82,12 +82,30 @@ const Home = () => {
 
     const handleOptions = (e:React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
-        setOptions({
-            ...options,
-            [e.target.name]: value,
-            page:1,
-            pageIndex:0,
-        });
+        // setOptions({
+        //     ...options,
+        //     [e.target.name]: value,
+        //     page:1,
+        //     pageIndex:0,
+        //     paginationStart:0,
+        // });
+        if(pages.length < 9){
+             setOptions({
+                ...options,
+                [e.target.name]: value,
+                page:1,
+                pageIndex:0,
+                paginationEnd:pages.length,
+             })
+        }else{
+             setOptions({
+                ...options,
+                [e.target.name]:value,
+                page:1,
+                pageIndex:0,
+                paginationEnd:9,
+             })
+        }
     }
 
     const handlePages = (e:React.MouseEvent<HTMLButtonElement>,page:number) => {
@@ -110,6 +128,16 @@ const Home = () => {
                 paginationEnd:pages.length,
             })
         }
+
+        if(pages.length < 9){
+            setOptions({
+                ...options,
+                page,
+                pageIndex:page-1,
+                paginationStart:0,
+                paginationEnd:pages.length,
+            })
+        }
     }
 
     const forwardPage = (e:React.MouseEvent<HTMLButtonElement>) => {
@@ -119,7 +147,7 @@ const Home = () => {
                 page:options.page+1,
                 pageIndex:options.pageIndex+1,
                 paginationStart:options.pageIndex+1,
-                paginationEnd:options.paginationEnd+1,
+                paginationEnd:options.pageIndex+10,
             })
         }else{
             setOptions({
@@ -224,7 +252,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="card-container">
-                    {!data.records.length ? <Loading/> : 
+                    {status === "failed" ? <h1>no</h1> : !data.records.length ? <Loading/> : 
                     data.records.map(pokemon => 
                     <Card
                     name={pokemon.name}
