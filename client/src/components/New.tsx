@@ -168,8 +168,18 @@ const New = () => {
                         <button 
                         className="new-next" 
                         type="submit" 
-                        disabled={isLastStep 
-                        && errors.picture !== "is valid" && !info.picture}>
+                        disabled={
+                        (errors.name !== "is valid") ||
+                        (!info.classes.length) ||
+                        (currentStepIndex === 1 && !info.attack) ||
+                        (currentStepIndex === 1 && !info.defense) ||
+                        (currentStepIndex === 2 && !info.specialAttack) ||
+                        (currentStepIndex === 2 && !info.specialDefense) ||
+                        (currentStepIndex === 3 && !info.speed) ||
+                        (currentStepIndex === 3 && !info.health) ||
+                        (isLastStep 
+                        && errors.picture !== "is valid" 
+                        && !info.picture)}>
                             {!isLastStep ? "Next" : "Finish"}
                         </button>
                     </div>

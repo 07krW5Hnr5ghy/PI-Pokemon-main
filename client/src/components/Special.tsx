@@ -16,7 +16,7 @@ const Special = ({specialAttack,specialDefense,updateFields}:SpecialProps) => {
             <input 
             type="number" 
             className="new-input" 
-            value={specialAttack} 
+            //value={specialAttack} 
             min={1}
             onChange={e => updateFields({specialAttack:Number(e.target.value)})}
             />
@@ -25,7 +25,7 @@ const Special = ({specialAttack,specialDefense,updateFields}:SpecialProps) => {
             <input 
             type="number" 
             className="new-input" 
-            value={specialDefense} 
+            // value={specialDefense} 
             min={1}
             onChange={e => updateFields({specialDefense:Number(e.target.value)})}
             />
