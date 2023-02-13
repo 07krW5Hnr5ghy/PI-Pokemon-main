@@ -9,17 +9,32 @@ type PictureData = {
 }
 
 type PictureProps = PictureData & {
-    updateFields:(fields:Partial<PictureData>) => void
+    updateFields:(fields:Partial<PictureData>) => void,
+    checkFields:(e:React.ChangeEvent<HTMLInputElement>) => void,
 }
 
-const Picture = ({picture,updateFields} : PictureProps) => {
+const Picture = ({picture,updateFields,checkFields} : PictureProps) => {
     const [upload,setUpload] = useState<boolean>(false);
+    const [errorMessage,setErrorMessage] = useState('');
     const toggleUpload = () => {
         setUpload(!upload);
     }
     const [file,setFile] = useState<File|null>(null);
     const handleFileInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-        setFile(e.target.files?.[0]!);
+        
+        
+        if(!e.target.files?.[0]){
+            setErrorMessage('No file selected');
+        }else if(!e.target.files?.[0].type.startsWith('image/jpeg') 
+        && !e.target.files?.[0].type.startsWith('image/png')
+        && !e.target.files?.[0].type.startsWith('image/webp')){
+            setErrorMessage('Only .jpg, .webp and .png files are allowed');
+        }        
+        else{
+            setErrorMessage('');
+            setFile(e.target.files?.[0]!);
+        }
+        
     }
     const handleUpload = (e:React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -77,8 +92,12 @@ const Picture = ({picture,updateFields} : PictureProps) => {
                     type="text" 
                     className="new-input" 
                     name="picture" 
-                    value={picture} 
-                    onChange={e => updateFields({picture:e.target.value})}
+                    value={picture}
+                    required
+                    onChange={(e) => {
+                        updateFields({picture:e.target.value});
+                        checkFields(e);
+                    }}
                     />
                 </div>
                      :
@@ -94,10 +113,12 @@ const Picture = ({picture,updateFields} : PictureProps) => {
                     type="file" 
                     className="new-input" 
                     name="file" 
-                    id="file" 
+                    id="file"
+                    required 
                     style={{display:"none"}}
                     onChange={handleFileInputChange}
                     />
+                    <p>Only .jpg, .png or .webp files can be uploaded</p>
                     {file?.name ? 
                     <div className="upload-confirm">
                         <p className="file-selected">File selected: {file.name}</p>

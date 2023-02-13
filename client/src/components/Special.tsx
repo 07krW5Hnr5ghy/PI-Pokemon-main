@@ -20,6 +20,7 @@ const Special = ({specialAttack,specialDefense,updateFields}:SpecialProps) => {
             min={1}
             onChange={e => updateFields({specialAttack:Number(e.target.value)})}
             />
+            {!specialAttack ? <p>set special attack value to at least 1 point</p> : null}
             <label htmlFor="" className="new-label">Special Defense</label>
             <input 
             type="number" 
@@ -28,6 +29,7 @@ const Special = ({specialAttack,specialDefense,updateFields}:SpecialProps) => {
             min={1}
             onChange={e => updateFields({specialDefense:Number(e.target.value)})}
             />
+            {!specialDefense ? <p>set special defense value to at least 1 point</p> : null}
         </FormWrapper>
     );
 }

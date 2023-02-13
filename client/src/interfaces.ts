@@ -60,3 +60,13 @@ export const INITIAL_DATA : FormData = {
     health:0,
     picture:"",
 }
+
+export interface ValidateData {
+    name: string;
+    picture: string;
+}
+
+export const ERROR_CHECKING : ValidateData = {
+    name:"",
+    picture:"",
+}

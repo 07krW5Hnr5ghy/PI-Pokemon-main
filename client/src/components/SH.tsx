@@ -23,6 +23,7 @@ const SH = ({speed,health,updateFields}:SHProps) => {
             min={1}
             onChange={e => updateFields({speed:Number(e.target.value)})}
             />
+            {!speed ? <p>set speed value to at least 1 point</p> : null}
             <label htmlFor="" className="new-label">Health</label>
             <input
             type="number" 
@@ -31,6 +32,7 @@ const SH = ({speed,health,updateFields}:SHProps) => {
             min={1}
             onChange={e => updateFields({health:Number(e.target.value)})}
             />
+            {!health ? <p>set health value to at least 1 point</p> : null}
         </FormWrapper>
     );
 }

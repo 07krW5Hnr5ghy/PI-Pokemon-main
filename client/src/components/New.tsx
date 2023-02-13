@@ -4,22 +4,71 @@ import AD from "./AD";
 import Special from "./Special";
 import SH from "./SH";
 import Picture from "./Picture";
-import { FormEvent, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { FormEvent, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useMultistepForm } from "../redux/hooks";
-import { addPokemon } from "../redux/pokemonActions";
-import { INITIAL_DATA,FormData } from "../interfaces";
+import { RootState } from "../redux/store";
+import { addPokemon,updatePokemon,resetDetail,getDetail } from "../redux/pokemonActions";
+import { useLocation, useNavigate } from "react-router-dom";
+import { INITIAL_DATA,FormData,Pokemon,ERROR_CHECKING,ValidateData } from "../interfaces";
 
+type PropertyMap = {[key:string]:any};
 
 const New = () => {
-    const [data,setData] = useState(INITIAL_DATA); 
+    const [info,setInfo] = useState<FormData>(INITIAL_DATA); 
+    const [errors,setErrors] = useState(ERROR_CHECKING);
+    const [enabled,setEnabled] = useState<boolean>(false);
     const dispatch = useDispatch();
-    console.log(data);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const id = location.pathname.split("/")[2];
+    const {data} = useSelector((state:RootState) => state.pokemons);
     const updateFields = (fields:Partial<FormData>) => {
-        setData(prev => {
+        setInfo(prev => {
             return {...prev,...fields}
         });
     }
+
+    const checkFields = (e:React.ChangeEvent<HTMLInputElement>) => {
+        
+        if(e.target.name === "name"){
+            if(e.target.value.length === 0){
+                setErrors({...errors,name:'Please write a name for the new pokemon'})
+            }else if(e.target.value.length > 10){
+                setErrors({...errors,name:'Maximum length allowed are 10 Characters'});
+            }else if(!/^[A-Za-z]+$/.test(e.target.value)){
+                setErrors({...errors,name:'Only alphabetic characters and no spaces are allowed'})
+            }else if(data.records.find(pokemon => pokemon.name === e.target.value)){
+                setErrors({...errors,name:'Name already exists in the pokemons list'});
+            }else{
+                setErrors({...errors,name:"is valid"});
+            }
+        }
+
+        if(e.target.name === "picture"){
+            if(!e.target.value){
+                setErrors({...errors,picture:'url of image is required'});
+            }else if(!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|svg|png|webp|jpeg)/.test(e.target.value)){
+                setErrors({...errors,picture:'input a valid image url of a file of the extensions jpg,svg,png,jpeg or webp'});
+            }else{
+                setErrors({...errors,picture:"is valid"});
+            }
+        }
+
+        if(e.target.name === "file"){
+            if(!e.target.files?.[0]){
+                setErrors({...errors,picture:'file is required'});
+            }else if(!e.target.files?.[0].type.startsWith('image/jpeg') 
+            && !e.target.files?.[0].type.startsWith('image/png')
+            && !e.target.files?.[0].type.startsWith('image/webp')){
+                setErrors({...errors,picture:'only jpg, png or webp files are allowed'});
+            }else{
+                setErrors({...errors,picture:"is valid"});
+            }
+        }
+
+    }
+    
     const {
         steps,
         currentStepIndex,
@@ -29,19 +78,67 @@ const New = () => {
         back,
         next
     } = useMultistepForm([
-        <Basic {...data} updateFields={updateFields}/>,
-        <AD {...data} updateFields={updateFields}/>,
-        <Special {...data} updateFields={updateFields}/>,
-        <SH {...data} updateFields={updateFields}/>,
-        <Picture {...data} updateFields={updateFields}/>
+        <Basic {...info} updateFields={updateFields} checkFields={checkFields}/>,
+        <AD {...info} updateFields={updateFields}/>,
+        <Special {...info} updateFields={updateFields}/>,
+        <SH {...info} updateFields={updateFields}/>,
+        <Picture {...info} updateFields={updateFields} checkFields={checkFields}/>
     ]);
 
     const onSubmit = (e:FormEvent) => {
         e.preventDefault();
         if(!isLastStep) return next();
-        dispatch(addPokemon(data));
-        alert("Successfull Creation")
+        if(id){
+            dispatch(updatePokemon(id,info));
+            dispatch(resetDetail());
+            dispatch(getDetail(id));
+            alert("Successfull Update");
+            navigate(`/pokemons/${id}`);
+        }else{
+            dispatch(addPokemon(info));
+            alert("Successfull Creation");
+        }
     }
+
+    const cancel = (e:React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        if(id){
+            navigate(`/pokemons/${id}`);
+        }else{
+            navigate(`/pokemons`);
+        }
+    }
+
+    console.log("info",info);
+
+    const validate = (evaluatedState:FormData) => {
+        console.log("evaluate",evaluatedState);
+        if(!evaluatedState.name){
+            setErrors({...errors,name:'Please write a name for the new pokemon'})
+        }else if(!/^[A-Za-z]+$/.test(evaluatedState.name) || evaluatedState.name.length > 10){
+            setErrors({...errors,name:'Name is invalid enter alphabet characters only and 10 Characters as maximum'});
+        }else if(data.records.find(pokemon => pokemon.name === evaluatedState.name)){
+            setErrors({...errors,name:'Name already exists in the pokemons list'});
+        }else{
+            setErrors({...errors,name:"is valid"});
+        }
+        
+        if(!evaluatedState.picture){
+            setErrors({...errors,picture:'url of image is required'});
+        }else if(!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|svg|png|webp|jpeg)/.test(evaluatedState.picture)){
+            setErrors({...errors,picture:'input a valid image url of a file of the extensions jpg,svg,png,jpeg or webp'});
+        }else{
+            setErrors({...errors,picture:"is valid"});
+        }
+    }
+
+    console.log("step",currentStepIndex);
+    console.log("errors",errors);
+
+    useEffect(() => {
+
+    },[]);
+
     return(
         <div className="new-container">
             <Nav/>
@@ -52,74 +149,32 @@ const New = () => {
                     </div>
                     {step}
                     <div className="new-buttons">
-                        {!isFirstStep && 
+                    {/* {!isFirstStep ? 
                         <button 
                         className="new-back" 
                         type="button" 
                         onClick={back}
                         >
                             Back
-                        </button>}
-                        <button className="new-next" type="submit">
+                        </button> :
+                        <button className="new-back" onClick={cancel}>Cancel</button>} */}
+                        {!isFirstStep ? <button 
+                        className="new-back" 
+                        type="button" 
+                        onClick={back}
+                        >
+                            Back
+                        </button> : null}
+                        <button 
+                        className="new-next" 
+                        type="submit" 
+                        disabled={isLastStep 
+                        && errors.picture !== "is valid" && !info.picture}>
                             {!isLastStep ? "Next" : "Finish"}
                         </button>
                     </div>
                 </form>
             </div>
-            {/* <div className="new-title">
-                <h2>Create a Pokemon</h2>
-            </div>
-            <form className="form">
-                <div className="column first">
-                    <label htmlFor="name" className="new-label">NAME</label>
-                    <input type="text" name="name" className="new-data name" placeholder="Enter a name" />
-                    <label htmlFor="types" className="new-label">TYPES</label>
-                    <select name="types" id="" className="new-types new-data">
-                        <option value="type" selected disabled>select type</option>
-                        <option value="normal">normal</option>
-                        <option value="grass">grass</option>
-                        <option value="fire">fire</option>
-                        <option value="water">water</option>
-                    </select>
-                </div>
-                <div className="column second">
-                    <label htmlFor="attack" className="new-label">ATTACK</label>
-                    <input type="number" name="attack" className="new-data attack" min={1}/>
-                    <label htmlFor="defense" className="new-label">DEFENSE</label>
-                    <input type="number" name="defense" className="new-data defense" min={1}/>
-                    <label htmlFor="special-attack" className="new-label">SPECIAL ATTACK</label>
-                    <input type="number" name="special-attack" className="new-data special-attack" min={1} />
-                    <label htmlFor="special-defense" className="new-label">SPECIAL DEFENSE</label>
-                    <input type="number" name="special-defense" className="new-data special-defense" min={1} />
-                    <label htmlFor="speed" className="new-label">SPEED</label>
-                    <input type="number" name="speed" className="new-data speed" min={1} />
-                    <label htmlFor="health" className="new-label">HEALTH</label>
-                    <input type="number" name="health" className="new-data health" min={1} />
-                </div>
-                    {!upload ? 
-                <div className="column third">
-                        <label htmlFor="picture" className="new-label">PICTURE</label>
-                        <div className="mode" onClick={toggleUpload}>
-                            Link
-                        </div>
-                        <label htmlFor="file" className="new-label file">
-                            <Publish/>
-                        </label>
-                        <input type="file" className="new-data picture" name="file" id="file" style={{display:"none"}}/>
-                    </div> 
-                     :
-                    <div className="column third">
-                        <label htmlFor="picture" className="new-label">PICTURE</label>
-                        <div className="mode" onClick={toggleUpload}>
-                            File
-                        </div>
-                        <input type="text" className="new-data picture" name="picture" />
-                    </div>
-                    }
-                <div className="submit">
-                    <button className="send">CREATE</button>
-                </div>
-            </form> */}
         </div>
     )
 }
