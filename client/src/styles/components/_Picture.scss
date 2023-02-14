@@ -9,7 +9,7 @@
 
 .mode{
     margin:0 0 f.rem(12) 0;
-    padding:f.rem(4) 0 f.rem(4) 0;
+    padding:f.rem(4) 0 f.rem(8) 0;
     border-radius: f.rem(8);
     border:2pt solid var(--secondary-shade2);
     background-color: var(--secondary-tint4);
@@ -30,7 +30,7 @@
 
 .upload-file{
     margin-top: f.rem(12);
-    padding: 0 f.rem(4) f.rem(4) f.rem(4);
+    padding: f.rem(2) f.rem(8) f.rem(4) f.rem(8);
     border-radius: f.rem(8);
     border: 2pt solid var(--secondary-shade2);
     color: var(--secondary-shade3);

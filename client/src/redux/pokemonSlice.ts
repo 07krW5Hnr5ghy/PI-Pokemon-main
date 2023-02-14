@@ -15,7 +15,7 @@ export interface PokemonsState{
     status:'idle' | 'loading' | 'failed',
 }
 
-const initialState : PokemonsState = {
+export const initialState : PokemonsState = {
     data:{
         records:[],
         currentPage:1,

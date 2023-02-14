@@ -4,31 +4,30 @@ import {getStorage, ref, uploadBytesResumable, getDownloadURL} from "firebase/st
 import app from '../firebase';
 import FormWrapper from "./FormWrapper";
 
-type PictureData = {
+type StepFiveData = {
     picture:string,
 }
 
-type PictureProps = PictureData & {
-    updateFields:(fields:Partial<PictureData>) => void,
+type StepFiveProps = StepFiveData & {
+    updateFields:(fields:Partial<StepFiveData>) => void,
     checkFields:(e:React.ChangeEvent<HTMLInputElement>) => void,
 }
 
-const Picture = ({picture,updateFields,checkFields} : PictureProps) => {
+const StepFive = ({picture,updateFields,checkFields} : StepFiveProps) => {
     const [upload,setUpload] = useState<boolean>(false);
-    const [errorMessage,setErrorMessage] = useState('');
+    const [errorMessage,setErrorMessage] = useState('No file selected');
     const toggleUpload = () => {
         setUpload(!upload);
     }
     const [file,setFile] = useState<File|null>(null);
     const handleFileInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-        
-        
+        checkFields(e);
         if(!e.target.files?.[0]){
             setErrorMessage('No file selected');
         }else if(!e.target.files?.[0].type.startsWith('image/jpeg') 
         && !e.target.files?.[0].type.startsWith('image/png')
         && !e.target.files?.[0].type.startsWith('image/webp')){
-            setErrorMessage('Only .jpg, .webp and .png files are allowed');
+            setErrorMessage('invalid file format try again');
         }        
         else{
             setErrorMessage('');
@@ -75,7 +74,7 @@ const Picture = ({picture,updateFields,checkFields} : PictureProps) => {
             });
 
         }else{
-            console.log("dont");
+            console.log("file not exist");
         }
 
     }
@@ -99,6 +98,10 @@ const Picture = ({picture,updateFields,checkFields} : PictureProps) => {
                         checkFields(e);
                     }}
                     />
+                    {!picture ? <p className="form-warning">url of image is required</p> 
+                    : !/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|png|webp|jpeg)/.test(picture) 
+                    ? <p className="form-error">input a valid image url of a file of the extensions jpg,png,jpeg or webp</p>
+                    : <p className="form-success">picture url is valid</p>}
                 </div>
                      :
                 <div className="picture">
@@ -118,7 +121,9 @@ const Picture = ({picture,updateFields,checkFields} : PictureProps) => {
                     style={{display:"none"}}
                     onChange={handleFileInputChange}
                     />
-                    <p>Only .jpg, .png or .webp files can be uploaded</p>
+                    <p className="form-warning">Upload a jpg, png or webp file for the picture</p>
+                    {errorMessage ? <p className="form-error">{errorMessage}</p> 
+                    : <p className="form-success">valid file</p>}
                     {file?.name ? 
                     <div className="upload-confirm">
                         <p className="file-selected">File selected: {file.name}</p>
@@ -135,4 +140,4 @@ const Picture = ({picture,updateFields,checkFields} : PictureProps) => {
     );
 }
 
-export default Picture;
+export default StepFive;

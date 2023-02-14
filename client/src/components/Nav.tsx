@@ -23,7 +23,9 @@ const Nav = () => {
               <span className="line line3"></span>
             </div>
             <div className="logo">
-                <h1>Pokeindex</h1>
+                <Link to={"/pokmons"}>
+                  <h1>Pokeindex</h1>
+                </Link>
             </div>
             <div className="menu-items">
                 {location.pathname !== "/pokemons"

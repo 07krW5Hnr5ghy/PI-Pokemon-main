@@ -67,6 +67,12 @@ const Home = () => {
                 paginationEnd:data.last_page,
             }))
         }
+        if(data.total === 0){
+            dispatch(updateFilter({
+                paginationStart:0,
+                paginationEnd:0,
+            }))
+        }
     },[
         dispatch,
         options,
@@ -77,18 +83,12 @@ const Home = () => {
         filters.column,
         filters.page,
         data.currentPage,
-        data.last_page
+        data.last_page,
+        data.total
     ]);
 
     const handleOptions = (e:React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
-        // setOptions({
-        //     ...options,
-        //     [e.target.name]: value,
-        //     page:1,
-        //     pageIndex:0,
-        //     paginationStart:0,
-        // });
         if(pages.length < 9){
              setOptions({
                 ...options,
@@ -206,9 +206,6 @@ const Home = () => {
         pages.push(i);
     }
 
-    //onsole.log("options",options);
-    //console.log("pages",pages);
-
     return(
         <div id="home-container">
             <Nav/>
@@ -252,7 +249,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="card-container">
-                    {status === "failed" ? <h1>no</h1> : !data.records.length ? <Loading/> : 
+                    {status === "failed" ? <h2 className="home-not-found">Pokemons were not found with this filters</h2> : !data.records.length ? <Loading/> : 
                     data.records.map(pokemon => 
                     <Card
                     name={pokemon.name}

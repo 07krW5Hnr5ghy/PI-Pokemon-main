@@ -11,6 +11,7 @@ import {
  } from "./pokemonSlice";
 import type {AppDispatch} from '../redux/store';
 import { Filters,Pokemon } from "../interfaces";
+import { initialState } from "./pokemonSlice";
 
 export const getAPIData = () => {
     axios(`/p-data`)
@@ -25,6 +26,7 @@ export const getDBPokemons = (page?:number,search?:string,type?:string,sorting?:
         console.log(res.data);
         if(res.data.total === 0){
             dispatch(setStatus("failed"));
+            dispatch(fetchDB(initialState.data));
         }else{
             dispatch(setStatus("idle"));
             dispatch(fetchDB(res.data));

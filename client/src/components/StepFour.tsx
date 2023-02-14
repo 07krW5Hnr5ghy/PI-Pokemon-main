@@ -1,17 +1,17 @@
 import FormWrapper from "./FormWrapper";
 
-type SHData = {
+type StepFourData = {
     speed:number,
     health:number,
 }
 
-type SHProps = SHData & {
-    updateFields:(fields:Partial<SHData>) => void
+type StepFourProps = StepFourData & {
+    updateFields:(fields:Partial<StepFourData>) => void
 }
 
 
 
-const SH = ({speed,health,updateFields}:SHProps) => {
+const StepFour = ({speed,health,updateFields}:StepFourProps) => {
     
     return(
         <FormWrapper title="Secondary Stats">
@@ -22,7 +22,7 @@ const SH = ({speed,health,updateFields}:SHProps) => {
             min={1}
             onChange={e => updateFields({speed:Number(e.target.value)})}
             />
-            {!speed ? <p>set speed value to at least 1 point</p> : null}
+            {!speed ? <p className="form-warning">set speed value to at least 1 point</p> : <p className="form-success">speed is valid</p>}
             <label htmlFor="" className="new-label">Health</label>
             <input
             type="number" 
@@ -30,9 +30,9 @@ const SH = ({speed,health,updateFields}:SHProps) => {
             min={1}
             onChange={e => updateFields({health:Number(e.target.value)})}
             />
-            {!health ? <p>set health value to at least 1 point</p> : null}
+            {!health ? <p className="form-warning">set health value to at least 1 point</p> : <p className="form-success">health is valid</p>}
         </FormWrapper>
     );
 }
 
-export default SH;
+export default StepFour;

@@ -30,29 +30,29 @@
 
 .new-buttons{
     display: flex;
-    gap:f.rem(4);
+    gap:f.rem(12);
     margin:f.rem(16) 0 f.rem(16) 0;
 }
 
 .new-back{
     flex:1;
     padding: f.rem(4) f.rem(4);
-    border: 2pt solid var(--secondary);
+    border: 2pt solid var(--primary);
     border-radius:f.rem(8);
-    background-color: var(--secondary-tint4);
-    color:var(--secondary-shade3);
+    background-color: var(--primary-tint4);
+    color:var(--primary-shade3);
 }
 
 .new-back:hover{
-    background-color: var(--secondary);
-    border-color: var(--secondary-tint4);
-    color:var(--secondary-tint4);
+    background-color: var(--primary);
+    border-color: var(--primary-tint4);
+    color:var(--primary-tint4);
 }
 
 .new-back:active{
-    background-color: var(--primary);
-    border-color: var(--primary-tint4);
-    color: var(--primary-tint4);
+    background-color: var(--secondary);
+    border-color: var(--secondary-tint4);
+    color: var(--secondary-tint4);
 }
 
 .new-next{
@@ -80,5 +80,26 @@
     background: var(--secondary-grayscale9);
     color: var(--primary-grayscale5);
     border: 2pt solid var(--primary-grayscale5);
+    box-shadow: 0px 0px 0px 0px;
     cursor:not-allowed;
+}
+
+.new-cancel{
+    margin:f.rem(16) 0 0 0;
+    padding: f.rem(4) f.rem(16) f.rem(6) f.rem(16);
+}
+
+.form-warning{
+    margin: f.rem(4) 0 0 0;
+    color:var(--warning-tint2);   
+}
+
+.form-error{
+    margin: f.rem(4) 0 0 0;
+    color: var(--error-tint2);
+}
+
+.form-success{
+    margin:f.rem(4) 0 0 0;
+    color:var(--success-shade2);
 }

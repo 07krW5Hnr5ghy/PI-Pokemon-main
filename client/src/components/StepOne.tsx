@@ -6,17 +6,17 @@ import React from "react";
 
 
 
-type BasicData = {
+type StepOneData = {
     name:string,
     classes:string[],
 }
 
-type BasicProps = BasicData & {
-    updateFields:(fields:Partial<BasicData>) => void,
+type StepOneProps = StepOneData & {
+    updateFields:(fields:Partial<StepOneData>) => void,
     checkFields:(e:React.ChangeEvent<HTMLInputElement>) => void,
 }
 
-const Basic = ({name,classes, updateFields,checkFields}:BasicProps) => {
+const StepOne = ({name,classes, updateFields,checkFields}:StepOneProps) => {
     const location = useLocation();
     const {types,data} = useSelector((state:RootState) => state.pokemons);
     const deleteType = (e:React.MouseEvent<HTMLButtonElement>) => {
@@ -37,11 +37,11 @@ const Basic = ({name,classes, updateFields,checkFields}:BasicProps) => {
                 checkFields(e);
             }}
             />
-            {name.length === 0 ? <p>Input a name for you pokemon</p>
-            : name.length > 10 ? <p>Maximum length allowed are 10 Characters</p>
-            : !/^[A-Za-z]+$/.test(name) ? <p>Only alphabetic characters whitout spaces are allowed</p>
+            {name.length === 0 ? <p className="form-warning">Input a name for you pokemon</p>
+            : name.length > 10 ? <p className="form-error">Maximum length allowed are 10 Characters</p>
+            : !/^[A-Za-z]+$/.test(name) ? <p className="form-error">Only alphabetic characters whitout spaces are allowed</p>
             : data.records.find(pokemon => pokemon.name === name) ? <p>Duplicated name</p>
-            : <p>no errors</p>}
+            : <p className="form-success">this name is valid</p>}
             <label htmlFor="" className="new-label">Types</label>
             <select 
             name="" 
@@ -57,7 +57,7 @@ const Basic = ({name,classes, updateFields,checkFields}:BasicProps) => {
                 {types.map(item => <option key={item.id}>{item.type}</option>)}
             </select>
             {classes.length === 0 ? 
-            <p>Select at least one type maximum two types</p>:
+            <p className="form-warning">Select at least one type maximum two types</p>:
             classes.map((item) => <div>
                 <button 
                 key={item} 
@@ -70,4 +70,4 @@ const Basic = ({name,classes, updateFields,checkFields}:BasicProps) => {
     );
 }
 
-export default Basic;
+export default StepOne;
