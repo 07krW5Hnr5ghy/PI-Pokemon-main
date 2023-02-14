@@ -19,7 +19,6 @@ const SH = ({speed,health,updateFields}:SHProps) => {
             <input 
             type="number" 
             className="new-input" 
-            // value={speed} 
             min={1}
             onChange={e => updateFields({speed:Number(e.target.value)})}
             />
@@ -28,7 +27,6 @@ const SH = ({speed,health,updateFields}:SHProps) => {
             <input
             type="number" 
             className="new-input" 
-            // value={health} 
             min={1}
             onChange={e => updateFields({health:Number(e.target.value)})}
             />

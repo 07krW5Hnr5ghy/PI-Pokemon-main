@@ -32,12 +32,10 @@ const Basic = ({name,classes, updateFields,checkFields}:BasicProps) => {
             type="text" 
             className="new-input"
             name="name" 
-            value={name} 
             onChange={(e) => {
                 updateFields({name:e.target.value});
                 checkFields(e);
             }}
-            required
             />
             {name.length === 0 ? <p>Input a name for you pokemon</p>
             : name.length > 10 ? <p>Maximum length allowed are 10 Characters</p>
@@ -49,8 +47,6 @@ const Basic = ({name,classes, updateFields,checkFields}:BasicProps) => {
             name="" 
             id="" 
             className="new-types new-select" 
-            value={!classes.length ? "" : classes[classes.length-1]}
-            required
             onChange={e => {
                 if(classes.length < 2){
                     updateFields({classes:classes.concat([e.target.value])})

@@ -4,20 +4,17 @@ import AD from "./AD";
 import Special from "./Special";
 import SH from "./SH";
 import Picture from "./Picture";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMultistepForm } from "../redux/hooks";
 import { RootState } from "../redux/store";
 import { addPokemon,updatePokemon,resetDetail,getDetail } from "../redux/pokemonActions";
 import { useLocation, useNavigate } from "react-router-dom";
-import { INITIAL_DATA,FormData,Pokemon,ERROR_CHECKING,ValidateData } from "../interfaces";
-
-type PropertyMap = {[key:string]:any};
+import { INITIAL_DATA,FormData,ERROR_CHECKING } from "../interfaces";
 
 const New = () => {
     const [info,setInfo] = useState<FormData>(INITIAL_DATA); 
     const [errors,setErrors] = useState(ERROR_CHECKING);
-    const [enabled,setEnabled] = useState<boolean>(false);
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
@@ -108,36 +105,6 @@ const New = () => {
             navigate(`/pokemons`);
         }
     }
-
-    console.log("info",info);
-
-    const validate = (evaluatedState:FormData) => {
-        console.log("evaluate",evaluatedState);
-        if(!evaluatedState.name){
-            setErrors({...errors,name:'Please write a name for the new pokemon'})
-        }else if(!/^[A-Za-z]+$/.test(evaluatedState.name) || evaluatedState.name.length > 10){
-            setErrors({...errors,name:'Name is invalid enter alphabet characters only and 10 Characters as maximum'});
-        }else if(data.records.find(pokemon => pokemon.name === evaluatedState.name)){
-            setErrors({...errors,name:'Name already exists in the pokemons list'});
-        }else{
-            setErrors({...errors,name:"is valid"});
-        }
-        
-        if(!evaluatedState.picture){
-            setErrors({...errors,picture:'url of image is required'});
-        }else if(!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|svg|png|webp|jpeg)/.test(evaluatedState.picture)){
-            setErrors({...errors,picture:'input a valid image url of a file of the extensions jpg,svg,png,jpeg or webp'});
-        }else{
-            setErrors({...errors,picture:"is valid"});
-        }
-    }
-
-    console.log("step",currentStepIndex);
-    console.log("errors",errors);
-
-    useEffect(() => {
-
-    },[]);
 
     return(
         <div className="new-container">
