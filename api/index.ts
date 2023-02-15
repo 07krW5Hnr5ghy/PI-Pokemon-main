@@ -33,34 +33,3 @@ const port = process.env.PORT || 3001;
 server.listen(port,()=>{
   console.log(`Server is running at https://localhost:${port}`);
 })
-/* JS code
-const server = require('./src/app.js');
-const { db } = require('./src/db.js');
-console.log(server);
-
-// Syncing all the models at once.
-db.sync({ force: false, alter:false }).then(() => {
-  server.listen(process.env.PORT, () => {
-    console.log(`listening at ${process.env.PORT}`); // eslint-disable-line no-console
-  });
-});*/
-// import http from 'http';
-// import express,{Application} from 'express';
-// import dotenv from 'dotenv';
-// import server from './src/app';
-// import router from './src/routes';
-// //import {sequelize} from './src/db';
-
-// dotenv.config();
-
-// const port = process.env.PORT || 3001;
-
-// sequelize.sync({ force: true }).then(() => {
-//   server.listen(process.env.PORT, () => {
-//     console.log(`listening at ${process.env.PORT}`); // eslint-disable-line no-console
-//   });
-// });
-
-// /*app.listen(port, () => {
-//   console.log(`Server is running at https://localhost:${port}`);
-// });*/

@@ -4,6 +4,8 @@ import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import StepFive from "./StepFive";
+import { ToastContainer,toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import React, { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMultistepForm } from "../redux/hooks";
@@ -13,18 +15,33 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { INITIAL_DATA,FormData,ERROR_CHECKING } from "../interfaces";
 
 const Form = () => {
-    const [info,setInfo] = useState<FormData>(INITIAL_DATA); 
-    const [errors,setErrors] = useState(ERROR_CHECKING);
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
     const id = location.pathname.split("/")[2];
-    const {data} = useSelector((state:RootState) => state.pokemons);
+    const {data,detail} = useSelector((state:RootState) => state.pokemons);
+    const [info,setInfo] = useState<FormData>(!id?INITIAL_DATA:{
+        name:detail.name,
+        classes:detail.classes,
+        attack:detail.attack,
+        defense:detail.defense,
+        specialAttack:detail.specialAttack,
+        specialDefense:detail.specialDefense,
+        speed:detail.speed,
+        health:detail.health,
+        picture:detail.picture,
+    }); 
+    const [errors,setErrors] = useState(!id?ERROR_CHECKING:{
+        name:"is valid",
+        picture:"is valid",
+    });
     const updateFields = (fields:Partial<FormData>) => {
         setInfo(prev => {
             return {...prev,...fields}
         });
     }
+
+    console.log(errors);
 
     const checkFields = (e:React.ChangeEvent<HTMLInputElement>) => {
         
@@ -75,12 +92,19 @@ const Form = () => {
         back,
         next
     } = useMultistepForm([
-        <StepOne {...info} updateFields={updateFields} checkFields={checkFields}/>,
-        <StepTwo {...info} updateFields={updateFields}/>,
-        <StepThree {...info} updateFields={updateFields}/>,
-        <StepFour {...info} updateFields={updateFields}/>,
-        <StepFive {...info} updateFields={updateFields} checkFields={checkFields}/>
+        <StepOne {...info} updateFields={updateFields} checkFields={checkFields} detail={detail} id={id}/>,
+        <StepTwo {...info} updateFields={updateFields} detail={detail} id={id}/>,
+        <StepThree {...info} updateFields={updateFields} detail={detail} id={id}/>,
+        <StepFour {...info} updateFields={updateFields} detail={detail} id={id}/>,
+        <StepFive {...info} updateFields={updateFields} detail={detail} checkFields={checkFields}/>
     ]);
+
+    const showToastMessage = (message:string) => {
+        toast.success(message,{
+            position:toast.POSITION.TOP_RIGHT,
+            theme:"colored",
+        });
+    }
 
     const onSubmit = (e:FormEvent) => {
         e.preventDefault();
@@ -89,12 +113,16 @@ const Form = () => {
             dispatch(updatePokemon(id,info));
             dispatch(resetDetail());
             dispatch(getDetail(id));
-            alert("Successfull Update");
-            navigate(`/pokemons/${id}`);
+            showToastMessage("Pokemon successfully updated");
+            setTimeout(() => {
+                navigate(`/pokemons/${id}`);
+            },5000);
         }else{
             dispatch(addPokemon(info));
-            alert("Successfull Creation");
-            navigate(`/pokemons`);
+            showToastMessage("Pokemon successfully created");
+            setTimeout(() => {
+                navigate(`/pokemons`);
+            },5000);
         }
     }
 
@@ -128,22 +156,26 @@ const Form = () => {
                         className="new-next" 
                         type="submit" 
                         disabled={
-                        (errors.name !== "is valid") ||
-                        (!info.classes.length) ||
-                        (currentStepIndex === 1 && !info.attack) ||
-                        (currentStepIndex === 1 && !info.defense) ||
-                        (currentStepIndex === 2 && !info.specialAttack) ||
-                        (currentStepIndex === 2 && !info.specialDefense) ||
-                        (currentStepIndex === 3 && !info.speed) ||
-                        (currentStepIndex === 3 && !info.health) ||
-                        ((isLastStep 
-                        && errors.picture !== "is valid") 
-                        || (isLastStep && !info.picture))}>
+                            !id ? ((errors.name !== "is valid") ||
+                            (!info.classes.length) ||
+                            (currentStepIndex === 1 && !info.attack) ||
+                            (currentStepIndex === 1 && !info.defense) ||
+                            (currentStepIndex === 2 && !info.specialAttack) ||
+                            (currentStepIndex === 2 && !info.specialDefense) ||
+                            (currentStepIndex === 3 && !info.speed) ||
+                            (currentStepIndex === 3 && !info.health) ||
+                            ((isLastStep 
+                            && errors.picture !== "is valid") 
+                            || (isLastStep && !info.picture))) : ((errors.name !== "is valid") ||
+                            (!info.classes.length) || ((isLastStep 
+                                && errors.picture !== "is valid")))
+                        }>
                             {!isLastStep ? "Next" : "Finish"}
                         </button>
                     </div>
                 </form>
             </div>
+            <ToastContainer/>
             <button className="new-back new-cancel" onClick={cancel}>Cancel</button>
         </div>
     )

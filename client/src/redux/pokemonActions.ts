@@ -12,6 +12,8 @@ import {
 import type {AppDispatch} from '../redux/store';
 import { Filters,Pokemon } from "../interfaces";
 import { initialState } from "./pokemonSlice";
+import { ToastContainer,toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const getAPIData = () => {
     axios(`/p-data`)
@@ -73,7 +75,10 @@ export const updateSearch = (name:string) => {
 export const addPokemon = (pokemon:Partial<Pokemon>) => {
     return(dispatch:AppDispatch) => {
         axios.post(`/pokemons`,pokemon)
-        .then(res => console.log(res))
+        .then(res => {
+            console.log(res)
+            
+        })
         .catch(e => console.log(e));
     }
 }

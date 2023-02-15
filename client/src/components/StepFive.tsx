@@ -3,6 +3,7 @@ import { Publish } from "@mui/icons-material";
 import {getStorage, ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
 import app from '../firebase';
 import FormWrapper from "./FormWrapper";
+import { Pokemon } from "../interfaces";
 
 type StepFiveData = {
     picture:string,
@@ -11,9 +12,10 @@ type StepFiveData = {
 type StepFiveProps = StepFiveData & {
     updateFields:(fields:Partial<StepFiveData>) => void,
     checkFields:(e:React.ChangeEvent<HTMLInputElement>) => void,
+    detail:Pokemon,
 }
 
-const StepFive = ({picture,updateFields,checkFields} : StepFiveProps) => {
+const StepFive = ({picture,updateFields,checkFields,detail} : StepFiveProps) => {
     const [upload,setUpload] = useState<boolean>(false);
     const [errorMessage,setErrorMessage] = useState('No file selected');
     const toggleUpload = () => {
@@ -78,7 +80,6 @@ const StepFive = ({picture,updateFields,checkFields} : StepFiveProps) => {
         }
 
     }
-    console.log(file);
     return(
         <FormWrapper title="Select your pokemon picture">
             {!upload ? 

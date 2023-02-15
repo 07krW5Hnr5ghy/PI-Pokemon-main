@@ -1,4 +1,5 @@
 import FormWrapper from "./FormWrapper";
+import { Pokemon } from "../interfaces";
 
 type StepFourData = {
     speed:number,
@@ -6,19 +7,22 @@ type StepFourData = {
 }
 
 type StepFourProps = StepFourData & {
-    updateFields:(fields:Partial<StepFourData>) => void
+    updateFields:(fields:Partial<StepFourData>) => void,
+    detail:Pokemon,
+    id:string,
 }
 
 
 
-const StepFour = ({speed,health,updateFields}:StepFourProps) => {
+const StepFour = ({speed,health,updateFields,detail,id}:StepFourProps) => {
     
     return(
         <FormWrapper title="Secondary Stats">
             <label htmlFor="" className="new-label">Speed</label>
             <input 
             type="number" 
-            className="new-input" 
+            className="new-input"
+            placeholder={!id?"0":detail.speed.toString()}  
             min={1}
             onChange={e => updateFields({speed:Number(e.target.value)})}
             />
@@ -26,7 +30,8 @@ const StepFour = ({speed,health,updateFields}:StepFourProps) => {
             <label htmlFor="" className="new-label">Health</label>
             <input
             type="number" 
-            className="new-input" 
+            className="new-input"
+            placeholder={!id?"0":detail.health.toString()} 
             min={1}
             onChange={e => updateFields({health:Number(e.target.value)})}
             />

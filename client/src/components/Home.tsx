@@ -2,7 +2,7 @@ import React, { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Filters } from "../interfaces";
 import { RootState } from "../redux/store";
-import { getDBPokemons,getTypes,updateFilter} from "../redux/pokemonActions";
+import { getDBPokemons,getTypes,updateFilter,resetDetail} from "../redux/pokemonActions";
 import { useSearchParams } from "react-router-dom";
 import { KeyboardArrowLeft, KeyboardArrowRight, KeyboardDoubleArrowLeft,KeyboardDoubleArrowRight } from "@mui/icons-material";
 import Card from "./Card";
@@ -19,6 +19,8 @@ const Home = () => {
 
     useEffect(() => {
         console.count("mount");
+
+        dispatch(resetDetail());
 
         if(!data.records.length){
             dispatch(getDBPokemons());

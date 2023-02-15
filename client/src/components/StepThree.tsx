@@ -1,4 +1,5 @@
 import FormWrapper from "./FormWrapper";
+import { Pokemon } from "../interfaces";
 
 type StepThreeData = {
     specialAttack:number,
@@ -6,16 +7,19 @@ type StepThreeData = {
 }
 
 type StepThreeProps = StepThreeData & {
-    updateFields:(fields:Partial<StepThreeData>) => void
+    updateFields:(fields:Partial<StepThreeData>) => void,
+    detail:Pokemon,
+    id:string,
 }
 
-const StepThree = ({specialAttack,specialDefense,updateFields}:StepThreeProps) => {
+const StepThree = ({specialAttack,specialDefense,updateFields,detail,id}:StepThreeProps) => {
     return(
         <FormWrapper title="Special Stats">
             <label htmlFor="" className="new-label">Special Attack</label>
             <input 
             type="number" 
-            className="new-input"  
+            className="new-input"
+            placeholder={!id?"0":detail.specialAttack.toString()}  
             min={1}
             onChange={e => updateFields({specialAttack:Number(e.target.value)})}
             />
@@ -24,6 +28,7 @@ const StepThree = ({specialAttack,specialDefense,updateFields}:StepThreeProps) =
             <input 
             type="number" 
             className="new-input"
+            placeholder={!id?"0":detail.specialDefense.toString()}
             min={1}
             onChange={e => updateFields({specialDefense:Number(e.target.value)})}
             />

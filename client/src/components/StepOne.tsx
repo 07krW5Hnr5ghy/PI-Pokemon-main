@@ -2,7 +2,7 @@ import FormWrapper from "./FormWrapper";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useLocation } from "react-router-dom";
-import React from "react";
+import { Pokemon } from "../interfaces";
 
 
 
@@ -14,9 +14,11 @@ type StepOneData = {
 type StepOneProps = StepOneData & {
     updateFields:(fields:Partial<StepOneData>) => void,
     checkFields:(e:React.ChangeEvent<HTMLInputElement>) => void,
+    detail:Pokemon,
+    id:string,
 }
 
-const StepOne = ({name,classes, updateFields,checkFields}:StepOneProps) => {
+const StepOne = ({name,classes, updateFields,checkFields,detail,id}:StepOneProps) => {
     const location = useLocation();
     const {types,data} = useSelector((state:RootState) => state.pokemons);
     const deleteType = (e:React.MouseEvent<HTMLButtonElement>) => {
@@ -32,6 +34,7 @@ const StepOne = ({name,classes, updateFields,checkFields}:StepOneProps) => {
             type="text" 
             className="new-input"
             name="name" 
+            placeholder={!id?"":detail.name}
             onChange={(e) => {
                 updateFields({name:e.target.value});
                 checkFields(e);
@@ -40,7 +43,7 @@ const StepOne = ({name,classes, updateFields,checkFields}:StepOneProps) => {
             {name.length === 0 ? <p className="form-warning">Input a name for you pokemon</p>
             : name.length > 10 ? <p className="form-error">Maximum length allowed are 10 Characters</p>
             : !/^[A-Za-z]+$/.test(name) ? <p className="form-error">Only alphabetic characters whitout spaces are allowed</p>
-            : data.records.find(pokemon => pokemon.name === name) ? <p>Duplicated name</p>
+            : data.records.find(pokemon => pokemon.name === name) ? (!id ? <p className="form-error">Duplicated name</p> : <p className="form-success">Name is valid</p>)
             : <p className="form-success">this name is valid</p>}
             <label htmlFor="" className="new-label">Types</label>
             <select 
