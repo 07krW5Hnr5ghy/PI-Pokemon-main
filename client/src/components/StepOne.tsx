@@ -51,7 +51,7 @@ const StepOne = ({name,classes, updateFields,checkFields,detail,id}:StepOneProps
             id="" 
             className="new-types new-select" 
             onChange={e => {
-                if(classes.length < 2){
+                if(classes.length < 2 && !classes.includes(e.target.value)){
                     updateFields({classes:classes.concat([e.target.value])})
                 }
             }}
