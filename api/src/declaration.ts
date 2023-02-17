@@ -40,7 +40,7 @@ export interface Type{
     type:string;
 }
 
-/* express types */
+/* express and routes types */
 export interface RequestParams {}
 
 export interface ResponseBody {}

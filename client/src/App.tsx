@@ -2,7 +2,6 @@ import {Routes,Route} from "react-router-dom";
 import Landing from "./components/Landing";
 import Home from "./components/Home";
 import Details from "./components/Details";
-import NotFound from "./components/NotFound";
 import Form from "./components/Form";
 import Loading from "./components/Loading";
 
@@ -15,7 +14,7 @@ function App() {
       <Route path="/new" element={<Form/>}/>
       <Route path="/loading" element={<Loading/>}/>
       <Route path="/update/:id" element={<Form/>}/>
-      <Route path="*" element={<NotFound/>}/>
+      <Route path="*" element={<Home/>}/>
     </Routes>
   );
 }

@@ -1,27 +1,23 @@
+/* libraries */
 import React, { useState } from "react";
 import { Publish } from "@mui/icons-material";
 import {getStorage, ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
+/* cloud storage access configuration */
 import app from '../firebase';
 import FormWrapper from "./FormWrapper";
-import { Pokemon } from "../interfaces";
+import { StepFiveProps } from "../tools/interfaces";
 
-type StepFiveData = {
-    picture:string,
-}
-
-type StepFiveProps = StepFiveData & {
-    updateFields:(fields:Partial<StepFiveData>) => void,
-    checkFields:(e:React.ChangeEvent<HTMLInputElement>) => void,
-    detail:Pokemon,
-}
-
-const StepFive = ({picture,updateFields,checkFields,detail} : StepFiveProps) => {
+const StepFive = ({picture,updateFields,checkFields} : StepFiveProps) => {
     const [upload,setUpload] = useState<boolean>(false);
+    /* error message state for upload file input */
     const [errorMessage,setErrorMessage] = useState('No file selected');
+    /* switch between paste url and upload file input */
     const toggleUpload = () => {
         setUpload(!upload);
     }
+    /* contains file data from input */
     const [file,setFile] = useState<File|null>(null);
+    /* handle validation for upload file input */
     const handleFileInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         checkFields(e);
         if(!e.target.files?.[0]){
@@ -37,6 +33,7 @@ const StepFive = ({picture,updateFields,checkFields,detail} : StepFiveProps) => 
         }
         
     }
+    /* upload file to cloud storage and return link of the file */
     const handleUpload = (e:React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const fileName = new Date().getTime() + file?.name!; 
@@ -92,13 +89,14 @@ const StepFive = ({picture,updateFields,checkFields,detail} : StepFiveProps) => 
                     type="text" 
                     className="new-input" 
                     name="picture" 
-                    value={picture}
+                    placeholder={picture}
                     required
                     onChange={(e) => {
                         updateFields({picture:e.target.value});
                         checkFields(e);
                     }}
                     />
+                    {/* display url validation messages */}
                     {!picture ? <p className="form-warning">url of image is required</p> 
                     : !/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|png|webp|jpeg)/.test(picture) 
                     ? <p className="form-error">input a valid image url of a file of the extensions jpg,png,jpeg or webp</p>
@@ -123,6 +121,7 @@ const StepFive = ({picture,updateFields,checkFields,detail} : StepFiveProps) => 
                     onChange={handleFileInputChange}
                     />
                     <p className="form-warning">Upload a jpg, png or webp file for the picture</p>
+                    {/* validation messages for upload file input */}
                     {errorMessage ? <p className="form-error">{errorMessage}</p> 
                     : <p className="form-success">valid file</p>}
                     {file?.name ? 

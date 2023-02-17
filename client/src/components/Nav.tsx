@@ -8,10 +8,11 @@ import { useLocation } from "react-router-dom";
 const Nav = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  /* update search by name parameter to filter data */
   const handleSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateSearch(e.target.value));
   }
-  console.log(location);
+  
   return(
     <nav>
       <div className="navbar">

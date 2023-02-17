@@ -1,5 +1,6 @@
-
+/* display loader while the app is fetching data from backend */
 const Loading = () => {
+
     return(
         <div className="loading-container">
             <div className="loading-outer">

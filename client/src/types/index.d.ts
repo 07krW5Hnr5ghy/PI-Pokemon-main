@@ -1,3 +1,4 @@
+/* types for import image files in project */
 declare module "*.jpg"{
     const path:string;
     export default path;

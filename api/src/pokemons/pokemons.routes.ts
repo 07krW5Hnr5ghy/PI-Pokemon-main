@@ -8,7 +8,7 @@ const router = Router();
 const controller = new PokemonController(
     new PokemonRepository()
 );
-
+/* routes to manage pokemon table */
 router.get("/p-data",controller.download.bind(controller));
 router.post("/pokemons",controller.create.bind(controller));
 router.get("/pokemons", controller.list.bind(controller));

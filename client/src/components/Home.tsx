@@ -1,24 +1,26 @@
+/* libraries */
 import React, { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Filters } from "../interfaces";
+import { KeyboardArrowLeft, KeyboardArrowRight, KeyboardDoubleArrowLeft,KeyboardDoubleArrowRight } from "@mui/icons-material";
+/* functions and defintions */
+import { Filters } from "../tools/interfaces";
 import { RootState } from "../redux/store";
 import { getDBPokemons,getTypes,updateFilter,resetDetail} from "../redux/pokemonActions";
-import { useSearchParams } from "react-router-dom";
-import { KeyboardArrowLeft, KeyboardArrowRight, KeyboardDoubleArrowLeft,KeyboardDoubleArrowRight } from "@mui/icons-material";
+/* components */
 import Card from "./Card";
 import Loading from "./Loading";
 import Nav from "./Nav";
 
 const Home = () => {
-    const dispatch = useDispatch();
-    const [searchParams] = useSearchParams();
-    const name = searchParams.get('name');
-    // selectors 
+
+    const dispatch = useDispatch(); 
+    /* selector of pokemon,types,filters and status data in redux state */
     const {data,types,filters,status} = useSelector((state:RootState) => state.pokemons);
+    /* filters, sorting and pagination local state */
     const [options,setOptions] = useState<Filters>(filters);
 
+    /* request pokemon and types data for redux state */
     useEffect(() => {
-        console.count("mount");
 
         dispatch(resetDetail());
 
@@ -32,12 +34,14 @@ const Home = () => {
 
     },[
         dispatch,
-        name,
         data.records.length,
         types.length,
     ]);
 
     useEffect(()=>{
+        /* update filter,sorting and pagination parameters to
+        request backend data for redux state with local state
+        data */
         if(
             filters.type ||
             filters.origin ||
@@ -63,18 +67,17 @@ const Home = () => {
                 filters.origin
             ));
         }
+
+        /* manage pagination index in
+        redux state when exist less than
+        9 pages */
         if(data.last_page < 9){
             dispatch(updateFilter({
                 paginationStart:0,
                 paginationEnd:data.last_page,
             }))
         }
-        if(data.total === 0){
-            dispatch(updateFilter({
-                paginationStart:0,
-                paginationEnd:0,
-            }))
-        }
+
     },[
         dispatch,
         options,
@@ -89,6 +92,7 @@ const Home = () => {
         data.total
     ]);
 
+    /* update filter,sorting and pagination state in local state */
     const handleOptions = (e:React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
         if(pages.length < 9){
@@ -110,6 +114,8 @@ const Home = () => {
         }
     }
 
+    /* update redux state when using the pages buttons of pagination
+    bar */
     const handlePages = (e:React.MouseEvent<HTMLButtonElement>,page:number) => {
         if(options.pageIndex < (pages.length-9)){
             setOptions({
@@ -142,6 +148,7 @@ const Home = () => {
         }
     }
 
+    /* update redux state to switch the next page */
     const forwardPage = (e:React.MouseEvent<HTMLButtonElement>) => {
         if(options.pageIndex < (pages.length-9)){
             setOptions({
@@ -162,6 +169,7 @@ const Home = () => {
         }
     }
 
+    /* update redux state to swicth the previous page */
     const backwardPage = (e:React.MouseEvent<HTMLButtonElement>) => {
         if(options.pageIndex <= (pages.length-9)){
             setOptions({
@@ -182,6 +190,7 @@ const Home = () => {
         }
     }
 
+    /* update redux state to skip to last page */
     const forwardSkip = (e:React.MouseEvent<HTMLButtonElement>) => {
         setOptions({
             ...options,
@@ -192,6 +201,7 @@ const Home = () => {
         })
     }
 
+    /* update redux state to skip to first page */
     const backwardSkip = (e:React.MouseEvent<HTMLButtonElement>) => {
         setOptions({
             ...options,
@@ -202,8 +212,10 @@ const Home = () => {
         })
     }
 
+    /* store the page numbers of pagination bar */
     const pages = [];
 
+    /* fill the page numbers for pagination bar */
     for(let i = 1; i <= data.last_page; i++){
         pages.push(i);
     }
@@ -251,7 +263,9 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="card-container">
-                    {status === "failed" ? <h2 className="home-not-found">Pokemons were not found with this filters</h2> : !data.records.length ? <Loading/> : 
+                    {/* check if exist records to be displayed in home page */}
+                    {status === "failed" ? <h2 className="home-not-found">Pokemons were not found with this filters</h2> 
+                    : !data.records.length ? <Loading/> : 
                     data.records.map(pokemon => 
                     <Card
                     name={pokemon.name}
@@ -261,6 +275,7 @@ const Home = () => {
                     key={pokemon.id}
                     />)}
                 </div>
+                {/* pagination bar */}
                 <div className="pagination-container">
                     {data.currentPage === 1 
                     ? null 

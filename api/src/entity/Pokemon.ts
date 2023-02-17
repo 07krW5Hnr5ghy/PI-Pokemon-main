@@ -1,7 +1,7 @@
 import { Entity, PrimaryColumn, CreateDateColumn, UpdateDateColumn, Column,Check } from "typeorm";
 import { Origin } from "../declaration";
 
-
+// Pokemon model for database
 @Entity()
 export class Pokemon {
 

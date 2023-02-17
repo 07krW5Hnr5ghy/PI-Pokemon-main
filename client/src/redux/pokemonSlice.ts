@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { Filters, Pokemon,Type } from "../interfaces";
+import { Filters, Pokemon,Type } from "../tools/interfaces";
 import { RootState } from "./store";
 
 export interface PokemonsState{

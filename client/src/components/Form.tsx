@@ -1,26 +1,41 @@
+/* components */
 import Nav from "./Nav";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import StepFive from "./StepFive";
-import { ToastContainer,toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+
+/* libraries */
 import React, { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useMultistepForm } from "../redux/hooks";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+/* functions and definitions */
+import { useMultistepForm,showSuccessMessage } from "../tools/tools";
 import { RootState } from "../redux/store";
 import { addPokemon,updatePokemon,resetDetail,getDetail } from "../redux/pokemonActions";
-import { useLocation, useNavigate } from "react-router-dom";
-import { INITIAL_DATA,FormData,ERROR_CHECKING } from "../interfaces";
+import { INITIAL_DATA,FormData,ERROR_CHECKING } from "../tools/interfaces";
 
 const Form = () => {
+
+    /* react and redux hooks */
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
+
+    /* get id from page url */
     const id = location.pathname.split("/")[2];
+
+    /* get pokemons and detail data from redux state */
     const {data,detail} = useSelector((state:RootState) => state.pokemons);
-    const [info,setInfo] = useState<FormData>(!id?INITIAL_DATA:{
+
+    /* form state default state is empty when the user begin to create
+    pokemon and is preloaded with pokemon data belonging to the id
+    of the url when the user update a pokemon */
+    const [info,setInfo] = useState<FormData>( !id ? INITIAL_DATA : {
         name:detail.name,
         classes:detail.classes,
         attack:detail.attack,
@@ -31,18 +46,23 @@ const Form = () => {
         health:detail.health,
         picture:detail.picture,
     }); 
-    const [errors,setErrors] = useState(!id?ERROR_CHECKING:{
+
+    /* form validation state is empty when user begin to create pokemon and is
+    preloaded with the all checks passed when user is updating pokemon */
+    const [errors,setErrors] = useState( !id ? ERROR_CHECKING:{
         name:"is valid",
         picture:"is valid",
     });
+
+    /* update the form state with the input from user */
     const updateFields = (fields:Partial<FormData>) => {
         setInfo(prev => {
             return {...prev,...fields}
         });
     }
 
-    console.log(errors);
-
+    /* check for errors in name and picture inputs and store the status
+    in the validation state */
     const checkFields = (e:React.ChangeEvent<HTMLInputElement>) => {
         
         if(e.target.name === "name"){
@@ -59,6 +79,8 @@ const Form = () => {
             }
         }
 
+        /* check errors in the picture input when the user choose
+        to paste the url for the pokemon picture */
         if(e.target.name === "picture"){
             if(!e.target.value){
                 setErrors({...errors,picture:'url of image is required'});
@@ -69,6 +91,9 @@ const Form = () => {
             }
         }
 
+        /* check errors in the picture input when user choose
+        that wants to upload an picture from pc, only can
+        upload format jpeg, png and webp */    
         if(e.target.name === "file"){
             if(!e.target.files?.[0]){
                 setErrors({...errors,picture:'file is required'});
@@ -83,6 +108,8 @@ const Form = () => {
 
     }
     
+    /* call function with multi-step form logic and set components
+    for each step of the form*/
     const {
         steps,
         currentStepIndex,
@@ -99,40 +126,46 @@ const Form = () => {
         <StepFive {...info} updateFields={updateFields} detail={detail} checkFields={checkFields}/>
     ]);
 
-    const showToastMessage = (message:string) => {
-        toast.success(message,{
-            position:toast.POSITION.TOP_RIGHT,
-            theme:"colored",
-        });
-    }
-
+    /* submit event */
     const onSubmit = (e:FormEvent) => {
+
         e.preventDefault();
+
+        /* switch to next step */
         if(!isLastStep) return next();
+
+        /* create or update pokemon taking in account the id parameter
+        in the url */
         if(id){
             dispatch(updatePokemon(id,info));
             dispatch(resetDetail());
             dispatch(getDetail(id));
-            showToastMessage("Pokemon successfully updated");
+            showSuccessMessage("Pokemon successfully updated");
             setTimeout(() => {
                 navigate(`/pokemons/${id}`);
             },5000);
         }else{
             dispatch(addPokemon(info));
-            showToastMessage("Pokemon successfully created");
+            showSuccessMessage("Pokemon successfully created");
             setTimeout(() => {
                 navigate(`/pokemons`);
             },5000);
         }
     }
 
+    /* cancel event return to home page if the user is
+    creating a pokemon or detail page if the user is
+    updating a pokemon */
     const cancel = (e:React.MouseEvent<HTMLButtonElement>) => {
+
         e.preventDefault();
+
         if(id){
             navigate(`/pokemons/${id}`);
         }else{
             navigate(`/pokemons`);
         }
+
     }
 
     return(
@@ -140,10 +173,12 @@ const Form = () => {
             <Nav/>
             <div className="form-container">
                 <form onSubmit={onSubmit} className="new-form">
+                    {/* steps counter */}
                     <div className="new-steps">
                         {currentStepIndex + 1} / {steps.length}
                     </div>
                     {step}
+                    {!id ? null : <p className="form-warning">Only fill up the fields that you want to update</p>}
                     <div className="new-buttons">
                         {!isFirstStep ? <button 
                         className="new-back" 
@@ -155,6 +190,9 @@ const Form = () => {
                         <button 
                         className="new-next" 
                         type="submit" 
+                        /* logic tests to check if the user
+                        doesnt have errors before passing to next
+                        step of form or submit the form */
                         disabled={
                             !id ? ((errors.name !== "is valid") ||
                             (!info.classes.length) ||
@@ -176,6 +214,7 @@ const Form = () => {
                 </form>
             </div>
             <ToastContainer/>
+            {/* button to return back */}
             <button className="new-back new-cancel" onClick={cancel}>Cancel</button>
         </div>
     )

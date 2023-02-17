@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
-const Card = ({name,img,classes,id} : {name:string,img:string,classes:string[],id:string}) => {
+/* Card that show the basic info of each pokemon */
+const Card = (
+    {name,img,classes,id} : {name:string,img:string,classes:string[],id:string}
+    ) => {
     return(
         <Link to={`/pokemons/${id}`}>
             <div className="pokemon-card">

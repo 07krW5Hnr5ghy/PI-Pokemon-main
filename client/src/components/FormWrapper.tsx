@@ -1,10 +1,6 @@
-import { ReactNode } from "react";
+import { FormWrapperProps } from "../tools/interfaces";
 
-type FormWrapperProps = {
-    title:string,
-    children:ReactNode
-}
-
+/* presentation container for form steps */
 const FormWrapper = ({title,children}:FormWrapperProps) => {
     return(
         <>

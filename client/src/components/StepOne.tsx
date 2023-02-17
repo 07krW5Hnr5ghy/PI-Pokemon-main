@@ -2,29 +2,21 @@ import FormWrapper from "./FormWrapper";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useLocation } from "react-router-dom";
-import { Pokemon } from "../interfaces";
-
-
-
-type StepOneData = {
-    name:string,
-    classes:string[],
-}
-
-type StepOneProps = StepOneData & {
-    updateFields:(fields:Partial<StepOneData>) => void,
-    checkFields:(e:React.ChangeEvent<HTMLInputElement>) => void,
-    detail:Pokemon,
-    id:string,
-}
+import { StepOneProps } from "../tools/interfaces";
 
 const StepOne = ({name,classes, updateFields,checkFields,detail,id}:StepOneProps) => {
+
     const location = useLocation();
+
+    /* types and pokemons redux state selector */
     const {types,data} = useSelector((state:RootState) => state.pokemons);
+
+    /* delete choosed types for pokemon */
     const deleteType = (e:React.MouseEvent<HTMLButtonElement>) => {
         const buttonValue = e.currentTarget.value;
         updateFields({classes:classes.filter(type => type !== buttonValue)});
     }
+
     return(
         <FormWrapper title={location.pathname === "/new" 
         ? "Create your Pokemon"
@@ -40,6 +32,7 @@ const StepOne = ({name,classes, updateFields,checkFields,detail,id}:StepOneProps
                 checkFields(e);
             }}
             />
+            {/* displays validation messages for name input */}
             {name.length === 0 ? <p className="form-warning">Input a name for you pokemon</p>
             : name.length > 10 ? <p className="form-error">Maximum length allowed are 10 Characters</p>
             : !/^[A-Za-z]+$/.test(name) ? <p className="form-error">Only alphabetic characters whitout spaces are allowed</p>
@@ -59,6 +52,7 @@ const StepOne = ({name,classes, updateFields,checkFields,detail,id}:StepOneProps
                 <option value="" selected>select types</option>
                 {types.map(item => <option key={item.id}>{item.type}</option>)}
             </select>
+            {/* display already choosed types for pokemon */}
             {classes.length === 0 ? 
             <p className="form-warning">Select at least one type maximum two types</p>:
             classes.map((item) => <div>

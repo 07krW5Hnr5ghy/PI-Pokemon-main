@@ -2,21 +2,19 @@ import express,{Express,Request,Response,NextFunction} from 'express';
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-import database from './config/database';
 import PokemonRoutes from "./pokemons/pokemons.routes";
 import TypeRoutes from "./types/type.routes";
-//import routes from './routes/index';
 
-//require('./db');
-
+/* server instance */
 const server : Express = express();
 
-//server.name = 'API';
-
+/* utilities to make the server work */
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan('dev'));
+
+/* http request headers configuration */
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true');
@@ -25,6 +23,7 @@ server.use((req, res, next) => {
   next();
 });
 
+/* Pokemon and Types router */
 server.use('/api', PokemonRoutes);
 server.use('/api', TypeRoutes);
 

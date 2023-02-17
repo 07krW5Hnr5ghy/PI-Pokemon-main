@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Origin } from "../declaration";
 
+// fetch pokemons from remote api
 export const getApiPokemons = async (limit: number) => {
     
     // store data of api pokemons
@@ -48,6 +49,7 @@ export const getApiPokemons = async (limit: number) => {
     return data;
 }
 
+// fetch pokemons types from remote api
 export const getApiTypes = async () => {
 
     // make call to the api to get types
