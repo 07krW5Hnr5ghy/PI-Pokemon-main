@@ -29,7 +29,7 @@ GET http://localhost:3001/api/pokemons
 GET http://localhost:3001/api/pokemons?page=1
 
 ### get all pokemons by search and order ASC
-GET http://localhost:3001/api/pokemons?search=&type=&sorting=&sortColumn=&origin=&page=2
+GET http://localhost:3001/api/pokemons?search=&type=&sorting=&sortColumn=&origin=&page=1
 
 ### get all the types
 GET http://localhost:3001/api/t-data
