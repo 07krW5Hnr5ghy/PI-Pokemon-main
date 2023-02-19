@@ -6,18 +6,18 @@ import {Type} from "../entity/Type";
 const {
     PGUSER, PGPASSWORD, PGHOST,PGDATABASE,PGPORT
 } = process.env;
-console.log(`${__dirname}/../entity/*.{ts,js}`);
+const port = PGPORT as number | undefined;
 // config of postgres database
 export default new DataSource({
     type:"postgres",
     host:PGHOST,
-    port: 5432,
+    port: port || 5432,
     username: PGUSER,
     database: PGDATABASE,
     password: PGPASSWORD,
     synchronize: true,
     ssl:true,
     logging:"all",
-    entities:[`${__dirname}/../entity/*.{ts,js}`],
+    entities:[Pokemon,Type],
     subscribers:[],
 });

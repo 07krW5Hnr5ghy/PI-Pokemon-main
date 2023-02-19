@@ -2,7 +2,7 @@ import { Entity, PrimaryColumn, CreateDateColumn, UpdateDateColumn, Column,Check
 import { Origin } from "../declaration";
 
 // Pokemon model for database
-@Entity()
+@Entity('pokemon')
 export class Pokemon {
 
     @PrimaryColumn({nullable:false})
