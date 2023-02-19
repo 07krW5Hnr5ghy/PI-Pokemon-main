@@ -27,7 +27,8 @@ export class PokemonController{
             }
             
         }catch(error){
-            next(error);
+            //next(error);
+            console.log(error);
         }
     }
     /* route method to create records in Pokemon table */
