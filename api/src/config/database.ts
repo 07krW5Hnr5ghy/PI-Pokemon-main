@@ -18,6 +18,7 @@ export default new DataSource({
     synchronize: true,
     ssl:true,
     logging:"all",
-    entities:[Pokemon,Type],
+    entities:[`${__dirname}/../**/entity/*.{ts,js}`],
+    migrations:[`${__dirname}/../**/migrations/*.{ts,js}`],
     subscribers:[],
 });
