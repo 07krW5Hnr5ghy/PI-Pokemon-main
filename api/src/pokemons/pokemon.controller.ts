@@ -13,7 +13,7 @@ export class PokemonController{
     async download(req:Request,res:Response,next:NextFunction):Promise<void>{
         try{
             /* count the records in Table pokemon */
-            console.log(database);
+            console.log(repository.manager.connection.entityMetadatas);
             let records = await repository.createQueryBuilder("pokemon")
             .select("COUNT(*)")
             .getRawOne();
