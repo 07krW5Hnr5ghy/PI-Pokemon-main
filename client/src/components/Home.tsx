@@ -24,7 +24,7 @@ const Home = () => {
 
         dispatch(resetDetail());
 
-        if(!data.records.length){
+        if(!data.records){
             dispatch(getDBPokemons());
         }
 
@@ -34,7 +34,7 @@ const Home = () => {
 
     },[
         dispatch,
-        data.records.length,
+        data.records,
         types.length,
     ]);
 

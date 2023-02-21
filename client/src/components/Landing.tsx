@@ -16,14 +16,14 @@ const Landing = () => {
     useEffect(() => {
         dispatch(getAPIData);
 
-        if(!data.records.length){
+        if(!data.records){
             dispatch(getDBPokemons());
         }
 
         if(!types.length){
             dispatch(getTypes());
         }
-    },[dispatch,data.records.length,types.length]);
+    },[dispatch,data.records,types.length]);
     
     return(
         <div id="landing-container">
