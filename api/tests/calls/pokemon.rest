@@ -33,3 +33,6 @@ GET http://localhost:3001/api/pokemons?search=&type=&sorting=&sortColumn=&origin
 
 ### get all the types
 GET http://localhost:3001/api/t-data
+
+### lisst types
+GET http://localhost:3001/api/types?search=&type=&sorting=&sortColumn=&origin=&page=1
