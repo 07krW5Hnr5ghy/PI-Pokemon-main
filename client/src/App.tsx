@@ -6,6 +6,7 @@ import Form from "./components/Form";
 import Loading from "./components/Loading";
 
 function App() {
+  /* frontend routing */
   return (
     <Routes>
       <Route path="/" element={<Landing/>}/>
