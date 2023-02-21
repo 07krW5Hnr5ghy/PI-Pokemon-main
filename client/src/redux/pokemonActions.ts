@@ -23,14 +23,14 @@ export const getAPIData = () => {
 
 /* fetch pokemon data from backend */
 export const getDBPokemons = (page?:number,search?:string,type?:string,sorting?:string,sortColumn?:string,origin?:string) => {
-    console.log("search",search);
-    console.log("type",type);
-    console.log("sorting",sorting);
-    console.log("sortColumn",sortColumn);
-    console.log("origin",origin);
    return (dispatch:AppDispatch) => {
     axios(`/pokemons?search=${search || ""}&type=${type || ""}&sorting=${sorting || ""}&sortColumn=${sortColumn || ""}&origin=${origin || ""}&page=${page || 1}`)
     .then((res) => {
+        console.log("search",search);
+        console.log("type",type);
+        console.log("sorting",sorting);
+        console.log("sortColumn",sortColumn);
+        console.log("origin",origin);
         console.log("response",res.data);
         if(res.data.total === 0){
             dispatch(setStatus("failed"));
