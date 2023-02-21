@@ -226,7 +226,7 @@ const Home = () => {
             <div className="info-container">
                 <div className="filter-container">
                     <div className="filter">
-                        <span className="filter-title">options</span>
+                        <span className="filter-title">Filters</span>
                         <select className="filter-select" name="type" onChange={handleOptions}>
                             <option value="type" selected disabled>type</option>
                             <option value="">all</option>
