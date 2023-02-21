@@ -10,8 +10,7 @@
     "dev": "nodemon --exec ts-node ./index.ts",
     "debug": "nodemon --inspect index.ts",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/config/database.ts migration:generate ./src/migrations/default",
-		"migration:run": "typeorm-ts-node-commonjs -d ./src/config/database.ts migration:run",
-    "vercel-build":"typeorm-ts-node-commonjs -d ./src/config/database.ts migration:generate ./src/migrations/default && typeorm-ts-node-commonjs -d ./src/config/database.ts migration:run"
+		"migration:run": "typeorm-ts-node-commonjs -d ./src/config/database.ts migration:run"
   },
   "author": "Henry",
   "license": "ISC",
