@@ -265,7 +265,7 @@ const Home = () => {
                 <div className="card-container">
                     {/* check if exist records to be displayed in home page */}
                     {status === "failed" ? <h2 className="home-not-found">Pokemons were not found with this filters</h2> 
-                    : !data.records.length ? <Loading/> : 
+                    : !data.records ? <Loading/> : 
                     data.records.map(pokemon => 
                     <Card
                     name={pokemon.name}
