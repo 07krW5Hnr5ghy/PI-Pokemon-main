@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import { PlayArrow } from "@mui/icons-material";
 import { useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
-import { getAPIData,getDBPokemons,getTypes } from "../redux/pokemonActions";
+import { getAPIData,getAPITypeData,getDBPokemons,getTypes } from "../redux/pokemonActions";
 import { RootState } from "../redux/store";
 
 
@@ -15,6 +15,7 @@ const Landing = () => {
     /* request to load remote api data */
     useEffect(() => {
         dispatch(getAPIData);
+        dispatch(getAPITypeData)
 
         if(!data.records){
             dispatch(getDBPokemons());

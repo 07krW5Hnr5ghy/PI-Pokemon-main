@@ -21,6 +21,13 @@ export const getAPIData = () => {
     .catch(e => console.log(e));
 }
 
+/* send signal to fetch type data from remote api to backend */
+export const getAPITypeData = () => {
+    axios(`/t-data`)
+    .then(res => console.log(res))
+    .catch(e => console.log(e));
+}
+
 /* fetch pokemon data from backend */
 export const getDBPokemons = (page?:number,search?:string,type?:string,sorting?:string,sortColumn?:string,origin?:string) => {
    return (dispatch:AppDispatch) => {
