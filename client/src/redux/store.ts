@@ -1,4 +1,4 @@
-import {configureStore,combineReducers,ThunkAction,Action} from '@reduxjs/toolkit';
+import {configureStore,combineReducers,ThunkAction,Action, Middleware} from '@reduxjs/toolkit';
 import {persistStore,persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger'
@@ -15,9 +15,11 @@ const reducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig,reducer);
 
+const customMiddleware: Middleware[] = [logger];
+
 const store = configureStore({
     reducer:persistedReducer,
-    middleware:(getDefaultMiddleware) => [...getDefaultMiddleware(),logger],
+    middleware:(getDefaultMiddleware) => [...getDefaultMiddleware(),...customMiddleware],
 });
 
 const persistor = persistStore(store);
