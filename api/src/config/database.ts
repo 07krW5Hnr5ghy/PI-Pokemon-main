@@ -14,7 +14,7 @@ export default new DataSource({
     username: PGUSER,
     database: PGDATABASE,
     password: PGPASSWORD,
-    //synchronize: true,
+    synchronize: true,
     ssl:true,
     logging:"all",
     entities:[`${__dirname}/../**/entity/*.{ts,js}`],
