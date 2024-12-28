@@ -15,7 +15,7 @@ const reducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig,reducer);
 
-const customMiddleware: Middleware[] = [logger];
+const customMiddleware: Middleware[] = [logger as Middleware];
 
 const store = configureStore({
     reducer:persistedReducer,
