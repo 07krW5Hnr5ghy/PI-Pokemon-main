@@ -15,7 +15,7 @@ export default new DataSource({
     database: PGDATABASE,
     password: PGPASSWORD,
     //synchronize: true,
-    //ssl:true,
+    ssl:true,
     logging:"all",
     entities:[`${__dirname}/../**/entity/*.{ts,js}`],
     migrations:[`${__dirname}/../**/migrations/*.{ts,js}`],
