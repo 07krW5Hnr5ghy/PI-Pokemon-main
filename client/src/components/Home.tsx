@@ -28,6 +28,8 @@ const Home = () => {
             dispatch(getDBPokemons());
         }
 
+        console.log(types);
+
         if(!types.length){
             dispatch(getTypes());
         }
